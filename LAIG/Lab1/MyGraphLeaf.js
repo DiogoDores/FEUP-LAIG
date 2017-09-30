@@ -25,7 +25,7 @@ MyGraphLeaf.prototype.parseLeafs = function(){
         console.log("No sphere available");
         break;
         case "triangle":
-        this.triangle = new MyTriangle(this.graph.scene);
+        this.triangle = new MyTriangle(this.graph.scene, 0, 0, 0, 0, 0, 0, 0, 0, 0); //shit ton de zeros = coordenadas
         break;
     }
 
