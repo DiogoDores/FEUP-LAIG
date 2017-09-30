@@ -5,17 +5,28 @@
 
 function MyGraphLeaf(graph, xmlelem) {
 
-    var type = graph.reader.getItem(xmlelem, 'type', ['rectangle', 'cylinder', 'sphere', 'triangle']);
-    parseLeafs(type);
-    
+    this.graph = graph;
+
+    this.type=graph.reader.getItem(xmlelem, 'type', ['rectangle', 'cylinder', 'sphere', 'triangle']);
+    this.parseLeafs();
+
 }
 
 MyGraphLeaf.prototype.parseLeafs = function(){
 
-    console.log("cona1");
-
-    if(type = "rectangle")
-        console.log("cona");
+    switch(this.type){
+        case "rectangle":
+        this.rectangle = new MyQuad(this.graph.scene, 0, 1, 0, 1);
+        break;
+        case "cylinder":
+        this.cylinder = new MyCylinder(this.graph.scene, 12, 20, true);
+        break;
+        case "sphere":
+        console.log("No sphere available");
+        break;
+        case "triangle":
+        this.triangle = new MyTriangle(this.graph.scene);
+        break;
+    }
 
 }
-
