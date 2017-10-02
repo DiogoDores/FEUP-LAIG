@@ -21,9 +21,9 @@
     this.normals = [];
     this.indices = [];
 
-    this.vertices.push(x1, y1, z1);
-    this.vertices.push(x2, y2, z2);
-    this.vertices.push(x3, y3, z3);
+    this.vertices.push(this.x1, this.y1, this.z1);
+    this.vertices.push(this.x2, this.y2, this.z2);
+    this.vertices.push(this.x3, this.y3, this.z3);
 
     var vecx = (this.y2 - this.y1) * (this.z3 - this.z1) - (this.z2 - this.z1) * (this.y3 - this.y1);
     var vecy = (this.x2 - this.x1) * (this.z3 - this.z1) - (this.z2 - this.z1) * (this.x3 - this.x1);

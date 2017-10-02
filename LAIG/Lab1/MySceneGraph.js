@@ -1349,7 +1349,7 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
 						
 						//parse leaf
 						console.log(descendants[j]);
-						this.nodes[nodeID].addChild(new MyGraphLeaf(this,descendants[j]));
+						this.nodes[nodeID].addLeaf(new MyGraphLeaf(this,descendants[j]));
                         sizeChildren++;
 					}
 					else
@@ -1423,9 +1423,29 @@ MySceneGraph.generateRandomString = function(length) {
  * Displays the scene, processing each node, starting in the root node.
  */
 MySceneGraph.prototype.displayScene = function() {
-	
-   /* for(var i= 0; i < this.nodes.length; i++){
-        nodes[i].display();
-    }*/
 
+	this.displayNodes(this.idRoot);
+    
+
+}
+
+MySceneGraph.prototype.displayNodes = function(id){
+    for(var i = 0; i < this.nodes[id].leaves.length; i++){
+        this.pushMatrix;
+     //   this.materials[this.nodes[id].materialID].apply();
+        //this.textures[this.nodes[id].textureID]
+        this.nodes[id].transformMatrix;
+        console.log(this.nodes[id].leaves);
+        this.nodes[id].leaves[i].display();
+        this.popMatrix;
+    }
+
+    for(var i = 0; i < this.nodes[id].children.length; i++){
+        this.pushMatrix;
+       // this.materials[this.nodes[id].materialID].apply();
+        //this.textures[this.nodes[id].textureID].apply();
+        this.nodes[id].transformMatrix;
+        this.displayNodes(this.nodes[id].children[i]);
+        this.popMatrix;
+    }
 }
