@@ -1348,7 +1348,6 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
 							this.warn("Error in leaf");
 
 						//parse leaf
-						console.log(descendants[j]);
 						this.nodes[nodeID].addLeaf(new MyGraphLeaf(this,descendants[j]));
                         sizeChildren++;
 					}
@@ -1425,17 +1424,19 @@ MySceneGraph.generateRandomString = function(length) {
 MySceneGraph.prototype.displayScene = function() {
 
 	this.displayNodes(this.idRoot);
-    
+
 
 }
 
 MySceneGraph.prototype.displayNodes = function(id){
+
+    var tempMatrix;
+
     for(var i = 0; i < this.nodes[id].leaves.length; i++){
         this.pushMatrix;
      //   this.materials[this.nodes[id].materialID].apply();
         //this.textures[this.nodes[id].textureID]
-        this.nodes[id].transformMatrix;
-        console.log(this.nodes[id].leaves);
+        //this.nodes[id].transformMatrix;
         this.nodes[id].leaves[i].display();
         this.popMatrix;
     }
@@ -1444,8 +1445,10 @@ MySceneGraph.prototype.displayNodes = function(id){
         this.pushMatrix;
        // this.materials[this.nodes[id].materialID].apply();
         //this.textures[this.nodes[id].textureID].apply();
-        this.nodes[id].transformMatrix;
+        tempMatrix = this.scene.getMatrix();
+        this.scene.multMatrix(this.nodes[id].transformMatrix);
         this.displayNodes(this.nodes[id].children[i]);
+        this.scene.setMatrix(tempMatrix);
         this.popMatrix;
     }
 }

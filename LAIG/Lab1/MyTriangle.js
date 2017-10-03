@@ -2,13 +2,13 @@
  * MyTriangle
  * @constructor
  */
- function MyTriangle(scene, x1, y1, z1, x2, y2, z2, x3, y3, z3) {
+ function MyTriangle(scene, args) {
  	CGFobject.call(this, scene);
 
 
-    this.x1 = x1; this.y1 = y1; this.z1 = z1;
-    this.x2 = x2; this.y2 = y2; this.z2 = z2;
-    this.x3 = x3; this.y3 = y3; this.z3 = z3;
+    this.x1 = args[0]; this.y1 = args[1]; this.z1 = args[2];
+    this.x2 = args[3]; this.y2 = args[4]; this.z2 = args[5];
+    this.x3 = args[6]; this.y3 = args[7]; this.z3 = args[8];
  	this.initBuffers();
  };
 
