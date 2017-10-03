@@ -1430,25 +1430,24 @@ MySceneGraph.prototype.displayScene = function() {
 
 MySceneGraph.prototype.displayNodes = function(id){
 
-    var tempMatrix;
+    this.scene.multMatrix(this.nodes[id].transformMatrix);
 
     for(var i = 0; i < this.nodes[id].leaves.length; i++){
-        this.pushMatrix;
-     //   this.materials[this.nodes[id].materialID].apply();
+        //this.pushMatrix;
+        //this.materials[this.nodes[id].materialID].apply();
         //this.textures[this.nodes[id].textureID]
         //this.nodes[id].transformMatrix;
-        this.nodes[id].leaves[i].display();
-        this.popMatrix;
+        this.nodes[id].leaves[i].primitive.display();
+        //this.popMatrix;
     }
 
     for(var i = 0; i < this.nodes[id].children.length; i++){
-        this.pushMatrix;
-       // this.materials[this.nodes[id].materialID].apply();
-        //this.textures[this.nodes[id].textureID].apply();
-        tempMatrix = this.scene.getMatrix();
-        this.scene.multMatrix(this.nodes[id].transformMatrix);
+
+      // this.materials[this.nodes[id].materialID].apply();
+       //this.textures[this.nodes[id].textureID].apply();
+
+        this.scene.pushMatrix();
         this.displayNodes(this.nodes[id].children[i]);
-        this.scene.setMatrix(tempMatrix);
-        this.popMatrix;
+        this.scene.popMatrix();
     }
 }
