@@ -1423,7 +1423,7 @@ MySceneGraph.generateRandomString = function(length) {
  */
 MySceneGraph.prototype.displayScene = function() {
 
-	this.displayNodes(this.idRoot, this.);
+	this.displayNodes(this.idRoot);
 
 
 }
