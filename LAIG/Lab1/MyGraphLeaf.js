@@ -27,7 +27,7 @@ MyGraphLeaf.prototype.parseLeafs = function(){
             this.primitive = new MyQuad(this.graph.scene, a);
             break;
         case "cylinder":
-            this.primitive = new MyCylinder(this.graph.scene, 12, 20, true);
+            this.primitive = new MyCylinder(this.graph.scene, a);
             break;
         case "sphere":
             this.primitive = new MyQuad(this.graph.scene, 0, 1, 0, 1);

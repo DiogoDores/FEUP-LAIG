@@ -2,14 +2,14 @@
  * MyCylinder
  * @constructor
  */
-function MyCylinder(scene, height, bottomRadius, topRadius, stacks, slices) {
+function MyCylinder(scene, args) {
     CGFobject.call(this, scene);
 
-    this.height = height;
-    this.bottomRadius = bottomRadius;
-    this.topRadius = topRadius;
-    this.slices = slices;
-    this.stacks = stacks;
+    this.height = args[0];
+    this.bottomRadius = args[1];
+    this.topRadius = args[2];
+    this.slices = args[3];
+    this.stacks = args[4];
 
     this.initBuffers();
 }

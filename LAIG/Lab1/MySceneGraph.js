@@ -1423,7 +1423,7 @@ MySceneGraph.generateRandomString = function(length) {
  */
 MySceneGraph.prototype.displayScene = function() {
 
-	this.displayNodes(this.idRoot);
+	this.displayNodes(this.idRoot, this.);
 
 
 }
@@ -1433,12 +1433,9 @@ MySceneGraph.prototype.displayNodes = function(id){
     this.scene.multMatrix(this.nodes[id].transformMatrix);
 
     for(var i = 0; i < this.nodes[id].leaves.length; i++){
-        //this.pushMatrix;
         //this.materials[this.nodes[id].materialID].apply();
-        //this.textures[this.nodes[id].textureID]
-        //this.nodes[id].transformMatrix;
+        //this.textures[this.nodes[id].textureID;
         this.nodes[id].leaves[i].primitive.display();
-        //this.popMatrix;
     }
 
     for(var i = 0; i < this.nodes[id].children.length; i++){
