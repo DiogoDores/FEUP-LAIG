@@ -2,11 +2,12 @@
  * MySphere
  * @constructor
  */
-function MySphere(scene, slices, stacks) {
+function MySphere(scene, args) {
     CGFobject.call(this, scene);
 
-    this.slices = slices;
-    this.stacks = stacks;
+    this.radius = args[0]
+    this.slices = args[1];
+    this.stacks = args[2];
 
     this.initBuffers();
 }
@@ -26,7 +27,7 @@ MySphere.prototype.initBuffers = function() {
     for (j = parseInt(-this.stacks/2 -0.5) ; j < this.stacks/2 + 1; j++) {
         for (i = 0; i < this.slices; i++) {
 
-            this.vertices.push(Math.cos(i * ang) * Math.cos(angEsf * j), Math.sin(i * ang) * Math.cos(angEsf * j), Math.sin(angEsf * j));
+            this.vertices.push(Math.cos(i * ang) * Math.cos(angEsf * j) * this.radius, Math.sin(i * ang) * Math.cos(angEsf * j) * this.radius, Math.sin(angEsf * j) * this.radius);
             this.normals.push(Math.cos(i * ang) * Math.cos(angEsf * j), Math.sin(i * ang) * Math.cos(angEsf * j), Math.sin(angEsf * j));
             this.texCoords.push((Math.cos(i * ang) * Math.cos(angEsf * j) + 1)/2, (Math.sin(i * ang) * Math.cos(angEsf * j) + 1)/2 );
         }

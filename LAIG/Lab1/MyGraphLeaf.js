@@ -30,7 +30,7 @@ MyGraphLeaf.prototype.parseLeafs = function(){
             this.primitive = new MyCylinder(this.graph.scene, a);
             break;
         case "sphere":
-            this.primitive = new MyQuad(this.graph.scene, 0, 1, 0, 1);
+            this.primitive = new MySphere(this.graph.scene, a);
             break;
         case "triangle":
             this.primitive = new MyTriangle(this.graph.scene, a);
@@ -43,7 +43,12 @@ MyGraphLeaf.prototype.parseLeafs = function(){
 }
 
 MyGraphLeaf.prototype.display = function(){
-  if(this.primitive != null){
-    this.primitive.display();
+  
+  if(this.primitive == null){
+    console.log("It is not possible to create that type of object.");
+    return;
   }
+
+  this.primitive.display();
+
 }
