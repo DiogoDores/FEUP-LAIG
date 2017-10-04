@@ -29,12 +29,12 @@ MyCylinder.prototype.initBuffers = function() {
     for (j = 0; j < this.stacks + 1; j++) {
         for (i = 0; i <= this.slices; i++) {
             if(j == 0)
-                this.vertices.push(Math.cos(i * ang), Math.sin(i * ang), 0);
+                this.vertices.push(Math.cos(i * ang) * radius, Math.sin(i * ang) * radius, 0);
             else
-                this.vertices.push(Math.cos(i * ang), Math.sin(i * ang), j/this.stacks);
+                this.vertices.push(Math.cos(i * ang) * radius, Math.sin(i * ang) * radius, j/this.stacks * this.height);
 
             this.normals.push(Math.cos(i * ang), Math.sin(i * ang), Math.sin(i * ang));
-                this.texCoords.push(j/this.slices,i/this.stacks);
+            this.texCoords.push(j/this.slices,i/this.stacks);
 
         }
         radius += radiusStep;
