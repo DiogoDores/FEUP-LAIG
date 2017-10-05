@@ -11,7 +11,6 @@ function MySphere(scene, args) {
 ;MySphere.prototype = Object.create(CGFobject.prototype);
 MySphere.prototype.constructor = MySphere;
 
-<<<<<<< HEAD
 MySphere.prototype.initBuffers = function() {
 
     this.vertices = [];
@@ -54,20 +53,3 @@ MySphere.prototype.assignTexture = function(texture){
     this.t = texture[2];
 
 }
-=======
-MySphere.prototype.display = function() {
-
-    this.semi.display();
-
-    this.scene.rotate(Math.PI,1,0,0);
-    this.semi.display();
-
-};
-
-function MyUnitCubeQuad(scene) {
-	CGFobject.call(this,scene);
-
-    this.quad = new MyQuad(this.scene);
-
-};
->>>>>>> 5b3b5fc828a0eeb958cfc451b21fde809b9f649f
