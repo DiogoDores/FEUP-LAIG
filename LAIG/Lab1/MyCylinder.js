@@ -57,3 +57,10 @@ MyCylinder.prototype.initBuffers = function() {
     this.initGLBuffers();
 }
 ;
+
+MyCylinder.prototype.assignTexture = function(texture){
+
+    this.s = texture[1];
+    this.t = texture[2];
+
+}

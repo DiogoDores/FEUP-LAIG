@@ -37,3 +37,10 @@
     this.primitiveType = this.scene.gl.TRIANGLES;
     this.initGLBuffers();
  }
+
+ MyTriangle.prototype.assignTexture = function(texture){
+
+     this.s = texture[1];
+     this.t = texture[2];
+
+ }
