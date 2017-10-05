@@ -2,11 +2,12 @@
  * MySemisphere
  * @constructor
  */
-function MySemisphere(scene, slices, stacks) {
+function MySemisphere(scene, args) {
     CGFobject.call(this, scene);
 
-    this.slices = slices;
-    this.stacks = stacks;
+    this.radius = args[0]
+    this.slices = args[1];
+    this.stacks = args[2];
 
     this.initBuffers();
 }
@@ -19,14 +20,14 @@ MySemisphere.prototype.initBuffers = function() {
     this.indices = [];
     this.normals = [];
     this.texCoords = [];
-    
+
     var ang = Math.PI * 2 / this.slices;
     var angEsf = Math.PI / 2 / this.stacks;
 
     for (j = 0; j < this.stacks + 1; j++) {
         for (i = 0; i < this.slices; i++) {
 
-            this.vertices.push(Math.cos(i * ang) * Math.cos(angEsf * j), Math.sin(i * ang) * Math.cos(angEsf * j), Math.sin(angEsf * j));
+            this.vertices.push(Math.cos(i * ang) * Math.cos(angEsf * j) * this.radius, Math.sin(i * ang) * Math.cos(angEsf * j) * this.radius, Math.sin(angEsf * j) * this.radius);
             this.normals.push(Math.cos(i * ang) * Math.cos(angEsf * j), Math.sin(i * ang) * Math.cos(angEsf * j), Math.sin(angEsf * j));
             this.texCoords.push((Math.cos(i * ang) * Math.cos(angEsf * j) + 1)/2, (Math.sin(i * ang) * Math.cos(angEsf * j) + 1)/2 );
         }
