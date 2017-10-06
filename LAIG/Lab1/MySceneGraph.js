@@ -1438,10 +1438,10 @@ MySceneGraph.prototype.displayNodes = function(id){
         if(this.materials[this.nodes[id].materialID] != undefined)
             this.materials[this.nodes[id].materialID].apply();
 
-        if(this.textures[this.nodes[id].textureID] != undefined){
+      /*  if(this.textures[this.nodes[id].textureID] != undefined){
             this.nodes[id].leaves[i].primitive.assignTexture(this.textures[this.nodes[id].textureID]);
             this.textures[this.nodes[id].textureID][0].bind();
-        }
+        }*/
 
         this.nodes[id].leaves[i].primitive.display();
 
@@ -1455,8 +1455,8 @@ MySceneGraph.prototype.displayNodes = function(id){
       if(this.materials[this.nodes[id].materialID] != undefined)
           this.materials[this.nodes[id].materialID].apply();
 
-      if(this.textures[this.nodes[id].textureID] != undefined)
-          this.textures[this.nodes[id].textureID][0].bind();
+      /*if(this.textures[this.nodes[id].textureID] != undefined)
+          this.textures[this.nodes[id].textureID][0].bind();*/
 
       this.displayNodes(this.nodes[id].children[i]);
 

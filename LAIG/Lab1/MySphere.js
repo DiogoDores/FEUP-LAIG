@@ -46,10 +46,3 @@ MySphere.prototype.initBuffers = function() {
     this.initGLBuffers();
 }
 ;
-
-MySphere.prototype.assignTexture = function(texture){
-
-    this.s = texture[1];
-    this.t = texture[2];
-
-}
