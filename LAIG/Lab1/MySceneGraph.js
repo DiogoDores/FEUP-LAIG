@@ -1423,43 +1423,83 @@ MySceneGraph.generateRandomString = function(length) {
  */
 MySceneGraph.prototype.displayScene = function() {
 
-	this.displayNodes(this.idRoot);
+	this.displayNodes(this.idRoot, null, null);
 
 
 }
 
-MySceneGraph.prototype.displayNodes = function(id){
+MySceneGraph.prototype.displayNodes = function(id, matToApply, texToApply){
 
-    this.scene.multMatrix(this.nodes[id].transformMatrix);
 
+
+    if(this.materials[this.nodes[id].materialID] != null)
+        matToApply = this.materials[this.nodes[id].materialID];
+
+    if(this.textures[this.nodes[id].textureID] == "clear")
+        texToApply = null;
+    else if(this.textures[this.nodes[id].textureID] != null)
+        texToApply = this.textures[this.nodes[id].textureID];
+
+    this.scene.pushMatrix();
+      this.scene.multMatrix(this.nodes[id].transformMatrix);
+
+    for(var i = 0; i < this.nodes[id].children.length; i++)
+        this.displayNodes(this.nodes[id].children[i], matToApply, texToApply);
+
+    for(var i = 0; i < this.nodes[id].leaves.length; i++){
+
+        matToApply.apply();
+          if(texToApply != null) {
+        this.nodes[id].leaves[i].primitive.assignTexture(texToApply);
+      texToApply[0].bind();
+    }
+        this.nodes[id].leaves[i].primitive.display();
+    }
+
+
+    this.scene.popMatrix();
+/*
     for(var i = 0; i < this.nodes[id].leaves.length; i++){
         this.scene.pushMatrix();
 
-        if(this.materials[this.nodes[id].materialID] != undefined)
+        if(this.materials[this.nodes[id].materialID] != null)
             this.materials[this.nodes[id].materialID].apply();
 
-      /*  if(this.textures[this.nodes[id].textureID] != undefined){
+        if(this.textures[this.nodes[id].textureID] != null){
             this.nodes[id].leaves[i].primitive.assignTexture(this.textures[this.nodes[id].textureID]);
             this.textures[this.nodes[id].textureID][0].bind();
-        }*/
+        }
+
+        if(this.textures[this.nodes[id].textureID] == 'clear'){
+          this.textures[this.nodes[id].textureID][0].unbind();
+        }
 
         this.nodes[id].leaves[i].primitive.display();
 
         this.scene.popMatrix();
+
+        console.log("Obrigado vespinha és um amor");
     }
 
     for(var i = 0; i < this.nodes[id].children.length; i++){
 
       this.scene.pushMatrix();
-
+    //  console.log(this.nodes[id].textureID);
       if(this.materials[this.nodes[id].materialID] != undefined)
           this.materials[this.nodes[id].materialID].apply();
 
-      /*if(this.textures[this.nodes[id].textureID] != undefined)
-          this.textures[this.nodes[id].textureID][0].bind();*/
+      if(this.textures[this.nodes[id].textureID] != null){
+
+          this.textures[this.nodes[id].textureID][0].bind();
+
+          if(this.nodes[id].textureID == 'clear'){
+              console.log("mernandes");
+              this.textures[this.nodes[id].textureID][0].unbind();
+          }
+      }
 
       this.displayNodes(this.nodes[id].children[i]);
 
       this.scene.popMatrix();
-    }
+    }*/
 }
