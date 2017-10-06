@@ -20,9 +20,4 @@ MySphere.prototype.display = function() {
 
 };
 
-function MyUnitCubeQuad(scene) {
-	CGFobject.call(this,scene);
-
-    this.quad = new MyQuad(this.scene);
-
-};
+MySphere.prototype.assignTexture = function(texture){};
