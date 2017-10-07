@@ -43,9 +43,11 @@ MyQuad.prototype.initBuffers = function() {
 ;
 
 MyQuad.prototype.assignTexture = function(texture){
+
     if(texture != null){
       this.s = texture[1];
       this.t = texture[2];
       this.initBuffers();
     }
+
 };

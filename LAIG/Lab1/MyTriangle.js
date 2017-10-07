@@ -20,6 +20,7 @@
     this.vertices = [];
     this.normals = [];
     this.indices = [];
+    this.texCoords = [];
 
     this.vertices.push(this.x1, this.y1, this.z1);
     this.vertices.push(this.x2, this.y2, this.z2);
@@ -32,7 +33,7 @@
     this.normals.push(vecx, vecy, vecz);
     this.normals.push(vecx, vecy, vecz);
 
-    this.indices.push(0, 1, 2, 2, 1, 0);
+    this.indices.push(0, 1, 2);
 
     this.primitiveType = this.scene.gl.TRIANGLES;
     this.initGLBuffers();
@@ -40,7 +41,36 @@
 
  MyTriangle.prototype.assignTexture = function(texture){
 
+   if(texture != null){
      this.s = texture[1];
      this.t = texture[2];
+   }
+
+   var a = Math.sqrt(	Math.pow((this.x3 - this.x1),2) +
+    					Math.pow((this.y3 - this.y1),2) +
+    					Math.pow((this.z3 - this.z1),2));
+
+   var b = Math.sqrt(	Math.pow((this.x2 - this.x1),2) +
+    					Math.pow((this.y2 - this.y1),2) +
+    					Math.pow((this.z2 - this.z1),2));
+
+    var c = Math.sqrt(	Math.pow((this.x3 - this.x2),2) +
+    					Math.pow((this.y3 - this.y2),2) +
+    					Math.pow((this.z3 - this.z2),2));
+
+	var beta   = Math.acos((( a* a) - ( b* b) + ( c* c))/(2 *  a *  c));
+
+	var halt = a * Math.sin(beta);
+    var mid = c - a*Math.cos(beta);
+
+
+
+    this.texCoords = [
+		0,0,
+		c/this.s, 0,
+		(c - mid)/this.s, - halt/this.t
+    ];
+
+	this.updateTexCoordsGLBuffers();
 
  }
