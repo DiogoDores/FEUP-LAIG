@@ -63,8 +63,13 @@
     </TEXTURE>
 
     <TEXTURE id="black">
-        <file path="images/mettalic_black.jpg" />
+        <file path="images/accents.jpg" />
         <amplif_factor s="2" t="2" />
+    </TEXTURE>
+
+    <TEXTURE id="steel">
+        <file path="images/mettalic_black.jpg" />
+        <amplif_factor s="1" t="2" />
     </TEXTURE>
 </TEXTURES>
 
@@ -137,7 +142,7 @@
     <NODE id="mainBody">
 
       <MATERIAL id="metalMaterial" />
-      <TEXTURE id="null" />
+      <TEXTURE id="steel" />
 
       <TRANSLATION x="0" y="0" z="0" />
       <SCALE sx="1" sy="1" sz="1" />
@@ -163,8 +168,8 @@
 
     <!-- Tie fighter's WINGS node -->
     <NODE id="wings">
-      <MATERIAL id="metalMaterial" />
-      <TEXTURE id="null" />
+      <MATERIAL id="null" />
+      <TEXTURE id="steel" />
 
       <DESCENDANTS>
         <NODEREF id="wing1" />
@@ -177,7 +182,7 @@
 
     <!-- Tie fighter's WING 1 node -->
     <NODE id="wing1">
-      <MATERIAL id="metalMaterial" />
+      <MATERIAL id="null" />
       <TEXTURE id="null" />
 
       <TRANSLATION x="-3.5" y="0" z="0" />
@@ -218,7 +223,7 @@
 
     <!-- Tie fighter's WING ACCENTS 1 node -->
     <NODE id="accentsCircle1">
-      <MATERIAL id="metalMaterial" />
+      <MATERIAL id="null" />
       <TEXTURE id="black" />
 
       <TRANSLATION x="-3.45" y="0" z="0" />
@@ -237,7 +242,7 @@
 
     <!-- Tie fighter's WING ACCENTS 2 node -->
     <NODE id="accentsCircle2">
-      <MATERIAL id="metalMaterial" />
+      <MATERIAL id="null" />
       <TEXTURE id="black" />
 
       <TRANSLATION x="3.45" y="0" z="0" />

@@ -33,18 +33,7 @@
     this.normals.push(vecx, vecy, vecz);
     this.normals.push(vecx, vecy, vecz);
 
-    this.indices.push(0, 1, 2);
-
-    var ab = Math.sqrt(Math.pow(this.x2-this.x1, 2) + Math.pow(this.y2-this.y1, 2) + Math.pow(this.z2-this.z1, 2));
-    var bc = Math.sqrt(Math.pow(this.x2-this.x3, 2) + Math.pow(this.y2-this.y3, 2) + Math.pow(this.z2-this.z3, 2));
-    var ac = Math.sqrt(Math.pow(this.x1-this.x3, 2) + Math.pow(this.y1-this.y3, 2) + Math.pow(this.z1-this.z3, 2));
-    var beta = Math.acos((Math.pow(bc, 2) + Math.pow(ab, 2) - Math.pow(ac, 2))/(2*ab*bc));
-
-    this.texCoords = [
-		0, 0,
-		1, 1,
-		(ab - bc*Math.cos(beta))/ab, bc*Math.sin(beta)/ab
-    ];
+    this.indices.push(0, 1, 2, 2, 1, 0);
 
     this.primitiveType = this.scene.gl.TRIANGLES;
     this.initGLBuffers();
