@@ -43,7 +43,7 @@ MyGraphLeaf.prototype.parseLeafs = function(){
 }
 
 MyGraphLeaf.prototype.display = function(){
-  
+
   if(this.primitive == null){
     console.log("It is not possible to create that type of object.");
     return;
