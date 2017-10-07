@@ -10,6 +10,7 @@ function MyCylinder(scene, args) {
     this.topRadius = args[2];
     this.slices = args[3];
     this.stacks = args[4];
+    
     this.s=1;
     this.t=1;
     this.initBuffers();

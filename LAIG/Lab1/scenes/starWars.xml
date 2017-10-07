@@ -161,7 +161,7 @@
       <TRANSLATION x="0" y="0" z="-2.25" />
 
       <DESCENDANTS>
-        <LEAF  type="cylinder" args="4.5 1 1 20 20" />
+        <LEAF  type="cylinder" args="4.5 1 1 20 20 1 1" />
       </DESCENDANTS>
 
     </NODE>
