@@ -10,7 +10,8 @@ function MyCylinder(scene, args) {
     this.topRadius = args[2];
     this.slices = args[3];
     this.stacks = args[4];
-
+    this.s=1;
+    this.t=1;
     this.initBuffers();
 }
 ;MyCylinder.prototype = Object.create(CGFobject.prototype);
@@ -26,6 +27,7 @@ MyCylinder.prototype.initBuffers = function() {
     var ang = Math.PI * 2 / this.slices;
     var radius = this.bottomRadius;
     var radiusStep = (this.topRadius - this.bottomRadius) / this.stacks;
+
     for (j = 0; j < this.stacks + 1; j++) {
         for (i = 0; i <= this.slices; i++) {
             if(j == 0)
@@ -34,7 +36,7 @@ MyCylinder.prototype.initBuffers = function() {
                 this.vertices.push(Math.cos(i * ang) * radius, Math.sin(i * ang) * radius, j/this.stacks * this.height);
 
             this.normals.push(Math.cos(i * ang), Math.sin(i * ang), Math.sin(i * ang));
-            this.texCoords.push(j/this.slices,i/this.stacks);
+            this.texCoords.push(i/(this.slices+1),j/(this.stacks+1));
 
         }
         radius += radiusStep;
