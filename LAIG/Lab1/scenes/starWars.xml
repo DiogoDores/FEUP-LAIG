@@ -61,6 +61,11 @@
         <file path="images/trunk-image.jpg" />
         <amplif_factor s="2" t="2" />
     </TEXTURE>
+
+    <TEXTURE id="black">
+        <file path="images/mettalic_black.jpg" />
+        <amplif_factor s="2" t="2" />
+    </TEXTURE>
 </TEXTURES>
 
 <MATERIALS>
@@ -103,10 +108,12 @@
       <MATERIAL id="metalMaterial" />
       <TEXTURE id="null" />
 
+      <TRANSLATION x="5" y="2" z="5" />
+
       <DESCENDANTS>
 
         <NODEREF id="tieBody" />
-      <!--  <NODEREF id="wings" /> -->
+        <NODEREF id="wings" />
         <NODEREF id="connections" />
 
       </DESCENDANTS>
@@ -121,7 +128,7 @@
       <DESCENDANTS>
 
         <NODEREF id="mainBody" />
-        <NODEREF id="windows" />
+        <NODEREF id="window" />
 
       </DESCENDANTS>
     </NODE>
@@ -132,7 +139,7 @@
       <MATERIAL id="metalMaterial" />
       <TEXTURE id="null" />
 
-       <TRANSLATION x="0" y="0" z="0" />
+      <TRANSLATION x="0" y="0" z="0" />
       <SCALE sx="1" sy="1" sz="1" />
 
       <DESCENDANTS>
@@ -141,16 +148,382 @@
 
     </NODE>
 
-    <!-- Tie fighter's WINDOWS node -->
-    <NODE id="windows">
+    <!-- Tie fighter's WINDOW node -->
+    <NODE id="window">
       <MATERIAL id="metalMaterial" />
       <TEXTURE id="null" />
 
-       <TRANSLATION x="0" y="0" z="-2.25" />
-       <SCALE sx="1" sy="1" sz="1" />
+      <TRANSLATION x="0" y="0" z="-2.25" />
 
       <DESCENDANTS>
         <LEAF  type="cylinder" args="4.5 1 1 20 20" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <!-- Tie fighter's WINGS node -->
+    <NODE id="wings">
+      <MATERIAL id="metalMaterial" />
+      <TEXTURE id="null" />
+
+      <DESCENDANTS>
+        <NODEREF id="wing1" />
+        <NODEREF id="wing2" />
+        <NODEREF id="accentsCircle1" />
+        <NODEREF id="accentsCircle2" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <!-- Tie fighter's WING 1 node -->
+    <NODE id="wing1">
+      <MATERIAL id="metalMaterial" />
+      <TEXTURE id="null" />
+
+      <TRANSLATION x="-3.5" y="0" z="0" />
+      <ROTATION axis="y" angle="180" />
+      <ROTATION axis="z" angle="90" />
+
+      <DESCENDANTS>
+        <NODEREF id="wingTriangle1" />
+        <NODEREF id="wingTriangle2" />
+        <NODEREF id="wingTriangle3" />
+        <NODEREF id="wingTriangle4" />
+        <NODEREF id="wingTriangle5" />
+        <NODEREF id="wingTriangle6" />
+        <!-- <NODEREF id="middle" /> -->
+      </DESCENDANTS>
+
+    </NODE>
+
+    <!-- Tie fighter's WING 2 node -->
+    <NODE id="wing2">
+      <MATERIAL id="metalMaterial" />
+      <TEXTURE id="null" />
+
+      <TRANSLATION x="3.5" y="0" z="0" />
+      <ROTATION axis="z" angle="90" />
+
+      <DESCENDANTS>
+        <NODEREF id="wingTriangle1" />
+        <NODEREF id="wingTriangle2" />
+        <NODEREF id="wingTriangle3" />
+        <NODEREF id="wingTriangle4" />
+        <NODEREF id="wingTriangle5" />
+        <NODEREF id="wingTriangle6" />
+        <!-- <NODEREF id="middle" /> -->
+      </DESCENDANTS>
+
+    </NODE>
+
+    <!-- Tie fighter's WING ACCENTS 1 node -->
+    <NODE id="accentsCircle1">
+      <MATERIAL id="metalMaterial" />
+      <TEXTURE id="black" />
+
+      <TRANSLATION x="-3.45" y="0" z="0" />
+      <ROTATION axis="y" angle="90" />
+
+      <DESCENDANTS>
+        <NODEREF id="accent1" />
+        <NODEREF id="accent2" />
+        <NODEREF id="accent3" />
+        <NODEREF id="accent4" />
+        <NODEREF id="accent5" />
+        <NODEREF id="accent6" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <!-- Tie fighter's WING ACCENTS 2 node -->
+    <NODE id="accentsCircle2">
+      <MATERIAL id="metalMaterial" />
+      <TEXTURE id="black" />
+
+      <TRANSLATION x="3.45" y="0" z="0" />
+      <ROTATION axis="y" angle="-90" />
+
+      <DESCENDANTS>
+        <NODEREF id="accent1" />
+        <NODEREF id="accent2" />
+        <NODEREF id="accent3" />
+        <NODEREF id="accent4" />
+        <NODEREF id="accent5" />
+        <NODEREF id="accent6" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="accent1">
+
+      <MATERIAL id="metalMaterial" />
+      <TEXTURE id="null" />
+
+      <DESCENDANTS>
+        <NODEREF id="accentFace1" />
+        <NODEREF id="accentFace2" />
+        <NODEREF id="accentFace3" />
+        <NODEREF id="accentFace4" />
+        <NODEREF id="accentFace5" />
+        <NODEREF id="accentFace6" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="accent2">
+
+      <MATERIAL id="metalMaterial" />
+      <TEXTURE id="null" />
+
+      <ROTATION axis="z" angle="60" />
+
+      <DESCENDANTS>
+        <NODEREF id="accentFace1" />
+        <NODEREF id="accentFace2" />
+        <NODEREF id="accentFace3" />
+        <NODEREF id="accentFace4" />
+        <NODEREF id="accentFace5" />
+        <NODEREF id="accentFace6" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="accent3">
+
+      <MATERIAL id="metalMaterial" />
+      <TEXTURE id="null" />
+
+      <ROTATION axis="z" angle="120" />
+
+      <DESCENDANTS>
+        <NODEREF id="accentFace1" />
+        <NODEREF id="accentFace2" />
+        <NODEREF id="accentFace3" />
+        <NODEREF id="accentFace4" />
+        <NODEREF id="accentFace5" />
+        <NODEREF id="accentFace6" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="accent4">
+
+      <MATERIAL id="metalMaterial" />
+      <TEXTURE id="null" />
+
+      <ROTATION axis="z" angle="180" />
+
+      <DESCENDANTS>
+        <NODEREF id="accentFace1" />
+        <NODEREF id="accentFace2" />
+        <NODEREF id="accentFace3" />
+        <NODEREF id="accentFace4" />
+        <NODEREF id="accentFace5" />
+        <NODEREF id="accentFace6" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="accent5">
+
+      <MATERIAL id="metalMaterial" />
+      <TEXTURE id="null" />
+
+      <ROTATION axis="z" angle="240" />
+
+      <DESCENDANTS>
+        <NODEREF id="accentFace1" />
+        <NODEREF id="accentFace2" />
+        <NODEREF id="accentFace3" />
+        <NODEREF id="accentFace4" />
+        <NODEREF id="accentFace5" />
+        <NODEREF id="accentFace6" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="accent6">
+
+      <MATERIAL id="metalMaterial" />
+      <TEXTURE id="null" />
+
+      <ROTATION axis="z" angle="300" />
+
+      <DESCENDANTS>
+        <NODEREF id="accentFace1" />
+        <NODEREF id="accentFace2" />
+        <NODEREF id="accentFace3" />
+        <NODEREF id="accentFace4" />
+        <NODEREF id="accentFace5" />
+        <NODEREF id="accentFace6" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="accentFace1"> <!-- Front face -->
+
+      <MATERIAL id="metalMaterial" />
+      <TEXTURE id="null" />
+
+      <DESCENDANTS>
+        <LEAF id="tieFace" type="rectangle" args="0 0 0.2 3.45" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="accentFace2"> <!-- Back face -->
+
+      <MATERIAL id="metalMaterial" />
+      <TEXTURE id="null" />
+
+      <TRANSLATION x="0" y="0" z="-0.2" />
+
+      <DESCENDANTS>
+        <LEAF id="tieFace" type="rectangle" args="0 0 0.2 3.45" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="accentFace3"> <!-- Left face -->
+
+      <MATERIAL id="metalMaterial" />
+      <TEXTURE id="null" />
+
+      <TRANSLATION x="0" y="0" z="-0.2" />
+      <ROTATION axis="y" angle="-90" />
+
+      <DESCENDANTS>
+        <LEAF id="tieFace" type="rectangle" args="0 0 0.2 3.45" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="accentFace4"> <!-- Right face -->
+
+      <MATERIAL id="metalMaterial" />
+      <TEXTURE id="null" />
+
+      <ROTATION axis="y" angle="90" />
+
+      <DESCENDANTS>
+        <LEAF id="tieFace" type="rectangle" args="0 0 0.2 3.45" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="accentFace5"> <!-- Top face -->
+
+      <MATERIAL id="metalMaterial" />
+      <TEXTURE id="null" />
+
+      <TRANSLATION x="0" y="3.45" z="-0.2" />
+      <ROTATION axis="x" angle="90" />
+
+      <DESCENDANTS>
+        <LEAF id="tieFace" type="rectangle" args="0 0 0.2 0.2" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="accentFace6"> <!-- Bottom face -->
+
+      <MATERIAL id="metalMaterial" />
+      <TEXTURE id="null" />
+
+      <ROTATION axis="x" angle="-90" />
+
+      <DESCENDANTS>
+        <LEAF id="tieFace" type="rectangle" args="0 0 0.2 0.2" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="wingTriangle1">
+
+      <MATERIAL id="metalMaterial" />
+      <TEXTURE id="null" />
+
+      <TRANSLATION x="0" y="0" z="0" />
+      <ROTATION axis="y" angle="0" />
+      <SCALE sx="1" sy="1" sz="1" />
+
+      <DESCENDANTS>
+        <LEAF id = "triangle1" type="triangle" args="0 0 0 1.7 0 3 -1.7 0 3" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="wingTriangle2">
+
+      <MATERIAL id="metalMaterial" />
+      <TEXTURE id="null" />
+
+      <TRANSLATION x="0" y="0" z="0" />
+      <ROTATION axis="y" angle="60" />
+      <SCALE sx="1" sy="1" sz="1" />
+
+      <DESCENDANTS>
+        <LEAF  id = "triangle1" type="triangle" args="0 0 0 1.7 0 3 -1.7 0 3" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="wingTriangle3">
+
+      <MATERIAL id="metalMaterial" />
+      <TEXTURE id="null" />
+
+      <TRANSLATION x="0" y="0" z="0" />
+      <ROTATION axis="y" angle="120" />
+      <SCALE sx="1" sy="1" sz="1" />
+
+      <DESCENDANTS>
+        <LEAF  id = "triangle1" type="triangle" args="0 0 0 1.7 0 3 -1.7 0 3" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="wingTriangle4">
+
+      <MATERIAL id="metalMaterial" />
+      <TEXTURE id="null" />
+
+      <TRANSLATION x="0" y="0" z="0" />
+      <ROTATION axis="y" angle="180" />
+      <SCALE sx="1" sy="1" sz="1" />
+
+      <DESCENDANTS>
+        <LEAF  id = "triangle1" type="triangle" args="0 0 0 1.7 0 3 -1.7 0 3" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="wingTriangle5">
+
+      <MATERIAL id="metalMaterial" />
+      <TEXTURE id="null" />
+
+      <TRANSLATION x="0" y="0" z="0" />
+      <ROTATION axis="y" angle="240" />
+      <SCALE sx="1" sy="1" sz="1" />
+
+      <DESCENDANTS>
+        <LEAF  id = "triangle1" type="triangle" args="0 0 0 1.7 0 3 -1.7 0 3" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="wingTriangle6">
+
+      <MATERIAL id="metalMaterial" />
+      <TEXTURE id="null" />
+
+      <TRANSLATION x="0" y="0" z="0" />
+      <ROTATION axis="y" angle="-60" />
+      <SCALE sx="1" sy="1" sz="1" />
+
+      <DESCENDANTS>
+        <LEAF  id = "triangle1" type="triangle" args="0 0 0 1.7 0 3 -1.7 0 3" />
       </DESCENDANTS>
 
     </NODE>
@@ -199,6 +572,8 @@
       </DESCENDANTS>
 
     </NODE>
+
+
 
     <NODE id="planet">
 
