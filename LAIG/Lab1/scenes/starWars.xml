@@ -364,7 +364,7 @@
       <MATERIAL id="defaultMaterial" />
       <TEXTURE id="null" />
 
-      <ROTATION axis="z" angle="240" />
+      <ROTATION axis="z" angle="-120" />
 
       <DESCENDANTS>
         <NODEREF id="accentFace1" />
@@ -382,7 +382,7 @@
       <MATERIAL id="defaultMaterial" />
       <TEXTURE id="null" />
 
-      <ROTATION axis="z" angle="300" />
+      <ROTATION axis="z" angle="-60" />
 
       <DESCENDANTS>
         <NODEREF id="accentFace1" />
@@ -401,7 +401,7 @@
       <TEXTURE id="null" />
 
       <DESCENDANTS>
-        <LEAF id="tieFace" type="rectangle" args="0 0 0.3 3.45" />
+        <LEAF id="tieFace" type="rectangle" args="-0.15 3.45 0.15 0" />
       </DESCENDANTS>
 
     </NODE>
@@ -412,9 +412,10 @@
       <TEXTURE id="null" />
 
       <TRANSLATION x="0" y="0" z="-0.2" />
+      <ROTATION axis="x" angle="180" />
 
       <DESCENDANTS>
-        <LEAF id="tieFace" type="rectangle" args="0 0 0.3 3.45" />
+        <LEAF id="tieFace" type="rectangle" args="-0.15 3.45 0.15 0" />
       </DESCENDANTS>
 
     </NODE>
@@ -424,38 +425,38 @@
       <MATERIAL id="defaultMaterial" />
       <TEXTURE id="null" />
 
-      <TRANSLATION x="0" y="0" z="-0.2" />
       <ROTATION axis="y" angle="-90" />
 
       <DESCENDANTS>
-        <LEAF id="tieFace" type="rectangle" args="0 0 0.3 3.45" />
+        <LEAF id="tieFace" type="rectangle" args="-0.15 3.45 0.15 0" />
       </DESCENDANTS>
 
     </NODE>
 
     <NODE id="accentFace4"> <!-- Right face -->
 
-      <MATERIAL id="defaultMaterial" />
+      <MATERIAL id="planetMaterial" />
       <TEXTURE id="null" />
 
       <ROTATION axis="y" angle="90" />
 
       <DESCENDANTS>
-        <LEAF id="tieFace" type="rectangle" args="0 0 0.3 3.45" />
+        <LEAF id="tieFace" type="rectangle" args="-0.15 3.45 0.15 0" />
       </DESCENDANTS>
 
     </NODE>
 
     <NODE id="accentFace5"> <!-- Top face -->
 
-      <MATERIAL id="defaultMaterial" />
+      <MATERIAL id="planetMaterial" />
       <TEXTURE id="null" />
 
-      <TRANSLATION x="0" y="3.45" z="-0.2" />
       <ROTATION axis="x" angle="90" />
+      <TRANSLATION x="0" y="3.15" z="0" />
+
 
       <DESCENDANTS>
-        <LEAF id="tieFace" type="rectangle" args="0 0 0.3 0.3" />
+        <LEAF id="tieFace" type="rectangle" args="-0.15 0.3 0.15 0" />
       </DESCENDANTS>
 
     </NODE>
@@ -465,10 +466,10 @@
       <MATERIAL id="defaultMaterial" />
       <TEXTURE id="null" />
 
-      <ROTATION axis="x" angle="-90" />
+      <ROTATION axis="x" angle="90" />
 
       <DESCENDANTS>
-        <LEAF id="tieFace" type="rectangle" args="0 0 0.3 0.3" />
+        <LEAF id="tieFace" type="rectangle" args="-0.15 0.3 0.15 0" />
       </DESCENDANTS>
 
     </NODE>
