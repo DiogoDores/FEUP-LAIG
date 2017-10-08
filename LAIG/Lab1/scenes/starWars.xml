@@ -619,7 +619,7 @@
       <DESCENDANTS>
 
         <NODEREF id="xBody" />
-      <!--  <NODEREF id="xwings" /> -->
+        <NODEREF id="xwings" />
 
       </DESCENDANTS>
 
@@ -798,7 +798,7 @@
       <MATERIAL id="defaultMaterial" />
       <TEXTURE id="null" />
 
-      <TRANSLATION x="0" y="2" z="1.25" />
+      <TRANSLATION x="0" y="2" z="1.3" />
       <ROTATION axis="x" angle="-65" />
 
       <DESCENDANTS>
@@ -813,13 +813,56 @@
       <MATERIAL id="planetMaterial" />
       <TEXTURE id="null" />
 
-      <TRANSLATION x="0" y="0" z="0" />
-      <ROTATION axis="x" angle="0" />
+      <TRANSLATION x="-0.75" y="1.9" z="1.5" />
+
+      <ROTATION axis="x" angle="-65" />
+      <ROTATION axis="y" angle="-90" />
 
       <DESCENDANTS>
-        <LEAF  type="triangle" args="0 3 0 0 0 0 0 0.423 0.906" />
+        <LEAF  type="triangle" args="-0.75 1.5 0 -0.75 -1.5 0 0.75 -1.5 0" />
       </DESCENDANTS>
 
+    </NODE>
+
+    <!-- X-Wing's Wings node -->
+    <NODE id="xwings">
+      <MATERIAL id="defaultMaterial" />
+      <TEXTURE id="null" />
+
+      <DESCENDANTS>
+        <NODEREF id="xTopLeftWing" />
+      <!--  <NODEREF id="xTopRighttWing" />
+        <NODEREF id="xBotLeftWing" />
+        <NODEREF id="xBotRightWing" /> -->
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- X-Wing's Top Left Wing node -->
+    <NODE id="xTopLeftWing">
+      <MATERIAL id="defaultMaterial" />
+      <TEXTURE id="null" />
+
+      <DESCENDANTS>
+
+        <NODEREF id="xBodyWing" />
+
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- X-Wing's Body Wing node -->
+    <NODE id="xBodyWing">
+      <MATERIAL id="defaultMaterial" />
+      <TEXTURE id="null" />
+
+      <TRANSLATION x="-5" y="2" z="1.5" />
+      <ROTATION axis="x" angle="-90"/>
+      <ROTATION axis="y" angle="20"/>
+
+      <DESCENDANTS>
+
+        <LEAF type="rectangle" args="-5 1.5 5 -1.5"/>
+
+      </DESCENDANTS>
     </NODE>
 
     <NODE id="planet">
