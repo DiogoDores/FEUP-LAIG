@@ -15,6 +15,7 @@ MySphere.prototype.display = function() {
 
     this.semi.display();
 
+    this.scene.rotate(Math.PI,0,0,1);
     this.scene.rotate(Math.PI,1,0,0);
     this.semi.display();
 

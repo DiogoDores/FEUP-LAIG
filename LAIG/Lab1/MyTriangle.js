@@ -60,13 +60,13 @@
 
 	var beta   = Math.acos((( a* a) - ( b* b) + ( c* c))/(2 *  a *  c));
 
-	var halt = a * Math.sin(beta);
-    var mid = c - a*Math.cos(beta);
+	var height = a * Math.sin(beta);
+  var mid = c - a * Math.cos(beta);
 
 
 
     this.texCoords = [
-		mid/this.s, halt/this.t,
+		mid/this.s, height/this.t,
 		c/this.s, 0,
 		0,0
     ];
