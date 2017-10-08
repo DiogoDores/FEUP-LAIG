@@ -75,11 +75,27 @@
 
 <MATERIALS>
 	<!-- Metal material -->
-    <MATERIAL id="metalMaterial">
+    <MATERIAL id="defaultMaterial">
         <shininess value="1" />
         <specular r="0" g="0" b="0" a="1" />
-        <diffuse r="1.0" g="0.68" b="0.4" a="1" />
-        <ambient r="0.2" g="0.2" b="0.2" a="1" />
+        <diffuse r="0.1" g="0.1" b="0.1" a="1" />
+        <ambient r="0.1" g="0.1" b="0.1" a="1" />
+        <emission r="0.0" g="0.0" b="0.0" a="1" />
+    </MATERIAL>
+
+    <MATERIAL id="whiteMaterial">
+        <shininess value="1" />
+        <specular r="0" g="0" b="0" a="1" />
+        <diffuse r="0.9" g="0.9" b="0.9" a="1" />
+        <ambient r="0.9" g="0.9" b="0.9" a="1" />
+        <emission r="0.0" g="0.0" b="0.0" a="1" />
+    </MATERIAL>
+
+    <MATERIAL id="planetMaterial">
+        <shininess value="1" />
+        <specular r="0" g="0" b="0" a="1" />
+        <diffuse r="0.7" g="0.5" b="0.1" a="1" />
+        <ambient r="0.7" g="0.5" b="0.1" a="1" />
         <emission r="0.0" g="0.0" b="0.0" a="1" />
     </MATERIAL>
 </MATERIALS>
@@ -95,7 +111,7 @@
 
     <!-- The root node -->
     <NODE id="root">
-        <MATERIAL id="metalMaterial" />
+        <MATERIAL id="defaultMaterial" />
         <TEXTURE id="null" />
 
         <DESCENDANTS>
@@ -110,7 +126,7 @@
 
     <!-- Tie Fighter node -->
     <NODE id="tieFighter">
-      <MATERIAL id="metalMaterial" />
+      <MATERIAL id="defaultMaterial" />
       <TEXTURE id="null" />
 
       <TRANSLATION x="5" y="2" z="5" />
@@ -127,7 +143,7 @@
 
     <!-- Tie fighter's MAIN BODY node -->
     <NODE id="tieBody">
-      <MATERIAL id="metalMaterial" />
+      <MATERIAL id="defaultMaterial" />
       <TEXTURE id="null" />
 
       <DESCENDANTS>
@@ -141,8 +157,8 @@
     <!-- Tie fighter's SPHERE node -->
     <NODE id="mainBody">
 
-      <MATERIAL id="metalMaterial" />
-      <TEXTURE id="steel" />
+      <MATERIAL id="defaultMaterial" />
+      <TEXTURE id="null" />
 
       <TRANSLATION x="0" y="0" z="0" />
       <SCALE sx="1" sy="1" sz="1" />
@@ -155,21 +171,21 @@
 
     <!-- Tie fighter's WINDOW node -->
     <NODE id="window">
-      <MATERIAL id="metalMaterial" />
+      <MATERIAL id="whiteMaterial" />
       <TEXTURE id="null" />
 
-      <TRANSLATION x="0" y="0" z="-2.25" />
+      <TRANSLATION x="0" y="0" z="0" />
 
       <DESCENDANTS>
-        <LEAF  type="cylinder" args="4.5 1 1 20 20 1 1" />
+        <LEAF  type="cylinder" args="2 1 1 20 20 1 0" />
       </DESCENDANTS>
 
     </NODE>
 
     <!-- Tie fighter's WINGS node -->
     <NODE id="wings">
-      <MATERIAL id="null" />
-      <TEXTURE id="steel" />
+      <MATERIAL id="defaultMaterial" />
+      <TEXTURE id="null" />
 
       <DESCENDANTS>
         <NODEREF id="wing1" />
@@ -183,7 +199,7 @@
     <!-- Tie fighter's WING 1 node -->
     <NODE id="wing1">
       <MATERIAL id="null" />
-      <TEXTURE id="null" />
+      <TEXTURE id="steel" />
 
       <TRANSLATION x="-3.5" y="0" z="0" />
       <ROTATION axis="y" angle="180" />
@@ -196,15 +212,15 @@
         <NODEREF id="wingTriangle4" />
         <NODEREF id="wingTriangle5" />
         <NODEREF id="wingTriangle6" />
-        <!-- <NODEREF id="middle" /> -->
+        <NODEREF id="middle" />
       </DESCENDANTS>
 
     </NODE>
 
     <!-- Tie fighter's WING 2 node -->
     <NODE id="wing2">
-      <MATERIAL id="metalMaterial" />
-      <TEXTURE id="null" />
+      <MATERIAL id="null" />
+      <TEXTURE id="steel" />
 
       <TRANSLATION x="3.5" y="0" z="0" />
       <ROTATION axis="z" angle="90" />
@@ -216,17 +232,31 @@
         <NODEREF id="wingTriangle4" />
         <NODEREF id="wingTriangle5" />
         <NODEREF id="wingTriangle6" />
-        <!-- <NODEREF id="middle" /> -->
+        <NODEREF id="middle" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <!-- Tie fighter's WING CIRCLE node -->
+    <NODE id="middle">
+      <MATERIAL id="whiteMaterial" />
+      <TEXTURE id="null" />
+
+      <TRANSLATION x="0" y="0.5" z="0" />
+      <ROTATION axis="x" angle="90" />
+
+      <DESCENDANTS>
+        <LEAF type="cylinder" args="1 0.6 0.6 20 20 1 1" />
       </DESCENDANTS>
 
     </NODE>
 
     <!-- Tie fighter's WING ACCENTS 1 node -->
     <NODE id="accentsCircle1">
-      <MATERIAL id="null" />
+      <MATERIAL id="whiteMaterial" />
       <TEXTURE id="black" />
 
-      <TRANSLATION x="-3.45" y="0" z="0" />
+      <TRANSLATION x="-3.35" y="0" z="0" />
       <ROTATION axis="y" angle="90" />
 
       <DESCENDANTS>
@@ -242,10 +272,10 @@
 
     <!-- Tie fighter's WING ACCENTS 2 node -->
     <NODE id="accentsCircle2">
-      <MATERIAL id="null" />
+      <MATERIAL id="whiteMaterial" />
       <TEXTURE id="black" />
 
-      <TRANSLATION x="3.45" y="0" z="0" />
+      <TRANSLATION x="3.35" y="0" z="0" />
       <ROTATION axis="y" angle="-90" />
 
       <DESCENDANTS>
@@ -261,7 +291,7 @@
 
     <NODE id="accent1">
 
-      <MATERIAL id="metalMaterial" />
+      <MATERIAL id="defaultMaterial" />
       <TEXTURE id="null" />
 
       <DESCENDANTS>
@@ -277,7 +307,7 @@
 
     <NODE id="accent2">
 
-      <MATERIAL id="metalMaterial" />
+      <MATERIAL id="defaultMaterial" />
       <TEXTURE id="null" />
 
       <ROTATION axis="z" angle="60" />
@@ -295,7 +325,7 @@
 
     <NODE id="accent3">
 
-      <MATERIAL id="metalMaterial" />
+      <MATERIAL id="defaultMaterial" />
       <TEXTURE id="null" />
 
       <ROTATION axis="z" angle="120" />
@@ -313,7 +343,7 @@
 
     <NODE id="accent4">
 
-      <MATERIAL id="metalMaterial" />
+      <MATERIAL id="defaultMaterial" />
       <TEXTURE id="null" />
 
       <ROTATION axis="z" angle="180" />
@@ -331,7 +361,7 @@
 
     <NODE id="accent5">
 
-      <MATERIAL id="metalMaterial" />
+      <MATERIAL id="defaultMaterial" />
       <TEXTURE id="null" />
 
       <ROTATION axis="z" angle="240" />
@@ -349,7 +379,7 @@
 
     <NODE id="accent6">
 
-      <MATERIAL id="metalMaterial" />
+      <MATERIAL id="defaultMaterial" />
       <TEXTURE id="null" />
 
       <ROTATION axis="z" angle="300" />
@@ -367,85 +397,85 @@
 
     <NODE id="accentFace1"> <!-- Front face -->
 
-      <MATERIAL id="metalMaterial" />
+      <MATERIAL id="defaultMaterial" />
       <TEXTURE id="null" />
 
       <DESCENDANTS>
-        <LEAF id="tieFace" type="rectangle" args="0 0 0.2 3.45" />
+        <LEAF id="tieFace" type="rectangle" args="0 0 0.3 3.45" />
       </DESCENDANTS>
 
     </NODE>
 
     <NODE id="accentFace2"> <!-- Back face -->
 
-      <MATERIAL id="metalMaterial" />
+      <MATERIAL id="defaultMaterial" />
       <TEXTURE id="null" />
 
       <TRANSLATION x="0" y="0" z="-0.2" />
 
       <DESCENDANTS>
-        <LEAF id="tieFace" type="rectangle" args="0 0 0.2 3.45" />
+        <LEAF id="tieFace" type="rectangle" args="0 0 0.3 3.45" />
       </DESCENDANTS>
 
     </NODE>
 
     <NODE id="accentFace3"> <!-- Left face -->
 
-      <MATERIAL id="metalMaterial" />
+      <MATERIAL id="defaultMaterial" />
       <TEXTURE id="null" />
 
       <TRANSLATION x="0" y="0" z="-0.2" />
       <ROTATION axis="y" angle="-90" />
 
       <DESCENDANTS>
-        <LEAF id="tieFace" type="rectangle" args="0 0 0.2 3.45" />
+        <LEAF id="tieFace" type="rectangle" args="0 0 0.3 3.45" />
       </DESCENDANTS>
 
     </NODE>
 
     <NODE id="accentFace4"> <!-- Right face -->
 
-      <MATERIAL id="metalMaterial" />
+      <MATERIAL id="defaultMaterial" />
       <TEXTURE id="null" />
 
       <ROTATION axis="y" angle="90" />
 
       <DESCENDANTS>
-        <LEAF id="tieFace" type="rectangle" args="0 0 0.2 3.45" />
+        <LEAF id="tieFace" type="rectangle" args="0 0 0.3 3.45" />
       </DESCENDANTS>
 
     </NODE>
 
     <NODE id="accentFace5"> <!-- Top face -->
 
-      <MATERIAL id="metalMaterial" />
+      <MATERIAL id="defaultMaterial" />
       <TEXTURE id="null" />
 
       <TRANSLATION x="0" y="3.45" z="-0.2" />
       <ROTATION axis="x" angle="90" />
 
       <DESCENDANTS>
-        <LEAF id="tieFace" type="rectangle" args="0 0 0.2 0.2" />
+        <LEAF id="tieFace" type="rectangle" args="0 0 0.3 0.3" />
       </DESCENDANTS>
 
     </NODE>
 
     <NODE id="accentFace6"> <!-- Bottom face -->
 
-      <MATERIAL id="metalMaterial" />
+      <MATERIAL id="defaultMaterial" />
       <TEXTURE id="null" />
 
       <ROTATION axis="x" angle="-90" />
 
       <DESCENDANTS>
-        <LEAF id="tieFace" type="rectangle" args="0 0 0.2 0.2" />
+        <LEAF id="tieFace" type="rectangle" args="0 0 0.3 0.3" />
       </DESCENDANTS>
 
     </NODE>
 
     <NODE id="wingTriangle1">
 
-      <MATERIAL id="metalMaterial" />
+      <MATERIAL id="defaultMaterial" />
       <TEXTURE id="null" />
 
       <TRANSLATION x="0" y="0" z="0" />
@@ -460,7 +490,7 @@
 
     <NODE id="wingTriangle2">
 
-      <MATERIAL id="metalMaterial" />
+      <MATERIAL id="defaultMaterial" />
       <TEXTURE id="null" />
 
       <TRANSLATION x="0" y="0" z="0" />
@@ -475,7 +505,7 @@
 
     <NODE id="wingTriangle3">
 
-      <MATERIAL id="metalMaterial" />
+      <MATERIAL id="defaultMaterial" />
       <TEXTURE id="null" />
 
       <TRANSLATION x="0" y="0" z="0" />
@@ -490,7 +520,7 @@
 
     <NODE id="wingTriangle4">
 
-      <MATERIAL id="metalMaterial" />
+      <MATERIAL id="defaultMaterial" />
       <TEXTURE id="null" />
 
       <TRANSLATION x="0" y="0" z="0" />
@@ -505,7 +535,7 @@
 
     <NODE id="wingTriangle5">
 
-      <MATERIAL id="metalMaterial" />
+      <MATERIAL id="defaultMaterial" />
       <TEXTURE id="null" />
 
       <TRANSLATION x="0" y="0" z="0" />
@@ -520,7 +550,7 @@
 
     <NODE id="wingTriangle6">
 
-      <MATERIAL id="metalMaterial" />
+      <MATERIAL id="defaultMaterial" />
       <TEXTURE id="null" />
 
       <TRANSLATION x="0" y="0" z="0" />
@@ -535,7 +565,7 @@
 
     <!-- Tie fighter's CONNECTIONS node -->
     <NODE id="connections">
-      <MATERIAL id="metalMaterial" />
+      <MATERIAL id="defaultMaterial" />
       <TEXTURE id="null" />
 
       <DESCENDANTS>
@@ -549,7 +579,7 @@
     <!-- LEFT tie fighter CONNECTOR -->
     <NODE id="tieCone1">
 
-      <MATERIAL id="metalMaterial" />
+      <MATERIAL id="defaultMaterial" />
       <TEXTURE id="null" />
 
       <TRANSLATION x="-0.5" y="0" z="0" />
@@ -565,7 +595,7 @@
     <!-- RIGHT tie fighter CONNECTOR -->
     <NODE id="tieCone2">
 
-      <MATERIAL id="metalMaterial" />
+      <MATERIAL id="defaultMaterial" />
       <TEXTURE id="null" />
 
       <TRANSLATION x="0.5" y="0" z="0" />
@@ -582,7 +612,7 @@
 
     <NODE id="planet">
 
-      <MATERIAL id="null" />
+      <MATERIAL id="planetMaterial" />
       <TEXTURE id="planetTex" />
 
       <TRANSLATION x="15" y="10" z="-20" />
