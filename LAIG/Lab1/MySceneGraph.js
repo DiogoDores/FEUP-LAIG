@@ -1431,7 +1431,6 @@ MySceneGraph.prototype.displayScene = function() {
 MySceneGraph.prototype.displayNodes = function(id, matToApply, texToApply){
 
 
-
     if(this.materials[this.nodes[id].materialID] != null)
         matToApply = this.materials[this.nodes[id].materialID];
 

@@ -117,7 +117,7 @@
         <DESCENDANTS>
 
             <NODEREF id="tieFighter" />
-            <!--<NODEREF id="x-fighters" />-->
+            <NODEREF id="xWing" />
             <NODEREF id="planet" />
 
         </DESCENDANTS>
@@ -608,7 +608,218 @@
 
     </NODE>
 
+    <!-- X-Wing node -->
+    <NODE id="xWing">
+      <MATERIAL id="defaultMaterial" />
+      <TEXTURE id="null" />
 
+      <TRANSLATION x="20" y="0" z="0" />
+
+      <DESCENDANTS>
+
+        <NODEREF id="xBody" />
+      <!--  <NODEREF id="xwings" /> -->
+
+      </DESCENDANTS>
+
+    </NODE>
+
+    <!-- X-Wing's MAIN BODY node -->
+    <NODE id="xBody">
+      <MATERIAL id="defaultMaterial" />
+      <TEXTURE id="null" />
+
+      <DESCENDANTS>
+
+        <NODEREF id="frontXBody" />
+        <NODEREF id="xCockpit" />
+        <NODEREF id="backXBody" />
+
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- X-Wing's Back Body node -->
+    <NODE id="backXBody">
+
+      <MATERIAL id="defaultMaterial" />
+      <TEXTURE id="null" />
+
+      <TRANSLATION x="0" y="0" z="0" />
+      <SCALE sx="1" sy="1" sz="1" />
+
+      <DESCENDANTS>
+        <NODEREF id="backBackX" />
+        <NODEREF id="topBackX" />
+        <NODEREF id="rightBackX" />
+        <NODEREF id="leftBackX" />
+        <NODEREF id="botBackX" />
+        <NODEREF id="frontBackX" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <!-- X-Wing's Back Back Body node -->
+    <NODE id="backBackX">
+
+      <MATERIAL id="defaultMaterial" />
+      <TEXTURE id="null" />
+
+      <ROTATION axis="x" angle="180" />
+
+      <DESCENDANTS>
+        <LEAF  type="rectangle" args="-1.75 1.75 1.75 -1.75" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <!-- X-Wing's Top Back Body node -->
+    <NODE id="topBackX">
+
+      <MATERIAL id="defaultMaterial" />
+      <TEXTURE id="null" />
+
+      <TRANSLATION x="0" y="1.75" z="2" />
+      <ROTATION axis="x" angle="-90" />
+
+      <DESCENDANTS>
+        <LEAF  type="rectangle" args="-1.75 2 1.75 -2" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <!-- X-Wing's Left Back Body node -->
+    <NODE id="leftBackX">
+
+      <MATERIAL id="defaultMaterial" />
+      <TEXTURE id="null" />
+
+      <TRANSLATION x="-1.75" y="0" z="2" />
+      <ROTATION axis="y" angle="-90" />
+
+      <DESCENDANTS>
+        <LEAF  type="rectangle" args="-2 1.75 2 -1.75" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <!-- X-Wing's Right Back Body node -->
+    <NODE id="rightBackX">
+
+      <MATERIAL id="defaultMaterial" />
+      <TEXTURE id="null" />
+
+      <TRANSLATION x="1.75" y="0" z="2" />
+      <ROTATION axis="y" angle="90" />
+
+      <DESCENDANTS>
+        <LEAF  type="rectangle" args="-2 1.75 2 -1.75" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <!-- X-Wing's Bottom Back Body node -->
+    <NODE id="botBackX">
+
+      <MATERIAL id="defaultMaterial" />
+      <TEXTURE id="null" />
+
+      <TRANSLATION x="0" y="-1.75" z="2" />
+      <ROTATION axis="x" angle="90" />
+
+      <DESCENDANTS>
+        <LEAF  type="rectangle" args="-1.75 2 1.75 -2" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <!-- X-Wing's Front Back Body node -->
+    <NODE id="frontBackX">
+
+      <MATERIAL id="defaultMaterial" />
+      <TEXTURE id="null" />
+
+      <TRANSLATION x="0" y="0" z="4" />
+
+      <DESCENDANTS>
+        <LEAF  type="rectangle" args="-1.75 1.75 1.75 -1.75" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <!-- X-Wing's Front Body node -->
+    <NODE id="frontXBody">
+
+      <MATERIAL id="defaultMaterial" />
+      <TEXTURE id="null" />
+
+      <TRANSLATION x="0" y="0" z="4" />
+
+      <DESCENDANTS>
+        <NODEREF id="frontX" />
+        <LEAF  type="cylinder" args="10 1.75 0.75 20 20 0 1" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <!-- X-Wing's top Front Body node -->
+    <NODE id="frontX">
+
+      <MATERIAL id="defaultMaterial" />
+      <TEXTURE id="null" />
+
+      <TRANSLATION x="0" y="0" z="9.8" />
+
+      <DESCENDANTS>
+        <LEAF  type="cylinder" args="2 0.80 0 20 20 0 1" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <!-- X-Wing's COCKPIT BODY node -->
+    <NODE id="xCockpit">
+      <MATERIAL id="defaultMaterial" />
+      <TEXTURE id="null" />
+
+      <TRANSLATION x="0" y="0" z="4" />
+
+      <DESCENDANTS>
+
+        <NODEREF id="xTopWindow" />
+        <NODEREF id="xLWindow" />
+    <!--    <NODEREF id="xRWindow" /> -->
+
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- X-Wing's Top Window node -->
+    <NODE id="xTopWindow">
+
+      <MATERIAL id="defaultMaterial" />
+      <TEXTURE id="null" />
+
+      <TRANSLATION x="0" y="2" z="1.25" />
+      <ROTATION axis="x" angle="-65" />
+
+      <DESCENDANTS>
+        <LEAF  type="rectangle" args="-0.75 1.5 0.75 -1.5" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <!-- X-Wing's Left Window node -->
+    <NODE id="xLWindow">
+
+      <MATERIAL id="planetMaterial" />
+      <TEXTURE id="null" />
+
+      <TRANSLATION x="0" y="0" z="0" />
+      <ROTATION axis="x" angle="0" />
+
+      <DESCENDANTS>
+        <LEAF  type="triangle" args="0 3 0 0 0 0 0 0.423 0.906" />
+      </DESCENDANTS>
+
+    </NODE>
 
     <NODE id="planet">
 
