@@ -77,17 +77,17 @@
 	<!-- Metal material -->
     <MATERIAL id="defaultMaterial">
         <shininess value="1" />
-        <specular r="0" g="0" b="0" a="1" />
-        <diffuse r="0.1" g="0.1" b="0.1" a="1" />
-        <ambient r="0.1" g="0.1" b="0.1" a="1" />
+        <specular r="0.7" g="0.7" b="0.7" a="1" />
+        <diffuse r="0.5" g="0.5" b="0.5" a="1" />
+        <ambient r="0.5" g="0.5" b="0.5" a="1" />
         <emission r="0.0" g="0.0" b="0.0" a="1" />
     </MATERIAL>
 
     <MATERIAL id="whiteMaterial">
         <shininess value="1" />
         <specular r="0" g="0" b="0" a="1" />
-        <diffuse r="0.9" g="0.9" b="0.9" a="1" />
-        <ambient r="0.9" g="0.9" b="0.9" a="1" />
+        <diffuse r="0.8" g="0.8" b="0.8" a="1" />
+        <ambient r="0.8" g="0.8" b="0.8" a="1" />
         <emission r="0.0" g="0.0" b="0.0" a="1" />
     </MATERIAL>
 
@@ -256,7 +256,7 @@
       <MATERIAL id="whiteMaterial" />
       <TEXTURE id="black" />
 
-      <TRANSLATION x="-3.35" y="0" z="0" />
+      <TRANSLATION x="-3.5" y="0" z="0" />
       <ROTATION axis="y" angle="90" />
 
       <DESCENDANTS>
@@ -275,7 +275,7 @@
       <MATERIAL id="whiteMaterial" />
       <TEXTURE id="black" />
 
-      <TRANSLATION x="3.35" y="0" z="0" />
+      <TRANSLATION x="3.5" y="0" z="0" />
       <ROTATION axis="y" angle="-90" />
 
       <DESCENDANTS>
@@ -400,6 +400,8 @@
       <MATERIAL id="defaultMaterial" />
       <TEXTURE id="null" />
 
+      <TRANSLATION x="0" y="0" z="0.15" />
+
       <DESCENDANTS>
         <LEAF id="tieFace" type="rectangle" args="-0.15 3.45 0.15 0" />
       </DESCENDANTS>
@@ -411,8 +413,8 @@
       <MATERIAL id="defaultMaterial" />
       <TEXTURE id="null" />
 
-      <TRANSLATION x="0" y="0" z="-0.2" />
-      <ROTATION axis="x" angle="180" />
+      <TRANSLATION x="0" y="0" z="-0.15" />
+      <ROTATION axis="y" angle="180" />
 
       <DESCENDANTS>
         <LEAF id="tieFace" type="rectangle" args="-0.15 3.45 0.15 0" />
@@ -425,6 +427,7 @@
       <MATERIAL id="defaultMaterial" />
       <TEXTURE id="null" />
 
+      <TRANSLATION x="-0.15" y="0" z="0" />
       <ROTATION axis="y" angle="-90" />
 
       <DESCENDANTS>
@@ -435,9 +438,10 @@
 
     <NODE id="accentFace4"> <!-- Right face -->
 
-      <MATERIAL id="planetMaterial" />
+      <MATERIAL id="defaultMaterial" />
       <TEXTURE id="null" />
 
+      <TRANSLATION x="0.15" y="0" z="0" />
       <ROTATION axis="y" angle="90" />
 
       <DESCENDANTS>
@@ -448,12 +452,11 @@
 
     <NODE id="accentFace5"> <!-- Top face -->
 
-      <MATERIAL id="planetMaterial" />
+      <MATERIAL id="defaultMaterial" />
       <TEXTURE id="null" />
 
+      <TRANSLATION x="0" y="3.45" z="-0.15" />
       <ROTATION axis="x" angle="90" />
-      <TRANSLATION x="0" y="3.15" z="0" />
-
 
       <DESCENDANTS>
         <LEAF id="tieFace" type="rectangle" args="-0.15 0.3 0.15 0" />
@@ -466,6 +469,7 @@
       <MATERIAL id="defaultMaterial" />
       <TEXTURE id="null" />
 
+      <TRANSLATION x="0" y="0" z="-0.15" />
       <ROTATION axis="x" angle="90" />
 
       <DESCENDANTS>
