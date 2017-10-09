@@ -1104,6 +1104,7 @@
         <NODEREF id="xMotorFront" />
         <NODEREF id="xMotorBack" />
         <NODEREF id="xMotor" />
+        <NODEREF id="xBackMotor" />
       </DESCENDANTS>
     </NODE>
 
@@ -1118,6 +1119,7 @@
         <NODEREF id="xMotorFront" />
         <NODEREF id="xMotorBack" />
         <NODEREF id="xMotor" />
+        <NODEREF id="xBackMotor" />
       </DESCENDANTS>
     </NODE>
 
@@ -1132,6 +1134,7 @@
         <NODEREF id="xMotorFront" />
         <NODEREF id="xMotorBack" />
         <NODEREF id="xMotor" />
+        <NODEREF id="xBackMotor" />
       </DESCENDANTS>
     </NODE>
 
@@ -1146,6 +1149,7 @@
         <NODEREF id="xMotorFront" />
         <NODEREF id="xMotorBack" />
         <NODEREF id="xMotor" />
+        <NODEREF id="xBackMotor" />
       </DESCENDANTS>
     </NODE>
 
@@ -1182,6 +1186,31 @@
       <DESCENDANTS>
 
         <LEAF type="cylinder" args="0.01 1 1 20 20 1 1" />
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- X-Wing's Wing's Back Motor Leaf node -->
+    <NODE id="xBackMotor">
+      <MATERIAL id="defaultMaterial" />
+      <TEXTURE id="null" />
+
+      <TRANSLATION x="0" y="0" z="-3.4" />
+
+      <DESCENDANTS>
+        <NODEREF id="xBackofBackMotor" />
+        <LEAF id="backmotor" type="cylinder" args="3.5 0.6 0.7 20 20 1 1" />
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- X-Wing's Wing's Back of Back Motor Leaf node -->
+    <NODE id="xBackofBackMotor">
+      <MATERIAL id="defaultMaterial" />
+      <TEXTURE id="null" />
+
+      <TRANSLATION x="0" y="0" z="-0.009" />
+
+      <DESCENDANTS>
+        <LEAF id="backbackmotor" type="cylinder" args="0.01 0.6 0.6 20 20 1 1" />
       </DESCENDANTS>
     </NODE>
 
