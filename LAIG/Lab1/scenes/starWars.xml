@@ -72,7 +72,6 @@
         <amplif_factor s="1" t="2" />
     </TEXTURE>
 
-<<<<<<< HEAD
     <TEXTURE id="bodyXwing">
         <file path="images/body_x_wing.png" />
         <amplif_factor s="1" t="1" />
@@ -143,7 +142,6 @@
         <amplif_factor s="3" t="4" />
     </TEXTURE>
 
-=======
     <TEXTURE id="tie-body">
         <file path="images/tie-body.jpg" />
         <amplif_factor s="1" t="1" />
@@ -163,7 +161,6 @@
         <file path="images/tie-window.jpg" />
         <amplif_factor s="1" t="1" />
     </TEXTURE>
->>>>>>> origin/master
 </TEXTURES>
 
 <MATERIALS>
