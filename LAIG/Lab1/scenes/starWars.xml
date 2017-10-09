@@ -831,9 +831,9 @@
 
       <DESCENDANTS>
         <NODEREF id="xTopLeftWing" />
-      <!--  <NODEREF id="xTopRighttWing" />
+        <NODEREF id="xTopRightWing" />
         <NODEREF id="xBotLeftWing" />
-        <NODEREF id="xBotRightWing" /> -->
+        <NODEREF id="xBotRightWing" />
       </DESCENDANTS>
     </NODE>
 
@@ -845,7 +845,47 @@
       <DESCENDANTS>
 
         <NODEREF id="xBodyWing1" />
+        <NODEREF id="xMotor1" />
+        <NODEREF id="xGun1" />
+      </DESCENDANTS>
+    </NODE>
 
+    <!-- X-Wing's Bop Left Wing node -->
+    <NODE id="xBotLeftWing">
+      <MATERIAL id="defaultMaterial" />
+      <TEXTURE id="null" />
+
+      <DESCENDANTS>
+
+        <NODEREF id="xBodyWing2" />
+        <NODEREF id="xMotor2" />
+        <NODEREF id="xGun2" />
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- X-Wing's Top Right Wing node -->
+    <NODE id="xTopRightWing">
+      <MATERIAL id="defaultMaterial" />
+      <TEXTURE id="null" />
+
+      <DESCENDANTS>
+
+        <NODEREF id="xBodyWing3" />
+        <NODEREF id="xMotor3" />
+        <NODEREF id="xGun3" />
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- X-Wing's Bot Right Wing node -->
+    <NODE id="xBotRightWing">
+      <MATERIAL id="defaultMaterial" />
+      <TEXTURE id="null" />
+
+      <DESCENDANTS>
+
+        <NODEREF id="xBodyWing4" />
+        <NODEREF id="xMotor4" />
+        <NODEREF id="xGun4" />
       </DESCENDANTS>
     </NODE>
 
@@ -944,7 +984,7 @@
       <MATERIAL id="defaultMaterial" />
       <TEXTURE id="null" />
 
-      <TRANSLATION x="-5" y="2" z="1.5" />
+      <TRANSLATION x="-5.5" y="1.8" z="1.5" />
       <ROTATION axis="x" angle="-90"/>
       <ROTATION axis="y" angle="20"/>
 
@@ -952,6 +992,236 @@
 
         <NODEREF id="xBodyWing" />
       </DESCENDANTS>
+    </NODE>
+
+    <!-- X-Wing's Body Wing node -->
+    <NODE id="xBodyWing2">
+      <MATERIAL id="defaultMaterial" />
+      <TEXTURE id="null" />
+
+      <TRANSLATION x="-5.5" y="-1.8" z="1.5" />
+      <ROTATION axis="x" angle="-90"/>
+      <ROTATION axis="y" angle="-20"/>
+
+      <DESCENDANTS>
+
+        <NODEREF id="xBodyWing" />
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- X-Wing's Body Wing node -->
+    <NODE id="xBodyWing3">
+      <MATERIAL id="defaultMaterial" />
+      <TEXTURE id="null" />
+
+      <TRANSLATION x="5.5" y="1.8" z="1.5" />
+      <ROTATION axis="x" angle="-90"/>
+      <ROTATION axis="y" angle="160" />
+
+      <DESCENDANTS>
+
+        <NODEREF id="xBodyWing" />
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- X-Wing's Body Wing node -->
+    <NODE id="xBodyWing4">
+      <MATERIAL id="defaultMaterial" />
+      <TEXTURE id="null" />
+
+      <TRANSLATION x="5.5" y="-1.8" z="1.5" />
+      <ROTATION axis="x" angle="-90"/>
+      <ROTATION axis="y" angle="200"/>
+
+      <DESCENDANTS>
+
+        <NODEREF id="xBodyWing" />
+      </DESCENDANTS>
+    </NODE>
+
+
+    <!-- X-Wing's Wing's Motor node -->
+    <NODE id="xMotor1">
+        <MATERIAL id="defaultMaterial" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="-2.5" y="1.8" z="-0.25" />
+
+        <DESCENDANTS>
+          <NODEREF id="xMotorFront" />
+          <NODEREF id="xMotorBack" />
+          <NODEREF id="xMotor" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- X-Wing's Wing's Motor node -->
+    <NODE id="xMotor2">
+        <MATERIAL id="defaultMaterial" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="-2.5" y="-1.8" z="-0.25" />
+
+        <DESCENDANTS>
+          <NODEREF id="xMotorFront" />
+          <NODEREF id="xMotorBack" />
+          <NODEREF id="xMotor" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- X-Wing's Wing's Motor node -->
+    <NODE id="xMotor3">
+        <MATERIAL id="defaultMaterial" />
+
+        <TEXTURE id="null" />
+        <TRANSLATION x="2.5" y="1.8" z="-0.25" />
+
+        <DESCENDANTS>
+          <NODEREF id="xMotorFront" />
+          <NODEREF id="xMotorBack" />
+          <NODEREF id="xMotor" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- X-Wing's Wing's Motor node -->
+    <NODE id="xMotor4">
+        <MATERIAL id="defaultMaterial" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="2.5" y="-1.8" z="-0.25" />
+
+        <DESCENDANTS>
+          <NODEREF id="xMotorFront" />
+          <NODEREF id="xMotorBack" />
+          <NODEREF id="xMotor" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- X-Wing's Wing's Motor Leaf node -->
+    <NODE id="xMotor">
+        <MATERIAL id="defaultMaterial" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+          <LEAF id="motor" type="cylinder" args="4.5 1 1 20 20 1 1" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- X-Wing's Wing's Motor Front node -->
+    <NODE id="xMotorFront">
+        <MATERIAL id="defaultMaterial" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="0" y="0" z="4.5" />
+
+        <DESCENDANTS>
+
+          <LEAF type="cylinder" args="0.01 1 1 20 20 1 1" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- X-Wing's Wing's Motor Back node -->
+    <NODE id="xMotorBack">
+        <MATERIAL id="defaultMaterial" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="0" y="0" z="-0.01" />
+
+        <DESCENDANTS>
+
+          <LEAF type="cylinder" args="0.01 1 1 20 20 1 1" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- X-Wing's Wing's Gun node -->
+    <NODE id="xGun1">
+        <MATERIAL id="defaultMaterial" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="-10.2" y="3.5" z="0" />
+
+        <DESCENDANTS>
+          <NODEREF id="xGunBarrel"/>
+          <NODEREF id="xGunBack" />
+          <NODEREF id="xGunBody" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- X-Wing's Wing's Gun node -->
+    <NODE id="xGun2">
+        <MATERIAL id="defaultMaterial" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="-10.2" y="-3.5" z="0" />
+
+        <DESCENDANTS>
+          <NODEREF id="xGunBarrel"/>
+          <NODEREF id="xGunBack" />
+          <NODEREF id="xGunBody" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- X-Wing's Wing's Gun node -->
+    <NODE id="xGun3">
+        <MATERIAL id="defaultMaterial" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="10.2" y="3.5" z="0" />
+
+        <DESCENDANTS>
+          <NODEREF id="xGunBarrel"/>
+          <NODEREF id="xGunBack" />
+          <NODEREF id="xGunBody" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- X-Wing's Wing's Gun node -->
+    <NODE id="xGun4">
+        <MATERIAL id="defaultMaterial" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="10.2" y="-3.5" z="0" />
+
+        <DESCENDANTS>
+          <NODEREF id="xGunBarrel"/>
+          <NODEREF id="xGunBack" />
+          <NODEREF id="xGunBody" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- X-Wing's Wing's Gun Body node -->
+    <NODE id="xGunBody">
+        <MATERIAL id="defaultMaterial" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+          <LEAF id="gun" type="cylinder" args="3 0.3 0.3 20 20 1 1" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- X-Wing's Wing's Gun Barrel node -->
+    <NODE id="xGunBarrel">
+        <MATERIAL id="defaultMaterial" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="0" y="0" z="3" />
+
+        <DESCENDANTS>
+
+          <LEAF id="barrel" type="cylinder" args="5 0.15 0.05 20 20 1 1" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- X-Wing's Wing's Gun Back node -->
+    <NODE id="xGunBack">
+        <MATERIAL id="defaultMaterial" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="0" y="0" z="-0.5" />
+
+        <DESCENDANTS>
+
+          <LEAF id="gunback" type="cylinder" args="0.5 0.1 0.25 20 20 1 1" />
+        </DESCENDANTS>
     </NODE>
 
     <NODE id="planet">
