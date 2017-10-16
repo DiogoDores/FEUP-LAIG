@@ -278,8 +278,10 @@
       <TEXTURE id="null" />
 
       <DESCENDANTS>
-        <NODEREF id="wing1" />
-        <NODEREF id="wing2" />
+        <NODEREF id="wing1Front" />
+        <NODEREF id="wing2Front" />
+        <NODEREF id="wing1Back" />
+        <NODEREF id="wing2Back" />
         <NODEREF id="accentsCircle1" />
         <NODEREF id="accentsCircle2" />
         <NODEREF id="accentsOuterCircle1" />
@@ -289,11 +291,11 @@
     </NODE>
 
     <!-- Tie fighter's WING 1 node -->
-    <NODE id="wing1">
-      <MATERIAL id="null" />
+    <NODE id="wing1Front">
+      <MATERIAL id="whiteMaterial" />
       <TEXTURE id="tie-wings" />
 
-      <TRANSLATION x="-3.5" y="0" z="0" />
+      <TRANSLATION x="-3.6" y="0" z="0" />
       <ROTATION axis="y" angle="180" />
       <ROTATION axis="z" angle="90" />
 
@@ -310,12 +312,54 @@
     </NODE>
 
     <!-- Tie fighter's WING 2 node -->
-    <NODE id="wing2">
-      <MATERIAL id="null" />
+    <NODE id="wing2Front">
+      <MATERIAL id="whiteMaterial" />
       <TEXTURE id="tie-wings" />
 
-      <TRANSLATION x="3.5" y="0" z="0" />
+      <TRANSLATION x="3.6" y="0" z="0" />
       <ROTATION axis="z" angle="90" />
+
+      <DESCENDANTS>
+        <NODEREF id="wingTriangle1" />
+        <NODEREF id="wingTriangle2" />
+        <NODEREF id="wingTriangle3" />
+        <NODEREF id="wingTriangle4" />
+        <NODEREF id="wingTriangle5" />
+        <NODEREF id="wingTriangle6" />
+        <NODEREF id="middle" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="wing1Back">
+      <MATERIAL id="whiteMaterial" />
+      <TEXTURE id="tie-wings" />
+
+      <TRANSLATION x="-3.4" y="0" z="0" />
+      <ROTATION axis="x" angle="30" />
+      <ROTATION axis="y" angle="90" />
+      <ROTATION axis="x" angle="-90" />
+
+      <DESCENDANTS>
+        <NODEREF id="wingTriangle1" />
+        <NODEREF id="wingTriangle2" />
+        <NODEREF id="wingTriangle3" />
+        <NODEREF id="wingTriangle4" />
+        <NODEREF id="wingTriangle5" />
+        <NODEREF id="wingTriangle6" />
+        <NODEREF id="middle" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="wing2Back">
+      <MATERIAL id="whiteMaterial" />
+      <TEXTURE id="tie-wings" />
+
+      <TRANSLATION x="3.4" y="0" z="0" />
+      <ROTATION axis="x" angle="-30" />
+      <ROTATION axis="y" angle="-90" />
+      <ROTATION axis="x" angle="-90" />
 
       <DESCENDANTS>
         <NODEREF id="wingTriangle1" />
@@ -573,7 +617,7 @@
       <MATERIAL id="defaultMaterial" />
       <TEXTURE id="null" />
 
-      <TRANSLATION x="0" y="-6.75" z="0" />
+      <TRANSLATION x="0" y="-6.9" z="0" />
       <ROTATION axis="z" angle="30" />
       <ROTATION axis="z" angle="-90" />
 
@@ -593,7 +637,7 @@
       <MATERIAL id="defaultMaterial" />
       <TEXTURE id="null" />
 
-      <TRANSLATION x="0" y="-6.75" z="0" />
+      <TRANSLATION x="0" y="-6.9" z="0" />
       <ROTATION axis="z" angle="-210" />
       <ROTATION axis="z" angle="-90" />
 
@@ -841,7 +885,7 @@
       <SCALE sx="1" sy="1" sz="1" />
 
       <DESCENDANTS>
-        <LEAF  type="cylinder" args="3 1 0.1 20 20" />
+        <LEAF  type="cylinder" args="3 1 0.1 20 20 0 0" />
       </DESCENDANTS>
 
     </NODE>
@@ -857,7 +901,7 @@
       <SCALE sx="1" sy="1" sz="1" />
 
       <DESCENDANTS>
-        <LEAF  type="cylinder" args="3 1 0.1 20 20" />
+        <LEAF  type="cylinder" args="3 1 0.1 20 20 0 0" />
       </DESCENDANTS>
 
     </NODE>
@@ -1107,8 +1151,8 @@
       <MATERIAL id="null" />
       <TEXTURE id="clear" />
 
-
       <TRANSLATION x="0.75" y="6" z="0" />
+
       <DESCENDANTS>
         <NODEREF id="xRotWind" />
       </DESCENDANTS>

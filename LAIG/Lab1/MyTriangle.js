@@ -33,7 +33,7 @@
     this.normals.push(vecx, vecy, vecz);
     this.normals.push(vecx, vecy, vecz);
 
-    this.indices.push(0, 1, 2, 2, 1, 0);
+    this.indices.push(0, 1, 2);
 
     this.primitiveType = this.scene.gl.TRIANGLES;
     this.initGLBuffers();
@@ -62,8 +62,6 @@
 
 	var height = a * Math.sin(beta);
   var mid = c - a * Math.cos(beta);
-
-
 
     this.texCoords = [
 		mid/this.s, height/this.t,
