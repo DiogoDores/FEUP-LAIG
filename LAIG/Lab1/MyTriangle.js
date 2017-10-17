@@ -64,9 +64,9 @@
   var mid = c - a * Math.cos(beta);
 
     this.texCoords = [
-		mid/this.s, height/this.t,
-		c/this.s, 0,
-		0,0
+		mid/this.s, 1 - height,
+		0, 1,
+		c/this.s, 1
     ];
 
 	this.updateTexCoordsGLBuffers();

@@ -524,7 +524,7 @@
         <TEXTURE id="vidral" />
 
         <TRANSLATION x="12" y="5.8" z="4.75" />
-        <SCALE sx="0.4" sy="2" sz="0.4" />
+        <!-- <SCALE sx="0.4" sy="2" sz="0.4" /> -->
 
         <DESCENDANTS>
        		<NODEREF id="meiaPiramide1" />
@@ -596,7 +596,7 @@
        	<ROTATION axis="y" angle="-45" />
 
         <DESCENDANTS>
-					<LEAF id="triangle1" type="triangle" args="2 0 12 12 0 2 0 0 0" />
+					<LEAF id="triangle1" type="triangle" args= "0.17 0 1 1 0 0.17 0 0 0"/>
         </DESCENDANTS>
 
     </NODE>
