@@ -524,7 +524,7 @@
         <TEXTURE id="vidral" />
 
         <TRANSLATION x="12" y="5.8" z="4.75" />
-        <!-- <SCALE sx="0.4" sy="2" sz="0.4" /> -->
+        <SCALE sx="0.4" sy="2" sz="0.4" />
 
         <DESCENDANTS>
        		<NODEREF id="meiaPiramide1" />
