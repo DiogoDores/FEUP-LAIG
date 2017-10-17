@@ -3,12 +3,13 @@
  * @constructor
 **/
 
-function MyGraphLeaf(graph, xmlelem) {
+function MyGraphLeaf(graph, xmlelem, controlVer) {
 
     this.graph = graph;
     this.elem = xmlelem;
+    this.controlVer = controlVer;
 
-    this.type = this.graph.reader.getItem(xmlelem, 'type', ['rectangle', 'cylinder', 'sphere', 'triangle']);
+    this.type = this.graph.reader.getItem(xmlelem, 'type', ['rectangle', 'cylinder', 'sphere', 'triangle', 'patch']);
     this.parseLeafs();
 
 }
@@ -34,6 +35,9 @@ MyGraphLeaf.prototype.parseLeafs = function(){
             break;
         case "triangle":
             this.primitive = new MyTriangle(this.graph.scene, a);
+            break;
+        case "patch":
+            this.primitive = new MyPatch(this.graph.scene, a, this.controlVer);
             break;
         default:
             this.primitive = null;
