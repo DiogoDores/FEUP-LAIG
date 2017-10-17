@@ -35,12 +35,6 @@
 
     this.indices.push(0, 1, 2);
 
-    this.texCoords = [
-    mid/this.s, (1 - height)/this.t,
-		0, 1/this.t,
-		c/this.s, 1/this.t
-    ];
-
     this.primitiveType = this.scene.gl.TRIANGLES;
     this.initGLBuffers();
  }
