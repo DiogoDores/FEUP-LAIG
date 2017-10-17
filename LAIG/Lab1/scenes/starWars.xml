@@ -1118,7 +1118,7 @@
     </NODE>
 
     <!-- X-Wing's Rotation Triangle Window node -->
-    <NODE id="xRotWind">
+    <NODE id="xRotWindL">
       <MATERIAL id="whiteMaterial" />
       <TEXTURE id="xPilotLeft" />
 
@@ -1127,6 +1127,20 @@
 
       <DESCENDANTS>
         <LEAF  type="triangle" args="0 3 0 0 0 0 0.906 0.423 0" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <!-- X-Wing's Rotation Triangle Window node -->
+    <NODE id="xRotWindR">
+      <MATERIAL id="whiteMaterial" />
+      <TEXTURE id="xPilotLeft" />
+
+      <ROTATION axis="y" angle="-90" />
+      <ROTATION axis="x" angle="180" /> -->
+
+      <DESCENDANTS>
+        <LEAF  type="triangle" args="0 3 0 -0.906 0.423 0 0 0 0" />
       </DESCENDANTS>
 
     </NODE>
@@ -1140,7 +1154,7 @@
 
       <TRANSLATION x="-0.75" y="6" z="0" />
       <DESCENDANTS>
-        <NODEREF id="xRotWind" />
+        <NODEREF id="xRotWindL" />
       </DESCENDANTS>
 
     </NODE>
@@ -1154,7 +1168,7 @@
       <TRANSLATION x="0.75" y="6" z="0" />
 
       <DESCENDANTS>
-        <NODEREF id="xRotWind" />
+        <NODEREF id="xRotWindR" />
       </DESCENDANTS>
 
     </NODE>
