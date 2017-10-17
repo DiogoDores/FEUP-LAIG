@@ -35,6 +35,12 @@
 
     this.indices.push(0, 1, 2);
 
+    this.texCoords = [
+    mid/this.s, (1 - height)/this.t,
+		0, 1/this.t,
+		c/this.s, 1/this.t
+    ];
+
     this.primitiveType = this.scene.gl.TRIANGLES;
     this.initGLBuffers();
  }
@@ -58,13 +64,13 @@
     					Math.pow((this.y3 - this.y2),2) +
     					Math.pow((this.z3 - this.z2),2));
 
-	var beta   = Math.acos((( a* a) - ( b* b) + ( c* c))/(2 *  a *  c));
+	var beta   = Math.acos(((a * a) - (b * b) + (c * c))/(2 * a * c));
 
 	var height = a * Math.sin(beta);
   var mid = c - a * Math.cos(beta);
 
     this.texCoords = [
-		mid/this.s, (1 - height)/this.t,
+    mid/this.s, (1 - height)/this.t,
 		0, 1/this.t,
 		c/this.s, 1/this.t
     ];
