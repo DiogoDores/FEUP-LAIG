@@ -21,6 +21,8 @@ function MySceneGraph(filename, scene) {
     scene.graph = this;
 
     this.nodes = [];
+    this.patches = [];
+    this.patchesid = null;
 
     this.idRoot = null;                    // The id of the root element.
 
@@ -1340,16 +1342,26 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
                 else
 					if (descendants[j].nodeName == "LEAF")
 					{
-						var type=this.reader.getItem(descendants[j], 'type', ['rectangle', 'cylinder', 'sphere', 'triangle']);
+						var type=this.reader.getItem(descendants[j], 'type', ['rectangle', 'cylinder', 'sphere', 'triangle', 'patch']);
 
 						if (type != null)
 							this.log("   Leaf: "+ type);
 						else
 							this.warn("Error in leaf");
 
-						//parse leaf
-						this.nodes[nodeID].addLeaf(new MyGraphLeaf(this,descendants[j]));
-                        sizeChildren++;
+            if(type == "patch"){
+              if ((error = this.parsePatch(descendants[j])) != null )
+                  return error;
+              if(this.patchesid == null)
+                this.patchesid = 0;
+              else
+                this.patchesid++;
+
+              this.nodes[nodeID].addLeaf(new MyGraphLeaf(this,descendants[j],this.patches[this.patchesid]));
+
+            } else
+						    this.nodes[nodeID].addLeaf(new MyGraphLeaf(this,descendants[j]));
+            sizeChildren++;
 					}
 					else
 						this.onXMLMinorError("unknown tag <" + descendants[j].nodeName + ">");
@@ -1364,6 +1376,76 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
 
     console.log("Parsed nodes");
     return null ;
+}
+
+/**
+ * Parses the Patch block.
+ */
+MySceneGraph.prototype.parsePatch = function(nodesNode) {
+  // Traverses nodes.
+  var cplines = nodesNode.children;
+  var controlVert = [];
+  for (var i = 0; i < cplines.length; i++) {
+      var nodeName;
+      var cpline = [];
+      //parse CPLINE
+      if ((nodeName = cplines[i].nodeName) == "CPLINE") {
+      //  var cpl = [];
+        var cpoints = cplines[i].children;
+
+        for (var j = 0; j < cpoints.length; j++) {
+            var nodeName1;
+
+            //parse CPOINT
+            if ((nodeName1 = cpoints[j].nodeName) == "CPOINT") {
+
+              var x = this.reader.getFloat(cpoints[j], 'xx');
+              if (x == null ) {
+                  this.onXMLMinorError("unable to parse XX; discarding CPOINT");
+                  break;
+              }
+              else if (isNaN(x))
+                  return "non-numeric value for X (in Patch CPOINT)";
+
+              var y = this.reader.getFloat(cpoints[j], 'yy');
+              if (y == null ) {
+                  this.onXMLMinorError("unable to parse YY; discarding CPOINT");
+                  break;
+              }
+              else if (isNaN(y))
+                  return "non-numeric value for Y (in Patch CPOINT)";
+
+              var z = this.reader.getFloat(cpoints[j], 'zz');
+              if (z == null ) {
+                  this.onXMLMinorError("unable to parse ZZ; discarding CPOINT");
+                  break;
+              }
+              else if (isNaN(z)) 
+                  return "non-numeric value for Z (in Patch CPOINT)";
+
+              var w = this.reader.getFloat(cpoints[j], 'ww');
+              if (w == null ) {
+                  this.onXMLMinorError("unable to parse WW; discarding CPOINT");
+                  break;
+              }
+              else if (isNaN(w))
+                  return "non-numeric value for W (in Patch CPOINT)";
+
+
+              var cpointVec = [x,y,z,w];
+              cpline.push(cpointVec);
+
+            } else
+                this.onXMLMinorError("unknown tag name <" + nodeName);
+        }
+        controlVert.push(cpline);
+      } else
+          this.onXMLMinorError("unknown tag name <" + nodeName);
+    //controlVert.push(cpl);
+  }
+  this.patches.push(controlVert);
+  console.log("Parsed Patch");
+  return null ;
 }
 
 /*
@@ -1457,48 +1539,5 @@ MySceneGraph.prototype.displayNodes = function(id, matToApply, texToApply){
 
 
     this.scene.popMatrix();
-/*
-    for(var i = 0; i < this.nodes[id].leaves.length; i++){
-        this.scene.pushMatrix();
 
-        if(this.materials[this.nodes[id].materialID] != null)
-            this.materials[this.nodes[id].materialID].apply();
-
-        if(this.textures[this.nodes[id].textureID] != null){
-            this.nodes[id].leaves[i].primitive.assignTexture(this.textures[this.nodes[id].textureID]);
-            this.textures[this.nodes[id].textureID][0].bind();
-        }
-
-        if(this.textures[this.nodes[id].textureID] == 'clear'){
-          this.textures[this.nodes[id].textureID][0].unbind();
-        }
-
-        this.nodes[id].leaves[i].primitive.display();
-
-        this.scene.popMatrix();
-
-        console.log("Obrigado vespinha és um amor");
-    }
-
-    for(var i = 0; i < this.nodes[id].children.length; i++){
-
-      this.scene.pushMatrix();
-    //  console.log(this.nodes[id].textureID);
-      if(this.materials[this.nodes[id].materialID] != undefined)
-          this.materials[this.nodes[id].materialID].apply();
-
-      if(this.textures[this.nodes[id].textureID] != null){
-
-          this.textures[this.nodes[id].textureID][0].bind();
-
-          if(this.nodes[id].textureID == 'clear'){
-              console.log("mernandes");
-              this.textures[this.nodes[id].textureID][0].unbind();
-          }
-      }
-
-      this.displayNodes(this.nodes[id].children[i]);
-
-      this.scene.popMatrix();
-    }*/
 }

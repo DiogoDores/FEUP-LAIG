@@ -209,7 +209,7 @@
             <NODEREF id="tieFighter" />
             <NODEREF id="xWing" />
             <NODEREF id="planet" />
-
+            <NODEREF id="patchTest" />
         </DESCENDANTS>
 
     </NODE>
@@ -1646,6 +1646,35 @@
 
       <DESCENDANTS>
         <LEAF  type="sphere" args="2 20 20" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <!-- Test Patch -->
+    <NODE id="patchTest">
+      <MATERIAL id="defaultMaterial" />
+      <TEXTURE id="planetTex" />
+
+    <!--  <SCALE sx="10" sy="10" sz="10" /> -->
+
+      <DESCENDANTS>
+
+        <LEAF type="patch" args="20 20">
+           <CPLINE>
+             <CPOINT xx="-1.5" yy="-1.5" zz="0.0" ww="1" />
+             <CPOINT xx="-1.5" yy="1.5" zz="0.0" ww="1" />
+           </CPLINE>
+
+           <CPLINE>
+             <CPOINT xx="0" yy="-1.5" zz="3.0" ww="1" />
+             <CPOINT xx="0" yy="1.5" zz="3.0" ww="1" />
+           </CPLINE>
+
+           <CPLINE>
+             <CPOINT xx="1.5" yy="-1.5" zz="0.0" ww="1" />
+             <CPOINT xx="1.5" yy="1.5" zz="0.0" ww="1" />
+           </CPLINE>
+         </LEAF>
       </DESCENDANTS>
 
     </NODE>
