@@ -209,7 +209,7 @@
             <NODEREF id="tieFighter" />
             <NODEREF id="xWing" />
             <NODEREF id="planet" />
-            <NODEREF id="patchTest" />
+            <NODEREF id="deathStar" />
         </DESCENDANTS>
 
     </NODE>
@@ -1650,30 +1650,102 @@
 
     </NODE>
 
-    <!-- Test Patch -->
-    <NODE id="patchTest">
+    <!-- Death Star NODE -->
+    <NODE id="deathStar">
+
       <MATERIAL id="defaultMaterial" />
       <TEXTURE id="planetTex" />
 
-    <!--  <SCALE sx="10" sy="10" sz="10" /> -->
+      <TRANSLATION x="-15" y="0" z="-10" />
+      <SCALE sx="10" sy="10" sz="10" />
+
+      <DESCENDANTS>
+        <NODEREF id="halfDeathStar" />
+        <NODEREF id="bottomHalfDeathStar" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <!-- Bottom Half Death Star NODE -->
+    <NODE id="bottomHalfDeathStar">
+
+      <MATERIAL id="defaultMaterial" />
+      <TEXTURE id="null" />
+
+      <ROTATION axis="z" angle="180" />
+
+      <DESCENDANTS>
+        <NODEREF id="halfDeathStar" />
+
+      </DESCENDANTS>
+
+    </NODE>
+
+    <!-- Half Death Star Patch -->
+    <NODE id="halfDeathStar">
+      <MATERIAL id="defaultMaterial" />
+      <TEXTURE id="null" />
 
       <DESCENDANTS>
 
         <LEAF type="patch" args="20 20">
-           <CPLINE>
-             <CPOINT xx="-1.5" yy="-1.5" zz="0.0" ww="1" />
-             <CPOINT xx="-1.5" yy="1.5" zz="0.0" ww="1" />
+        <!--   <CPLINE>
+             <CPOINT xx="-0.175" yy="0.0" zz="1.0" ww="1" />
+             <CPOINT xx="-0.75" yy="0.0" zz="0.85" ww="1" />
+             <CPOINT xx="-0.75" yy="0.0" zz="0.15" ww="1" />
+             <CPOINT xx="0.0" yy="0.0" zz="0.0" ww="1" />
            </CPLINE>
 
            <CPLINE>
-             <CPOINT xx="0" yy="-1.5" zz="3.0" ww="1" />
-             <CPOINT xx="0" yy="1.5" zz="3.0" ww="1" />
+             <CPOINT xx="-0.15" yy="0.225" zz="1.0" ww="1" />
+             <CPOINT xx="-0.5" yy="1.0" zz="0.85" ww="1" />
+             <CPOINT xx="-0.5" yy="1.0" zz="0.15" ww="1" />
+             <CPOINT xx="0.0" yy="0.0" zz="0.0" ww="1" />
            </CPLINE>
 
            <CPLINE>
-             <CPOINT xx="1.5" yy="-1.5" zz="0.0" ww="1" />
-             <CPOINT xx="1.5" yy="1.5" zz="0.0" ww="1" />
+             <CPOINT xx="0.15" yy="0.225" zz="1.0" ww="1" />
+             <CPOINT xx="0.5" yy="1.0" zz="0.85" ww="1" />
+             <CPOINT xx="0.5" yy="1.0" zz="0.15" ww="1" />
+             <CPOINT xx="0.0" yy="0.0" zz="0.0" ww="1" />
            </CPLINE>
+
+
+           <CPLINE>
+             <CPOINT xx="0.175" yy="0.0" zz="1.0" ww="1" />
+             <CPOINT xx="0.75" yy="0.0" zz="0.85" ww="1" />
+             <CPOINT xx="0.75" yy="0.0" zz="0.15" ww="1" />
+             <CPOINT xx="0.0" yy="0.0" zz="0.0" ww="1" />
+           </CPLINE>
+         -->
+         <CPLINE>
+           <CPOINT xx="0.3" yy="0" zz="1" ww="1" />
+           <CPOINT xx="0.3" yy="0.6" zz="1" ww="0.33" />
+           <CPOINT xx="-0.3" yy="0.6" zz="1" ww="0.33" />
+           <CPOINT xx="-0.3" yy="0" zz="1" ww="1" />
+         </CPLINE>
+
+         <CPLINE>
+           <CPOINT xx="2" yy="0" zz="1" ww="0.33" />
+           <CPOINT xx="2" yy="4" zz="1" ww="0.11" />
+           <CPOINT xx="-2" yy="4" zz="1" ww="0.11" />
+           <CPOINT xx="-2" yy="0" zz="1" ww="0.33" />
+         </CPLINE>
+
+         <CPLINE>
+           <CPOINT xx="2" yy="0" zz="-1" ww="0.33" />
+           <CPOINT xx="2" yy="4" zz="-1" ww="0.11" />
+           <CPOINT xx="-2" yy="4" zz="-1" ww="0.11" />
+           <CPOINT xx="-2" yy="0" zz="-1" ww="0.33" />
+         </CPLINE>
+
+         <CPLINE>
+           <CPOINT xx="0" yy="0" zz="-1" ww="1" />
+           <CPOINT xx="0" yy="0" zz="-1" ww="0.33" />
+           <CPOINT xx="0" yy="0" zz="-1" ww="0.33" />
+           <CPOINT xx="0" yy="0" zz="-1" ww="1" />
+         </CPLINE>
+
          </LEAF>
       </DESCENDANTS>
 
