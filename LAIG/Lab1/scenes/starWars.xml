@@ -292,7 +292,7 @@
 
     <!-- Tie fighter's WING 1 node -->
     <NODE id="wing1Front">
-      <MATERIAL id="whiteMaterial" />
+      <MATERIAL id="defaultMaterial" />
       <TEXTURE id="tie-wings" />
 
       <TRANSLATION x="-3.6" y="0" z="0" />
@@ -313,7 +313,7 @@
 
     <!-- Tie fighter's WING 2 node -->
     <NODE id="wing2Front">
-      <MATERIAL id="whiteMaterial" />
+      <MATERIAL id="defaultMaterial" />
       <TEXTURE id="tie-wings" />
 
       <TRANSLATION x="3.6" y="0" z="0" />
@@ -332,7 +332,7 @@
     </NODE>
 
     <NODE id="wing1Back">
-      <MATERIAL id="whiteMaterial" />
+      <MATERIAL id="defaultMaterial" />
       <TEXTURE id="tie-wings" />
 
       <TRANSLATION x="-3.4" y="0" z="0" />
@@ -353,7 +353,7 @@
     </NODE>
 
     <NODE id="wing2Back">
-      <MATERIAL id="whiteMaterial" />
+      <MATERIAL id="defaultMaterial" />
       <TEXTURE id="tie-wings" />
 
       <TRANSLATION x="3.4" y="0" z="0" />
@@ -466,7 +466,7 @@
     <!-- Tie fighter's WING CIRCLE node -->
     <NODE id="middle">
       <MATERIAL id="defaultMaterial" />
-      <TEXTURE id="tie-wings" />
+      <TEXTURE id="accentsTexture" />
 
       <TRANSLATION x="0" y="0.5" z="0" />
       <ROTATION axis="x" angle="90" />
@@ -1655,25 +1655,41 @@
       <MATERIAL id="defaultMaterial" />
       <TEXTURE id="planetTex" />
 
-    <!--  <SCALE sx="10" sy="10" sz="10" /> -->
+      <TRANSLATION x="-10" y="0" z="0" />
+      <SCALE sx="10" sy="10" sz="10" />
 
       <DESCENDANTS>
 
         <LEAF type="patch" args="20 20">
+
            <CPLINE>
-             <CPOINT xx="-1.5" yy="-1.5" zz="0.0" ww="1" />
-             <CPOINT xx="-1.5" yy="1.5" zz="0.0" ww="1" />
+             <CPOINT xx="0" yy="0" zz="1" ww="1" />
+             <CPOINT xx="0" yy="0" zz="1" ww="0.33" />
+             <CPOINT xx="0" yy="0" zz="1" ww="0.33" />
+             <CPOINT xx="0" yy="0" zz="1" ww="1" />
            </CPLINE>
 
            <CPLINE>
-             <CPOINT xx="0" yy="-1.5" zz="3.0" ww="1" />
-             <CPOINT xx="0" yy="1.5" zz="3.0" ww="1" />
+             <CPOINT xx="2" yy="0" zz="1" ww="0.33" />
+             <CPOINT xx="2" yy="4" zz="1" ww="0.11" />
+             <CPOINT xx="-2" yy="4" zz="1" ww="0.11" />
+             <CPOINT xx="-2" yy="0" zz="1" ww="0.33" />
            </CPLINE>
 
            <CPLINE>
-             <CPOINT xx="1.5" yy="-1.5" zz="0.0" ww="1" />
-             <CPOINT xx="1.5" yy="1.5" zz="0.0" ww="1" />
+             <CPOINT xx="2" yy="0" zz="-1" ww="0.33" />
+             <CPOINT xx="2" yy="4" zz="-1" ww="0.11" />
+             <CPOINT xx="-2" yy="4" zz="-1" ww="0.11" />
+             <CPOINT xx="-2" yy="0" zz="-1" ww="0.33" />
            </CPLINE>
+
+           <CPLINE>
+             <CPOINT xx="0" yy="0" zz="-1" ww="1" />
+             <CPOINT xx="0" yy="0" zz="-1" ww="0.33" />
+             <CPOINT xx="0" yy="0" zz="-1" ww="0.33" />
+             <CPOINT xx="0" yy="0" zz="-1" ww="1" />
+           </CPLINE>
+
          </LEAF>
       </DESCENDANTS>
 
