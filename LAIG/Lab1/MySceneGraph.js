@@ -978,7 +978,8 @@ MySceneGraph.prototype.parseMaterials = function(materialsNode) {
             return "no specular component defined for material with ID = " + materialID;
         var specularComponent = [];
         // R.
-        var r = this.reader.getFloat(materialSpecs[specularIndex], 'r');
+          var r = this.reader.getFloat(materialSpecs[specularIndex], 'r');
+
         if (r == null )
             return "unable to parse R component of specular reflection for material with ID = " + materialID;
         else if (isNaN(r))
@@ -987,7 +988,8 @@ MySceneGraph.prototype.parseMaterials = function(materialsNode) {
             return "specular 'r' must be a value between 0 and 1 on the MATERIALS block"
         specularComponent.push(r);
         // G.
-        var g = this.reader.getFloat(materialSpecs[specularIndex], 'g');
+          var g = this.reader.getFloat(materialSpecs[specularIndex], 'g');
+
         if (g == null )
            return "unable to parse G component of specular reflection for material with ID = " + materialID;
         else if (isNaN(g))
@@ -996,7 +998,9 @@ MySceneGraph.prototype.parseMaterials = function(materialsNode) {
            return "specular 'g' must be a value between 0 and 1 on the MATERIALS block";
         specularComponent.push(g);
         // B.
-        var b = this.reader.getFloat(materialSpecs[specularIndex], 'b');
+
+          var b = this.reader.getFloat(materialSpecs[specularIndex], 'b');
+
         if (b == null )
             return "unable to parse B component of specular reflection for material with ID = " + materialID;
         else if (isNaN(b))
@@ -1020,7 +1024,9 @@ MySceneGraph.prototype.parseMaterials = function(materialsNode) {
             return "no diffuse component defined for material with ID = " + materialID;
         var diffuseComponent = [];
         // R.
-        r = this.reader.getFloat(materialSpecs[diffuseIndex], 'r');
+
+          r = this.reader.getFloat(materialSpecs[diffuseIndex], 'r');
+
         if (r == null )
             return "unable to parse R component of diffuse reflection for material with ID = " + materialID;
         else if (isNaN(r))
@@ -1029,7 +1035,7 @@ MySceneGraph.prototype.parseMaterials = function(materialsNode) {
             return "diffuse 'r' must be a value between 0 and 1 on the MATERIALS block";
         diffuseComponent.push(r);
         // G.
-        g = this.reader.getFloat(materialSpecs[diffuseIndex], 'g');
+          g = this.reader.getFloat(materialSpecs[diffuseIndex], 'g');
         if (g == null )
             return "unable to parse G component of diffuse reflection for material with ID = " + materialID;
         else if (isNaN(g))
@@ -1038,7 +1044,8 @@ MySceneGraph.prototype.parseMaterials = function(materialsNode) {
             return "diffuse 'g' must be a value between 0 and 1 on the MATERIALS block";
         diffuseComponent.push(g);
         // B.
-        b = this.reader.getFloat(materialSpecs[diffuseIndex], 'b');
+          b = this.reader.getFloat(materialSpecs[diffuseIndex], 'b');
+
         if (b == null )
             return "unable to parse B component of diffuse reflection for material with ID = " + materialID;
         else if (isNaN(b))
@@ -1062,8 +1069,8 @@ MySceneGraph.prototype.parseMaterials = function(materialsNode) {
             return "no ambient component defined for material with ID = " + materialID;
         var ambientComponent = [];
         // R.
-        r = this.reader.getFloat(materialSpecs[ambientIndex], 'r');
-        if (r == null )
+          r = this.reader.getFloat(materialSpecs[ambientIndex], 'r');
+              if (r == null )
             return "unable to parse R component of ambient reflection for material with ID = " + materialID;
         else if (isNaN(r))
             return "ambient 'r' is a non numeric value on the MATERIALS block";
@@ -1071,7 +1078,8 @@ MySceneGraph.prototype.parseMaterials = function(materialsNode) {
             return "ambient 'r' must be a value between 0 and 1 on the MATERIALS block";
         ambientComponent.push(r);
         // G.
-        g = this.reader.getFloat(materialSpecs[ambientIndex], 'g');
+          g = this.reader.getFloat(materialSpecs[ambientIndex], 'g');
+
         if (g == null )
             return "unable to parse G component of ambient reflection for material with ID = " + materialID;
         else if (isNaN(g))
@@ -1080,7 +1088,8 @@ MySceneGraph.prototype.parseMaterials = function(materialsNode) {
             return "ambient 'g' must be a value between 0 and 1 on the MATERIALS block";
         ambientComponent.push(g);
         // B.
-        b = this.reader.getFloat(materialSpecs[ambientIndex], 'b');
+          b = this.reader.getFloat(materialSpecs[ambientIndex], 'b');
+
         if (b == null )
              return "unable to parse B component of ambient reflection for material with ID = " + materialID;
         else if (isNaN(b))
@@ -1420,7 +1429,7 @@ MySceneGraph.prototype.parsePatch = function(nodesNode) {
                   this.onXMLMinorError("unable to parse ZZ; discarding CPOINT");
                   break;
               }
-              else if (isNaN(z)) 
+              else if (isNaN(z))
                   return "non-numeric value for Z (in Patch CPOINT)";
 
               var w = this.reader.getFloat(cpoints[j], 'ww');

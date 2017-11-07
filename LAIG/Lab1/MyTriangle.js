@@ -33,7 +33,7 @@
     this.normals.push(vecx, vecy, vecz);
     this.normals.push(vecx, vecy, vecz);
 
-    this.indices.push(0, 1, 2);
+    this.indices.push(2, 1, 0);
 
     this.primitiveType = this.scene.gl.TRIANGLES;
     this.initGLBuffers();
