@@ -20,6 +20,6 @@ LinearAnimation.prototype.readPoints = function(){
       var lastCP = this.controlPoints[i-1];
       var nextCP = this.controlPoints[i];
 
-      handleControlPoints();
+      handleCP();
     }
 }
