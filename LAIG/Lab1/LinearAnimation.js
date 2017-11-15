@@ -9,17 +9,26 @@ function LinearAnimation(scene, args) {
     this.speed = this.args[0];
     this.controlPoints = this.args[1];
 
-    readPoints();
+    getPoints();
 };
 LinearAnimation.prototype = Object.create(Animation.prototype);
 LinearAnimation.prototype.constructor = LinearAnimation;
 
-LinearAnimation.prototype.readPoints = function(){
+LinearAnimation.prototype.getPoints = function () {
 
-    for (let i = 0; i < this.controlPoints.length; i ++){
-      var lastCP = this.controlPoints[i-1];
-      var nextCP = this.controlPoints[i];
-
-      handleCP();
+    for (let i = 0; i < this.controlPoints.length; i++) {
+        this.lastCP = this.controlPoints[i - 1];
+        this.nextCP = this.controlPoints[i];
     }
 }
+
+LinearAnimation.prototype.update = function(currTime){
+    
+}
+    
+    
+
+
+
+
+
