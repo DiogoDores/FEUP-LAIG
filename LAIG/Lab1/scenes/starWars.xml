@@ -204,6 +204,15 @@
 <LEAVES>
 </LEAVES>
 
+<ANIMATIONS>
+
+  <ANIMATION id="x-wingLinear" speed="1" type="linear">
+    <controlpoint xx="0" yy="0" zz="1.5" />
+    <controlpoint xx="0" yy="0" zz="5.5" />
+  </ANIMATION>
+
+</ANIMATIONS>
+
 <!-- The nodes -->
 <NODES>
 
@@ -922,6 +931,10 @@
       <TEXTURE id="null" />
 
       <TRANSLATION x="5" y="2" z="25" />
+
+      <ANIMATIONREFS>
+        <ANIMATIONREF id="x-WingLinear"/>
+      </ANIMATIONREFS>
 
       <DESCENDANTS>
 
