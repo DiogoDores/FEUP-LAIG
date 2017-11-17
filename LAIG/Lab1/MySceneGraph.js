@@ -1750,11 +1750,12 @@ MySceneGraph.prototype.displayNodes = function(id, matToApply, texToApply){
         texToApply = this.textures[this.nodes[id].textureID];
 
     this.scene.pushMatrix();
+    //console.log(this.anims);
     this.nodes[id].nextAnim();
       if(this.nodes[id].currAnim != null){
         this.nodes[id].currAnim.updatePos(this.scene.currTime);
         this.scene.translate(this.nodes[id].currAnim.pos[0],this.nodes[id].currAnim.pos[1],this.nodes[id].currAnim.pos[2]);
-        console.log("Aqui");
+        //console.log("Aqui");
       }
       this.scene.multMatrix(this.nodes[id].transformMatrix);
 

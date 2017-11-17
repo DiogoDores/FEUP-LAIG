@@ -49,11 +49,14 @@ MyGraphNode.prototype.addLeaf = function(leaf) {
 
 MyGraphNode.prototype.nextAnim = function(){
   //console.log("Aqui m");
-  if(this.currAnim != null && this.currAnim.finished){
+  if((this.currAnim != null && this.currAnim.finished) || this.currAnim == null){
     if(this.anims[0] != null){
-      let anim = this.graph.anims[this.anims[0]];
+      console.log(this.anims[0]);
+      console.log(this.graph.anims);
+      var anim = this.graph.anims[this.anims[0]];
+      console.log(anim);
       switch (anim[0]) {
-        case linear:
+        case "linear":
           this.currAnim = new LinearAnimation(this.graph.scene, anim);
           break;
         default:
