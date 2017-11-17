@@ -200,15 +200,11 @@
     </MATERIAL>
 </MATERIALS>
 
-<!-- The leaves -->
-<LEAVES>
-</LEAVES>
-
 <ANIMATIONS>
 
-  <ANIMATION id="x-wingLinear" speed="1" type="linear">
+  <ANIMATION id="x-wingLinear" speed="0.2" type="linear">
     <controlpoint xx="0" yy="0" zz="1.5" />
-    <controlpoint xx="0" yy="0" zz="5.5" />
+    <controlpoint xx="0" yy="0" zz="25.5" />
   </ANIMATION>
 
 </ANIMATIONS>

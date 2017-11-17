@@ -39,8 +39,6 @@ MyGraphLeaf.prototype.parseLeafs = function(){
         case "patch":
             this.primitive = new MyPatch(this.graph.scene, a, this.controlVer);
             break;
-        case "linear":
-            this.primitive = new LinearAnimation(this.graph.scene, a);
         default:
             this.primitive = null;
             break;

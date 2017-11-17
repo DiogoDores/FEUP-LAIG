@@ -6,7 +6,7 @@ var ILLUMINATION_INDEX = 1;
 var LIGHTS_INDEX = 2;
 var TEXTURES_INDEX = 3;
 var MATERIALS_INDEX = 4;
-var LEAVES_INDEX = 5;
+var ANIMATIONS_INDEX = 5;
 var NODES_INDEX = 6;
 
 /**
@@ -138,6 +138,17 @@ MySceneGraph.prototype.parseLSXFile = function(rootElement) {
             this.onXMLMinorError("tag <MATERIALS> out of order");
 
         if ((error = this.parseMaterials(nodes[index])) != null )
+            return error;
+    }
+
+    // <ANIMATIONS>
+    if ((index = nodeNames.indexOf("ANIMATIONS")) == -1)
+        return "tag <ANIMATIONS> missing";
+    else {
+        if (index != ANIMATIONS_INDEX)
+            this.onXMLMinorError("tag <ANIMATIONS> out of order");
+
+        if ((error = this.parseAnimations(nodes[index])) != null )
             return error;
     }
 
@@ -1190,12 +1201,12 @@ MySceneGraph.prototype.parseAnimations = function(animsNode) {
       }
 
       // Get id of the current animation.
-      var animId = this.reader.getString(children[i], 'id');
+      var animID = this.reader.getString(children[i], 'id');
       if (animID == null )
           return "no ID defined for animation";
 
       // Checks for repeated IDs.
-      if (this.anim[animID] != null )
+      if (this.anims[animID] != null )
           return "ID must be unique for each light (conflict: ID = " + animID + ")";
 
       // Get type of the current animation.
@@ -1339,7 +1350,7 @@ MySceneGraph.prototype.parseAnimations = function(animsNode) {
       else if(type == 'bezier' && numberOfCP != 4)
         return "Bezier Animation has to have precisely 4 controlpoints";
       else {
-        this.anims[animID] = [type,speed,cps];
+        this.anims[animID] = [type, animSpeed,cps];
         numAnims++;
       }
 
@@ -1389,7 +1400,7 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
             // Gathers child nodes.
             var nodeSpecs = children[i].children;
             var specsNames = [];
-            var possibleValues = ["MATERIAL", "TEXTURE", "TRANSLATION", "ROTATION", "SCALE", "DESCENDANTS"];
+            var possibleValues = ["MATERIAL", "TEXTURE", "TRANSLATION", "ROTATION", "SCALE", "ANIMATIONREFS", "DESCENDANTS"];
             for (var j = 0; j < nodeSpecs.length; j++) {
                 var name = nodeSpecs[j].nodeName;
                 specsNames.push(nodeSpecs[j].nodeName);
@@ -1505,25 +1516,25 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
             }
 
             // Retrieves information about animations.
-            var animationsIndex = specsNames.indexOf("ANIMATIONSREF");
+            var animationsIndex = specsNames.indexOf("ANIMATIONREFS");
             if (animationsIndex != -1){
-                                                                                          //Continuar a alterar este bloco
+
               var animations = nodeSpecs[animationsIndex].children;
-              var sizeAnims = 0;
+
               for (var j = 0; j < animations.length; j++) {
-                  if (animations[j].nodeName == "NODEREF"){
+                  if (animations[j].nodeName == "ANIMATIONREF"){
 
-  					            var curId = this.reader.getString(animations[j], 'id');
+  					            var animId = this.reader.getString(animations[j], 'id');
 
-  					            this.log("   Descendant: "+curId);
+  					            this.log("   Animation: "+animId);
 
-                        if (curId == null )
-                            this.onXMLMinorError("unable to parse descendant id");
-                        else if (curId == nodeID)
+                        if (animId == null )
+                            this.onXMLMinorError("unable to parse animation ref id");
+                        else if (animId == nodeID)
                             return "a node may not be a child of its own";
                         else {
-                            this.nodes[nodeID].addChild(curId);
-                            sizeAnims++;
+                            this.nodes[nodeID].addAnimation(animId);
+
                         }
                   }
                 }
@@ -1739,7 +1750,12 @@ MySceneGraph.prototype.displayNodes = function(id, matToApply, texToApply){
         texToApply = this.textures[this.nodes[id].textureID];
 
     this.scene.pushMatrix();
-
+    this.nodes[id].nextAnim();
+      if(this.nodes[id].currAnim != null){
+        this.nodes[id].currAnim.updatePos(this.scene.currTime);
+        this.scene.translate(this.nodes[id].currAnim.pos[0],this.nodes[id].currAnim.pos[1],this.nodes[id].currAnim.pos[2]);
+        console.log("Aqui");
+      }
       this.scene.multMatrix(this.nodes[id].transformMatrix);
 
     for(var i = 0; i < this.nodes[id].children.length; i++)
