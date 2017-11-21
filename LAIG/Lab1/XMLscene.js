@@ -31,7 +31,7 @@ XMLscene.prototype.init = function(application) {
     this.gl.depthFunc(this.gl.LEQUAL);
 
     this.axis = new CGFaxis(this);
-    this.setUpdatePeriod(1);
+    this.setUpdatePeriod(30);
 }
 
 /**
@@ -99,15 +99,16 @@ XMLscene.prototype.onGraphLoaded = function()
  *
  */
 XMLscene.prototype.update = function(currTime){
-
+  //console.log("AAAAAAAAA" + currTime);
     this.lastTime = this.lastTime || 0.0;
     this.delta = currTime - this.lastTime || 0.0;
     if(this.graph.animRefs != undefined){
       for(let i = 0; i < this.graph.animRefs.length; i++){
 
-        this.graph.animRefs[i].updates(this.delta);
+        this.graph.animRefs[i].updates(this.delta/1000);
       }
     }
+    console.log(this.delta);
     this.lastTime = currTime;
 }
 

@@ -42,18 +42,21 @@ LinearAnimation.prototype.getTotalTime = function(){
 LinearAnimation.prototype.getMatrix = function(time){
     let timeIdx = this.getIndexTime(time);
     let mat = mat4.create();
-    if(timeIdx != null){
-      let timePassed = this.times(timeIdx) - time;
+    if(timeIdx != null && timeIdx != undefined){
+      let timePassed = this.times[timeIdx] - time;
 
-      let vecDir;
-      vec3.subtract(this.controlPoints[timeIdx],this.controlPoints[timeIdx+1], vecDir);
+      let vecDir = vec3.create();
+      console.log(timeIdx);
+      console.log(this.controlPoints);
+      vec3.sub(vecDir, this.controlPoints[timeIdx],this.controlPoints[timeIdx+1]);
+      console.log
       vec3.normalize(vecDir, vecDir);
       let alpha = 1/Math.cos(vec3.dot(vec3.fromValues(0,0,1),vecDir)/(vec3.length(vecDir)*vec3.length(vec3.fromValues(0,0,1))));
-      mat4.rotate(mat,mat,alpha);
+      //mat4.rotate(mat,mat,alpha);
       let dist = this.speed * timePassed;
       vec3.multiply(vecDir,vec3.fromValues(dist,dist,dist),vecDir);
-      let newPoint;
-      vec3.add(this.controlPoints[timeIdx],vecDir,newPoint);
+      let newPoint = vec3.create();
+      vec3.add(newPoint,vecDir,this.controlPoints[timeIdx]);
       mat4.translate(mat, mat, newPoint);
       console.log(newPoint);
     }
