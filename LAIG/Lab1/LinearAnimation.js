@@ -7,29 +7,62 @@ function LinearAnimation(scene, args) {
     this.scene = scene;
     this.args = args;
     this.speed = this.args[1];
-    this.controlPoints = this.args[2];
-    this.finished = false;
-    this.pos = this.controlPoints.shift();
-    this.nextPos = this.controlPoints.shift();
-    console.log(this.nextPos);
+    var tempControlPoints = this.args[2];
+    this.controlPoints = [];
+    this.distances = [];
+    this.times = [];
+    this.totalDistance = [];
 
-    this.dir = [
-      this.nextPos[0] - this.pos[0],
-      this.nextPos[1] - this.pos[1],
-      this.nextPos[2] - this.pos[2]
-    ];
-    console.log(this.dir);
-    this.dist = Math.sqrt(Math.pow(this.dir[0],2)+Math.pow(this.dir[1],2)+Math.pow(this.dir[2],2));
-    this.currDist = 0;
-    this.dir[0] = this.dir[0] / this.speed;
-    this.dir[1] = this.dir[1] / this.speed;
-    this.dir[2] = this.dir[2] / this.speed;
-    console.log(this.dir);
-    //getPoints();
+    for(let i=0; i < tempControlPoints.length; i++){
+      this.controlPoints.push(vec3.fromValues(tempControlPoints[i][0],tempControlPoints[i][1], tempControlPoints[i][2]));
+    }
+    this.totalDistance = 0;
+    for(let i=1; i < this.controlPoints.length; i++){
+      this.distances.push(vec3.distance(this.controlPoints[i-1], this.controlPoints[i]));
+      this.totalDistance += this.distances[i-1];
+      this.times.push(this.totalDistance/this.speed);
+    }
+
+
 };
 LinearAnimation.prototype = Object.create(Animation.prototype);
 LinearAnimation.prototype.constructor = LinearAnimation;
 
+LinearAnimation.prototype.getIndexTime = function(time){
+    for(let i = 0; i < this.times.length; i++){
+      if(time <= this.times[i])
+        return i;
+    }
+}
+
+LinearAnimation.prototype.getTotalTime = function(){
+  return this.times[this.times.length -1];
+}
+
+LinearAnimation.prototype.getMatrix = function(time){
+    let timeIdx = this.getIndexTime(time);
+    let mat = mat4.create();
+    if(timeIdx != null){
+      let timePassed = this.times(timeIdx) - time;
+
+      let vecDir;
+      vec3.subtract(this.controlPoints[timeIdx],this.controlPoints[timeIdx+1], vecDir);
+      vec3.normalize(vecDir, vecDir);
+      let alpha = 1/Math.cos(vec3.dot(vec3.fromValues(0,0,1),vecDir)/(vec3.length(vecDir)*vec3.length(vec3.fromValues(0,0,1))));
+      mat4.rotate(mat,mat,alpha);
+      let dist = this.speed * timePassed;
+      vec3.multiply(vecDir,vec3.fromValues(dist,dist,dist),vecDir);
+      let newPoint;
+      vec3.add(this.controlPoints[timeIdx],vecDir,newPoint);
+      mat4.translate(mat, mat, newPoint);
+      console.log(newPoint);
+    }
+    else {
+      mat4.translate(mat,mat,this.controlPoints[this.times.length]);
+    }
+    return mat;
+}
+/*
 LinearAnimation.prototype.getPoints = function () {
 
     for (let i = 0; i < this.controlPoints.length; i++) {
@@ -39,7 +72,7 @@ LinearAnimation.prototype.getPoints = function () {
 }
 
 LinearAnimation.prototype.updatePos = function(currTime){
-  console.log(this.pos);
+  //console.log(this.pos);
     this.currDist += this.speed * currTime;
     if(this.currDist > this.dist)
       this.currDist = this.dist;
@@ -53,3 +86,4 @@ LinearAnimation.prototype.updatePos = function(currTime){
       this.pos[2] = this.dir[2] * currTime;
     }
 }
+*/

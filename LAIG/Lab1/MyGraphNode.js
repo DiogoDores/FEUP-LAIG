@@ -20,8 +20,7 @@ function MyGraphNode(graph, nodeID) {
     // The texture ID.
     this.textureID = null ;
 
-    this.anims = [];
-    this.currAnim = null;
+    this.anim = null;
     this.transformMatrix = mat4.create();
     mat4.identity(this.transformMatrix);
 }
@@ -37,7 +36,8 @@ MyGraphNode.prototype.addChild = function(nodeID) {
  * Adds a leaf to this node's leaves array.
  */
 MyGraphNode.prototype.addAnimation = function(anim) {
-    this.anims.push(anim);
+    this.anim = anim;
+
 }
 
 /**
@@ -48,21 +48,10 @@ MyGraphNode.prototype.addLeaf = function(leaf) {
 }
 
 MyGraphNode.prototype.nextAnim = function(){
-  //console.log("Aqui m");
-  if((this.currAnim != null && this.currAnim.finished) || this.currAnim == null){
-    if(this.anims[0] != null){
-      console.log(this.anims[0]);
-      console.log(this.graph.anims);
-      var anim = this.graph.anims[this.anims[0]];
-      console.log(anim);
-      switch (anim[0]) {
-        case "linear":
-          this.currAnim = new LinearAnimation(this.graph.scene, anim);
-          break;
-        default:
-        break;
+
+  if((this.currAnim != null && this.currAnim.isFinished) || this.currAnim == null){
+    if(this.anims.length >= 1 && this.anims[0] != null){
+        this.currAnim = this.anims.shift();
       }
-      this.anims.shift();
     }
-  }
 }

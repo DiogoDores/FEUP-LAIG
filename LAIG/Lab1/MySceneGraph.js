@@ -1187,6 +1187,7 @@ MySceneGraph.prototype.parseAnimations = function(animsNode) {
   var children = animsNode.children;
 
   this.anims = [];
+  this.animsCreated = [];
   var numAnims = 0;
 
   var grandChildren = [];
@@ -1255,6 +1256,7 @@ MySceneGraph.prototype.parseAnimations = function(animsNode) {
               return "at least one SPANREF must be defined";
           else{
               this.anims[animID] = [type, cps];
+              this.animsCreated[animID] = new ComboAnimation(this,this.anims[animID]);
               numAnims++;
               continue;
           }
@@ -1305,6 +1307,7 @@ MySceneGraph.prototype.parseAnimations = function(animsNode) {
             return "'rotang' is a non numeric value on the ANIMATIONS block";
 
         this.anims[animID] = [type,speed,centerx,centery,centerz,radius,startang,rotang];
+        this.animsCreated[animID] = new CircularAnimation(this,this.anims[animID]);
         numAnims++;
         continue;
       }
@@ -1351,6 +1354,10 @@ MySceneGraph.prototype.parseAnimations = function(animsNode) {
         return "Bezier Animation has to have precisely 4 controlpoints";
       else {
         this.anims[animID] = [type, animSpeed,cps];
+        if(type == 'linear')
+            this.animsCreated[animID] = new LinearAnimation(this,this.anims[animID]);
+        else if (type == 'bezier')
+            this.animsCreated[animID] = new BezierAnimation(this,this.anims[animID]);
         numAnims++;
       }
 
@@ -1366,7 +1373,7 @@ MySceneGraph.prototype.parseAnimations = function(animsNode) {
  * Parses the <NODES> block.
  */
 MySceneGraph.prototype.parseNodes = function(nodesNode) {
-
+    this.animRefs = [];
     // Traverses nodes.
     var children = nodesNode.children;
 
@@ -1518,7 +1525,7 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
             // Retrieves information about animations.
             var animationsIndex = specsNames.indexOf("ANIMATIONREFS");
             if (animationsIndex != -1){
-
+              var animR = [];
               var animations = nodeSpecs[animationsIndex].children;
 
               for (var j = 0; j < animations.length; j++) {
@@ -1533,11 +1540,14 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
                         else if (animId == nodeID)
                             return "a node may not be a child of its own";
                         else {
-                            this.nodes[nodeID].addAnimation(animId);
+                            animR.push(this.animsCreated[animId]);
 
                         }
                   }
                 }
+                var animHolder = new AnimationsOfNode(this, animR);
+                this.animRefs.push(animHolder);
+                this.nodes[nodeID].addAnimation(this.animRefs[this.animRefs.length - 1]);
             }
 
 
@@ -1751,12 +1761,11 @@ MySceneGraph.prototype.displayNodes = function(id, matToApply, texToApply){
 
     this.scene.pushMatrix();
     //console.log(this.anims);
-    this.nodes[id].nextAnim();
-      if(this.nodes[id].currAnim != null){
-        this.nodes[id].currAnim.updatePos(this.scene.currTime);
-        this.scene.translate(this.nodes[id].currAnim.pos[0],this.nodes[id].currAnim.pos[1],this.nodes[id].currAnim.pos[2]);
-        //console.log("Aqui");
-      }
+    if(this.nodes[id].anim != null){
+      this.scene.multMatrix(this.nodes[id].anim.matrix);
+      console.log(this.nodes[id].anim.matrix);
+    }
+
       this.scene.multMatrix(this.nodes[id].transformMatrix);
 
     for(var i = 0; i < this.nodes[id].children.length; i++)
@@ -1765,10 +1774,10 @@ MySceneGraph.prototype.displayNodes = function(id, matToApply, texToApply){
     for(var i = 0; i < this.nodes[id].leaves.length; i++){
 
         matToApply.apply();
-          if(texToApply != null) {
-        this.nodes[id].leaves[i].primitive.assignTexture(texToApply);
-      texToApply[0].bind();
-    }
+        if(texToApply != null) {
+          this.nodes[id].leaves[i].primitive.assignTexture(texToApply);
+          texToApply[0].bind();
+        }
         this.nodes[id].leaves[i].primitive.display();
     }
 
