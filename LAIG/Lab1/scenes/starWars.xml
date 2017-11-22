@@ -202,9 +202,10 @@
 
 <ANIMATIONS>
 
-  <ANIMATION id="x-wingLinear" speed="2" type="linear">
-    <controlpoint xx="0" yy="0" zz="-51.5" />
-    <controlpoint xx="0" yy="0" zz="10.5" />
+  <ANIMATION id="x-wingLinear" speed="3" type="linear">
+    <controlpoint xx="0" yy="0" zz="-50" />
+    <controlpoint xx="0" yy="0" zz="10" />
+    <controlpoint xx="50" yy="0" zz="-20" />
   </ANIMATION>
   <ANIMATION id="test" speed="0.8" type="linear">
     <controlpoint xx="0" yy="0" zz="1.5" />

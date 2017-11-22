@@ -1763,7 +1763,7 @@ MySceneGraph.prototype.displayNodes = function(id, matToApply, texToApply){
     //console.log(this.anims);
     if(this.nodes[id].anim != null){
       this.scene.multMatrix(this.nodes[id].anim.matrix);
-      console.log(this.nodes[id].anim.matrix);
+      //console.log(this.nodes[id].anim.matrix);
     }
 
       this.scene.multMatrix(this.nodes[id].transformMatrix);

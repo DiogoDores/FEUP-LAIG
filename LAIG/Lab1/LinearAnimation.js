@@ -39,29 +39,56 @@ LinearAnimation.prototype.getTotalTime = function(){
   return this.times[this.times.length -1];
 }
 
+function angle(a, b) {
+  let tempA = vec3.fromValues(a[0], a[1], a[2]);
+  let tempB = vec3.fromValues(b[0], b[1], b[2]);
+  vec3.normalize(tempA, tempA);
+  vec3.normalize(tempB, tempB);
+  let cosine = vec3.dot(tempA, tempB);
+  if(cosine > 1.0) {
+    return 0;
+  }
+  else if(cosine < -1.0) {
+    return Math.PI;
+  } else {
+    return Math.acos(cosine);
+  }
+}
+
 LinearAnimation.prototype.getMatrix = function(time){
     let timeIdx = this.getIndexTime(time);
     let mat = mat4.create();
     if(timeIdx != null && timeIdx != undefined){
-      let timePassed = this.times[timeIdx] - time;
-
+      let timePassed = timeIdx == 0 ? time : time - this.times[timeIdx - 1];
+      //console.log("TimePassed: " + timePassed);
       let vecDir = vec3.create();
-      console.log(timeIdx);
-      console.log(this.controlPoints);
-      vec3.sub(vecDir, this.controlPoints[timeIdx],this.controlPoints[timeIdx+1]);
-      console.log
+    //  console.log(timeIdx);
+  //    console.log(this.controlPoints);
+//console.log("1CCCCCCCCCCCC " + vecDir);
+      vec3.sub(vecDir, this.controlPoints[timeIdx + 1],this.controlPoints[timeIdx]);
+      //console.log("2CCCCCCCCCCCC " + vecDir);
       vec3.normalize(vecDir, vecDir);
-      let alpha = 1/Math.cos(vec3.dot(vec3.fromValues(0,0,1),vecDir)/(vec3.length(vecDir)*vec3.length(vec3.fromValues(0,0,1))));
-      //mat4.rotate(mat,mat,alpha);
+      let vecInx0z = vec3.clone(vecDir);
+      vecInx0z[1] = 0;
+      //console.log("BBBBBBBBBBBB" + vecInx0z);
+      //console.log("CCCCCCCCCCCC " + vecDir);//vec3.dot(vec3.fromValues(0,0,1),vecInx0z));
+      //let alpha = 1/Math.cos(vec3.dot(vec3.fromValues(0,0,1),vecInx0z)/(vec3.length(vecInx0z)*vec3.length(vec3.fromValues(0,0,1))));
+      let alpha = angle(vecInx0z, vec3.fromValues(0,0,1));
+      //console.log("AAAAAAAAAAAA" + alpha);
       let dist = this.speed * timePassed;
+      //console.log("LLLLLLLLL " + dist);
       vec3.multiply(vecDir,vec3.fromValues(dist,dist,dist),vecDir);
       let newPoint = vec3.create();
       vec3.add(newPoint,vecDir,this.controlPoints[timeIdx]);
+      //console.log("ZZZZZ " + this.controlPoints[timeIdx] + vecDir);
+      //mat4.translate(mat, mat, this.controlPoints[timeIdx]);
+      //console.log("XXXXXX " + this.controlPoints[timeIdx]);
       mat4.translate(mat, mat, newPoint);
-      console.log(newPoint);
+      mat4.rotate(mat,mat,alpha, this.scene.axisCoords['y']);
+      //console.log(newPoint);
     }
     else {
-      mat4.translate(mat,mat,this.controlPoints[this.times.length]);
+      //mat4.translate(mat,mat,this.controlPoints[this.times.length]);
     }
     return mat;
 }
