@@ -10,6 +10,12 @@ function XMLscene(interface) {
     this.interface = interface;
 
     this.lightValues = {};
+
+    this.selectedShaderIndex = 0;
+    
+    this.wireframe=false;
+	
+	this.scaleFactor=50.0;
 }
 
 XMLscene.prototype = Object.create(CGFscene.prototype);
@@ -18,7 +24,7 @@ XMLscene.prototype.constructor = XMLscene;
 /**
  * Initializes the scene, setting some WebGL defaults, initializing the camera and the axis.
  */
-XMLscene.prototype.init = function(application) {
+XMLscene.prototype.init = function (application) {
     CGFscene.prototype.init.call(this, application);
 
     this.initCameras();
@@ -32,19 +38,36 @@ XMLscene.prototype.init = function(application) {
 
     this.axis = new CGFaxis(this);
     this.setUpdatePeriod(30);
+
+
+}
+
+XMLscene.prototype.updateWireframe=function(v){
+    
+	if (v)
+		this.teapot.setLineMode();
+	else
+		this.teapot.setFillMode();
+		
+}
+
+XMLscene.prototype.updateScaleFactor=function(v){
+	this.testShaders[1].setUniformsValues({normScale: this.scaleFactor});
+	this.testShaders[2].setUniformsValues({normScale: this.scaleFactor});
+	this.testShaders[5].setUniformsValues({normScale: this.scaleFactor});
 }
 
 /**
  * Initializes the scene lights with the values read from the LSX file.
  */
-XMLscene.prototype.initLights = function() {
+XMLscene.prototype.initLights = function () {
     var i = 0;
     // Lights index.
 
     // Reads the lights from the scene graph.
     for (var key in this.graph.lights) {
         if (i >= 8)
-            break;              // Only eight lights allowed by WebGL.
+            break; // Only eight lights allowed by WebGL.
 
         if (this.graph.lights.hasOwnProperty(key)) {
             var light = this.graph.lights[key];
@@ -68,45 +91,65 @@ XMLscene.prototype.initLights = function() {
 
 }
 
+XMLscene.prototype.initShaders = function(){
+    
+    this.testShaders=[
+		new CGFshader(this.gl, "scenes/shaders/flat.vert", "scenes/shaders/flat.frag"),
+		new CGFshader(this.gl, "scenes/shaders/uScale.vert", "scenes/shaders/uScale.frag"),
+		new CGFshader(this.gl, "scenes/shaders/varying.vert", "scenes/shaders/varying.frag"),
+		new CGFshader(this.gl, "scenes/shaders/texture1.vert", "scenes/shaders/texture1.frag"),
+		new CGFshader(this.gl, "scenes/shaders/texture2.vert", "scenes/shaders/texture2.frag"),
+		new CGFshader(this.gl, "scenes/shaders/texture3.vert", "scenes/shaders/texture3.frag"),
+		new CGFshader(this.gl, "scenes/shaders/texture3.vert", "scenes/shaders/sepia.frag"),
+		new CGFshader(this.gl, "scenes/shaders/texture3.vert", "scenes/shaders/convolution.frag")
+	];
+    
+    // texture will have to be bound to unit 1 later, when using the shader, with "this.texture2.bind(1);"
+	this.testShaders[4].setUniformsValues({uSampler2: 1});
+	this.testShaders[5].setUniformsValues({uSampler2: 1});
+}
+
 /**
  * Initializes the scene cameras.
  */
-XMLscene.prototype.initCameras = function() {
-    this.camera = new CGFcamera(0.4,0.1,500,vec3.fromValues(15, 15, 15),vec3.fromValues(0, 0, 0));
+XMLscene.prototype.initCameras = function () {
+    this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
 }
 
 /* Handler called when the graph is finally loaded.
  * As loading is asynchronous, this may be called already after the application has started the run loop
  */
-XMLscene.prototype.onGraphLoaded = function()
-{
+XMLscene.prototype.onGraphLoaded = function () {
     this.camera.near = this.graph.near;
     this.camera.far = this.graph.far;
-    this.axis = new CGFaxis(this,this.graph.referenceLength);
+    this.axis = new CGFaxis(this, this.graph.referenceLength);
 
     this.setGlobalAmbientLight(this.graph.ambientIllumination[0], this.graph.ambientIllumination[1],
-    this.graph.ambientIllumination[2], this.graph.ambientIllumination[3]);
+        this.graph.ambientIllumination[2], this.graph.ambientIllumination[3]);
 
     this.gl.clearColor(this.graph.background[0], this.graph.background[1], this.graph.background[2], this.graph.background[3]);
 
     this.initLights();
+    this.initShaders();
+    
+    this.updateScaleFactor();
 
     // Adds lights group.
     this.interface.addLightsGroup(this.graph.lights);
+    this.interface.addShadersGroup();
 }
 
 /*
  *
  */
-XMLscene.prototype.update = function(currTime){
-  //console.log("AAAAAAAAA" + currTime);
+XMLscene.prototype.update = function (currTime) {
     this.lastTime = this.lastTime || 0.0;
     this.delta = currTime - this.lastTime || 0.0;
-    if(this.graph.animRefs != undefined){
-      for(let i = 0; i < this.graph.animRefs.length; i++){
+    if (this.graph.animRefs != undefined) {
+        for (let i = 0; i < this.graph.animRefs.length; i++) {
 
-        this.graph.animRefs[i].updates(this.delta/1000);
-      }
+            this.graph.animRefs[i].updates(this.delta / 1000);
+        }
     }
     console.log(this.delta);
     this.lastTime = currTime;
@@ -115,7 +158,7 @@ XMLscene.prototype.update = function(currTime){
 /**
  * Displays the scene.
  */
-XMLscene.prototype.display = function() {
+XMLscene.prototype.display = function () {
     // ---- BEGIN Background, camera and axis setup
 
     // Clear image and depth buffer everytime we update the scene
@@ -131,13 +174,12 @@ XMLscene.prototype.display = function() {
 
     this.pushMatrix();
 
-    if (this.graph.loadedOk)
-    {
+    if (this.graph.loadedOk) {
         // Applies initial transformations.
         this.multMatrix(this.graph.initialTransforms);
 
-		// Draw axis
-		this.axis.display();
+        // Draw axis
+        this.axis.display();
 
         var i = 0;
         for (var key in this.lightValues) {
@@ -145,8 +187,7 @@ XMLscene.prototype.display = function() {
                 if (this.lightValues[key]) {
                     this.lights[i].setVisible(true);
                     this.lights[i].enable();
-                }
-                else {
+                } else {
                     this.lights[i].setVisible(false);
                     this.lights[i].disable();
                 }
@@ -155,15 +196,16 @@ XMLscene.prototype.display = function() {
             }
         }
 
+        this.setActiveShader(this.testShaders[this.selectedShaderIndex]);
         // Displays the scene.
         this.graph.displayScene();
+        
+        this.setActiveShader(this.defaultShader);
 
+    } else {
+        // Draw axis
+        this.axis.display();
     }
-	else
-	{
-		// Draw axis
-		this.axis.display();
-	}
 
 
     this.popMatrix();
