@@ -207,6 +207,9 @@
     <controlpoint xx="-40" yy="0" zz="10" />
     <controlpoint xx="0" yy="0" zz="-20" />
   </ANIMATION>
+  <ANIMATION id="x-wingCircular" speed="3" type="circular"
+        centerx="20" centery="5" centerz="20"
+        radius="5" startang="35" rotang="648"/>
   <ANIMATION id="test" speed="0.8" type="linear">
     <controlpoint xx="0" yy="0" zz="1.5" />
     <controlpoint xx="0" yy="0" zz="25.5" />
@@ -934,6 +937,7 @@
 
       <ANIMATIONREFS>
         <ANIMATIONREF id="x-wingLinear"/>
+        <ANIMATIONREF id="x-wingCircular"/>
       </ANIMATIONREFS>
 
       <DESCENDANTS>

@@ -1258,7 +1258,8 @@ MySceneGraph.prototype.parseAnimations = function (animsNode) {
             else if (isNaN(rotang))
                 return "'rotang' is a non numeric value on the ANIMATIONS block";
 
-            this.anims[animID] = [type, speed, centerx, centery, centerz, radius, startang, rotang];
+            this.anims[animID] = [type, animSpeed, centerx, centery, centerz, radius,
+              startang * DEGREE_TO_RAD, rotang * DEGREE_TO_RAD];
             this.animsCreated[animID] = new CircularAnimation(this, this.anims[animID]);
             numAnims++;
             continue;
