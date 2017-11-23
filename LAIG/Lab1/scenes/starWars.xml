@@ -925,7 +925,7 @@
     </NODE>
 
     <!-- X-Wing node -->
-    <NODE id="xWing">
+    <NODE id="xWing" selectable="true">
       <MATERIAL id="defaultMaterial" />
       <TEXTURE id="null" />
 

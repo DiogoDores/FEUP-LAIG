@@ -54,7 +54,7 @@ MyInterface.prototype.addLightsGroup = function (lights) {
     }
 }
 
-MyInterface.prototype.addShadersGroup = function () {
+MyInterface.prototype.addShadersGroup = function (selectables) {
 
     var group = this.gui.addFolder("Shaders");
     group.open();
@@ -74,6 +74,17 @@ MyInterface.prototype.addShadersGroup = function () {
     obj = this;
     this.gui.add(this.scene, 'wireframe').onChange(function (v) {
         obj.scene.updateWireframe(v)
+    });
+    
+    group.add(this.scene,'node',selectables).onChange(function(v){
+        for(var i = 0; i  < selectables.length;i++){
+            if(selectables[i] == v){
+                obj.scene.graph.clearSelectables();
+                console.log("CHANGE ",i);
+                obj.scene.graph.activeSelectable = i;
+                
+            }
+        } 
     });
 
     this.gui.add(this.scene, 'scaleFactor', -50, 50).onChange(function (v) {

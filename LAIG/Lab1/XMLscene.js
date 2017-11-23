@@ -16,6 +16,10 @@ function XMLscene(interface) {
     this.wireframe=false;
 	
 	this.scaleFactor=50.0;
+    
+    this.selectables = [];
+    this.node= 0;
+    this.frame = 0;
 }
 
 XMLscene.prototype = Object.create(CGFscene.prototype);
@@ -151,6 +155,7 @@ XMLscene.prototype.update = function (currTime) {
             this.graph.animRefs[i].updates(this.delta / 1000);
         }
     }
+      
     console.log(this.delta);
     this.lastTime = currTime;
 }
