@@ -26,7 +26,8 @@ AnimationsOfNode.prototype.constructor = AnimationsOfNode;
 AnimationsOfNode.prototype.updates = function(currTime){
   this.totalTime += currTime;
   this.currentTime += currTime;
-  this.matrix = this.anims[this.currAnim].getMatrix(this.currentTime);
+  if(!this.isFinished)
+    this.matrix = this.anims[this.currAnim].getMatrix(this.currentTime);
 
   this.finish();
   this.nextAnim();

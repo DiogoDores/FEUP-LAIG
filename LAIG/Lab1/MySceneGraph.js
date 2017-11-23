@@ -34,8 +34,8 @@ function MySceneGraph(filename, scene) {
     // File reading
     this.reader = new CGFXMLreader();
 
-    this.selectables = [];
-    this.useSelectable = null;
+    this.selectables = ["No selected node"];
+    this.useSelectable = 0;
 
     /*
      * Read the contents of the xml file, and refer to this class for loading and error handlers.
@@ -1355,6 +1355,7 @@ MySceneGraph.prototype.parseNodes = function (nodesNode) {
 
             if (nodeShader) {
                 this.selectables.push(nodeID);
+                console.log(this.selectables);
             }
 
             this.log("Processing node " + nodeID);
@@ -1690,13 +1691,18 @@ MySceneGraph.generateRandomString = function (length) {
  */
 MySceneGraph.prototype.displayScene = function () {
 
-    this.displayNodes(this.idRoot, null, null, false);
+    if (this.useSelectable >= 1)
+        this.nodes[this.selectables[this.useSelectable]].selectable = true;
+
+    this.displayNodes(this.idRoot, null, null, null);
+
 
 }
 
 MySceneGraph.prototype.displayNodes = function (id, matToApply, texToApply, useShader) {
 
     var selected = useShader;
+
 
     if (this.materials[this.nodes[id].materialID] != null)
         matToApply = this.materials[this.nodes[id].materialID];
@@ -1708,33 +1714,37 @@ MySceneGraph.prototype.displayNodes = function (id, matToApply, texToApply, useS
 
     this.scene.pushMatrix();
     //console.log(this.anims);
-    if (this.nodes[id].anim != null) {
-        this.scene.multMatrix(this.nodes[id].anim.matrix);
-        //console.log(this.nodes[id].anim.matrix);
-    }
-    
-    if (!selected && this.useSelectable != null && this.selectables.includes(this.node[id]) && this.nodes[this.selectables[this.useSelectable]])
-        selected = true;
 
-    if (selected)
-        this.scene.setActiveShader(this.scene.testShaders[this.scene.selectedShaderIndex]);
-    else
-        this.scene.setActiveShader(this.scene.defaultShader);
+    if (this.nodes[id].selectable != null) {
+        selected = this.nodes[id].selectable;
+    }
 
     this.scene.multMatrix(this.nodes[id].transformMatrix);
+
+    if (this.nodes[id].anim != null) {
+      this.scene.multMatrix(this.nodes[id].anim.matrix);
+      //console.log(this.nodes[id].anim.matrix);
+    }
 
     for (var i = 0; i < this.nodes[id].children.length; i++)
         this.displayNodes(this.nodes[id].children[i], matToApply, texToApply, selected);
 
     for (var i = 0; i < this.nodes[id].leaves.length; i++) {
 
+        if (selected == true) {
+            this.scene.setActiveShader(this.scene.testShaders[this.scene.selectedShaderIndex]);
+
+        } else if (selected == false || selected == null) {
+            this.scene.setActiveShader(this.scene.defaultShader);
+        }
+
         matToApply.apply();
         if (texToApply != null) {
             this.nodes[id].leaves[i].primitive.assignTexture(texToApply);
 
-            if (selected)
+            /*if (selected)
                 texToApply[0].bind(1);
-            else
+            else*/
                 texToApply[0].bind(0);
         }
         this.nodes[id].leaves[i].primitive.display();

@@ -15,7 +15,7 @@ function XMLscene(interface) {
     this.selectedShaderIndex = 0;
     this.scaleFactor = 1.0;
 
-    this.selectables = [];
+    //this.selectables = [];
     this.node = 0;
 }
 
@@ -206,7 +206,7 @@ XMLscene.prototype.display = function () {
                 i++;
             }
         }
-
+/*
         for (var key in this.selectablesValues) {
             if (this.selectablesValues.hasOwnProperty(key)) {
                 if (this.selectablesValues[key]) {
@@ -215,7 +215,7 @@ XMLscene.prototype.display = function () {
                     this.graph.nodes[key].selectable = false;
                 }
             }
-        }
+        }*/
 
         // Displays the scene.
         this.graph.displayScene();
@@ -225,7 +225,7 @@ XMLscene.prototype.display = function () {
         // Draw axis
         this.axis.display();
     }
-
+  
 
     this.popMatrix();
 

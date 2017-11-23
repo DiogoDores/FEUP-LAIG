@@ -172,7 +172,7 @@
     </NODE>
 
     <!-- The floor -->
-    <NODE id="chao">
+    <NODE id="chao" selectable="true">
         <MATERIAL id="null" />
         <TEXTURE id="rocks" />
 

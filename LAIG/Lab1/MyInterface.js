@@ -14,7 +14,7 @@ function contains(a, obj) {
  * @constructor
  */
 function MyInterface() {
-    //call CGFinterface constructor 
+    //call CGFinterface constructor
     CGFinterface.call(this);
 };
 
@@ -33,7 +33,7 @@ MyInterface.prototype.init = function (application) {
     //  http://workshop.chromeexperiments.com/examples/gui
 
     this.gui = new dat.GUI();
-    
+
     return true;
 };
 
@@ -60,7 +60,7 @@ MyInterface.prototype.addShadersGroup = function (selectables) {
 
     var group = this.gui.addFolder("Shaders");
     group.open();
-    
+
     group.add(this.scene, 'selectedShaderIndex', {
         'Flat Shading': 0,
         'Passing a scale as uniform': 1,
@@ -74,13 +74,13 @@ MyInterface.prototype.addShadersGroup = function (selectables) {
 
 
     obj = this;
-    
+
     console.log(selectables);
-    
+
     group.add(this.scene, 'node', selectables).onChange(function (v) {
         for (var i = 0; i < selectables.length; i++) {
             if (selectables[i] == v) {
-                obj.scene.graph.clearSelectables();
+                //obj.scene.graph.clearSelectables();
                 console.log("CHANGE ", i);
                 obj.scene.graph.useSelectable = i;
 
