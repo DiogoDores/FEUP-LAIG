@@ -55,11 +55,10 @@ MyInterface.prototype.addLightsGroup = function (lights) {
 }
 
 MyInterface.prototype.addShadersGroup = function (selectables) {
-
+    
     var group = this.gui.addFolder("Shaders");
     group.open();
-
-    this.gui.add(this.scene, 'selectedShaderIndex', {
+    group.add(this.scene,'selectedShaderIndex', {
         'Flat Shading': 0,
         'Passing a scale as uniform': 1,
         'Passing a varying parameter from VS -> FS': 2,
@@ -68,15 +67,11 @@ MyInterface.prototype.addShadersGroup = function (selectables) {
         'Multiple textures in VS and FS': 5,
         'Sepia': 6,
         'Convolution': 7
-
-    }).name('Shader examples');
+    }).name('Shaders list');
+  
 
     obj = this;
-    this.gui.add(this.scene, 'wireframe').onChange(function (v) {
-        obj.scene.updateWireframe(v)
-    });
-    
-    group.add(this.scene,'node',selectables).onChange(function(v){
+    group.add(this.scene,'node', selectables).onChange(function(v){
         for(var i = 0; i  < selectables.length;i++){
             if(selectables[i] == v){
                 obj.scene.graph.clearSelectables();
@@ -86,10 +81,9 @@ MyInterface.prototype.addShadersGroup = function (selectables) {
             }
         } 
     });
-
-    this.gui.add(this.scene, 'scaleFactor', -50, 50).onChange(function (v) {
+    
+    group.add(this.scene,'scaleFactor',-25,25).onChange(function(v){
         obj.scene.updateScaleFactor(v);
     });
 
-    return true;
 }

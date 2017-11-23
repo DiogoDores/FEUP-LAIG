@@ -1340,12 +1340,14 @@ MySceneGraph.prototype.parseNodes = function (nodesNode) {
             }
         } else if (nodeName == "NODE") {
             // Retrieves node ID.
-            this.selectablesArray = [];
+            this.selectables = ["null"];
             var nodeID = this.reader.getString(children[i], 'id');
             var nodeShader = this.reader.getBoolean(children[i], 'selectable', false);
 
-            if (nodeShader)
-                this.selectablesArray.push(nodeID);
+            if (nodeShader){
+                this.selectables.push(nodeID);
+                console.log(this.selectables);
+            }
 
             if (nodeID == null)
                 return "failed to retrieve node ID";
@@ -1621,6 +1623,12 @@ MySceneGraph.prototype.parsePatch = function (nodesNode) {
     this.patches.push(controlVert);
     console.log("Parsed Patch");
     return null;
+}
+
+MySceneGraph.prototype.clearSelectables = function(){
+    for(var i = 1; i < this.selectables.length;i++){
+        this.nodes[this.selectables[i]].selectable = null;
+    }
 }
 
 /*

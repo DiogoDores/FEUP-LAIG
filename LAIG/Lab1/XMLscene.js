@@ -140,7 +140,8 @@ XMLscene.prototype.onGraphLoaded = function () {
 
     // Adds lights group.
     this.interface.addLightsGroup(this.graph.lights);
-    this.interface.addShadersGroup();
+    this.interface.addShadersGroup(this.graph.selectables);
+    
 }
 
 /*
@@ -200,11 +201,18 @@ XMLscene.prototype.display = function () {
             }
         }
 
-        this.setActiveShader(this.testShaders[this.selectedShaderIndex]);
+        for(var key in this.selectablesValues){
+            if(this.selectablesValues.hasOwnProperty(key)){
+                if(this.selectablesValues[key]){
+                    this.graph.nodes[key].selectable = true;
+                }else{
+                    this.graph.nodes[key].selectable = false;
+                }
+            }
+        }
         // Displays the scene.
         this.graph.displayScene();
         
-        this.setActiveShader(this.defaultShader);
 
     } else {
         // Draw axis
