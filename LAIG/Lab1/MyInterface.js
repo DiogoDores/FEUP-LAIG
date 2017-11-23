@@ -33,6 +33,8 @@ MyInterface.prototype.init = function (application) {
     //  http://workshop.chromeexperiments.com/examples/gui
 
     this.gui = new dat.GUI();
+    
+    return true;
 };
 
 /**
@@ -55,10 +57,11 @@ MyInterface.prototype.addLightsGroup = function (lights) {
 }
 
 MyInterface.prototype.addShadersGroup = function (selectables) {
-    
+
     var group = this.gui.addFolder("Shaders");
     group.open();
-    group.add(this.scene,'selectedShaderIndex', {
+    
+    group.add(this.scene, 'selectedShaderIndex', {
         'Flat Shading': 0,
         'Passing a scale as uniform': 1,
         'Passing a varying parameter from VS -> FS': 2,
@@ -68,21 +71,24 @@ MyInterface.prototype.addShadersGroup = function (selectables) {
         'Sepia': 6,
         'Convolution': 7
     }).name('Shaders list');
-  
+
 
     obj = this;
-    group.add(this.scene,'node', selectables).onChange(function(v){
-        for(var i = 0; i  < selectables.length;i++){
-            if(selectables[i] == v){
-                obj.scene.graph.clearSelectables();
-                console.log("CHANGE ",i);
-                obj.scene.graph.activeSelectable = i;
-                
-            }
-        } 
-    });
     
-    group.add(this.scene,'scaleFactor',-25,25).onChange(function(v){
+    console.log(selectables);
+    
+    group.add(this.scene, 'node', selectables).onChange(function (v) {
+        for (var i = 0; i < selectables.length; i++) {
+            if (selectables[i] == v) {
+                obj.scene.graph.clearSelectables();
+                console.log("CHANGE ", i);
+                obj.scene.graph.useSelectable = i;
+
+            }
+        }
+    });
+
+    group.add(this.scene, 'scaleFactor', -25, 25).onChange(function (v) {
         obj.scene.updateScaleFactor(v);
     });
 

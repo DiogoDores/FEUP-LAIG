@@ -34,6 +34,9 @@ function MySceneGraph(filename, scene) {
     // File reading
     this.reader = new CGFXMLreader();
 
+    this.selectables = ["No selected node"];
+    this.useSelectable = 0;
+
     /*
      * Read the contents of the xml file, and refer to this class for loading and error handlers.
      * After the file is read, the reader calls onXMLReady on this object.
@@ -1340,20 +1343,20 @@ MySceneGraph.prototype.parseNodes = function (nodesNode) {
             }
         } else if (nodeName == "NODE") {
             // Retrieves node ID.
-            this.selectables = ["null"];
             var nodeID = this.reader.getString(children[i], 'id');
-            var nodeShader = this.reader.getBoolean(children[i], 'selectable', false);
-
-            if (nodeShader){
-                this.selectables.push(nodeID);
-                console.log(this.selectables);
-            }
 
             if (nodeID == null)
                 return "failed to retrieve node ID";
             // Checks if ID is valid.
             if (this.nodes[nodeID] != null)
                 return "node ID must be unique (conflict: ID = " + nodeID + ")";
+
+            var nodeShader = this.reader.getBoolean(children[i], 'selectable', false);
+
+            if (nodeShader) {
+                this.selectables.push(nodeID);
+                console.log(this.selectables);
+            }
 
             this.log("Processing node " + nodeID);
 
@@ -1625,8 +1628,8 @@ MySceneGraph.prototype.parsePatch = function (nodesNode) {
     return null;
 }
 
-MySceneGraph.prototype.clearSelectables = function(){
-    for(var i = 1; i < this.selectables.length;i++){
+MySceneGraph.prototype.clearSelectables = function () {
+    for (var i = 1; i < this.selectables.length; i++) {
         this.nodes[this.selectables[i]].selectable = null;
     }
 }
@@ -1688,12 +1691,17 @@ MySceneGraph.generateRandomString = function (length) {
  */
 MySceneGraph.prototype.displayScene = function () {
 
-    this.displayNodes(this.idRoot, null, null);
+    if (this.useSelectable >= 1)
+        this.nodes[this.selectables[this.useSelectable]].selectable = true;
+
+    this.displayNodes(this.idRoot, null, null, null);
 
 
 }
 
-MySceneGraph.prototype.displayNodes = function (id, matToApply, texToApply) {
+MySceneGraph.prototype.displayNodes = function (id, matToApply, texToApply, useShader) {
+
+    var selected = useShader;
 
 
     if (this.materials[this.nodes[id].materialID] != null)
@@ -1706,22 +1714,37 @@ MySceneGraph.prototype.displayNodes = function (id, matToApply, texToApply) {
 
     this.scene.pushMatrix();
     //console.log(this.anims);
-    if(this.nodes[id].anim != null){
-      this.scene.multMatrix(this.nodes[id].anim.matrix);
-      //console.log(this.nodes[id].anim.matrix);
+    if (this.nodes[id].anim != null) {
+        this.scene.multMatrix(this.nodes[id].anim.matrix);
+        //console.log(this.nodes[id].anim.matrix);
+    }
+
+    if (this.nodes[id].selectable != null) {
+        selected = this.nodes[id].selectable;
     }
 
     this.scene.multMatrix(this.nodes[id].transformMatrix);
 
     for (var i = 0; i < this.nodes[id].children.length; i++)
-        this.displayNodes(this.nodes[id].children[i], matToApply, texToApply);
+        this.displayNodes(this.nodes[id].children[i], matToApply, texToApply, selected);
 
     for (var i = 0; i < this.nodes[id].leaves.length; i++) {
+
+        if (selected == true) {
+            this.scene.setActiveShader(this.scene.testShaders[this.scene.selectedShaderIndex]);
+
+        } else if (selected == false || selected == null) {
+            this.scene.setActiveShader(this.scene.defaultShader);
+        }
 
         matToApply.apply();
         if (texToApply != null) {
             this.nodes[id].leaves[i].primitive.assignTexture(texToApply);
-            texToApply[0].bind();
+
+            if (selected)
+                texToApply[0].bind(1);
+            else
+                texToApply[0].bind(0);
         }
         this.nodes[id].leaves[i].primitive.display();
     }

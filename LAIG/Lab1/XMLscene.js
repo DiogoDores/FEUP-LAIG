@@ -10,15 +10,13 @@ function XMLscene(interface) {
     this.interface = interface;
 
     this.lightValues = {};
+    this.selectablesValues = {};
 
     this.selectedShaderIndex = 0;
-    
-    this.wireframe=false;
-	
-	this.scaleFactor=50.0;
-    
+    this.scaleFactor = 1.0;
+
     this.selectables = [];
-    this.node= 0;
+    this.node = 0;
     this.frame = 0;
 }
 
@@ -44,21 +42,6 @@ XMLscene.prototype.init = function (application) {
     this.setUpdatePeriod(30);
 
 
-}
-
-XMLscene.prototype.updateWireframe=function(v){
-    
-	if (v)
-		this.teapot.setLineMode();
-	else
-		this.teapot.setFillMode();
-		
-}
-
-XMLscene.prototype.updateScaleFactor=function(v){
-	this.testShaders[1].setUniformsValues({normScale: this.scaleFactor});
-	this.testShaders[2].setUniformsValues({normScale: this.scaleFactor});
-	this.testShaders[5].setUniformsValues({normScale: this.scaleFactor});
 }
 
 /**
@@ -95,9 +78,9 @@ XMLscene.prototype.initLights = function () {
 
 }
 
-XMLscene.prototype.initShaders = function(){
-    
-    this.testShaders=[
+XMLscene.prototype.initShaders = function () {
+
+    this.testShaders = [
 		new CGFshader(this.gl, "scenes/shaders/flat.vert", "scenes/shaders/flat.frag"),
 		new CGFshader(this.gl, "scenes/shaders/uScale.vert", "scenes/shaders/uScale.frag"),
 		new CGFshader(this.gl, "scenes/shaders/varying.vert", "scenes/shaders/varying.frag"),
@@ -107,10 +90,26 @@ XMLscene.prototype.initShaders = function(){
 		new CGFshader(this.gl, "scenes/shaders/texture3.vert", "scenes/shaders/sepia.frag"),
 		new CGFshader(this.gl, "scenes/shaders/texture3.vert", "scenes/shaders/convolution.frag")
 	];
-    
+
     // texture will have to be bound to unit 1 later, when using the shader, with "this.texture2.bind(1);"
-	this.testShaders[4].setUniformsValues({uSampler2: 1});
-	this.testShaders[5].setUniformsValues({uSampler2: 1});
+    this.testShaders[4].setUniformsValues({
+        uSampler2: 1
+    });
+    this.testShaders[5].setUniformsValues({
+        uSampler2: 1
+    });
+}
+
+XMLscene.prototype.updateScaleFactor = function (v) {
+    this.testShaders[1].setUniformsValues({
+        normScale: this.scaleFactor
+    });
+    this.testShaders[2].setUniformsValues({
+        normScale: this.scaleFactor
+    });
+    this.testShaders[5].setUniformsValues({
+        normScale: this.scaleFactor
+    });
 }
 
 /**
@@ -135,13 +134,16 @@ XMLscene.prototype.onGraphLoaded = function () {
 
     this.initLights();
     this.initShaders();
-    
+
     this.updateScaleFactor();
 
     // Adds lights group.
     this.interface.addLightsGroup(this.graph.lights);
+
+    console.log(this.graph.selectables);
+
     this.interface.addShadersGroup(this.graph.selectables);
-    
+
 }
 
 /*
@@ -156,6 +158,11 @@ XMLscene.prototype.update = function (currTime) {
             this.graph.animRefs[i].updates(this.delta / 1000);
         }
     }
+
+    //this.selectedShaderIndex[0].setUniformsValues({amplitude: (1+Math.sin(this.delta/1000))/2})
+
+    //this.selectedShaderIndex[1].setUniformsValues({amplitude:(1+Math.sin(3*this.frame))/2});
+
     //console.log(this.delta);
     this.lastTime = currTime;
 }
@@ -201,18 +208,20 @@ XMLscene.prototype.display = function () {
             }
         }
 
-        for(var key in this.selectablesValues){
-            if(this.selectablesValues.hasOwnProperty(key)){
-                if(this.selectablesValues[key]){
+        for (var key in this.selectablesValues) {
+            if (this.selectablesValues.hasOwnProperty(key)) {
+                if (this.selectablesValues[key]) {
+                    console.log(key + "           " + this.graph.nodes[key].selectable);
                     this.graph.nodes[key].selectable = true;
-                }else{
+                } else {
                     this.graph.nodes[key].selectable = false;
                 }
             }
         }
+
         // Displays the scene.
         this.graph.displayScene();
-        
+
 
     } else {
         // Draw axis
