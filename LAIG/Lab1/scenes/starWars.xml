@@ -207,19 +207,11 @@
             <controlpoint xx="-40" yy="0" zz="10" />
             <controlpoint xx="0" yy="0" zz="-20" />
         </ANIMATION>
-
+        <ANIMATION id="x-wingCircular" speed="3" type="circular" centerx="20" centery="5" centerz="20" radius="5" startang="35" rotang="648" />
         <ANIMATION id="test" speed="0.8" type="linear">
             <controlpoint xx="0" yy="0" zz="1.5" />
             <controlpoint xx="0" yy="0" zz="25.5" />
         </ANIMATION>
-
-        <ANIMATION id="x-wingBezier" speed="3" type="bezier">
-            <controlpoint xx="0" yy="0" zz="0" />
-            <controlpoint xx="15" yy="0" zz="0" />
-            <controlpoint xx="15" yy="15" zz="0" />
-            <controlpoint xx="0" yy="15" zz="0" />
-        </ANIMATION>
-
     </ANIMATIONS>
 
     <!-- The nodes -->
@@ -947,8 +939,11 @@
 
             <TRANSLATION x="5" y="2" z="25" />
 
+
             <ANIMATIONREFS>
-                <ANIMATIONREF id="x-wingBezier" />
+                <ANIMATIONREF id="x-wingLinear" />
+                <ANIMATIONREF id="x-wingCircular" />
+                <!--<ANIMATIONREF id="x-wingBezier" />-->
             </ANIMATIONREFS>
 
             <DESCENDANTS>
