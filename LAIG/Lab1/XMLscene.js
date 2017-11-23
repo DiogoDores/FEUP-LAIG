@@ -155,8 +155,7 @@ XMLscene.prototype.update = function (currTime) {
             this.graph.animRefs[i].updates(this.delta / 1000);
         }
     }
-      
-    console.log(this.delta);
+    //console.log(this.delta);
     this.lastTime = currTime;
 }
 
