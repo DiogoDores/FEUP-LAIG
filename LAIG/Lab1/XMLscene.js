@@ -17,7 +17,6 @@ function XMLscene(interface) {
 
     this.selectables = [];
     this.node = 0;
-    this.frame = 0;
 }
 
 XMLscene.prototype = Object.create(CGFscene.prototype);
@@ -211,7 +210,6 @@ XMLscene.prototype.display = function () {
         for (var key in this.selectablesValues) {
             if (this.selectablesValues.hasOwnProperty(key)) {
                 if (this.selectablesValues[key]) {
-                    console.log(key + "           " + this.graph.nodes[key].selectable);
                     this.graph.nodes[key].selectable = true;
                 } else {
                     this.graph.nodes[key].selectable = false;
