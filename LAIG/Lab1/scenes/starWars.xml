@@ -941,9 +941,9 @@
 
 
             <ANIMATIONREFS>
-                <!--<ANIMATIONREF id="x-wingLinear" />
-                <ANIMATIONREF id="x-wingCircular" />-->
-                <ANIMATIONREF id="x-wingBezier" />
+                <ANIMATIONREF id="x-wingLinear" />
+                <ANIMATIONREF id="x-wingCircular" />
+                <!--<ANIMATIONREF id="x-wingBezier" />-->
             </ANIMATIONREFS>
 
             <DESCENDANTS>

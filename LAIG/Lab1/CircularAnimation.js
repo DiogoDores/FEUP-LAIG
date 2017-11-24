@@ -24,44 +24,43 @@ function CircularAnimation(scene, args) {
 CircularAnimation.prototype = Object.create(Animation.prototype);
 CircularAnimation.prototype.constructor = CircularAnimation;
 
-CircularAnimation.prototype.getTotalTime = function(){
-  return this.rotang / this.speedang;
+CircularAnimation.prototype.getTotalTime = function () {
+    return this.rotang / this.speedang;
 }
 
 function angle(a, b) {
-  let tempA = vec3.fromValues(a[0], a[1], a[2]);
-  let tempB = vec3.fromValues(b[0], b[1], b[2]);
+    let tempA = vec3.fromValues(a[0], a[1], a[2]);
+    let tempB = vec3.fromValues(b[0], b[1], b[2]);
 
-  let cosine = vec3.dot(tempA, tempB);
+    let cosine = vec3.dot(tempA, tempB);
 
-  if(cosine > 1.0) {
-    return 0;
-  }
-  else if(cosine < -1.0) {
+    if (cosine > 1.0) {
+        return 0;
+    } else if (cosine < -1.0) {
 
-    return Math.PI;
-  } else {
+        return Math.PI;
+    } else {
 
-    let sign = (tempA[0]-tempB[0] < 0) ? -1 : 1;
-    return Math.acos(cosine)*sign ;
-  }
+        let sign = (tempA[0] - tempB[0] < 0) ? -1 : 1;
+        return Math.acos(cosine) * sign;
+    }
 }
 
-CircularAnimation.prototype.getMatrix = function(time){
+CircularAnimation.prototype.getMatrix = function (time) {
 
     this.ang = this.speedang * time;
 
-    if(this.ang >= this.rotang){
-      this.ang = this.rotang;
-      this.isFinished = true;
+    if (this.ang >= this.rotang) {
+        this.ang = this.rotang;
+        this.isFinished = true;
     }
 
     let mat = mat4.create();
 
-    mat4.rotate(mat,mat,Math.PI, this.scene.axisCoords['y']);
+    mat4.rotate(mat, mat, Math.PI, this.scene.axisCoords['y']);
     mat4.translate(mat, mat, vec3.fromValues(this.radius, 0, 0));
-    mat4.rotate(mat,mat,this.startang + this.ang, this.scene.axisCoords['y']);
-    mat4.translate(mat, mat, vec3.fromValues(-this.center[0],-this.center[1],-this.center[2]));
+    mat4.rotate(mat, mat, this.startang + this.ang, this.scene.axisCoords['y']);
+    mat4.translate(mat, mat, vec3.fromValues(-this.center[0], -this.center[1], -this.center[2]));
 
 
     return mat;
