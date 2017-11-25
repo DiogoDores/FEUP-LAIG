@@ -62,28 +62,24 @@ MyInterface.prototype.addShadersGroup = function (selectables) {
     group.open();
 
     group.add(this.scene, 'selectedShaderIndex', {
-        'Flat Shading': 0,
-        'Passing a scale as uniform': 1,
-        'Passing a varying parameter from VS -> FS': 2,
-        'Simple texturing': 3,
-        'Multiple textures in the FS': 4,
-        'Multiple textures in VS and FS': 5,
-        'Sepia': 6,
-        'Convolution': 7
+        'Shader1': 0,
+        'Flat Shading': 1,
+        'Passing a scale as uniform': 2,
+        'Passing a varying parameter from VS -> FS': 3,
+        'Simple texturing': 4,
+        'Multiple textures in the FS': 5,
+        'Multiple textures in VS and FS': 6,
+        'Sepia': 7,
+        'Convolution': 8
     }).name('Shaders list');
 
 
     obj = this;
 
-    console.log(selectables);
-
     group.add(this.scene, 'node', selectables).onChange(function (v) {
         for (var i = 0; i < selectables.length; i++) {
             if (selectables[i] == v) {
-                //obj.scene.graph.clearSelectables();
-                console.log("CHANGE ", i);
                 obj.scene.graph.useSelectable = i;
-
             }
         }
     });

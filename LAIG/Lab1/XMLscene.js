@@ -29,6 +29,7 @@ XMLscene.prototype.init = function (application) {
     CGFscene.prototype.init.call(this, application);
 
     this.initCameras();
+    this.initShaders();
 
     this.enableTextures(true);
 
@@ -80,6 +81,7 @@ XMLscene.prototype.initLights = function () {
 XMLscene.prototype.initShaders = function () {
 
     this.testShaders = [
+        new CGFshader(this.gl, "scenes/shaders/Shader1.vert", "scenes/shaders/Shader1.frag"),
 		new CGFshader(this.gl, "scenes/shaders/flat.vert", "scenes/shaders/flat.frag"),
 		new CGFshader(this.gl, "scenes/shaders/uScale.vert", "scenes/shaders/uScale.frag"),
 		new CGFshader(this.gl, "scenes/shaders/varying.vert", "scenes/shaders/varying.frag"),
@@ -91,22 +93,22 @@ XMLscene.prototype.initShaders = function () {
 	];
 
     // texture will have to be bound to unit 1 later, when using the shader, with "this.texture2.bind(1);"
-    this.testShaders[4].setUniformsValues({
+    this.testShaders[5].setUniformsValues({
         uSampler2: 1
     });
-    this.testShaders[5].setUniformsValues({
+    this.testShaders[6].setUniformsValues({
         uSampler2: 1
     });
 }
 
 XMLscene.prototype.updateScaleFactor = function (v) {
-    this.testShaders[1].setUniformsValues({
-        normScale: this.scaleFactor
-    });
     this.testShaders[2].setUniformsValues({
         normScale: this.scaleFactor
     });
-    this.testShaders[5].setUniformsValues({
+    this.testShaders[3].setUniformsValues({
+        normScale: this.scaleFactor
+    });
+    this.testShaders[6].setUniformsValues({
         normScale: this.scaleFactor
     });
 }
@@ -132,7 +134,6 @@ XMLscene.prototype.onGraphLoaded = function () {
     this.gl.clearColor(this.graph.background[0], this.graph.background[1], this.graph.background[2], this.graph.background[3]);
 
     this.initLights();
-    this.initShaders();
 
     this.updateScaleFactor();
 
@@ -158,10 +159,18 @@ XMLscene.prototype.update = function (currTime) {
         }
     }
 
-    //this.selectedShaderIndex[0].setUniformsValues({amplitude: (1+Math.sin(this.delta/1000))/2})
-
-    //this.selectedShaderIndex[1].setUniformsValues({amplitude:(1+Math.sin(3*this.frame))/2});
-
+    this.testShaders[0].setUniformsValues({
+        amplitude: (1 + Math.sin(this.delta / 1000)) / 2
+    })
+    
+    this.testShaders[0].setUniformsValues({
+        displacement: (1 + Math.sin(3 * this.delta)) / 2
+    })
+    
+    this.testShaders[0].setUniformsValues({
+        amplitude: (1 + Math.sin(3 * this.delta)) / 2
+    })
+    
     //console.log(this.delta);
     this.lastTime = currTime;
 }
@@ -206,16 +215,16 @@ XMLscene.prototype.display = function () {
                 i++;
             }
         }
-/*
-        for (var key in this.selectablesValues) {
-            if (this.selectablesValues.hasOwnProperty(key)) {
-                if (this.selectablesValues[key]) {
-                    this.graph.nodes[key].selectable = true;
-                } else {
-                    this.graph.nodes[key].selectable = false;
-                }
-            }
-        }*/
+        /*
+                for (var key in this.selectablesValues) {
+                    if (this.selectablesValues.hasOwnProperty(key)) {
+                        if (this.selectablesValues[key]) {
+                            this.graph.nodes[key].selectable = true;
+                        } else {
+                            this.graph.nodes[key].selectable = false;
+                        }
+                    }
+                }*/
 
         // Displays the scene.
         this.graph.displayScene();
@@ -225,7 +234,7 @@ XMLscene.prototype.display = function () {
         // Draw axis
         this.axis.display();
     }
-  
+
 
     this.popMatrix();
 
