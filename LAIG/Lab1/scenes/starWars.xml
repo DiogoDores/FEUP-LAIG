@@ -207,12 +207,26 @@
     <controlpoint xx="-40" yy="0" zz="10" />
     <controlpoint xx="0" yy="0" zz="-20" />
   </ANIMATION>
-  <ANIMATION id="x-wingCircular" speed="3" type="circular"
-        centerx="20" centery="5" centerz="20"
-        radius="5" startang="35" rotang="648"/>
+  <ANIMATION id="x-wingLinear2" speed="5" type="linear">
+    <controlpoint xx="0" yy="0" zz="-50" />
+    <controlpoint xx="20" yy="0" zz="-5" />
+    <controlpoint xx="20" yy="0" zz="0" />
+  </ANIMATION>
+  <ANIMATION id="t1" speed="6" type="linear">
+    <controlpoint xx="0" yy="0" zz="0" />
+    <controlpoint xx="20" yy="0" zz="-15" />
+    <controlpoint xx="20" yy="0" zz="0" />
+  </ANIMATION>
+  <ANIMATION id="x-wingCircular" speed="6" type="circular"
+        centerx="0" centery="0" centerz="0"
+        radius="20" startang="0" rotang="360"/>
   <ANIMATION id="test" speed="0.8" type="linear">
     <controlpoint xx="0" yy="0" zz="1.5" />
     <controlpoint xx="0" yy="0" zz="25.5" />
+  </ANIMATION>
+  <ANIMATION id="combo" type="combo">
+    <SPANREF id="t1" />
+    <SPANREF id="x-wingCircular" />
   </ANIMATION>
 </ANIMATIONS>
 
@@ -230,6 +244,7 @@
 
             <NODEREF id="tieFighter" />
             <NODEREF id="xWing" />
+            <NODEREF id="xWing2" />
             <NODEREF id="planet" />
             <NODEREF id="deathStar" />
         </DESCENDANTS>
@@ -933,12 +948,30 @@
       <MATERIAL id="defaultMaterial" />
       <TEXTURE id="null" />
 
-      <TRANSLATION x="5" y="2" z="25" />
+    <!--  <TRANSLATION x="5" y="2" z="25" /> -->
 
       <ANIMATIONREFS>
-        <ANIMATIONREF id="x-wingLinear"/>
+        <ANIMATIONREF id="x-wingLinear2"/>
         <ANIMATIONREF id="x-wingCircular"/>
+
+        <!-- <ANIMATIONREF id="combo" /> -->
       </ANIMATIONREFS>
+
+      <DESCENDANTS>
+
+        <NODEREF id="xBody" />
+        <NODEREF id="xwings" />
+
+      </DESCENDANTS>
+
+    </NODE>
+
+    <!-- X-Wing node -->
+    <NODE id="xWing2" selectable="true">
+      <MATERIAL id="defaultMaterial" />
+      <TEXTURE id="null" />
+
+
 
       <DESCENDANTS>
 

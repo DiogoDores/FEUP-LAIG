@@ -58,11 +58,11 @@ CircularAnimation.prototype.getMatrix = function(time){
 
     let mat = mat4.create();
 
-    mat4.rotate(mat,mat,Math.PI, this.scene.axisCoords['y']);
-    mat4.translate(mat, mat, vec3.fromValues(this.radius, 0, 0));
+    mat4.translate(mat, mat, vec3.fromValues(this.center[0],this.center[1],this.center[2]));
     mat4.rotate(mat,mat,this.startang + this.ang, this.scene.axisCoords['y']);
-    mat4.translate(mat, mat, vec3.fromValues(-this.center[0],-this.center[1],-this.center[2]));
-
+    mat4.translate(mat, mat, vec3.fromValues(this.radius, 0, 0));
+    mat4.rotate(mat,mat,Math.PI, this.scene.axisCoords['y']);
+    console.log(this.rotang + " -- " + this.startang + " -- " + this.ang + " -- " + (this.startang + this.ang));
 
     return mat;
 }

@@ -1194,14 +1194,14 @@ MySceneGraph.prototype.parseAnimations = function (animsNode) {
                     return "no ID defined for spanref in combo animation";
 
                 // Checks if exist the ID.
-                if (this.anim[spanID] == null)
-                    return "ID " + spanID + " doesn't exist";
+                if (this.animsCreated[spanId] == null)
+                    return "ID " + spanId + " doesn't exist";
 
-                if (this.anim[spanID][0] == 'combo')
+                if (this.animsCreated[spanId][0] == 'combo')
                     return "Combo Animations can't have combo animations"
 
                 numberOfCP++;
-                cps.push(spanID);
+                cps.push(this.animsCreated[spanId]);
             }
 
             if (numberOfCP == 0)
@@ -1695,14 +1695,14 @@ MySceneGraph.prototype.displayScene = function () {
     if (this.useSelectable >= 1)
         this.nodes[this.selectables[this.useSelectable]].selectable = true;
 
-    this.displayNodes(this.idRoot, null, null, null);
+    this.displayNodes(this.idRoot, null, null);
 
 
 }
 
-MySceneGraph.prototype.displayNodes = function (id, matToApply, texToApply, useShader) {
+MySceneGraph.prototype.displayNodes = function (id, matToApply, texToApply) {
 
-    var selected = useShader;
+    var selected;
 
 
     if (this.materials[this.nodes[id].materialID] != null)
@@ -1714,44 +1714,38 @@ MySceneGraph.prototype.displayNodes = function (id, matToApply, texToApply, useS
         texToApply = this.textures[this.nodes[id].textureID];
 
     this.scene.pushMatrix();
-    //console.log(this.anims);
 
     if (this.nodes[id].selectable != null) {
         selected = this.nodes[id].selectable;
+    } else {
+      selected = false;
     }
 
     this.scene.multMatrix(this.nodes[id].transformMatrix);
 
     if (this.nodes[id].anim != null) {
       this.scene.multMatrix(this.nodes[id].anim.matrix);
-      //console.log(this.nodes[id].anim.matrix);
     }
-
+    if(selected)
+      this.scene.setActiveShader(this.scene.testShaders[this.scene.selectedShaderIndex]);
     for (var i = 0; i < this.nodes[id].children.length; i++)
         this.displayNodes(this.nodes[id].children[i], matToApply, texToApply, selected);
 
     for (var i = 0; i < this.nodes[id].leaves.length; i++) {
 
-        if (selected == true) {
-            this.scene.setActiveShader(this.scene.testShaders[this.scene.selectedShaderIndex]);
-
-        } else if (selected == false || selected == null) {
-            this.scene.setActiveShader(this.scene.defaultShader);
-        }
-
         matToApply.apply();
         if (texToApply != null) {
-            this.nodes[id].leaves[i].primitive.assignTexture(texToApply);
 
-            /*if (selected)
-                texToApply[0].bind(1);
-            else*/
-                texToApply[0].bind(0);
+            this.nodes[id].leaves[i].primitive.assignTexture(texToApply);
+            texToApply[0].bind();
         }
+
         this.nodes[id].leaves[i].primitive.display();
     }
 
-
     this.scene.popMatrix();
+
+    if(selected)
+      this.scene.setActiveShader(this.scene.defaultShader);
 
 }
