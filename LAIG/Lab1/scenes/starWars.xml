@@ -213,9 +213,16 @@
     <controlpoint xx="20" yy="0" zz="0" />
   </ANIMATION>
   <ANIMATION id="t1" speed="6" type="linear">
+    <controlpoint xx="20" yy="0" zz="0" />
     <controlpoint xx="0" yy="0" zz="0" />
     <controlpoint xx="20" yy="0" zz="-15" />
     <controlpoint xx="20" yy="0" zz="0" />
+  </ANIMATION>
+  <ANIMATION id="bezier" speed="6" type="bezier">
+    <controlpoint xx="-40" yy="0" zz="0" />
+    <controlpoint xx="-40" yy="0" zz="-40" />
+    <controlpoint xx="0" yy="0" zz="-40" />
+    <controlpoint xx="0" yy="0" zz="0" />
   </ANIMATION>
   <ANIMATION id="x-wingCircular" speed="6" type="circular"
         centerx="0" centery="0" centerz="0"
@@ -244,6 +251,7 @@
 
                 <NODEREF id="tieFighter" />
                 <NODEREF id="xWing" />
+                <NODEREF id="xWing2" />
                 <NODEREF id="planet" />
                 <NODEREF id="deathStar" />
             </DESCENDANTS>
@@ -959,7 +967,8 @@
             <ANIMATIONREFS>
                 <ANIMATIONREF id="x-wingLinear2" />
                 <ANIMATIONREF id="x-wingCircular" />
-                <!--<ANIMATIONREF id="x-wingBezier" />-->
+                <ANIMATIONREF id="combo" />
+
             </ANIMATIONREFS>
 
             <DESCENDANTS>
@@ -968,27 +977,23 @@
                 <NODEREF id="xwings" />
 
             </DESCENDANTS>
+        </NODE>
 
-    <!-- X-Wing node -->
-    <NODE id="xWing2" selectable="true">
-      <MATERIAL id="defaultMaterial" />
-      <TEXTURE id="null" />
+        <!-- X-Wing node -->
+        <NODE id="xWing2" selectable="true">
+          <ANIMATIONREFS>
+            <ANIMATIONREF id="bezier" />
+          </ANIMATIONREFS>
+          <MATERIAL id="defaultMaterial" />
+          <TEXTURE id="null" />
+          <DESCENDANTS>
 
+            <NODEREF id="xBody" />
+            <NODEREF id="xwings" />
 
+          </DESCENDANTS>
 
-      <DESCENDANTS>
-
-        <NODEREF id="xBody" />
-        <NODEREF id="xwings" />
-
-      </DESCENDANTS>
-
-    </NODE>
-
-    <!-- X-Wing's MAIN BODY node -->
-    <NODE id="xBody">
-      <MATERIAL id="defaultMaterial" />
-      <TEXTURE id="null" />
+        </NODE>
 
         <!-- X-Wing's MAIN BODY node -->
         <NODE id="xBody">

@@ -6,6 +6,8 @@ function LinearAnimation(scene, args) {
     Animation.call(scene, args);
     this.scene = scene;
     this.args = args;
+
+    this.type = this.args[0];
     this.speed = this.args[1];
     var tempControlPoints = this.args[2];
     this.controlPoints = [];

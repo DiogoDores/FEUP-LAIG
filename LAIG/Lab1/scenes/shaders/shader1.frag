@@ -10,9 +10,9 @@ void main() {
 
 	vec4 color = texture2D(uSampler, vTextureCoord);
 
-	color.r = color.r * 0.0 + color.g *0.769 + color.b * 0.1;
-	color.g = color.r * 0.0 + color.g *amplitude + color.b * 0.1;
-	color.b = color.r * 0.0 + color.g *0.534 + color.b * amplitude;
+	color.r = color.r + amplitude * (1.0 - color.r);
+	color.g = color.g + amplitude * (0.5 - color.g);
+	color.b = color.b + amplitude * (0.0 - color.b);
 
 	gl_FragColor = color;
 }

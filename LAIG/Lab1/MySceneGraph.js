@@ -1692,9 +1692,6 @@ MySceneGraph.generateRandomString = function (length) {
  */
 MySceneGraph.prototype.displayScene = function () {
 
-    if (this.useSelectable >= 1)
-        this.nodes[this.selectables[this.useSelectable]].selectable = true;
-
     this.displayNodes(this.idRoot, null, null);
 
 
@@ -1715,8 +1712,8 @@ MySceneGraph.prototype.displayNodes = function (id, matToApply, texToApply) {
 
     this.scene.pushMatrix();
 
-    if (this.nodes[id].selectable != null) {
-        selected = this.nodes[id].selectable;
+    if (id == this.selectables[this.useSelectable]) {
+        selected = true;
     } else {
       selected = false;
     }

@@ -6,12 +6,14 @@ function ComboAnimation(scene, args) {
     Animation.call(scene, args);
     this.scene = scene;
 
+    this.type = args[0];
     this.totalTime = 0;
     this.currentTime = 0;
 
     this.oldMatrix = mat4.create();
     this.matrix = mat4.create();
     mat4.identity(this.matrix);
+    mat4.identity(this.oldMatrix);
 
     this.anims = args[1];
     this.currAnim = 0;
@@ -28,24 +30,25 @@ ComboAnimation.prototype = Object.create(Animation.prototype);
 ComboAnimation.prototype.constructor = ComboAnimation;
 
 ComboAnimation.prototype.updates = function(currTime){
-  this.totalTime += currTime;
-  this.currentTime += currTime;
-  if(!this.isFinished){
-    this.matrix = this.anims[this.currAnim].getMatrix(this.currentTime);
-    mat4.multiply(this.matrix, this.oldMatrix, this.matrix);
+  if(this.totalTime < this.animsTimes[this.animsTimes.length - 1]){
+    this.totalTime += currTime;
+    this.currentTime += currTime;
+    if(!this.isFinished)
+      this.matrix = this.anims[this.currAnim].getMatrix(this.currentTime);
+
+    this.finish();
+    this.nextAnim();
   } else {
     this.matrix = this.oldMatrix;
   }
-  this.finish();
-  this.nextAnim();
 }
 
 ComboAnimation.prototype.finish = function(){
+
   if(this.anims[this.currAnim].getTotalTime() <= this.currentTime && !this.isFinished){
-      mat4.multiply(this.oldMatrix, this.oldMatrix,
-      this.anims[this.currAnim].getMatrix(this.currentTime));
-      this.currentTime = 0;
-      this.isFinished = true;
+    this.oldMatrix = this.anims[this.currAnim].getMatrix(this.currentTime);
+    this.currentTime = 0;
+    this.isFinished = true;
   }
 }
 
@@ -64,7 +67,9 @@ ComboAnimation.prototype.getTotalTime = function(){
   return this.animsTimes[this.animsTimes.length - 1];
 }
 
-ComboAnimation.prototype.getMatrix = function(time){
+ComboAnimation.prototype.getMatrix = function(time, update){
+  if(update != null && update)
+    this.updates(time);
 
   return this.matrix;
 }

@@ -25,25 +25,32 @@ AnimationsOfNode.prototype = Object.create(AnimationsOfNode.prototype);
 AnimationsOfNode.prototype.constructor = AnimationsOfNode;
 
 AnimationsOfNode.prototype.updates = function(currTime){
-  this.totalTime += currTime;
-  this.currentTime += currTime;
-  if(!this.isFinished){
-    this.matrix = this.anims[this.currAnim].getMatrix(this.currentTime);
-    mat4.multiply(this.matrix, this.oldMatrix, this.matrix);
+  if(this.totalTime < this.animsTimes[this.animsTimes.length - 1]){
+    
+    this.totalTime += currTime;
+    this.currentTime += currTime;
+    if(!this.isFinished){
+      if(this.anims[this.currAnim].type == "combo")
+        this.matrix = this.anims[this.currAnim].getMatrix(currTime, true);
+      else
+        this.matrix = this.anims[this.currAnim].getMatrix(this.currentTime);
+
+    }
+    this.finish();
+    this.nextAnim();
   } else {
     this.matrix = this.oldMatrix;
   }
-  this.finish();
-  this.nextAnim();
 }
 
 AnimationsOfNode.prototype.finish = function(){
+
   if(this.anims[this.currAnim].getTotalTime() <= this.currentTime && !this.isFinished){
-      mat4.multiply(this.oldMatrix, this.oldMatrix,
-        this.anims[this.currAnim].getMatrix(this.currentTime));
+    this.oldMatrix = this.anims[this.currAnim].getMatrix(this.currentTime, false);
     this.currentTime = 0;
     this.isFinished = true;
   }
+
 }
 
 AnimationsOfNode.prototype.addAnimation = function(anim) {

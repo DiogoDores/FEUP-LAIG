@@ -22,13 +22,29 @@ function BezierAnimation(scene, args) {
     this.p3 = this.controlPoints[2];
     this.p4 = this.controlPoints[3];
 
-    this.l2 = (this.p1 + this.p2) / 2;
-    this.h = (this.p2 + this.p3) / 2;
-    this.l3 = (this.l2 + this.h) / 2;
-    this.r3 = (this.p3 + this.p4) / 2;
-    this.r2 = (this.h + this.r3) / 2;
+    this.l2 = vec3.create();
+    vec3.add(this.l2, this.p1, this.p2);
+    vec3.scale(this.l2, this.l2, 0.5);
 
-    this.totalDistance = 
+    this.h = vec3.create();
+    vec3.add(this.h, this.p2, this.p3);
+    vec3.scale(this.h, this.h, 0.5);
+
+    this.l3 = vec3.create();
+    vec3.add(this.l3, this.p1, this.h);
+    vec3.scale(this.l3, this.l3, 0.5);
+
+    this.r3 = vec3.create();
+    vec3.add(this.r3, this.p3, this.p4);
+    vec3.scale(this.r3, this.r3, 0.5);
+
+    this.r2 = vec3.create();
+    vec3.add(this.r2, this.h, this.r3);
+    vec3.scale(this.r2, this.r2, 0.5);
+
+    console.log(this.l2 + " " + this.h+ " " + this.l3+ " " + this.r3+ " " + this.r2);
+
+    this.totalDistance =
         this.calcDistance(this.p1, this.l2) +
         this.calcDistance(this.l2, this.l3) +
         this.calcDistance(this.l3, this.r2) +
@@ -38,6 +54,8 @@ function BezierAnimation(scene, args) {
     for (let i = 1; i < this.controlPoints.length; i++) {
         this.times.push(this.totalDistance / this.speed);
     }
+
+    this.totalTime = this.totalTime / this.speed;
 };
 BezierAnimation.prototype = Object.create(Animation.prototype);
 BezierAnimation.prototype.constructor = BezierAnimation;
@@ -67,7 +85,7 @@ BezierAnimation.prototype.calcDistance = function (p1, p2) {
 }
 
 BezierAnimation.prototype.getTotalTime = function () {
-    return this.times[this.times.length - 1];
+    return this.totalTime;
 }
 
 BezierAnimation.prototype.getIndexTime = function (time) {
@@ -80,13 +98,11 @@ BezierAnimation.prototype.getIndexTime = function (time) {
 
 BezierAnimation.prototype.getMatrix = function (time) {
 
-    let t = time / this.getTotalTime();
+    let t = time / this.totalTime;
     let mat = mat4.create();
+    mat4.identity(mat);
 
-    if (t > 1) {
-        return;
-
-    } else {
+    if (t <= 1) {
 
         var blend_1 = Math.pow(1 - this.t, 3);
         var blend_2 = 3 * this.t * (Math.pow(1 - this.t, 2));
@@ -111,7 +127,7 @@ BezierAnimation.prototype.getMatrix = function (time) {
             (blend_2_diff - blend_3_diff) * this.p3[2] + blend_3_diff * this.p4[2];
 
         this.ang = Math.atan(dx / dz) + (dz < 0 ? Math.PI : 0);
-
+        //Add here Matriz da rot que esta no caderno e tirar esta chamada ao angle
         let angToSend = angle(this.angle, vec3.fromValues(0, 0, 1));
 
         mat4.rotate(mat, mat, rot_y, this.scene.axisCoords['z']);
@@ -119,6 +135,6 @@ BezierAnimation.prototype.getMatrix = function (time) {
 
         console.log(mat);
 
-        return mat;
     }
+    return mat;
 }

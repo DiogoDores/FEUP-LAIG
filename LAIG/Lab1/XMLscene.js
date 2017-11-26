@@ -17,6 +17,9 @@ function XMLscene(interface) {
 
     //this.selectables = [];
     this.node = 0;
+    this.lastime = 0;
+    this.delta = 0;
+    this.timeFactor = 0;
 }
 
 XMLscene.prototype = Object.create(CGFscene.prototype);
@@ -81,7 +84,7 @@ XMLscene.prototype.initLights = function () {
 XMLscene.prototype.initShaders = function () {
 
     this.testShaders = [
-        new CGFshader(this.gl, "scenes/shaders/Shader1.vert", "scenes/shaders/Shader1.frag"),
+    new CGFshader(this.gl, "scenes/shaders/shader1.vert", "scenes/shaders/shader1.frag"),
 		new CGFshader(this.gl, "scenes/shaders/flat.vert", "scenes/shaders/flat.frag"),
 		new CGFshader(this.gl, "scenes/shaders/uScale.vert", "scenes/shaders/uScale.frag"),
 		new CGFshader(this.gl, "scenes/shaders/varying.vert", "scenes/shaders/varying.frag"),
@@ -152,26 +155,21 @@ XMLscene.prototype.onGraphLoaded = function () {
 XMLscene.prototype.update = function (currTime) {
     this.lastTime = this.lastTime || 0.0;
     this.delta = currTime - this.lastTime || 0.0;
+    this.timeFactor += this.delta / 1000;
     if (this.graph.animRefs != undefined) {
         for (let i = 0; i < this.graph.animRefs.length; i++) {
 
             this.graph.animRefs[i].updates(this.delta / 1000);
         }
     }
+    this.testShaders[0].setUniformsValues({
+        amplitude: (1 + Math.sin(this.timeFactor)) / 2
+    })
 
     this.testShaders[0].setUniformsValues({
-        amplitude: (1 + Math.sin(this.delta / 1000)) / 2
+        displacement: (1 + Math.sin(1.5 * this.timeFactor)) / 2
     })
-    
-    this.testShaders[0].setUniformsValues({
-        displacement: (1 + Math.sin(3 * this.delta)) / 2
-    })
-    
-    this.testShaders[0].setUniformsValues({
-        amplitude: (1 + Math.sin(3 * this.delta)) / 2
-    })
-    
-    //console.log(this.delta);
+
     this.lastTime = currTime;
 }
 

@@ -6,6 +6,7 @@ function CircularAnimation(scene, args) {
     Animation.call(scene, args);
     this.scene = scene;
 
+    this.type = args[0];
     this.speed = args[1];
     this.radius = args[5];
     this.speedang = this.speed / this.radius;
@@ -28,23 +29,6 @@ CircularAnimation.prototype.getTotalTime = function () {
     return this.rotang / this.speedang;
 }
 
-function angle(a, b) {
-    let tempA = vec3.fromValues(a[0], a[1], a[2]);
-    let tempB = vec3.fromValues(b[0], b[1], b[2]);
-
-    let cosine = vec3.dot(tempA, tempB);
-
-    if (cosine > 1.0) {
-        return 0;
-    } else if (cosine < -1.0) {
-
-        return Math.PI;
-    } else {
-
-        let sign = (tempA[0] - tempB[0] < 0) ? -1 : 1;
-        return Math.acos(cosine) * sign;
-    }
-}
 
 CircularAnimation.prototype.getMatrix = function (time) {
 
@@ -61,7 +45,6 @@ CircularAnimation.prototype.getMatrix = function (time) {
     mat4.rotate(mat,mat,this.startang + this.ang, this.scene.axisCoords['y']);
     mat4.translate(mat, mat, vec3.fromValues(this.radius, 0, 0));
     mat4.rotate(mat,mat,Math.PI, this.scene.axisCoords['y']);
-    console.log(this.rotang + " -- " + this.startang + " -- " + this.ang + " -- " + (this.startang + this.ang));
 
     return mat;
 }
