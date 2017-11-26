@@ -76,7 +76,7 @@ MyInterface.prototype.addShadersGroup = function (selectables) {
 
     obj = this;
 
-    group.add(this.scene, 'node', selectables).onChange(function (v) {
+    group.add(this.scene, 'Node', selectables).onChange(function (v) {
         for (var i = 0; i < selectables.length; i++) {
             if (selectables[i] == v) {
                 obj.scene.graph.useSelectable = i;

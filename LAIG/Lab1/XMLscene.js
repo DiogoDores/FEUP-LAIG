@@ -15,8 +15,7 @@ function XMLscene(interface) {
     this.selectedShaderIndex = 0;
     this.scaleFactor = 1.0;
 
-    //this.selectables = [];
-    this.node = 0;
+    this.Node = 0;
     this.lastime = 0;
     this.delta = 0;
     this.timeFactor = 0;
@@ -143,8 +142,6 @@ XMLscene.prototype.onGraphLoaded = function () {
     // Adds lights group.
     this.interface.addLightsGroup(this.graph.lights);
 
-    console.log(this.graph.selectables);
-
     this.interface.addShadersGroup(this.graph.selectables);
 
 }
@@ -213,16 +210,6 @@ XMLscene.prototype.display = function () {
                 i++;
             }
         }
-        /*
-                for (var key in this.selectablesValues) {
-                    if (this.selectablesValues.hasOwnProperty(key)) {
-                        if (this.selectablesValues[key]) {
-                            this.graph.nodes[key].selectable = true;
-                        } else {
-                            this.graph.nodes[key].selectable = false;
-                        }
-                    }
-                }*/
 
         // Displays the scene.
         this.graph.displayScene();

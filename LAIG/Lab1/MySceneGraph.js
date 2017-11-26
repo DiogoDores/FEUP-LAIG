@@ -1356,7 +1356,7 @@ MySceneGraph.prototype.parseNodes = function (nodesNode) {
 
             if (nodeShader) {
                 this.selectables.push(nodeID);
-                console.log(this.selectables);
+                console.log(nodeID + " is a selectable node for shader");
             }
 
             this.log("Processing node " + nodeID);
@@ -1627,12 +1627,6 @@ MySceneGraph.prototype.parsePatch = function (nodesNode) {
     this.patches.push(controlVert);
     console.log("Parsed Patch");
     return null;
-}
-
-MySceneGraph.prototype.clearSelectables = function () {
-    for (var i = 1; i < this.selectables.length; i++) {
-        this.nodes[this.selectables[i]].selectable = null;
-    }
 }
 
 /*
