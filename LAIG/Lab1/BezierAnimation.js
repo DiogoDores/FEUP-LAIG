@@ -65,23 +65,23 @@ BezierAnimation.prototype.getTotalTime = function () {
 
 BezierAnimation.prototype.getMatrix = function (time) {
 
-    this.t = time / this.totalTime;
+    time = time / this.totalTime;
 
     let mat = mat4.create();
     mat4.identity(mat);
 
-    if (this.t > 1)
-      this.t = 1;
+    if (time > 1)
+      time = 1;
 
-    var blend_1 = Math.pow(1 - this.t, 3);
-    var blend_2 = 3 * this.t * (Math.pow(1 - this.t, 2));
-    var blend_3 = 3 * Math.pow(this.t, 2) * (1 - this.t);
-    var blend_4 = Math.pow(this.t, 3);
+    var blend_1 = Math.pow(1 - time, 3);
+    var blend_2 = 3 * time * (Math.pow(1 - time, 2));
+    var blend_3 = 3 * Math.pow(time, 2) * (1 - time);
+    var blend_4 = Math.pow(time, 3);
 
 
-    var blend_1_diff = 3 * Math.pow(1 - this.t, 2);
-    var blend_2_diff = 6 * this.t * (1 - this.t);
-    var blend_3_diff = 3 * Math.pow(this.t, 2);
+    var blend_1_diff = 3 * Math.pow(1 - time, 2);
+    var blend_2_diff = 6 * time * (1 - time);
+    var blend_3_diff = 3 * Math.pow(time, 2);
 
 
     var new_x = blend_1 * this.p1[0] + blend_2 * this.p2[0] + blend_3 * this.p3[0] + blend_4 * this.p4[0];
@@ -99,10 +99,10 @@ BezierAnimation.prototype.getMatrix = function (time) {
         (blend_2_diff - blend_3_diff) * this.p3[2] + blend_3_diff * this.p4[2];
 
 
-    this.ang = Math.atan(dx / dz) + (dz < 0 ? Math.PI : 0);
+    let ang = Math.atan(dx / dz) + (dz < 0 ? Math.PI : 0);
 
     mat4.translate(mat, mat, vec3.fromValues(new_x, new_y, new_z));
-    mat4.rotateY(mat, mat, this.ang);
+    mat4.rotateY(mat, mat, ang);
 
     return mat;
 }
