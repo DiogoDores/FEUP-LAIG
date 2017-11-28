@@ -217,13 +217,16 @@
       <ANIMATION id="t1" speed="9" type="linear">
         <controlpoint xx="20" yy="0" zz="0" />
         <controlpoint xx="0" yy="0" zz="0" />
-        <controlpoint xx="20" yy="0" zz="-15" />
-        <controlpoint xx="20" yy="0" zz="0" />
       </ANIMATION>
 
       <ANIMATION id="t2" speed="9" type="linear">
-        <controlpoint xx="-1" yy="0" zz="0" />
+        <controlpoint xx="-50" yy="0" zz="0" />
+        <controlpoint xx="20" yy="0" zz="0" />
+      </ANIMATION>
+
+      <ANIMATION id="t3" speed="9" type="linear">
         <controlpoint xx="0" yy="0" zz="0" />
+        <controlpoint xx="50" yy="-10" zz="20" />
       </ANIMATION>
 
       <ANIMATION id="bezier" speed="9" type="bezier">
@@ -233,9 +236,20 @@
         <controlpoint xx="0" yy="10" zz="0" />
       </ANIMATION>
 
+      <ANIMATION id="bezier2" speed="9" type="bezier">
+        <controlpoint xx="50" yy="-10" zz="20" />
+        <controlpoint xx="50" yy="-10" zz="0" />
+        <controlpoint xx="20" yy="-10" zz="0" />
+        <controlpoint xx="20" yy="-10" zz="20" />
+      </ANIMATION>
+
       <ANIMATION id="x-wingCircular" speed="9" type="circular"
             centerx="0" centery="0" centerz="0"
             radius="20" startang="0" rotang="360"/>
+
+      <ANIMATION id="circular" speed="9" type="circular"
+            centerx="0" centery="-10" centerz="20"
+            radius="20" startang="0" rotang="180"/>
 
       <ANIMATION id="test" speed="0.8" type="linear">
         <controlpoint xx="0" yy="0" zz="1.5" />
@@ -243,9 +257,9 @@
       </ANIMATION>
 
       <ANIMATION id="combo" type="combo">
-        <SPANREF id="t1" />
-        <SPANREF id="bezier" />
+        <SPANREF id="t2" />
         <SPANREF id="x-wingCircular" />
+        <SPANREF id="t1" />
       </ANIMATION>
     </ANIMATIONS>
 
@@ -263,7 +277,6 @@
 
                 <NODEREF id="tieFighter" />
                 <NODEREF id="xWing" />
-                <NODEREF id="xWing2" />
                 <NODEREF id="planet" />
                 <NODEREF id="deathStar" />
             </DESCENDANTS>
@@ -278,8 +291,7 @@
             <TRANSLATION x="5" y="2" z="5" />
 
             <ANIMATIONREFS>
-              <ANIMATIONREF id="t2" />
-              <ANIMATIONREF id="bezier" />
+              <ANIMATIONREF id="combo" />
             </ANIMATIONREFS>
             <DESCENDANTS>
 
@@ -977,13 +989,10 @@
             <MATERIAL id="defaultMaterial" />
             <TEXTURE id="null" />
 
-    <!--  <TRANSLATION x="5" y="2" z="25" /> -->
-
-
             <ANIMATIONREFS>
-                <ANIMATIONREF id="x-wingLinear2" />
-                <ANIMATIONREF id="x-wingCircular" />
-                <ANIMATIONREF id="combo" />
+                <ANIMATIONREF id="t3" />
+                <ANIMATIONREF id="bezier2" />
+                <ANIMATIONREF id="circular" />
 
             </ANIMATIONREFS>
 
@@ -993,22 +1002,6 @@
                 <NODEREF id="xwings" />
 
             </DESCENDANTS>
-        </NODE>
-
-        <!-- X-Wing node -->
-        <NODE id="xWing2" selectable="true">
-          <ANIMATIONREFS>
-            <ANIMATIONREF id="bezier" />
-          </ANIMATIONREFS>
-          <MATERIAL id="defaultMaterial" />
-          <TEXTURE id="null" />
-          <DESCENDANTS>
-
-            <NODEREF id="xBody" />
-            <NODEREF id="xwings" />
-
-          </DESCENDANTS>
-
         </NODE>
 
         <!-- X-Wing's MAIN BODY node -->
