@@ -3,10 +3,10 @@
 <!-- Initial values -->
 <INITIALS>
     <frustum near="0.1" far="500"/>
-    <translation x="-1" y="1" z="0" />
+    <translation x="-1" y="3" z="1" />
     <rotation axis="x" angle="0" />
     <rotation axis="y" angle="0" />
-    <rotation axis="z" angle="0" />
+    <rotation axis="z" angle="-20" />
     <scale sx="0.25" sy="0.25" sz="0.25" />
     <reference length="5" />
 </INITIALS>
@@ -60,55 +60,29 @@
     <!-- Rocks -->
     <TEXTURE id="gameBoard">
         <file path="images/boardGame.png" />
-        <amplif_factor s="10" t="10" />
+        <amplif_factor s="1" t="1" />
     </TEXTURE>
 
 </TEXTURES>
 
 
 <MATERIALS>
-	<!-- Pyramid material -->
-    <MATERIAL id="piramideMaterial">
-        <shininess value="1" />
-        <specular r="0" g="0" b="0" a="1" />
-        <diffuse r="1.0" g="0.68" b="0.4" a="1" />
-        <ambient r="0.2" g="0.2" b="0.2" a="1" />
-        <emission r="0.0" g="0.0" b="0.0" a="1" />
-    </MATERIAL>
 
-	<!-- Tree leaves material -->
-	<MATERIAL id="leavesTreeMaterial">
-        <shininess value="1" />
-        <specular r="0.2" g="0.2" b="0.2" a="1" />
-        <diffuse r="0.0" g="0.207" b="0.0" a="1" />
-        <ambient r="0.1" g="0.1" b="0.1" a="1" />
-        <emission r="0.0" g="0.0" b="0.0" a="1" />
-    </MATERIAL>
-
-	<!-- Tree trunk material -->
-	<MATERIAL id="trunkTreeMaterial">
-        <shininess value="1" />
-        <specular r="0.0" g="0.0" b="0.0" a="1" />
-        <diffuse r="0.6" g="0.298" b="0.0" a="1" />
-        <ambient r="0.1" g="0.1" b="0.1" a="1" />
-        <emission r="0.0" g="0.0" b="0.0" a="1" />
-    </MATERIAL>
-
-    <!-- Lamp post material -->
-    <MATERIAL id="lightPostMaterial">
+    <!-- Board material -->
+    <MATERIAL id="boardMaterial">
         <shininess value="100" />
-        <specular r="0.0" g="0.0" b="0.0" a="1" />
-        <diffuse r="0.447" g="0.416" b="0.416" a="1" />
-        <ambient r="0.0" g="0.0" b="0.0" a="1" />
+        <specular r="0.38" g="0.2" b="0.09" a="1" />
+        <diffuse r="0.38" g="0.2" b="0.09" a="1" />
+        <ambient r="0.38" g="0.2" b="0.09" a="1" />
         <emission r="0.0" g="0.0" b="0.0" a="1" />
     </MATERIAL>
 
-    <!-- Light bulb material -->
-    <MATERIAL id="lightMaterial">
+    <!-- Square material -->
+    <MATERIAL id="squareMaterial">
         <shininess value="100" />
-        <specular r="0.5" g="0.5" b="0.5" a="1" />
-        <diffuse r="0.5" g="0.5" b="0.5" a="1" />
-        <ambient r="0.0" g="0.0" b="0.0" a="1" />
+        <specular r="0.05" g="0.11" b="1.0" a="1" />
+        <diffuse r="0.05" g="0.11" b="1.0" a="1" />
+        <ambient r="0.05" g="0.11" b="1.0" a="1" />
         <emission r="0.0" g="0.0" b="0.0" a="1" />
     </MATERIAL>
 
@@ -161,25 +135,413 @@
         <DESCENDANTS>
 
           <NODEREF id="board" />
+          <NODEREF id="pieces" />
+
         </DESCENDANTS>
 
     </NODE>
 
-    <!-- The floor -->
-    <NODE id="board" selectable="true">
+    <!-- The board -->
+    <NODE id="board">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="5" y="0" z="25" />
+
+        <DESCENDANTS>
+            <NODEREF id="topFace"/>
+            <NODEREF id="bottomFace"/>
+            <NODEREF id="sideFace"/>
+		</DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="topFace">
         <MATERIAL id="null" />
         <TEXTURE id="gameBoard" />
 
-        <SCALE sx="10" sy="10" sz="10" />
+        <SCALE sx="20" sy="20" sz="20" />
         <ROTATION axis="x" angle="-90" />
 
         <DESCENDANTS>
-					<LEAF  type="rectangle" args="0 0 1 1" />
-				</DESCENDANTS>
+            <LEAF  type="rectangle" args="0 0 1 1" />
+        </DESCENDANTS>
 
     </NODE>
 
 
+    <NODE id="bottomFace">
+        <MATERIAL id="boardMaterial" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="0" y="-2.5" z="0" />
+        <SCALE sx="20" sy="20" sz="20" />
+        <ROTATION axis="x" angle="-90" />
+
+        <DESCENDANTS>
+            <LEAF  type="rectangle" args="0 0 1 1" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="sideFace">
+        <MATERIAL id="boardMaterial" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="0" y="-2.5" z="0" />
+
+        <DESCENDANTS>
+            <NODEREF id="face1"/>
+            <NODEREF id="face2"/>
+            <NODEREF id="face3"/>
+            <NODEREF id="face4"/>
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="face1">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <SCALE sx="20" sy="2.5" sz="1"/>
+
+        <DESCENDANTS>
+           <LEAF  type="rectangle" args="0 0 1 1" /> 
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="face2">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <ROTATION axis="y" angle="90"/>
+        <SCALE sx="20" sy="2.5" sz="1"/>
+
+        <DESCENDANTS>
+           <LEAF  type="rectangle" args="0 0 1 1" /> 
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="face3">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="20" y="0" z="0" />
+        <ROTATION axis="y" angle="90"/>
+        <SCALE sx="20" sy="2.5" sz="1"/>
+
+        <DESCENDANTS>
+           <LEAF  type="rectangle" args="0 0 1 1" /> 
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="face4">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="0" y="0" z="-20" />
+        <SCALE sx="20" sy="2.5" sz="1"/>
+
+        <DESCENDANTS>
+           <LEAF  type="rectangle" args="0 0 1 1" /> 
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="pieces">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+           <NODEREF id="square" />
+           <!--<NODEREF id="hexagon" /> 
+           <NODEREF id="circle" /> 
+           <NODEREF id="triangle" /> -->
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="square">
+        <MATERIAL id="squareMaterial" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="0" y="0.35" z="0" />
+
+        <DESCENDANTS>
+           <NODEREF id="square1" />
+           <NODEREF id="square2" /> 
+           <NODEREF id="square3" /> 
+           <NODEREF id="square4" /> 
+           <NODEREF id="square5" /> 
+           <NODEREF id="square6" /> 
+           <NODEREF id="square7" /> 
+           <NODEREF id="square8" /> 
+           <NODEREF id="square9" />  
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="square1">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="5.5" y="0" z="19.5" />
+
+        <DESCENDANTS>
+           <NODEREF id="cube" />
+        </DESCENDANTS>
+
+    </NODE>
+
+
+    <NODE id="square2">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="5.5" y="0" z="17" />
+
+        <DESCENDANTS>
+           <NODEREF id="cube" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="square3">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="5.5" y="0" z="14.5" />
+
+        <DESCENDANTS>
+           <NODEREF id="cube" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="square4">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="5.5" y="0" z="12" />
+
+        <DESCENDANTS>
+           <NODEREF id="cube" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="square5">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="7.7" y="0" z="13.2" />
+
+        <DESCENDANTS>
+           <NODEREF id="cube" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="square6">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="7.7" y="0" z="15.6" />
+
+        <DESCENDANTS>
+           <NODEREF id="cube" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="square7">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="7.7" y="0" z="18" />
+
+        <DESCENDANTS>
+           <NODEREF id="cube" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="square8">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="10" y="0" z="17" />
+
+        <DESCENDANTS>
+           <NODEREF id="cube" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="square9">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="10" y="0" z="14.4" />
+
+        <DESCENDANTS>
+           <NODEREF id="cube" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="cube">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <SCALE sx="1.2" sy="1.2" sz="1.2"/>
+
+        <DESCENDANTS>
+           <NODEREF id="cubeFace1" />
+           <NODEREF id="cubeFace2" />
+           <NODEREF id="cubeFace3" />
+           <NODEREF id="cubeFace4" />
+           <NODEREF id="cubeFace5" />
+           <NODEREF id="cubeFace6" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="cubeFace1">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <ROTATION axis="x" angle="-90"/>
+
+        <DESCENDANTS>
+           <LEAF type="rectangle" args="0 0 1 1"/>
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="cubeFace2">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="0" y="-0.3" z="0"/>
+        <ROTATION axis="x" angle="-90"/>
+
+        <DESCENDANTS>
+           <LEAF type="rectangle" args="0 0 1 1"/>
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="cubeFace3">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="0" y="-0.3" z="0"/>
+        <SCALE sx="1" sy="0.3" sz="1"/>
+
+        <DESCENDANTS>
+           <LEAF type="rectangle" args="0 0 1 1"/>
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="cubeFace4">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="0" y="-0.3" z="-1"/>
+        <SCALE sx="1" sy="0.3" sz="1"/>
+
+        <DESCENDANTS>
+           <LEAF type="rectangle" args="0 0 1 1"/>
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="cubeFace5">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="0" y="-0.3" z="-1"/>
+        <ROTATION axis="y" angle="-90"/>
+        <SCALE sx="1" sy="0.3" sz="1"/>
+
+        <DESCENDANTS>
+           <LEAF type="rectangle" args="0 0 1 1"/>
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="cubeFace6">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="1" y="-0.3" z="0"/>
+        <ROTATION axis="y" angle="90"/>
+        <SCALE sx="1" sy="0.3" sz="1"/>
+
+        <DESCENDANTS>
+           <LEAF type="rectangle" args="0 0 1 1"/>
+        </DESCENDANTS>
+
+    </NODE>
+
+    <!--<NODE id="hexagon">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+           <NODEREF id="hexagon1" />
+           <NODEREF id="hexagon2" /> 
+           <NODEREF id="hexagon3" /> 
+           <NODEREF id="hexagon4" /> 
+           <NODEREF id="hexagon5" /> 
+           <NODEREF id="hexagon6" /> 
+           <NODEREF id="hexagon7" /> 
+           <NODEREF id="hexagon8" /> 
+           <NODEREF id="hexagon9" />  
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="circle">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+           <NODEREF id="circle1" />
+           <NODEREF id="circle2" /> 
+           <NODEREF id="circle3" /> 
+           <NODEREF id="circle4" /> 
+           <NODEREF id="circle5" /> 
+           <NODEREF id="circle6" /> 
+           <NODEREF id="circle7" /> 
+           <NODEREF id="circle8" /> 
+           <NODEREF id="circle9" />  
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="triangle">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+           <NODEREF id="triangle1" />
+           <NODEREF id="triangle2" /> 
+           <NODEREF id="triangle3" /> 
+           <NODEREF id="triangle4" /> 
+           <NODEREF id="triangle5" /> 
+           <NODEREF id="triangle6" /> 
+           <NODEREF id="triangle7" /> 
+           <NODEREF id="triangle8" /> 
+           <NODEREF id="triangle9" />  
+        </DESCENDANTS>
+
+    </NODE>-->
 
   </NODES>
 
