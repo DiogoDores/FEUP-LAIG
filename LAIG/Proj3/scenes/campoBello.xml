@@ -78,11 +78,36 @@
     </MATERIAL>
 
     <!-- Square material -->
-    <MATERIAL id="squareMaterial">
+    <MATERIAL id="blueMaterial">
         <shininess value="100" />
-        <specular r="0.05" g="0.11" b="1.0" a="1" />
-        <diffuse r="0.05" g="0.11" b="1.0" a="1" />
-        <ambient r="0.05" g="0.11" b="1.0" a="1" />
+        <specular r="0.10" g="0.10" b="1.0" a="1" />
+        <diffuse r="0.10" g="0.10" b="1.0" a="1" />
+        <ambient r="0.10" g="0.10" b="1.0" a="1" />
+        <emission r="0.0" g="0.0" b="0.0" a="1" />
+    </MATERIAL>
+
+    <MATERIAL id="redMaterial">
+        <shininess value="100" />
+        <specular r="1.0" g="0.10" b="0.10" a="1" />
+        <diffuse r="1.0" g="0.10" b="0.10" a="1" />
+        <ambient r="1.0" g="0.10" b="0.10" a="1" />
+        <emission r="0.0" g="0.0" b="0.0" a="1" />
+    </MATERIAL>
+
+    <!-- Circle material -->
+    <MATERIAL id="yellowMaterial">
+        <shininess value="100" />
+        <specular r="0.5" g="0.5" b="0.0" a="1" />
+        <diffuse r="0.5" g="0.5" b="0.0" a="1" />
+        <ambient r="0.5" g="0.5" b="0.0" a="1" />
+        <emission r="0.0" g="0.0" b="0.0" a="1" />
+    </MATERIAL>
+
+    <MATERIAL id="greenMaterial">
+        <shininess value="100" />
+        <specular r="0" g="0.3" b="0" a="1" />
+        <diffuse r="0" g="0.3" b="0" a="1" />
+        <ambient r="0" g="0.3" b="0" a="1" />
         <emission r="0.0" g="0.0" b="0.0" a="1" />
     </MATERIAL>
 
@@ -255,36 +280,63 @@
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
+        <TRANSLATION x="0" y="0.35" z="0" /> 
+
         <DESCENDANTS>
-           <NODEREF id="square" />
-           <!--<NODEREF id="hexagon" /> 
+           <NODEREF id="square" /> 
            <NODEREF id="circle" /> 
-           <NODEREF id="triangle" /> -->
         </DESCENDANTS>
 
     </NODE>
 
     <NODE id="square">
-        <MATERIAL id="squareMaterial" />
+        <MATERIAL id="null" />
         <TEXTURE id="null" />
 
-        <TRANSLATION x="0" y="0.35" z="0" />
-
         <DESCENDANTS>
-           <NODEREF id="square1" />
-           <NODEREF id="square2" /> 
-           <NODEREF id="square3" /> 
-           <NODEREF id="square4" /> 
-           <NODEREF id="square5" /> 
-           <NODEREF id="square6" /> 
-           <NODEREF id="square7" /> 
-           <NODEREF id="square8" /> 
-           <NODEREF id="square9" />  
+           <NODEREF id="blue_square" />
+           <NODEREF id="red_square" />
         </DESCENDANTS>
 
     </NODE>
 
-    <NODE id="square1">
+    <NODE id="blue_square">
+        <MATERIAL id="blueMaterial" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+           <NODEREF id="square1_blue" />
+           <NODEREF id="square2_blue" /> 
+           <NODEREF id="square3_blue" /> 
+           <NODEREF id="square4_blue" /> 
+           <NODEREF id="square5_blue" /> 
+           <NODEREF id="square6_blue" /> 
+           <NODEREF id="square7_blue" /> 
+           <NODEREF id="square8_blue" /> 
+           <NODEREF id="square9_blue" /> 
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="red_square">
+        <MATERIAL id="redMaterial" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+           <NODEREF id="square1_red" />
+           <NODEREF id="square2_red" /> 
+           <NODEREF id="square3_red" /> 
+           <NODEREF id="square4_red" /> 
+           <NODEREF id="square5_red" /> 
+           <NODEREF id="square6_red" /> 
+           <NODEREF id="square7_red" /> 
+           <NODEREF id="square8_red" /> 
+           <NODEREF id="square9_red" />  
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="square1_blue">
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
@@ -297,7 +349,7 @@
     </NODE>
 
 
-    <NODE id="square2">
+    <NODE id="square2_blue">
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
@@ -309,7 +361,7 @@
 
     </NODE>
 
-    <NODE id="square3">
+    <NODE id="square3_blue">
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
@@ -321,7 +373,7 @@
 
     </NODE>
 
-    <NODE id="square4">
+    <NODE id="square4_blue">
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
@@ -333,7 +385,7 @@
 
     </NODE>
 
-    <NODE id="square5">
+    <NODE id="square5_blue">
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
@@ -345,7 +397,7 @@
 
     </NODE>
 
-    <NODE id="square6">
+    <NODE id="square6_blue">
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
@@ -357,7 +409,7 @@
 
     </NODE>
 
-    <NODE id="square7">
+    <NODE id="square7_blue">
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
@@ -369,7 +421,7 @@
 
     </NODE>
 
-    <NODE id="square8">
+    <NODE id="square8_blue">
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
@@ -381,11 +433,120 @@
 
     </NODE>
 
-    <NODE id="square9">
+    <NODE id="square9_blue">
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
         <TRANSLATION x="10" y="0" z="14.4" />
+
+        <DESCENDANTS>
+           <NODEREF id="cube" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="square1_red">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="23.35" y="0" z="19.5" />
+
+        <DESCENDANTS>
+            <NODEREF id="cube" />
+        </DESCENDANTS>
+
+    </NODE>
+
+
+    <NODE id="square2_red">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="23.35" y="0" z="17" />
+
+        <DESCENDANTS>
+           <NODEREF id="cube" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="square3_red">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="23.35" y="0" z="14.5" />
+
+        <DESCENDANTS>
+           <NODEREF id="cube" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="square4_red">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="23.35" y="0" z="12" />
+
+        <DESCENDANTS>
+           <NODEREF id="cube" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="square5_red">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="21.15" y="0" z="13.2" />
+
+        <DESCENDANTS>
+           <NODEREF id="cube" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="square6_red">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="21.15" y="0" z="15.6" />
+
+        <DESCENDANTS>
+           <NODEREF id="cube" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="square7_red">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="21.15" y="0" z="18" />
+
+        <DESCENDANTS>
+           <NODEREF id="cube" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="square8_red">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="18.85" y="0" z="17" />
+
+        <DESCENDANTS>
+           <NODEREF id="cube" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="square9_red">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="18.85" y="0" z="14.4" />
 
         <DESCENDANTS>
            <NODEREF id="cube" />
@@ -489,59 +650,280 @@
 
     </NODE>
 
-    <!--<NODE id="hexagon">
-        <MATERIAL id="null" />
-        <TEXTURE id="null" />
-
-        <DESCENDANTS>
-           <NODEREF id="hexagon1" />
-           <NODEREF id="hexagon2" /> 
-           <NODEREF id="hexagon3" /> 
-           <NODEREF id="hexagon4" /> 
-           <NODEREF id="hexagon5" /> 
-           <NODEREF id="hexagon6" /> 
-           <NODEREF id="hexagon7" /> 
-           <NODEREF id="hexagon8" /> 
-           <NODEREF id="hexagon9" />  
-        </DESCENDANTS>
-
-    </NODE>
-
     <NODE id="circle">
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
         <DESCENDANTS>
-           <NODEREF id="circle1" />
-           <NODEREF id="circle2" /> 
-           <NODEREF id="circle3" /> 
-           <NODEREF id="circle4" /> 
-           <NODEREF id="circle5" /> 
-           <NODEREF id="circle6" /> 
-           <NODEREF id="circle7" /> 
-           <NODEREF id="circle8" /> 
-           <NODEREF id="circle9" />  
+           <NODEREF id="yellow_circle" />
+           <NODEREF id="green_circle" />  
         </DESCENDANTS>
 
     </NODE>
 
-    <NODE id="triangle">
+    <NODE id="yellow_circle">
+        <MATERIAL id="yellowMaterial" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS> 
+           <NODEREF id="circle1_yellow" />
+           <NODEREF id="circle2_yellow" /> 
+           <NODEREF id="circle3_yellow" /> 
+           <NODEREF id="circle4_yellow" /> 
+           <NODEREF id="circle5_yellow" /> 
+           <NODEREF id="circle6_yellow" /> 
+           <NODEREF id="circle7_yellow" /> 
+           <NODEREF id="circle8_yellow" /> 
+           <NODEREF id="circle9_yellow" />  
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="green_circle">
+        <MATERIAL id="greenMaterial" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS> 
+           <NODEREF id="circle1_green" />
+           <NODEREF id="circle2_green" /> 
+           <NODEREF id="circle3_green" /> 
+           <NODEREF id="circle4_green" /> 
+           <NODEREF id="circle5_green" /> 
+           <NODEREF id="circle6_green" /> 
+           <NODEREF id="circle7_green" /> 
+           <NODEREF id="circle8_green" /> 
+           <NODEREF id="circle9_green" />  
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="circle1_yellow">
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
+        <TRANSLATION x="11.2" y="0" z="23.95" />
+
         <DESCENDANTS>
-           <NODEREF id="triangle1" />
-           <NODEREF id="triangle2" /> 
-           <NODEREF id="triangle3" /> 
-           <NODEREF id="triangle4" /> 
-           <NODEREF id="triangle5" /> 
-           <NODEREF id="triangle6" /> 
-           <NODEREF id="triangle7" /> 
-           <NODEREF id="triangle8" /> 
-           <NODEREF id="triangle9" />  
+           <NODEREF id="circleObject" />
         </DESCENDANTS>
 
-    </NODE>-->
+    </NODE>
+
+    <NODE id="circle2_yellow">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="13.7" y="0" z="23.95" />
+
+        <DESCENDANTS>
+           <NODEREF id="circleObject" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="circle3_yellow">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="16.2" y="0" z="23.95" />
+
+        <DESCENDANTS>
+           <NODEREF id="circleObject" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="circle4_yellow">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="18.7" y="0" z="23.95" />
+
+        <DESCENDANTS>
+           <NODEREF id="circleObject" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="circle5_yellow">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        
+        <TRANSLATION x="17.7" y="0" z="21.75" />
+
+        <DESCENDANTS>
+           <NODEREF id="circleObject" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="circle6_yellow">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="15.1" y="0" z="21.75" />
+
+        <DESCENDANTS>
+           <NODEREF id="circleObject" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="circle7_yellow">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="12.5" y="0" z="21.75" />
+
+        <DESCENDANTS>
+           <NODEREF id="circleObject" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="circle8_yellow">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="13.7" y="0" z="19.45" />
+
+        <DESCENDANTS>
+           <NODEREF id="circleObject" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="circle9_yellow">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="16.4" y="0" z="19.45" />
+
+        <DESCENDANTS>
+           <NODEREF id="circleObject" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="circle1_green">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="11.2" y="0" z="6.1" />
+
+        <DESCENDANTS>
+           <NODEREF id="circleObject" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="circle2_green">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="13.7" y="0" z="6.1" />
+
+        <DESCENDANTS>
+           <NODEREF id="circleObject" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="circle3_green">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="16.2" y="0" z="6.1" />
+
+        <DESCENDANTS>
+           <NODEREF id="circleObject" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="circle4_green">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        
+        <TRANSLATION x="18.7" y="0" z="6.1" />
+
+        <DESCENDANTS>
+           <NODEREF id="circleObject" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="circle5_green">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="17.7" y="0" z="8.3" />
+
+        <DESCENDANTS>
+           <NODEREF id="circleObject" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="circle6_green">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="15.1" y="0" z="8.3" />
+
+        <DESCENDANTS>
+           <NODEREF id="circleObject" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="circle7_green">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="12.5" y="0" z="8.3" />
+
+        <DESCENDANTS>
+           <NODEREF id="circleObject" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="circle8_green">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="13.7" y="0" z="10.6" />
+
+        <DESCENDANTS>
+           <NODEREF id="circleObject" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="circle9_green">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="16.4" y="0" z="10.6" />
+
+        <DESCENDANTS>
+           <NODEREF id="circleObject" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="circleObject">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <ROTATION axis="x" angle="90" />
+
+        <DESCENDANTS>
+           <LEAF type="cylinder" args="0.3 0.7 0.7 20 20 1 1" />
+        </DESCENDANTS>
+
+    </NODE>
 
   </NODES>
 
