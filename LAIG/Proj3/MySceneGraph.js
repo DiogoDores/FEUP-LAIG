@@ -44,6 +44,8 @@ function MySceneGraph(filename, scene) {
      */
 
     this.reader.open('scenes/' + filename, this);
+
+    this.pickId = 0;
 }
 
 /*
@@ -1529,6 +1531,7 @@ MySceneGraph.prototype.parseNodes = function (nodesNode) {
                         this.nodes[nodeID].addChild(curId);
                         sizeChildren++;
                     }
+
                 } else
                 if (descendants[j].nodeName == "LEAF") {
                     var type = this.reader.getItem(descendants[j], 'type', ['rectangle', 'cylinder', 'sphere', 'triangle', 'patch']);
@@ -1717,8 +1720,14 @@ MySceneGraph.prototype.displayNodes = function (id, matToApply, texToApply) {
     if (this.nodes[id].anim != null) {
       this.scene.multMatrix(this.nodes[id].anim.matrix);
     }
+
     if(selected)
       this.scene.setActiveShader(this.scene.testShaders[this.scene.selectedShaderIndex]);
+
+    if(id == "pieces"){
+        this.scene.registerForPick(this.pickId++, this.nodes[id].children);
+    }
+
     for (var i = 0; i < this.nodes[id].children.length; i++)
         this.displayNodes(this.nodes[id].children[i], matToApply, texToApply, selected);
 
