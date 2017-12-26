@@ -37,6 +37,8 @@ function MySceneGraph(filename, scene) {
     this.selectables = ["No selected node"];
     this.useSelectable = 0;
 
+    this.pickId = 0;
+
     /*
      * Read the contents of the xml file, and refer to this class for loading and error handlers.
      * After the file is read, the reader calls onXMLReady on this object.
@@ -44,8 +46,6 @@ function MySceneGraph(filename, scene) {
      */
 
     this.reader.open('scenes/' + filename, this);
-
-    this.pickId = 0;
 }
 
 /*
@@ -1698,7 +1698,6 @@ MySceneGraph.prototype.displayNodes = function (id, matToApply, texToApply) {
 
     var selected;
 
-
     if (this.materials[this.nodes[id].materialID] != null)
         matToApply = this.materials[this.nodes[id].materialID];
 
@@ -1725,7 +1724,10 @@ MySceneGraph.prototype.displayNodes = function (id, matToApply, texToApply) {
       this.scene.setActiveShader(this.scene.testShaders[this.scene.selectedShaderIndex]);
 
     if(id == "pieces"){
-        this.scene.registerForPick(this.pickId++, this.nodes[id].children);
+
+        for (var i = 0; i < this.nodes[id].children.length; i++) {
+            this.scene.registerForPick(1, this.nodes[id].children[i]);
+        }   
     }
 
     for (var i = 0; i < this.nodes[id].children.length; i++)
