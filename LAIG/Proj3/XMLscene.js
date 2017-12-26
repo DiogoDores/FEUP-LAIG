@@ -130,12 +130,13 @@ XMLscene.prototype.logPicking = function ()
                 var obj = this.pickResults[i][0];
                 if (obj)
                 {
-                    var customId = this.pickResults[i][1];              
+                    var customId = this.pickResults[i][1];
+                    makeRequest(); // TODO remover daqui, so para teste
                     console.log("Picked object: " + obj + ", with pick id " + customId);
                 }
             }
             this.pickResults.splice(0,this.pickResults.length);
-        }       
+        }
     }
 }
 
@@ -160,6 +161,32 @@ XMLscene.prototype.onGraphLoaded = function () {
     this.interface.addLightsGroup(this.graph.lights);
 
     this.interface.addShadersGroup(this.graph.selectables);
+
+}
+
+function getPrologRequest(requestString, onSuccess, onError, port)
+{
+  var requestPort = port || 8081
+  var request = new XMLHttpRequest();
+  request.open('GET', 'http://localhost:'+requestPort+'/'+requestString, true);
+
+  request.onload = onSuccess || function(data){console.log("Request successful. Reply: " + data.target.response);};
+  request.onerror = onError || function(){console.log("Error waiting for response");};
+
+  request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+  request.send();
+}
+
+function makeRequest()
+{
+  //TODO
+
+  // Make Request
+  getPrologRequest("handshake", handleReply);
+}
+
+//Handle the Reply
+function handleReply(data){
 
 }
 
@@ -194,7 +221,7 @@ XMLscene.prototype.display = function () {
 
     this.logPicking();
     this.clearPickRegistration();
-    
+
     // ---- BEGIN Background, camera and axis setup
 
     // Clear image and depth buffer everytime we update the scene
