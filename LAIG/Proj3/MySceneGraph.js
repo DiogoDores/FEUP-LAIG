@@ -1723,11 +1723,11 @@ MySceneGraph.prototype.displayNodes = function (id, matToApply, texToApply) {
     if(selected)
       this.scene.setActiveShader(this.scene.testShaders[this.scene.selectedShaderIndex]);
 
-    if(id == "pieces"){
-
-        for (var i = 0; i < this.nodes[id].children.length; i++) {
-            this.scene.registerForPick(1, this.nodes[id].children[i]);
-        }   
+    if(id == "circle1_yellow"){
+        /*for (var i = 0; i < this.nodes[id].children.length; i++) {
+            this.scene.registerForPick(i+1, this.nodes[id].children[i]);
+        }   */
+        this.scene.registerForPick(1, this.nodes[id]);
     }
 
     for (var i = 0; i < this.nodes[id].children.length; i++)
