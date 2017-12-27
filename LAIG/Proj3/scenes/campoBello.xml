@@ -148,7 +148,7 @@
 </ANIMATIONS>
 
 <!-- The nodes -->
-  <NODES>
+<NODES>
 
     <ROOT id="root" />
 
@@ -231,7 +231,7 @@
         <SCALE sx="20" sy="2.5" sz="1"/>
 
         <DESCENDANTS>
-           <LEAF  type="rectangle" args="0 0 1 1" /> 
+           <LEAF  type="rectangle" args="0 0 1 1" />
         </DESCENDANTS>
 
     </NODE>
@@ -244,7 +244,7 @@
         <SCALE sx="20" sy="2.5" sz="1"/>
 
         <DESCENDANTS>
-           <LEAF  type="rectangle" args="0 0 1 1" /> 
+           <LEAF  type="rectangle" args="0 0 1 1" />
         </DESCENDANTS>
 
     </NODE>
@@ -258,7 +258,7 @@
         <SCALE sx="20" sy="2.5" sz="1"/>
 
         <DESCENDANTS>
-           <LEAF  type="rectangle" args="0 0 1 1" /> 
+           <LEAF  type="rectangle" args="0 0 1 1" />
         </DESCENDANTS>
 
     </NODE>
@@ -271,7 +271,7 @@
         <SCALE sx="20" sy="2.5" sz="1"/>
 
         <DESCENDANTS>
-           <LEAF  type="rectangle" args="0 0 1 1" /> 
+           <LEAF  type="rectangle" args="0 0 1 1" />
         </DESCENDANTS>
 
     </NODE>
@@ -280,11 +280,11 @@
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
-        <TRANSLATION x="0" y="0.35" z="0" /> 
+        <TRANSLATION x="0" y="0.35" z="0" />
 
         <DESCENDANTS>
-           <NODEREF id="squares" /> 
-           <NODEREF id="circles" /> 
+           <NODEREF id="squares" />
+           <NODEREF id="circles" />
         </DESCENDANTS>
 
     </NODE>
@@ -306,14 +306,14 @@
 
         <DESCENDANTS>
            <NODEREF id="square1_blue" />
-           <NODEREF id="square2_blue" /> 
-           <NODEREF id="square3_blue" /> 
-           <NODEREF id="square4_blue" /> 
+           <NODEREF id="square2_blue" />
+           <NODEREF id="square3_blue" />
+           <NODEREF id="square4_blue" />
            <NODEREF id="square5_blue" />
-           <NODEREF id="square6_blue" /> 
-           <NODEREF id="square7_blue" /> 
-           <NODEREF id="square8_blue" /> 
-           <NODEREF id="square9_blue" /> 
+           <NODEREF id="square6_blue" />
+           <NODEREF id="square7_blue" />
+           <NODEREF id="square8_blue" />
+           <NODEREF id="square9_blue" />
         </DESCENDANTS>
 
     </NODE>
@@ -326,14 +326,14 @@
 
         <DESCENDANTS>
            <NODEREF id="square1_red" />
-           <NODEREF id="square2_red" /> 
-           <NODEREF id="square3_red" /> 
-           <NODEREF id="square4_red" /> 
-           <NODEREF id="square5_red" /> 
-           <NODEREF id="square6_red" /> 
-           <NODEREF id="square7_red" /> 
-           <NODEREF id="square8_red" /> 
-           <NODEREF id="square9_red" />  
+           <NODEREF id="square2_red" />
+           <NODEREF id="square3_red" />
+           <NODEREF id="square4_red" />
+           <NODEREF id="square5_red" />
+           <NODEREF id="square6_red" />
+           <NODEREF id="square7_red" />
+           <NODEREF id="square8_red" />
+           <NODEREF id="square9_red" />
         </DESCENDANTS>
 
     </NODE>
@@ -654,7 +654,7 @@
 
         <DESCENDANTS>
            <NODEREF id="yellow_circle" />
-           <NODEREF id="green_circle" />  
+           <NODEREF id="green_circle" />
         </DESCENDANTS>
 
     </NODE>
@@ -665,16 +665,16 @@
 
         <ROTATION axis="y" angle="90" />
 
-        <DESCENDANTS> 
+        <DESCENDANTS>
            <NODEREF id="circle1_yellow" />
-           <NODEREF id="circle2_yellow" /> 
-           <NODEREF id="circle3_yellow" /> 
-           <NODEREF id="circle4_yellow" /> 
-           <NODEREF id="circle5_yellow" /> 
-           <NODEREF id="circle6_yellow" /> 
-           <NODEREF id="circle7_yellow" /> 
-           <NODEREF id="circle8_yellow" /> 
-           <NODEREF id="circle9_yellow" />  
+           <NODEREF id="circle2_yellow" />
+           <NODEREF id="circle3_yellow" />
+           <NODEREF id="circle4_yellow" />
+           <NODEREF id="circle5_yellow" />
+           <NODEREF id="circle6_yellow" />
+           <NODEREF id="circle7_yellow" />
+           <NODEREF id="circle8_yellow" />
+           <NODEREF id="circle9_yellow" />
         </DESCENDANTS>
 
     </NODE>
@@ -685,16 +685,16 @@
 
         <ROTATION axis="y" angle="-90" />
 
-        <DESCENDANTS> 
+        <DESCENDANTS>
            <NODEREF id="circle1_green" />
-           <NODEREF id="circle2_green" /> 
-           <NODEREF id="circle3_green" /> 
-           <NODEREF id="circle4_green" /> 
-           <NODEREF id="circle5_green" /> 
-           <NODEREF id="circle6_green" /> 
-           <NODEREF id="circle7_green" /> 
-           <NODEREF id="circle8_green" /> 
-           <NODEREF id="circle9_green" />  
+           <NODEREF id="circle2_green" />
+           <NODEREF id="circle3_green" />
+           <NODEREF id="circle4_green" />
+           <NODEREF id="circle5_green" />
+           <NODEREF id="circle6_green" />
+           <NODEREF id="circle7_green" />
+           <NODEREF id="circle8_green" />
+           <NODEREF id="circle9_green" />
         </DESCENDANTS>
 
     </NODE>
@@ -846,7 +846,7 @@
     <NODE id="circle4_green">
         <MATERIAL id="null" />
         <TEXTURE id="null" />
-        
+
         <TRANSLATION x="-9.55" y="0" z="-3.45" />
 
         <DESCENDANTS>
@@ -918,7 +918,7 @@
     <NODE id="circleObject">
         <MATERIAL id="null" />
         <TEXTURE id="null" />
-        
+
         <TRANSLATION x="0.5" y="0" z="-0.5"/>
         <ROTATION axis="x" angle="90" />
 
