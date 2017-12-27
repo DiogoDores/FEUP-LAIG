@@ -19,6 +19,8 @@ function XMLscene(interface) {
     this.lastime = 0;
     this.delta = 0;
     this.timeFactor = 0;
+
+    this.objects=[];
 }
 
 XMLscene.prototype = Object.create(CGFscene.prototype);
@@ -39,6 +41,10 @@ XMLscene.prototype.init = function (application) {
     this.gl.enable(this.gl.DEPTH_TEST);
     this.gl.enable(this.gl.CULL_FACE);
     this.gl.depthFunc(this.gl.LEQUAL);
+
+    for (var i = 0; i < 41; i++) {
+       this.objects.push(new CGFplane(this));
+    }
 
     this.axis = new CGFaxis(this);
     this.setUpdatePeriod(30);
@@ -257,6 +263,44 @@ XMLscene.prototype.display = function () {
                 this.lights[i].update();
                 i++;
             }
+        }
+
+        var counter = 1;
+        var lastX = -9.55;
+        var lastZ = 7.15;
+        var angle = 0;
+
+        for (var i = 0; i < this.objects.length - 1; i++) {
+
+            if(counter == 5){
+                lastZ = 3.15;
+                lastX += 2.2;
+            } else if (counter == 8) {
+                lastZ = 1.8;
+                lastX += 2.2;
+            } else if (counter == 10){
+                lastZ = 0.45;
+                lastX += 2.2;
+            }
+
+            this.pushMatrix()
+            if(counter <= 10){
+                lastZ -= 2.65;
+                this.rotate(0,1,0,angle*Math.PI/180);
+
+                this.translate(lastX, 0.5, lastZ);
+            }
+
+            if(counter == 10){
+                counter = 0;
+                angle -= 90;
+            }
+
+            this.registerForPick(i+1, this.objects[i]);
+
+            this.objects[i].display();
+            this.popMatrix();
+            counter++;
         }
 
         // Displays the scene.

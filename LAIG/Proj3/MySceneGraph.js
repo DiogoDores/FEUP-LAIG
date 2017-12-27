@@ -37,8 +37,6 @@ function MySceneGraph(filename, scene) {
     this.selectables = ["No selected node"];
     this.useSelectable = 0;
 
-    this.pickId = 0;
-
     /*
      * Read the contents of the xml file, and refer to this class for loading and error handlers.
      * After the file is read, the reader calls onXMLReady on this object.
@@ -1722,13 +1720,6 @@ MySceneGraph.prototype.displayNodes = function (id, matToApply, texToApply) {
 
     if(selected)
       this.scene.setActiveShader(this.scene.testShaders[this.scene.selectedShaderIndex]);
-
-    if(id == "circle1_yellow"){
-        /*for (var i = 0; i < this.nodes[id].children.length; i++) {
-            this.scene.registerForPick(i+1, this.nodes[id].children[i]);
-        }   */
-        this.scene.registerForPick(1, this.nodes[id]);
-    }
 
     for (var i = 0; i < this.nodes[id].children.length; i++)
         this.displayNodes(this.nodes[id].children[i], matToApply, texToApply, selected);
