@@ -148,7 +148,7 @@
 </ANIMATIONS>
 
 <!-- The nodes -->
-  <NODES>
+<NODES>
 
     <ROOT id="root" />
 
@@ -161,6 +161,7 @@
 
           <NODEREF id="board" />
           <NODEREF id="pieces" />
+          <NODEREF id="piecesSpots"/>
 
         </DESCENDANTS>
 
@@ -177,7 +178,517 @@
             <NODEREF id="topFace"/>
             <NODEREF id="bottomFace"/>
             <NODEREF id="sideFace"/>
-		</DESCENDANTS>
+		    </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="piecesSpots">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="0" y="0.01" z="0" />
+
+        <DESCENDANTS>
+            <NODEREF id="psMid"/>
+            <NODEREF id="piecesSpotsRed"/>
+            <NODEREF id="piecesSpotsBlue"/>
+            <NODEREF id="piecesSpotsYellow"/>
+            <NODEREF id="piecesSpotsGreen"/>
+        </DESCENDANTS>
+
+    </NODE>
+    <NODE id="psMid">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+            <NODEREF id="pieceSpot"/>
+        </DESCENDANTS>
+
+    </NODE>
+    <NODE id="piecesSpotsRed">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+            <NODEREF id="psR0"/>
+            <NODEREF id="psR1"/>
+            <NODEREF id="psR2"/>
+            <NODEREF id="psR3"/>
+            <NODEREF id="psR4"/>
+            <NODEREF id="psR5"/>
+            <NODEREF id="psR6"/>
+            <NODEREF id="psR7"/>
+            <NODEREF id="psR8"/>
+            <NODEREF id="psR9"/>
+        </DESCENDANTS>
+
+    </NODE>
+    <NODE id="piecesSpotsBlue">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+            <NODEREF id="psB0"/>
+            <NODEREF id="psB1"/>
+            <NODEREF id="psB2"/>
+            <NODEREF id="psB3"/>
+            <NODEREF id="psB4"/>
+            <NODEREF id="psB5"/>
+            <NODEREF id="psB6"/>
+            <NODEREF id="psB7"/>
+            <NODEREF id="psB8"/>
+            <NODEREF id="psB9"/>
+        </DESCENDANTS>
+
+    </NODE>
+    <NODE id="piecesSpotsYellow">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+            <NODEREF id="psY0"/>
+            <NODEREF id="psY1"/>
+            <NODEREF id="psY2"/>
+            <NODEREF id="psY3"/>
+            <NODEREF id="psY4"/>
+            <NODEREF id="psY5"/>
+            <NODEREF id="psY6"/>
+            <NODEREF id="psY7"/>
+            <NODEREF id="psY8"/>
+            <NODEREF id="psY9"/>
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="piecesSpotsGreen">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+            <NODEREF id="psG0"/>
+            <NODEREF id="psG1"/>
+            <NODEREF id="psG2"/>
+            <NODEREF id="psG3"/>
+            <NODEREF id="psG4"/>
+            <NODEREF id="psG5"/>
+            <NODEREF id="psG6"/>
+            <NODEREF id="psG7"/>
+            <NODEREF id="psG8"/>
+            <NODEREF id="psG9"/>
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="psR0">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+            <NODEREF id="pieceSpot"/>
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="psR1">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+            <NODEREF id="pieceSpot"/>
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="psR2">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+            <NODEREF id="pieceSpot"/>
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="psR3">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+            <NODEREF id="pieceSpot"/>
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="psR4">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+            <NODEREF id="pieceSpot"/>
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="psR5">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+            <NODEREF id="pieceSpot"/>
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="psR6">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+            <NODEREF id="pieceSpot"/>
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="psR7">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+            <NODEREF id="pieceSpot"/>
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="psR8">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+            <NODEREF id="pieceSpot"/>
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="psR9">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+            <NODEREF id="pieceSpot"/>
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="psB0">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+            <NODEREF id="pieceSpot"/>
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="psB1">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+            <NODEREF id="pieceSpot"/>
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="psB2">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+            <NODEREF id="pieceSpot"/>
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="psB3">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+            <NODEREF id="pieceSpot"/>
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="psB4">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+            <NODEREF id="pieceSpot"/>
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="psB5">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+            <NODEREF id="pieceSpot"/>
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="psB6">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+            <NODEREF id="pieceSpot"/>
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="psB7">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+            <NODEREF id="pieceSpot"/>
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="psB8">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+            <NODEREF id="pieceSpot"/>
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="psB9">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+            <NODEREF id="pieceSpot"/>
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="psY0">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+            <NODEREF id="pieceSpot"/>
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="psY1">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+            <NODEREF id="pieceSpot"/>
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="psY2">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+            <NODEREF id="pieceSpot"/>
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="psY3">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+            <NODEREF id="pieceSpot"/>
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="psY4">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+            <NODEREF id="pieceSpot"/>
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="psY5">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+            <NODEREF id="pieceSpot"/>
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="psY6">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+            <NODEREF id="pieceSpot"/>
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="psY7">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+            <NODEREF id="pieceSpot"/>
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="psY8">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+            <NODEREF id="pieceSpot"/>
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="psY9">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+            <NODEREF id="pieceSpot"/>
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="psG0">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+            <NODEREF id="pieceSpot"/>
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="psG1">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+            <NODEREF id="pieceSpot"/>
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="psG2">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+            <NODEREF id="pieceSpot"/>
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="psG3">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+            <NODEREF id="pieceSpot"/>
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="psG4">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+            <NODEREF id="pieceSpot"/>
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="psG5">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+            <NODEREF id="pieceSpot"/>
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="psG6">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+            <NODEREF id="pieceSpot"/>
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="psG7">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+            <NODEREF id="pieceSpot"/>
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="psG8">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+            <NODEREF id="pieceSpot"/>
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="psG9">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+            <NODEREF id="pieceSpot"/>
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="pieceSpot">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <ROTATION axis="x" angle="90" />
+
+        <DESCENDANTS>
+            <LEAF type="cylinder" args="0.01 0.3 0.3 20 2 1 1" />
+        </DESCENDANTS>
 
     </NODE>
 
@@ -231,7 +742,7 @@
         <SCALE sx="20" sy="2.5" sz="1"/>
 
         <DESCENDANTS>
-           <LEAF  type="rectangle" args="0 0 1 1" /> 
+           <LEAF  type="rectangle" args="0 0 1 1" />
         </DESCENDANTS>
 
     </NODE>
@@ -244,7 +755,7 @@
         <SCALE sx="20" sy="2.5" sz="1"/>
 
         <DESCENDANTS>
-           <LEAF  type="rectangle" args="0 0 1 1" /> 
+           <LEAF  type="rectangle" args="0 0 1 1" />
         </DESCENDANTS>
 
     </NODE>
@@ -258,7 +769,7 @@
         <SCALE sx="20" sy="2.5" sz="1"/>
 
         <DESCENDANTS>
-           <LEAF  type="rectangle" args="0 0 1 1" /> 
+           <LEAF  type="rectangle" args="0 0 1 1" />
         </DESCENDANTS>
 
     </NODE>
@@ -271,7 +782,7 @@
         <SCALE sx="20" sy="2.5" sz="1"/>
 
         <DESCENDANTS>
-           <LEAF  type="rectangle" args="0 0 1 1" /> 
+           <LEAF  type="rectangle" args="0 0 1 1" />
         </DESCENDANTS>
 
     </NODE>
@@ -280,11 +791,11 @@
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
-        <TRANSLATION x="0" y="0.35" z="0" /> 
+        <TRANSLATION x="0" y="0.35" z="0" />
 
         <DESCENDANTS>
-           <NODEREF id="squares" /> 
-           <NODEREF id="circles" /> 
+           <NODEREF id="squares" />
+           <NODEREF id="circles" />
         </DESCENDANTS>
 
     </NODE>
@@ -306,14 +817,14 @@
 
         <DESCENDANTS>
            <NODEREF id="square1_blue" />
-           <NODEREF id="square2_blue" /> 
-           <NODEREF id="square3_blue" /> 
-           <NODEREF id="square4_blue" /> 
+           <NODEREF id="square2_blue" />
+           <NODEREF id="square3_blue" />
+           <NODEREF id="square4_blue" />
            <NODEREF id="square5_blue" />
-           <NODEREF id="square6_blue" /> 
-           <NODEREF id="square7_blue" /> 
-           <NODEREF id="square8_blue" /> 
-           <NODEREF id="square9_blue" /> 
+           <NODEREF id="square6_blue" />
+           <NODEREF id="square7_blue" />
+           <NODEREF id="square8_blue" />
+           <NODEREF id="square9_blue" />
         </DESCENDANTS>
 
     </NODE>
@@ -326,14 +837,14 @@
 
         <DESCENDANTS>
            <NODEREF id="square1_red" />
-           <NODEREF id="square2_red" /> 
-           <NODEREF id="square3_red" /> 
-           <NODEREF id="square4_red" /> 
-           <NODEREF id="square5_red" /> 
-           <NODEREF id="square6_red" /> 
-           <NODEREF id="square7_red" /> 
-           <NODEREF id="square8_red" /> 
-           <NODEREF id="square9_red" />  
+           <NODEREF id="square2_red" />
+           <NODEREF id="square3_red" />
+           <NODEREF id="square4_red" />
+           <NODEREF id="square5_red" />
+           <NODEREF id="square6_red" />
+           <NODEREF id="square7_red" />
+           <NODEREF id="square8_red" />
+           <NODEREF id="square9_red" />
         </DESCENDANTS>
 
     </NODE>
@@ -654,7 +1165,7 @@
 
         <DESCENDANTS>
            <NODEREF id="yellow_circle" />
-           <NODEREF id="green_circle" />  
+           <NODEREF id="green_circle" />
         </DESCENDANTS>
 
     </NODE>
@@ -665,16 +1176,16 @@
 
         <ROTATION axis="y" angle="90" />
 
-        <DESCENDANTS> 
+        <DESCENDANTS>
            <NODEREF id="circle1_yellow" />
-           <NODEREF id="circle2_yellow" /> 
-           <NODEREF id="circle3_yellow" /> 
-           <NODEREF id="circle4_yellow" /> 
-           <NODEREF id="circle5_yellow" /> 
-           <NODEREF id="circle6_yellow" /> 
-           <NODEREF id="circle7_yellow" /> 
-           <NODEREF id="circle8_yellow" /> 
-           <NODEREF id="circle9_yellow" />  
+           <NODEREF id="circle2_yellow" />
+           <NODEREF id="circle3_yellow" />
+           <NODEREF id="circle4_yellow" />
+           <NODEREF id="circle5_yellow" />
+           <NODEREF id="circle6_yellow" />
+           <NODEREF id="circle7_yellow" />
+           <NODEREF id="circle8_yellow" />
+           <NODEREF id="circle9_yellow" />
         </DESCENDANTS>
 
     </NODE>
@@ -685,16 +1196,16 @@
 
         <ROTATION axis="y" angle="-90" />
 
-        <DESCENDANTS> 
+        <DESCENDANTS>
            <NODEREF id="circle1_green" />
-           <NODEREF id="circle2_green" /> 
-           <NODEREF id="circle3_green" /> 
-           <NODEREF id="circle4_green" /> 
-           <NODEREF id="circle5_green" /> 
-           <NODEREF id="circle6_green" /> 
-           <NODEREF id="circle7_green" /> 
-           <NODEREF id="circle8_green" /> 
-           <NODEREF id="circle9_green" />  
+           <NODEREF id="circle2_green" />
+           <NODEREF id="circle3_green" />
+           <NODEREF id="circle4_green" />
+           <NODEREF id="circle5_green" />
+           <NODEREF id="circle6_green" />
+           <NODEREF id="circle7_green" />
+           <NODEREF id="circle8_green" />
+           <NODEREF id="circle9_green" />
         </DESCENDANTS>
 
     </NODE>
@@ -750,7 +1261,7 @@
     <NODE id="circle5_yellow">
         <MATERIAL id="null" />
         <TEXTURE id="null" />
-        
+
         <TRANSLATION x="-7.35" y="0" z="-2.15" />
 
         <DESCENDANTS>
@@ -846,7 +1357,7 @@
     <NODE id="circle4_green">
         <MATERIAL id="null" />
         <TEXTURE id="null" />
-        
+
         <TRANSLATION x="-9.55" y="0" z="-3.45" />
 
         <DESCENDANTS>
@@ -918,7 +1429,7 @@
     <NODE id="circleObject">
         <MATERIAL id="null" />
         <TEXTURE id="null" />
-        
+
         <TRANSLATION x="0.5" y="0" z="-0.5"/>
         <ROTATION axis="x" angle="90" />
 
