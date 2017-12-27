@@ -3,30 +3,30 @@
 :- use_module(library(lists)).
 :- include('Board.pl').
 :- include('CLI.pl').
-                                                                     
+
 % Get blue player points
 bluePlayerPoints([],0).
-bluePlayerPoints([H|T],P) :- 
+bluePlayerPoints([H|T],P) :-
         bluePlayerPoints(T,P1), blueArea(B), member(H,B), P is P1 + 3.
-bluePlayerPoints([H|T],P) :- 
+bluePlayerPoints([H|T],P) :-
         bluePlayerPoints(T,P1),
         (yellowArea(Y), member(H,Y); H==mid),
         P is P1 + 1.
 
 % Get yellow player points
 yellowPlayerPoints([],0).
-yellowPlayerPoints([H|T],P) :- 
+yellowPlayerPoints([H|T],P) :-
         yellowPlayerPoints(T,P1), yellowArea(Y), member(H,Y), P is P1 + 3.
-yellowPlayerPoints([H|T],P) :- 
+yellowPlayerPoints([H|T],P) :-
         yellowPlayerPoints(T,P1),
         (H==mid; blueArea(B), member(H,B)),
         P is P1 + 1.
 
 % Calculate Points for a given player and board
-points(b,BlueMoversPos,Points) :- 
+points(b,BlueMoversPos,Points) :-
         bluePlayerPoints(BlueMoversPos,Points),
         write('Blue scored '), write(Points), write(' points.'),nl.
-points(y,YellowMoversPos,Points) :- 
+points(y,YellowMoversPos,Points) :-
         yellowPlayerPoints(YellowMoversPos,Points),
         write('Yellow scored '), write(Points), write(' points.'),nl.
 
@@ -48,10 +48,10 @@ isValid(y,Yi,Bi,InitialPos,JumpPos,FinalPos) :-
         validJump2(InitialPos,FinalPos,JumpPos),
         isEmpty(FinalPos,Yi,Bi),
         isNotEmpty(JumpPos, Yi,Bi).
-        
-        
+
+
 isNotEmpty(X,Yi,Bi):- boardMembers(L),!, member(X,L), (member(X,Yi) ; member(X,Bi)).
-           
+
 isEmpty(X,Yi,Bi):- boardMembers(L), !,member(X,L),!, \+ member(X,Yi), \+ member(X,Bi).
 getEmptyElement(Y,B,[BoardHead|_],Empty):- \+member(BoardHead,Y), \+member(BoardHead,B), Empty = BoardHead.
 getEmptyElement(Y,B,[_|BoardTail],Empty):- getEmptyElement(Y,B,BoardTail,Empty).
@@ -75,7 +75,7 @@ move(Yi,Bi,InitialPos,JumpPos,FinalPos,Yo,Bo,_) :-
         delete(Yo3,JumpPos,Yo),
         append([],Bi,Bo).
 
-%(Bot) Yellow jumps blue mover   
+%(Bot) Yellow jumps blue mover
 move(Yi,Bi,InitialPos,JumpPos,FinalPos,Yo,Bo,bot) :-
         member(InitialPos,Yi),
         delete(Yi,InitialPos,Yo2),
@@ -84,9 +84,9 @@ move(Yi,Bi,InitialPos,JumpPos,FinalPos,Yo,Bo,bot) :-
         getFirstElement(Yo3, MoverToRemove),
         delete(Yo3,MoverToRemove,Yo),
         write('Removing '), write(MoverToRemove),nl,
-        append([],Bi,Bo).     
+        append([],Bi,Bo).
 
-% Yellow jumps blue mover and selects valid mover to remove.     
+% Yellow jumps blue mover and selects valid mover to remove.
 move(Yi,Bi,InitialPos,JumpPos,FinalPos,Yo,Bo,human) :-
         member(InitialPos,Yi),
         delete(Yi,InitialPos,Yo2),
@@ -96,7 +96,7 @@ move(Yi,Bi,InitialPos,JumpPos,FinalPos,Yo,Bo,human) :-
         delete(Yo3,MoverToRemove,Yo),
         append([],Bi,Bo).
 
-% Blue jumps blue mover   
+% Blue jumps blue mover
 move(Yi,Bi,InitialPos,JumpPos,FinalPos,Yo,Bo,_) :-
         member(InitialPos,Bi),
         delete(Bi,InitialPos,Bo2),
@@ -105,7 +105,7 @@ move(Yi,Bi,InitialPos,JumpPos,FinalPos,Yo,Bo,_) :-
         delete(Bo3,JumpPos,Bo),
         append([],Yi,Yo).
 
-%(Bot) Blue jumps yellow mover   
+%(Bot) Blue jumps yellow mover
 move(Yi,Bi,InitialPos,JumpPos,FinalPos,Yo,Bo,bot) :-
         member(InitialPos,Bi),
         delete(Bi,InitialPos,Bo2),
@@ -116,7 +116,7 @@ move(Yi,Bi,InitialPos,JumpPos,FinalPos,Yo,Bo,bot) :-
         write('Removing '), write(MoverToRemove),nl,
         append([],Yi,Yo).
 
-% Blue jumps yellow mover and selects valid mover to remove.     
+% Blue jumps yellow mover and selects valid mover to remove.
 move(Yi,Bi,InitialPos,JumpPos,FinalPos,Yo,Bo,human) :-
         member(InitialPos,Bi),
         delete(Bi,InitialPos,Bo2),
@@ -152,14 +152,14 @@ isGameOver(b,YellowMovers,BlueMovers):-
 
 list_empty([]).
 list_empty([_|_]):- fail.
-        
+
 
 
 getAllPossibleMovesAux(Player, [Start|Tail],Yi, Bi, CalcMoves, Moves) :-
         isValid(Player,Yi,Bi,Start, Mid, Final),!,
         getAllPossibleMovesAux(Player,Tail,Yi,Bi,[[Start,Final,Mid]|CalcMoves], Moves).
-        
-/* Used when previous condition fails*/        
+
+/* Used when previous condition fails*/
 getAllPossibleMovesAux(Player,[_|Tail],Yi,Bi,CalcMoves,Moves):- getAllPossibleMovesAux(Player,Tail,Yi,Bi,CalcMoves,Moves).
 
 getAllPossibleMovesAux(_,[],_,_,Moves,Moves).
@@ -214,7 +214,7 @@ makeConsecutivePlay(Player,Yi,Bi,FirstInitial,PrevFinal,Yo,Bo,human,Count):-
         readConsecutiveMove(Player,Yi,Bi,FirstInitial,PrevFinal,NextJump,NextFinal),
         move(Yi,Bi,PrevFinal,NextJump,NextFinal,Yo2,Bo2,human),!,
         makeConsecutivePlay(Player,Yo2,Bo2,FirstInitial,NextFinal,Yo,Bo,human,Count + 1).
-        
+
 
 makeConsecutivePlay(_,Yi,Bi,_,_,Yi,Bi,_,_):-
         write('No more moves available'),nl.
@@ -254,39 +254,39 @@ gameBot(Player,Yi,Bi,Yo,Bo,YDif,BDif):-
         getPersonalMovers(Player,Yi,Bi,MyMovers),
         getAllPossibleMoves(Player,MyMovers,Yi,Bi,[[Start,Final,Mid] | _]),
         write('Moving '), write(Start), write(' To '), write(Final),nl,
-        move(Yi,Bi,Start,Mid,Final,Yo1,Bo1,bot),
-        makeConsecutivePlay(Player,Yo1,Bo1,Start,Final,Yo,Bo,bot,1).
+        move(Yi,Bi,Start,Mid,Final,Yo1,Bo1,bot).%,
+        %makeConsecutivePlay(Player,Yo1,Bo1,Start,Final,Yo,Bo,bot,1).
 
 /* PC-PC */
 game(Yi,Bi,Player,3,YDific,BDific):-
         \+ isGameOver(Player,Yi,Bi),
-        gameBot(Player,Yi,Bi,Yo,Bo,YDific,BDific),
-        switchPlayer(Player,NextPlayer),
-        game(Yo,Bo,NextPlayer,3,YDific,BDific).
+        gameBot(Player,Yi,Bi,Yo,Bo,YDific,BDific).,
+        %switchPlayer(Player,NextPlayer),
+        %game(Yo,Bo,NextPlayer,3,YDific,BDific).
 
 /* Human-Pc*/
 game(Yi,Bi,y,2,_,BDific):-
         \+ isGameOver(y,Yi,Bi),
-        gameHuman(y,Yi,Bi,Yo,Bo),!,
-        game(Yo,Bo,b,2,_,BDific).
+        gameHuman(y,Yi,Bi,Yo,Bo).%,!,
+        %game(Yo,Bo,b,2,_,BDific).
 game(Yi,Bi,b,2,_,BDific):-
         \+ isGameOver(b,Yi,Bi),
-        gameBot(b,Yi,Bi,Yo,Bo,_,BDific),!,
-        game(Yo,Bo,y,2,_,BDific).
+        gameBot(b,Yi,Bi,Yo,Bo,_,BDific). %,!,
+        %game(Yo,Bo,y,2,_,BDific).
 
 /* Player Vs Player With Possible initial moves*/
 game(Yi,Bi,Player,1,_,_) :-
         \+ isGameOver(Player,Yi,Bi),
-        gameHuman(Player,Yi,Bi,Yo,Bo),
-        switchPlayer(Player,NextPlayer),
-        game(Yo,Bo,NextPlayer,1,_,_).
-        
+        gameHuman(Player,Yi,Bi,Yo,Bo). %,
+        %switchPlayer(Player,NextPlayer),
+        %game(Yo,Bo,NextPlayer,1,_,_).
+
 game(Yi,Bi,_,_,_,_):-
         displayBoard(Yi,Bi),
         write('Game Over'),nl,nl,
         winner(Yi,Bi).
-        
-        
+
+
 
 validStartOption(MODE) :- integer(MODE), MODE > 0, MODE < 4.
 validDificOption(MODE) :- integer(MODE), MODE > 0, MODE < 3.
@@ -301,14 +301,14 @@ readValidPlay(InitialPos,JumpPos,FinalPos,Yi,Bi,Player):-
                 isValid(Player, Yi,Bi,InitialPos,JumpPos,FinalPos),
                 !.
 
-chooseDificulty(b, Dificulty) :- nl, put_code(201), 
+chooseDificulty(b, Dificulty) :- nl, put_code(201),
         put_code(205),put_code(205),
         write('BOT Blue Dificulty'),
         put_code(205),put_code(205),put_code(205),put_code(205),
         put_code(187),nl,
         put_code(186), write('  1. Easy               '), put_code(186),nl,
         put_code(186), write('  2. Medium             '), put_code(186),nl,
-        put_code(200), 
+        put_code(200),
         put_code(205),put_code(205), put_code(205),put_code(205),put_code(205),put_code(205),put_code(205),put_code(205),put_code(205),
         put_code(205),put_code(205),put_code(205), put_code(205), put_code(205), put_code(205),put_code(205),put_code(205),
         put_code(205),put_code(205),put_code(205),put_code(205),put_code(205),put_code(205),put_code(205),
@@ -319,14 +319,14 @@ chooseDificulty(b, Dificulty) :- nl, put_code(201),
                 validDificOption(Dificulty),
         !.
 
-chooseDificulty(y, Dificulty) :- nl, put_code(201), 
+chooseDificulty(y, Dificulty) :- nl, put_code(201),
         put_code(205),put_code(205),
         write('BOT Yellow Dificulty'),
         put_code(205),put_code(205),
         put_code(187),nl,
         put_code(186), write('  1. Easy               '), put_code(186),nl,
         put_code(186), write('  2. Medium             '), put_code(186),nl,
-        put_code(200), 
+        put_code(200),
         put_code(205),put_code(205), put_code(205),put_code(205),put_code(205),put_code(205),put_code(205),put_code(205),put_code(205),
         put_code(205),put_code(205),put_code(205), put_code(205), put_code(205), put_code(205),put_code(205),put_code(205),
         put_code(205),put_code(205),put_code(205),put_code(205),put_code(205),put_code(205),put_code(205),
@@ -337,7 +337,7 @@ chooseDificulty(y, Dificulty) :- nl, put_code(201),
                 validDificOption(Dificulty),
         !.
 
-start :- nl, put_code(201), 
+start :- nl, put_code(201),
         put_code(205), put_code(205),put_code(205),put_code(205), put_code(205),put_code(205),put_code(205),put_code(205),put_code(205),
         write('MENU'),
         put_code(205),put_code(205),put_code(205),put_code(205),put_code(205),put_code(205),put_code(205),put_code(205),put_code(205),
@@ -345,7 +345,7 @@ start :- nl, put_code(201),
         put_code(186), write('  1.Player vs Player  '), put_code(186),nl,
         put_code(186), write('  2.Player vs PC      '), put_code(186),nl,
         put_code(186), write('  3.PC vs PC          '), put_code(186),nl,
-        put_code(200), 
+        put_code(200),
         put_code(205), put_code(205),put_code(205),put_code(205), put_code(205),put_code(205),put_code(205),put_code(205),put_code(205),
         put_code(205), put_code(205), put_code(205), put_code(205),
         put_code(205),put_code(205),put_code(205),put_code(205),put_code(205),put_code(205),put_code(205),put_code(205),put_code(205),
