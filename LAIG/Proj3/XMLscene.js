@@ -266,34 +266,37 @@ XMLscene.prototype.display = function () {
         }
 
         var counter = 1;
-        var lastX = -9.55;
-        var lastZ = 7.15;
+        var lastX = -9.05;
+        var lastZ = 6.65;
         var angle = 0;
 
         for (var i = 0; i < this.objects.length - 1; i++) {
 
             if(counter == 5){
-                lastZ = 3.15;
+                lastZ = 5.3;
                 lastX += 2.2;
             } else if (counter == 8) {
-                lastZ = 1.8;
+                lastZ = 3.95;
                 lastX += 2.2;
             } else if (counter == 10){
-                lastZ = 0.45;
+                lastZ = 2.6;
                 lastX += 2.2;
             }
 
             this.pushMatrix()
             if(counter <= 10){
                 lastZ -= 2.65;
-                this.rotate(0,1,0,angle*Math.PI/180);
 
+                this.rotate(angle*Math.PI/180, 0,1,0);
                 this.translate(lastX, 0.5, lastZ);
+
             }
 
             if(counter == 10){
                 counter = 0;
                 angle -= 90;
+                lastX = -9.05;
+                lastZ = 6.65;
             }
 
             this.registerForPick(i+1, this.objects[i]);
