@@ -100,6 +100,8 @@ XMLscene.prototype.initShaders = function () {
 		new CGFshader(this.gl, "scenes/shaders/texture3.vert", "scenes/shaders/convolution.frag")
 	];
 
+    this.transparent = new CGFshader(this.gl, "scenes/shaders/texture3.vert", "scenes/shaders/transparent.frag");
+
     // texture will have to be bound to unit 1 later, when using the shader, with "this.texture2.bind(1);"
     this.testShaders[5].setUniformsValues({
         uSampler2: 1
@@ -270,6 +272,14 @@ XMLscene.prototype.display = function () {
         var lastZ = 6.65;
         var angle = 0;
 
+        this.setActiveShader(this.transparent);
+
+        this.pushMatrix();
+        this.translate(0,0.4,0);
+        this.registerForPick(this.objects.length, this.objects[this.objects.length-1]);
+        this.objects[this.objects.length-1].display();
+        this.popMatrix();
+
         for (var i = 0; i < this.objects.length - 1; i++) {
 
             if(counter == 5){
@@ -288,8 +298,7 @@ XMLscene.prototype.display = function () {
                 lastZ -= 2.65;
 
                 this.rotate(angle*Math.PI/180, 0,1,0);
-                this.translate(lastX, 0.5, lastZ);
-
+                this.translate(lastX, 0.4, lastZ);
             }
 
             if(counter == 10){
@@ -305,6 +314,11 @@ XMLscene.prototype.display = function () {
             this.popMatrix();
             counter++;
         }
+
+    this.setActiveShader(this.defaultShader);
+
+    this.clearPickRegistration();
+
 
         // Displays the scene.
         this.graph.displayScene();
