@@ -108,11 +108,14 @@ parse_input(handshake, handshake).
 % Reply: 0 - initial; 1 - moves ; 2 - bad move ; 3 - asks for mover to remove ; 4 - does move with removing mover
 parse_input(0, 0-Y-B) :- initialBoard(Y,B).
 % Mode: 1 - H/H ; 2 - H/PC ; 3 - PC/PC
-parse_input(1-Yi-Bi-Player-Mode-PosI-PosF,1-Yo-Bo-PosI-PosJumped-PosF):- game(Yi,Bi,Player,Mode,_,_,PosI,PosJumped,PosF, Yo, Bo).
-parse_input(1-Yi-Bi-Player-Mode-PosI-PosF,2):- \+game(Yi,Bi,Player,Mode,_,_,PosI,_,PosF,_,_).
+parse_input(1-Yi-Bi-Player-Mode-PosI-PosF,1-Yo-Bo-PosI-PosJumped-PosF):-
+		isValid(Player, Yi,Bi,PosI,PosJumped,PosF),
+		game(Yi,Bi,Player,Mode,_,_,PosI,PosJumped,PosF, Yo, Bo).
+parse_input(1-Yi-Bi-Player-_-PosI-PosF,2):-
+		\+isValid(Player, Yi,Bi,PosI,_,PosF).
 
-parse_input(Initial-Final, 1-handshake-Final) :- write(Initial), nl, write(Final), nl.
-parse_input(test(C,N), Res) :- test(C,Res,N).
+%parse_input(Initial-Final, 1-handshake-Final) :- write(Initial), nl, write(Final), nl.
+%parse_input(test(C,N), Res) :- test(C,Res,N).
 parse_input(quit, goodbye).
 
 test(_,[],N) :- N =< 0.

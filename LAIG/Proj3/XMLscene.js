@@ -200,12 +200,12 @@ XMLscene.prototype.getPrologRequest = function(requestString, onSuccess, onError
 XMLscene.prototype.makeRequest = function(type)
 {
   if(type == 0){
-    this.getPrologRequest(0, this.handleReply);
+    this.getPrologRequest(0, this.handleReply.bind(this));
   } else if(type == 1){
     console.log(this.picks[0] + this.picks[1]);
     this.getPrologRequest("1-" + this.allPlays[this.allPlays.length - 1][1] + "-"
     + this.allPlays[this.allPlays.length - 1][2] + "-" + this.players[this.player]
-    + "-1-" + this.picks[0] + "-" + this.picks[1], this.handleReply);
+    + "-1-" + this.picks[0] + "-" + this.picks[1], this.handleReply.bind(this));
     //TODO tirar o 1 e por o modo de jogo
   } else if(type == 2) {
 
