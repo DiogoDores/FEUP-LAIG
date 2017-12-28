@@ -21,6 +21,9 @@ function XMLscene(interface) {
     this.timeFactor = 0;
 
     this.objects=[];
+
+    this.picks = ["", ""];
+    this.pickCounter = 0;
 }
 
 XMLscene.prototype = Object.create(CGFscene.prototype);
@@ -139,7 +142,11 @@ XMLscene.prototype.logPicking = function ()
                 if (obj)
                 {
                     var customId = this.pickResults[i][1];
-                    makeRequest(); // TODO remover daqui, so para teste
+                    //TODO mudar para os nomes das posicoes
+                    this.picks[this.pickCounter] = customId;
+                    this.pickCounter++;
+                    if(this.pickCounter == 2)
+                      this.makeRequest(1); // TODO ver melhor esta parte para usar o counter a 3 para dar pick na peca a remover
                     console.log("Picked object: " + obj + ", with pick id " + customId);
                 }
             }
@@ -172,7 +179,7 @@ XMLscene.prototype.onGraphLoaded = function () {
 
 }
 
-function getPrologRequest(requestString, onSuccess, onError, port)
+XMLscene.prototype.getPrologRequest = function(requestString, onSuccess, onError, port)
 {
   var requestPort = port || 8081
   var request = new XMLHttpRequest();
@@ -185,17 +192,24 @@ function getPrologRequest(requestString, onSuccess, onError, port)
   request.send();
 }
 
-function makeRequest()
+XMLscene.prototype.makeRequest = function(type)
 {
+  if(type == 1){
+    this.getPrologRequest(this.picks[0] + this.picks[1], handleReply);
+  } else if(type == 2) {
+
+  }
   //TODO
 
   // Make Request
-  getPrologRequest("handshake", handleReply);
+  //getPrologRequest("handshake", handleReply);
 }
 
 //Handle the Reply
 function handleReply(data){
-
+  console.log("answer from prolog: " + data);
+  // TODO reset counter caso successo.
+  //TODO Fazer movimentos e cenas
 }
 
 /*
