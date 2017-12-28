@@ -161,6 +161,7 @@
 
           <NODEREF id="board" />
           <NODEREF id="pieces" />
+          <NODEREF id="scene1" />
 
         </DESCENDANTS>
 
@@ -926,6 +927,17 @@
            <LEAF type="cylinder" args="0.3 0.6 0.6 20 20 1 1" />
         </DESCENDANTS>
 
+    </NODE>
+
+    <NODE id="scene1">
+        <MATERIAL id="null"/>
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="0" y="2" z="0" />
+
+        <DESCENDANTS>
+            <LEAF type="cylinder" args="3 5 5 20 20 0 0" />
+        </DESCENDANTS>
     </NODE>
 
   </NODES>

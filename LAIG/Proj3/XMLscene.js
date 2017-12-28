@@ -21,6 +21,8 @@ function XMLscene(interface) {
     this.timeFactor = 0;
 
     this.objects=[];
+    this.pickIDs=[];
+    this.runOnce = true;
 
     this.picks = ["", ""];
     this.pickCounter = 0;
@@ -282,9 +284,12 @@ XMLscene.prototype.display = function () {
         }
 
         var counter = 1;
+        var inverseCounter = 9;
         var lastX = -9.05;
         var lastZ = 6.65;
         var angle = 0;
+        var name = ["b", "g", "r", "y"];
+        var nameCounter = 0;
 
         this.setActiveShader(this.transparent);
 
@@ -315,19 +320,32 @@ XMLscene.prototype.display = function () {
                 this.translate(lastX, 0.4, lastZ);
             }
 
+            this.registerForPick(i+1, this.objects[i]);
+            if(this.runOnce){
+                var idName = name[nameCounter] + inverseCounter;
+                this.pickIDs.push(i+1, idName);
+            }
+
             if(counter == 10){
                 counter = 0;
+                inverseCounter = 10;
                 angle -= 90;
                 lastX = -9.05;
                 lastZ = 6.65;
+                nameCounter++;
             }
-
-            this.registerForPick(i+1, this.objects[i]);
 
             this.objects[i].display();
             this.popMatrix();
+
             counter++;
+            inverseCounter--;
         }
+
+        if(this.runOnce)
+            this.pickIDs.push(this.objects.length, "middle");
+
+        this.runOnce = false;
 
     this.setActiveShader(this.defaultShader);
 
