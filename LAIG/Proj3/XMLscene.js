@@ -333,8 +333,6 @@ XMLscene.prototype.display = function () {
 
         this.runOnce = false;
 
-        console.log(this.pickIDs);
-
     this.setActiveShader(this.defaultShader);
 
     this.clearPickRegistration();
