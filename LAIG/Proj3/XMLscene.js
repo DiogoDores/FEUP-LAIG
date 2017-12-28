@@ -144,8 +144,7 @@ XMLscene.prototype.logPicking = function ()
                 if (obj)
                 {
                     var customId = this.pickResults[i][1];
-                    //TODO mudar para os nomes das posicoes
-                    this.picks[this.pickCounter] = customId;
+                    this.picks[this.pickCounter] = this.pickIDs[customId - 1];
                     this.pickCounter++;
                     if(this.pickCounter == 2)
                       this.makeRequest(1); // TODO ver melhor esta parte para usar o counter a 3 para dar pick na peca a remover
@@ -197,7 +196,8 @@ XMLscene.prototype.getPrologRequest = function(requestString, onSuccess, onError
 XMLscene.prototype.makeRequest = function(type)
 {
   if(type == 1){
-    this.getPrologRequest(this.picks[0] + this.picks[1], handleReply);
+    console.log(this.picks[0] + this.picks[1]);
+    this.getPrologRequest(this.picks[0] + "-" + this.picks[1], handleReply);
   } else if(type == 2) {
 
   }
@@ -209,7 +209,7 @@ XMLscene.prototype.makeRequest = function(type)
 
 //Handle the Reply
 function handleReply(data){
-  console.log("answer from prolog: " + data);
+  console.log("answer from prolog: " + data.target.response);
   // TODO reset counter caso successo.
   //TODO Fazer movimentos e cenas
 }
@@ -323,7 +323,7 @@ XMLscene.prototype.display = function () {
             this.registerForPick(i+1, this.objects[i]);
             if(this.runOnce){
                 var idName = name[nameCounter] + inverseCounter;
-                this.pickIDs.push(i+1, idName);
+                this.pickIDs.push(idName);
             }
 
             if(counter == 10){
@@ -343,7 +343,7 @@ XMLscene.prototype.display = function () {
         }
 
         if(this.runOnce)
-            this.pickIDs.push(this.objects.length, "middle");
+            this.pickIDs.push("mid");
 
         this.runOnce = false;
 

@@ -104,6 +104,7 @@ print_header_line(_).
 :-use_module(library(codesio)).
 
 parse_input(handshake, handshake).
+parse_input(Initial-Final, handshake) :- write(Initial), nl, write(Final).
 parse_input(test(C,N), Res) :- test(C,Res,N).
 parse_input(quit, goodbye).
 
