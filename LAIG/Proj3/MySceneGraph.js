@@ -1754,53 +1754,53 @@ MySceneGraph.prototype.createMapOfPieces = function () {
 MySceneGraph.prototype.createMapOfCoord = function () {
   this.positionsMap = new Map();
 
-  this.positionsMap.set("y9", vec3.fromValues(3.5,0,9.55));
-  this.positionsMap.set("y8", vec3.fromValues(0.85,0,9.55));
-  this.positionsMap.set("y7", vec3.fromValues(-1.8,0,9.55));
-  this.positionsMap.set("y6", vec3.fromValues(-4.45,0,9.55));
-  this.positionsMap.set("y5", vec3.fromValues(2.15,0,7.35));
-  this.positionsMap.set("y4", vec3.fromValues(-0.5,0,7.35));
-  this.positionsMap.set("y3", vec3.fromValues(-3.15,0,7.35));
-  this.positionsMap.set("y2", vec3.fromValues(0.8,0,5.15));
-  this.positionsMap.set("y1", vec3.fromValues(-1.85,0,5.15));
-  this.positionsMap.set("y0", vec3.fromValues(-0.5,0,2.8));
+  this.positionsMap.set("y9", vec3.fromValues(4,0,9.05));
+  this.positionsMap.set("y8", vec3.fromValues(1.35,0,9.05));
+  this.positionsMap.set("y7", vec3.fromValues(-1.3,0,9.05));
+  this.positionsMap.set("y6", vec3.fromValues(-3.95,0,9.05));
+  this.positionsMap.set("y5", vec3.fromValues(2.65,0,6.85));
+  this.positionsMap.set("y4", vec3.fromValues(0,0,6.85));
+  this.positionsMap.set("y3", vec3.fromValues(-2.65,0,6.85));
+  this.positionsMap.set("y2", vec3.fromValues(1.3,0,4.65));
+  this.positionsMap.set("y1", vec3.fromValues(-1.35,0,4.65));
+  this.positionsMap.set("y0", vec3.fromValues(0,0,2.3));
 
 
-  this.positionsMap.set("g9", vec3.fromValues(-4.5,0,-8.55));
-  this.positionsMap.set("g8", vec3.fromValues(-1.85,0,-8.55));
-  this.positionsMap.set("g7", vec3.fromValues(0.8,0,-8.55));
-  this.positionsMap.set("g6", vec3.fromValues(3.45,0,-8.55));
-  this.positionsMap.set("g5", vec3.fromValues(-3.15,0,-6.35));
-  this.positionsMap.set("g4", vec3.fromValues(-0.5,0,-6.35));
-  this.positionsMap.set("g3", vec3.fromValues(2.15,0,-6.35));
-  this.positionsMap.set("g2", vec3.fromValues(-1.8,0,-4.15));
-  this.positionsMap.set("g1", vec3.fromValues(0.85,0,-4.15));
-  this.positionsMap.set("g0", vec3.fromValues(-0.5,0,-1.8));
+  this.positionsMap.set("g9", vec3.fromValues(-4,0,-9.05));
+  this.positionsMap.set("g8", vec3.fromValues(-1.35,0,-9.05));
+  this.positionsMap.set("g7", vec3.fromValues(1.3,0,-9.05));
+  this.positionsMap.set("g6", vec3.fromValues(3.95,0,-9.05));
+  this.positionsMap.set("g5", vec3.fromValues(-2.65,0,-6.85));
+  this.positionsMap.set("g4", vec3.fromValues(0,0,-6.85));
+  this.positionsMap.set("g3", vec3.fromValues(2.65,0,-6.85));
+  this.positionsMap.set("g2", vec3.fromValues(-1.3,0,-4.65));
+  this.positionsMap.set("g1", vec3.fromValues(1.35,0,-4.65));
+  this.positionsMap.set("g0", vec3.fromValues(0,0,-2.3));
 
 
-  this.positionsMap.set("b9", vec3.fromValues(-9.55,0,4.5));
-  this.positionsMap.set("b8", vec3.fromValues(-9.55,0,1.85));
-  this.positionsMap.set("b7", vec3.fromValues(-9.55,0,-0.8));
-  this.positionsMap.set("b6", vec3.fromValues(-9.55,0,-3.45));
-  this.positionsMap.set("b5", vec3.fromValues(-7.35,0,3.15));
-  this.positionsMap.set("b4", vec3.fromValues(-7.35,0,0.5));
-  this.positionsMap.set("b3", vec3.fromValues(-7.35,0,-2.15));
-  this.positionsMap.set("b2", vec3.fromValues(-5.15,0,1.8));
-  this.positionsMap.set("b1", vec3.fromValues(-5.15,0,-0.85));
-  this.positionsMap.set("b0", vec3.fromValues(-2.8,0,0.5));
+  this.positionsMap.set("b9", vec3.fromValues(-9.05,0,4));
+  this.positionsMap.set("b8", vec3.fromValues(-9.05,0,1.35));
+  this.positionsMap.set("b7", vec3.fromValues(-9.05,0,-1.2));
+  this.positionsMap.set("b6", vec3.fromValues(-9.05,0,-3.95));
+  this.positionsMap.set("b5", vec3.fromValues(-6.85,0,2.65));
+  this.positionsMap.set("b4", vec3.fromValues(-6.85,0,0));
+  this.positionsMap.set("b3", vec3.fromValues(-6.85,0,-2.65));
+  this.positionsMap.set("b2", vec3.fromValues(-4.65,0,1.3));
+  this.positionsMap.set("b1", vec3.fromValues(-4.65,0,-1.35));
+  this.positionsMap.set("b0", vec3.fromValues(-2.3,0,0));
 
-  this.positionsMap.set("r9", vec3.fromValues(8.55,0,-3.5));
-  this.positionsMap.set("r8", vec3.fromValues(8.55,0,-0.85));
-  this.positionsMap.set("r7", vec3.fromValues(8.55,0,1.8));
-  this.positionsMap.set("r6", vec3.fromValues(8.55,0,4.45));
-  this.positionsMap.set("r5", vec3.fromValues(6.35,0,-2.15));
-  this.positionsMap.set("r4", vec3.fromValues(6.35,0,0.5));
-  this.positionsMap.set("r3", vec3.fromValues(6.35,0,3.15));
-  this.positionsMap.set("r2", vec3.fromValues(4.15,0,-0.8));
-  this.positionsMap.set("r1", vec3.fromValues(4.15,0,1.85));
-  this.positionsMap.set("r0", vec3.fromValues(1.8,0,0.5));
+  this.positionsMap.set("r9", vec3.fromValues(9.05,0,-4));
+  this.positionsMap.set("r8", vec3.fromValues(9.05,0,-1.55));
+  this.positionsMap.set("r7", vec3.fromValues(9.05,0,1.3));
+  this.positionsMap.set("r6", vec3.fromValues(9.05,0,3.95));
+  this.positionsMap.set("r5", vec3.fromValues(6.85,0,-2.5));
+  this.positionsMap.set("r4", vec3.fromValues(6.85,0,0));
+  this.positionsMap.set("r3", vec3.fromValues(6.85,0,2.65));
+  this.positionsMap.set("r2", vec3.fromValues(4.65,0,-1.3));
+  this.positionsMap.set("r1", vec3.fromValues(4.65,0,1.35));
+  this.positionsMap.set("r0", vec3.fromValues(2.3,0,0));
 
-  this.positionsMap.set("mid", vec3.fromValues(-0.5,0,0.5));
+  this.positionsMap.set("mid", vec3.fromValues(0,0,0));
 }
 
 /**
@@ -1817,11 +1817,7 @@ MySceneGraph.prototype.movePiece = function (pos1, pos2) {
   this.piecesMap.delete(nodePos1);
   this.piecesMap.set(nodePos1, pos2);
 
-  let var1 = this.scene.getMatrix();
-  console.log(var1);
-  let var2 = mat4.multiply(var1, var1, this.nodes[nodePos1].transformMatrix)
-  console.log(this.nodes[nodePos1].transformMatrix);
-  console.log(var2);
+
   //let var3 = mat4.multiply(var2, var2, )
 /*
   if (this.nodes[nodePos1].anim != null) {
@@ -1829,18 +1825,25 @@ MySceneGraph.prototype.movePiece = function (pos1, pos2) {
   } */
 
   //TODO create animation from pos1 to pos2
-  console.log(nodePos1);
+  let coordPos1 = vec3.create();
+  coordPos1 = this.positionsMap.get(pos1);
+  let coordPos2 = vec3.create();
+//  coordPos2 = this.positionsMap.get(pos2);
+  vec3.subtract(coordPos2, this.positionsMap.get(pos2), this.positionsMap.get(pos1));
+  let animation = new BezierAnimation(this, ["bezier", 1, [[0,0,0], [0,5,0], [coordPos2[0],5,coordPos2[2]],coordPos2]]);
+
   if(this.nodes[nodePos1].anim == null){
 
-    var animHolder = new AnimationsOfNode(this, animation);
+    var animHolder = new AnimationsOfNode(this, [animation]);
     this.animRefs.push(animHolder);
     this.nodes[nodePos1].addAnimation(this.animRefs[this.animRefs.length - 1]);
   } else {
     this.nodes[nodePos1].anim.addAnimationAfter(animation);
   }
-    console.log(this.nodes[nodePos1]);
 
 }
+
+
 
 /**
  * Displays the scene, processing each node, starting in the root node.
@@ -1876,6 +1879,12 @@ MySceneGraph.prototype.displayNodes = function (id, matToApply, texToApply) {
 
     if (this.nodes[id].anim != null) {
       this.scene.multMatrix(this.nodes[id].anim.matrix);
+      if(this.scene.playing && this.nodes[id].anim.isFinished && this.nodes[id].anim.notChanged){
+        mat4.multiply(this.nodes[id].transformMatrix, this.nodes[id].transformMatrix, this.nodes[id].anim.matrix);
+        mat4.identity(this.nodes[id].anim.oldMatrix);
+        mat4.identity(this.nodes[id].anim.matrix);
+        this.nodes[id].anim.notChanged = false;
+      }
     }
 
     if(selected)

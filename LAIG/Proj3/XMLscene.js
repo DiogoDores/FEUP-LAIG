@@ -38,6 +38,7 @@ function XMLscene(interface) {
     this.GameType = 3;
     this.gameType = 0;
 
+    this.playing = true; //TODO change
 }
 
 XMLscene.prototype = Object.create(CGFscene.prototype);
@@ -255,7 +256,7 @@ XMLscene.prototype.update = function (currTime) {
     this.lastTime = this.lastTime || 0.0;
     this.delta = currTime - this.lastTime || 0.0;
     this.timeFactor += this.delta / 1000;
-    if (this.graph.animRefs != undefined) {
+    if (this.graph.animRefs != undefined && this.graph.animRefs.length > 0) {
         for (let i = 0; i < this.graph.animRefs.length; i++) {
 
             this.graph.animRefs[i].updates(this.delta / 1000);
