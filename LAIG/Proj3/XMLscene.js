@@ -129,7 +129,7 @@ XMLscene.prototype.updateScaleFactor = function (v) {
  * Initializes the scene cameras.
  */
 XMLscene.prototype.initCameras = function () {
-    this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
+    this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(50, 50, 50), vec3.fromValues(0, 0, 0));
 }
 
 XMLscene.prototype.logPicking = function ()
@@ -280,6 +280,7 @@ XMLscene.prototype.display = function () {
         this.setActiveShader(this.transparent);
 
         this.pushMatrix();
+        this.scale(0.7, 1, 0.7);
         this.translate(0,0.4,0);
         this.registerForPick(this.objects.length, this.objects[this.objects.length-1]);
         this.objects[this.objects.length-1].display();
@@ -302,6 +303,7 @@ XMLscene.prototype.display = function () {
             if(counter <= 10){
                 lastZ -= 2.65;
 
+                this.scale(0.7, 1, 0.7);
                 this.rotate(angle*Math.PI/180, 0,1,0);
                 this.translate(lastX, 0.4, lastZ);
             }
@@ -328,10 +330,10 @@ XMLscene.prototype.display = function () {
             inverseCounter--;
         }
 
-        if(this.runOnce)
-            this.pickIDs.push(this.objects.length, "middle");
+    if(this.runOnce)
+        this.pickIDs.push(this.objects.length, "middle");
 
-        this.runOnce = false;
+    this.runOnce = false;
 
     this.setActiveShader(this.defaultShader);
 

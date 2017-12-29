@@ -23,9 +23,9 @@
 <LIGHTS>
 	<LIGHT id="light0">
         <enable value ="1" />
-        <position  x="0" y="10" z="0" w="1" />
-        <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
-        <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
+        <position  x="-30" y="34" z="50" w="1" />
+        <ambient r="0.4" g="0.4" b="0.2" a="1.0" />
+        <diffuse r="0.4" g="0.4" b="0.2" a="1.0" />
         <specular r="1.0" g="1.0" b="1.0" a="1.0" />
     </LIGHT>
 
@@ -60,6 +60,31 @@
     <!-- Rocks -->
     <TEXTURE id="gameBoard">
         <file path="images/boardGame.png" />
+        <amplif_factor s="1" t="1" />
+    </TEXTURE>
+
+    <TEXTURE id="riverTexture">
+        <file path="images/river.jpg" />
+        <amplif_factor s="1" t="1" />
+    </TEXTURE>
+
+    <TEXTURE id="gondolaTexture">
+        <file path="images/boat.jpg" />
+        <amplif_factor s="1" t="1" />
+    </TEXTURE>
+
+    <TEXTURE id="accentTexture">
+        <file path="images/accent.jpg" />
+        <amplif_factor s="1" t="1" />
+    </TEXTURE>
+
+    <TEXTURE id="sideVeniceTexture">
+        <file path="images/sideVenice.jpg" />
+        <amplif_factor s="1" t="1" />
+    </TEXTURE>
+
+    <TEXTURE id="backVeniceTexture">
+        <file path="images/backVenice.jpg" />
         <amplif_factor s="1" t="1" />
     </TEXTURE>
 
@@ -111,6 +136,14 @@
         <emission r="0.0" g="0.0" b="0.0" a="1" />
     </MATERIAL>
 
+    <MATERIAL id="lightBlueMaterial">
+        <shininess value="100" />
+        <specular r="0" g="0.70" b="1" a="1" />
+        <diffuse r="0" g="0.70" b="1" a="1" />
+        <ambient r="0" g="0.70" b="1" a="1" />
+        <emission r="0.0" g="0.0" b="1" a="1" />
+    </MATERIAL>
+
     <!-- A default material -->
     <MATERIAL id="defaultMaterial">
         <shininess value="1" />
@@ -158,10 +191,25 @@
         <TEXTURE id="null" />
 
         <DESCENDANTS>
+            
+          <NODEREF id="game" />
+          <NODEREF id="scene1" />
 
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="game">
+        <MATERIAL id="defaultMaterial" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="10" y="7" z="15" />
+        <SCALE sx="0.7" sy="0.7" sz="0.7" />
+
+        <DESCENDANTS>
+            
           <NODEREF id="board" />
           <NODEREF id="pieces" />
-          <NODEREF id="scene1" />
 
         </DESCENDANTS>
 
@@ -933,11 +981,408 @@
         <MATERIAL id="null"/>
         <TEXTURE id="null" />
 
-        <TRANSLATION x="0" y="2" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="gondola" />
+            <NODEREF id="river" />
+            <NODEREF id="streets" />
+            <NODEREF id="city" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="gondola">
+        <MATERIAL id="null"/>
+        <TEXTURE id="gondolaTexture" />
+
+        <TRANSLATION x="10" y="0" z="0" />
 
         <DESCENDANTS>
-            <LEAF type="cylinder" args="3 5 5 20 20 0 0" />
+            <NODEREF id="body" />
+            <NODEREF id="cover" />
+            <NODEREF id="bottom" />
+            <NODEREF id="accent" />
         </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="body">
+        <MATERIAL id="null"/>
+        <TEXTURE id="null" />
+
+        <SCALE sx="1.5" sy="4" sz="1.5" />
+        <TRANSLATION x="0" y="10" z="10" />
+        <ROTATION axis="y" angle="90" />
+
+        <DESCENDANTS>
+            <LEAF type="patch" args="20 20">
+
+                <CPLINE>
+                    <CPOINT xx="-22" yy="-5" zz="0" ww="1" />
+                    <CPOINT xx="-24" yy="-10" zz="15" ww="0.7" />
+                    <CPOINT xx="24" yy="-10" zz="15" ww="0.7" />
+                    <CPOINT xx="22" yy="-5" zz="0" ww="1" />
+                </CPLINE>
+
+                <CPLINE>
+                    <CPOINT xx="-22" yy="-5" zz="0" ww="1" />
+                    <CPOINT xx="-24" yy="-17" zz="0" ww="0.7" />
+                    <CPOINT xx="24" yy="-17" zz="0" ww="0.7" />
+                    <CPOINT xx="22" yy="-5" zz="0" ww="1" />
+                </CPLINE>
+
+                <CPLINE>
+                    <CPOINT xx="-22" yy="-5" zz="0" ww="1" />
+                    <CPOINT xx="-24" yy="-10" zz="-15" ww="0.7" />
+                    <CPOINT xx="24" yy="-10" zz="-15" ww="0.7" />
+                    <CPOINT xx="22" yy="-5" zz="0" ww="1" />
+                </CPLINE>
+
+            </LEAF>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="cover">
+        <MATERIAL id="null"/>
+        <TEXTURE id="null" />
+        
+
+        <SCALE sx="1.5" sy="4" sz="1.5" />
+        <TRANSLATION x="0" y="10" z="10" />
+        <ROTATION axis="y" angle="90" />
+        <ROTATION axis="x" angle="180" />
+
+        <DESCENDANTS>
+            <LEAF type="patch" args="20 20">
+
+                <CPLINE>
+                    <CPOINT xx="-22" yy="5" zz="0" ww="1" />
+                    <CPOINT xx="-24" yy="10" zz="15" ww="0.7" />
+                    <CPOINT xx="24" yy="10" zz="15" ww="0.7" />
+                    <CPOINT xx="22" yy="5" zz="0" ww="1" />
+                </CPLINE>
+
+                <CPLINE>
+                    <CPOINT xx="-22" yy="5" zz="0" ww="1" />
+                    <CPOINT xx="-24" yy="17" zz="0" ww="0.7" />
+                    <CPOINT xx="24" yy="17" zz="0" ww="0.7" />
+                    <CPOINT xx="22" yy="5" zz="0" ww="1" />
+                </CPLINE>
+
+                <CPLINE>
+                    <CPOINT xx="-22" yy="5" zz="0" ww="1" />
+                    <CPOINT xx="-24" yy="10" zz="-15" ww="0.7" />
+                    <CPOINT xx="24" yy="10" zz="-15" ww="0.7" />
+                    <CPOINT xx="22" yy="5" zz="0" ww="1" />
+                </CPLINE>
+
+            </LEAF>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="bottom">
+        <MATERIAL id="null"/>
+        <TEXTURE id="null" />
+
+        <SCALE sx="13.5" sy="1" sz="25" />
+        <TRANSLATION x="0" y="5" z="0.65" />
+        <ROTATION axis="x" angle="-90" />
+
+        <DESCENDANTS>
+            <LEAF type="cylinder" args="0.5 1 1 100 20 1 1" />
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="accent">
+        <MATERIAL id="yellowMaterial" />
+        <TEXTURE id="accentTexture" />
+
+        <TRANSLATION x="-1.5" y="40" z="-18" />
+        <ROTATION axis="y" angle="-90" />
+        <ROTATION axis="x" angle="180" />
+        <ROTATION axis="z" angle="90" />
+
+        <DESCENDANTS>
+            <NODEREF id="semiCircleFront" />
+            <NODEREF id="semiCircleBack" />
+            <NODEREF id="rectangle1" />
+            <NODEREF id="rectangle2" />
+            <NODEREF id="rectangle3" />
+            <NODEREF id="rectangle4" />
+
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="semiCircleFront">
+        <MATERIAL id="defaultMaterial" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="20" y="2.5" z="0" />
+        <ROTATION axis="z" angle="180" />
+        <SCALE sx="1.5" sy="1.5" sz="1.5" />
+
+        <DESCENDANTS>
+            <LEAF type="patch" args="20 20">
+
+                <CPLINE>
+                    <CPOINT xx="0" yy="0" zz="1" ww="1" />
+                    <CPOINT xx="0" yy="0" zz="1" ww="0.33" />
+                    <CPOINT xx="0" yy="0" zz="1" ww="0.33" />
+                    <CPOINT xx="0" yy="0" zz="1" ww="1" />
+                </CPLINE>
+
+                <CPLINE>
+                    <CPOINT xx="2" yy="0" zz="1" ww="0.33" />
+                    <CPOINT xx="2" yy="4" zz="1" ww="0.11" />
+                    <CPOINT xx="-2" yy="4" zz="1" ww="0.11" />
+                    <CPOINT xx="-2" yy="0" zz="1" ww="0.33" />
+                </CPLINE>
+
+            </LEAF>
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="semiCircleBack">
+        <MATERIAL id="defaultMaterial" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="20" y="2.5" z="-0.005" />
+        <SCALE sx="1.5" sy="1.5" sz="1.5" />
+
+        <DESCENDANTS>
+            <LEAF type="patch" args="20 20">
+
+                <CPLINE>
+                    <CPOINT xx="0" yy="0" zz="1" ww="1" />
+                    <CPOINT xx="0" yy="0" zz="1" ww="0.33" />
+                    <CPOINT xx="0" yy="0" zz="1" ww="0.33" />
+                    <CPOINT xx="0" yy="0" zz="1" ww="1" />
+                </CPLINE>
+
+                <CPLINE>
+                    <CPOINT xx="2" yy="0" zz="1" ww="0.33" />
+                    <CPOINT xx="2" yy="-4" zz="1" ww="0.11" />
+                    <CPOINT xx="-2" yy="-4" zz="1" ww="0.11" />
+                    <CPOINT xx="-2" yy="0" zz="1" ww="0.33" />
+                </CPLINE>
+
+            </LEAF>
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="rectangle1">
+        <MATERIAL id="defaultMaterial" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="21.5" y="1.2" z="1.5" />
+        <ROTATION axis="z" angle="-90" />
+        <SCALE sx="1.2" sy="9" sz="1" />
+
+        <DESCENDANTS>
+            <LEAF type="rectangle" args="0 0 1 1"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="rectangle2">
+        <MATERIAL id="defaultMaterial" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="24" y="0" z="1.5" />
+        <SCALE sx="1" sy="2.3" sz="1" />
+
+        <DESCENDANTS>
+            <LEAF type="rectangle" args="0 0 1 1"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="rectangle3">
+        <MATERIAL id="defaultMaterial" />
+        <TEXTURE id="null" />
+        
+        <TRANSLATION x="26" y="0" z="1.5" />
+        <SCALE sx="1" sy="2.3" sz="1" />
+
+        <DESCENDANTS>
+            <LEAF type="rectangle" args="0 0 1 1"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="rectangle4">
+        <MATERIAL id="defaultMaterial" />
+        <TEXTURE id="null" />
+        
+        <TRANSLATION x="28" y="0" z="1.5" />
+        <SCALE sx="1" sy="2.3" sz="1" />
+        
+        <DESCENDANTS>
+            <LEAF type="rectangle" args="0 0 1 1"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="river">
+        <MATERIAL id="lightBlueMaterial"/>
+        <TEXTURE id="riverTexture" />
+        
+        <TRANSLATION x="-25" y="0" z="-25" />
+        <SCALE sx="70" sy="1" sz="80" />
+        <ROTATION axis="x" angle="90" />
+
+        <DESCENDANTS>
+            <LEAF  type="rectangle" args="0 0 1 1" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="streets">
+        <MATERIAL id="defaultMaterial"/>
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+            <NODEREF id="pavement" />
+            <NODEREF id="lamps" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="pavement">
+        <MATERIAL id="defaultMaterial"/>
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+            <NODEREF id="pavementRight" />
+            <NODEREF id="pavementLeft" /> 
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="pavementRight">
+        <MATERIAL id="defaultMaterial"/>
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="46" y="7" z="-25" />
+        <SCALE sx="10" sy="10" sz="16" />
+        <ROTATION axis="z" angle="45" />
+
+        <DESCENDANTS>
+            <LEAF  type="cylinder" args="5 1 1 4 20 1 1" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="pavementLeft">
+        <MATERIAL id="defaultMaterial"/>
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="-30" y="7" z="-25" />
+        <SCALE sx="10" sy="10" sz="16" />
+        <ROTATION axis="z" angle="45" />
+
+        <DESCENDANTS>
+            <LEAF  type="cylinder" args="5 1 1 4 20 1 1" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="lamps">
+        <MATERIAL id="defaultMaterial"/>
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+            <NODEREF id="lamp1" />
+            <NODEREF id="lamp2" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="lamp1">
+        <MATERIAL id="defaultMaterial"/>
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="47" y="14" z="-17" />
+
+        <DESCENDANTS>
+            <NODEREF id="post" />
+            <NODEREF id="middle" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="lamp2">
+        <MATERIAL id="defaultMaterial"/>
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="-30" y="14" z="50" />
+
+        <DESCENDANTS>
+            <NODEREF id="post" />
+            <NODEREF id="middle" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="post">
+        <MATERIAL id="defaultMaterial"/>
+        <TEXTURE id="null" />
+
+        <ROTATION axis="x" angle="-90" />
+
+        <DESCENDANTS>
+            <LEAF  type="cylinder" args="20 0.8 0.8 20 20 1 1" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="middle">
+        <MATERIAL id="defaultMaterial"/>
+        <TEXTURE id="null" />
+        
+        <TRANSLATION x="0" y="19" z="0" />
+        <ROTATION axis="y" angle="45" />
+        <ROTATION axis="x" angle="-90" />
+
+        <DESCENDANTS>
+            <LEAF  type="cylinder" args="4 2 3 4 20 0 1" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="city">
+        <MATERIAL id="null"/>
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+            <NODEREF id="backWall" />
+            <NODEREF id="leftWall" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="backWall">
+        <MATERIAL id="null"/>
+        <TEXTURE id="backVeniceTexture" />
+        
+        <TRANSLATION x="-37" y="0" z="-25.05"/>
+        <SCALE sx="90" sy="54" sz="1" />
+
+        <DESCENDANTS>
+            <LEAF type="rectangle" args="0 0 1 1" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="leftWall">
+        <MATERIAL id="null"/>
+        <TEXTURE id="sideVeniceTexture" />
+        
+        <TRANSLATION x="-37" y="14" z="55"/>
+        <ROTATION axis="y" angle="90" />
+        <SCALE sx="80" sy="40" sz="1" />
+
+        <DESCENDANTS>
+            <LEAF type="rectangle" args="0 0 1 1" />
+        </DESCENDANTS>
+
     </NODE>
 
   </NODES>
