@@ -249,6 +249,13 @@ XMLscene.prototype.handleReply = function(data){
   //TODO Fazer movimentos e cenas
 }
 
+function setGameType(value){
+    this.gameType = value;
+    var elem = document.getElementById('div');
+    elem.parentNode.removeChild(elem);
+    console.log(value);
+}
+
 /*
  *
  */
