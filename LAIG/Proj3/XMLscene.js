@@ -30,6 +30,11 @@ function XMLscene(interface) {
     this.players = ["y", "b"];
     this.player = 0;
     this.makeRequest(0);
+
+    this.globalCounter = 0;
+    this.runTimer = true;
+    this.secondsIndex = 10;
+    this.minutesIndex = 5;
 }
 
 XMLscene.prototype = Object.create(CGFscene.prototype);
@@ -44,6 +49,8 @@ XMLscene.prototype.init = function (application) {
     this.initCameras();
     this.initShaders();
 
+    this.clock = [];
+
     this.enableTextures(true);
 
     this.gl.clearDepth(100.0);
@@ -56,7 +63,7 @@ XMLscene.prototype.init = function (application) {
     }
 
     this.axis = new CGFaxis(this);
-    this.setUpdatePeriod(30);
+    this.setUpdatePeriod(26);
 
     this.setPickEnabled(true);
 }
@@ -262,6 +269,30 @@ XMLscene.prototype.update = function (currTime) {
     })
 
     this.lastTime = currTime;
+
+    //Timer handling
+
+    if(this.globalCounter == 33){
+
+        if (this.graph.nodes != null && this.graph.clockTextures != null && this.runTimer) {
+
+            if(this.graph.nodes["units"].textureID != this.graph.clockTextures[0]){
+                this.graph.nodes["units"].textureID = this.graph.clockTextures[this.secondsIndex--];
+            }
+            else{
+                this.graph.nodes["dozens"].textureID = this.graph.clockTextures[this.minutesIndex--];
+                this.secondsIndex = 9;
+                this.graph.nodes["units"].textureID = this.graph.clockTextures[this.secondsIndex--];
+            }
+
+            if(this.graph.nodes["units"].textureID == this.graph.clockTextures[0] && this.graph.nodes["dozens"].textureID == this.graph.clockTextures[0])
+                this.runTimer = false;
+
+            this.globalCounter = 0;
+        }
+    }
+
+    this.globalCounter++;
 }
 
 /**
@@ -320,11 +351,11 @@ XMLscene.prototype.display = function () {
         this.setActiveShader(this.transparent);
 
         this.pushMatrix();
-        this.translate(10, 7, 15);
-        this.scale(0.7, 1, 0.7);
-        this.translate(0,0.4,0);
-        this.registerForPick(this.objects.length, this.objects[this.objects.length-1]);
-        this.objects[this.objects.length-1].display();
+            this.translate(10, 7, 15);
+            this.scale(0.7, 1, 0.7);
+            this.translate(0,0.4,0);
+            this.registerForPick(this.objects.length, this.objects[this.objects.length-1]);
+            this.objects[this.objects.length-1].display();
         this.popMatrix();
 
         for (var i = 0; i < this.objects.length - 1; i++) {

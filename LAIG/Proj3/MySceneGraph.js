@@ -37,6 +37,8 @@ function MySceneGraph(filename, scene) {
     this.selectables = ["No selected node"];
     this.useSelectable = 0;
 
+    this.clockTextures=[];
+
     /*
      * Read the contents of the xml file, and refer to this class for loading and error handlers.
      * After the file is read, the reader calls onXMLReady on this object.
@@ -879,6 +881,19 @@ MySceneGraph.prototype.parseTextures = function (texturesNode) {
             var texture = new CGFtexture(this.scene, "./scenes/" + filepath);
 
             this.textures[textureID] = [texture, amplifFactorS, amplifFactorT];
+
+            if(textureID == "number_0" ||
+               textureID == "number_1" ||
+               textureID == "number_2" ||
+               textureID == "number_3" ||
+               textureID == "number_4" ||
+               textureID == "number_5" ||
+               textureID == "number_6" ||
+               textureID == "number_7" ||
+               textureID == "number_8" ||
+               textureID == "number_9")
+                this.clockTextures.push(textureID);
+
             oneTextureDefined = true;
         } else
             this.onXMLMinorError("unknown tag name <" + nodeName + ">");
@@ -1729,7 +1744,7 @@ MySceneGraph.prototype.displayNodes = function (id, matToApply, texToApply) {
         matToApply.apply();
         if (texToApply != null) {
 
-            this.nodes[id].leaves[i].primitive.assignTexture(texToApply);
+            this.nodes[id].leaves[i].primitive.assignTexture();
             texToApply[0].bind();
         }
 
