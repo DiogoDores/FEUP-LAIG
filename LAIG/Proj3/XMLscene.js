@@ -23,6 +23,13 @@ function XMLscene(interface) {
     this.objects=[];
     this.pickIDs=[];
     this.runOnce = true;
+
+    this.picks = ["", ""];
+    this.pickCounter = 0;
+
+    this.players = ["y", "b"];
+    this.player = 0;
+    this.makeRequest(0);
 }
 
 XMLscene.prototype = Object.create(CGFscene.prototype);
@@ -141,7 +148,10 @@ XMLscene.prototype.logPicking = function ()
                 if (obj)
                 {
                     var customId = this.pickResults[i][1];
-                    makeRequest(); // TODO remover daqui, so para teste
+                    this.picks[this.pickCounter] = this.pickIDs[customId - 1];
+                    this.pickCounter++;
+                    if(this.pickCounter == 2)
+                      this.makeRequest(1); // TODO ver melhor esta parte para usar o counter a 3 para dar pick na peca a remover
                     console.log("Picked object: " + obj + ", with pick id " + customId);
                 }
             }
@@ -174,7 +184,7 @@ XMLscene.prototype.onGraphLoaded = function () {
 
 }
 
-function getPrologRequest(requestString, onSuccess, onError, port)
+XMLscene.prototype.getPrologRequest = function(requestString, onSuccess, onError, port)
 {
   var requestPort = port || 8081
   var request = new XMLHttpRequest();
@@ -187,17 +197,47 @@ function getPrologRequest(requestString, onSuccess, onError, port)
   request.send();
 }
 
-function makeRequest()
+XMLscene.prototype.makeRequest = function(type)
 {
+  if(type == 0){
+    this.getPrologRequest(0, this.handleReply.bind(this));
+  } else if(type == 1){
+    console.log(this.picks[0] + this.picks[1]);
+    this.getPrologRequest("1-" + this.allPlays[this.allPlays.length - 1][1] + "-"
+    + this.allPlays[this.allPlays.length - 1][2] + "-" + this.players[this.player]
+    + "-1-" + this.picks[0] + "-" + this.picks[1], this.handleReply.bind(this));
+    //TODO tirar o 1 e por o modo de jogo
+  } else if(type == 2) {
+
+  }
   //TODO
 
   // Make Request
-  getPrologRequest("handshake", handleReply);
+  //getPrologRequest("handshake", handleReply);
 }
 
 //Handle the Reply
-function handleReply(data){
+XMLscene.prototype.handleReply = function(data){
+  let response = data.target.response;
+  console.log("answer from prolog: " + response);
 
+  let responseArr = response.split("-");
+  console.log(responseArr);
+  if(responseArr[0] == "0"){
+    this.allPlays = [responseArr];
+
+  } else if(responseArr[0] == "1"){
+    console.log("nice move");
+    this.allPlays.push(responseArr);
+    this.pickCounter = 0;
+    this.player = this.player == 0? 1 : 0;
+  } else if(responseArr[0] == "2") {
+    this.pickCounter = 0;
+    console.log("bad move");
+  }
+  console.log(this.allPlays);
+  // TODO reset counter caso successo.
+  //TODO Fazer movimentos e cenas
 }
 
 /*
@@ -311,7 +351,7 @@ XMLscene.prototype.display = function () {
             this.registerForPick(i+1, this.objects[i]);
             if(this.runOnce){
                 var idName = name[nameCounter] + inverseCounter;
-                this.pickIDs.push(i+1, idName);
+                this.pickIDs.push(idName);
             }
 
             if(counter == 10){
@@ -331,7 +371,7 @@ XMLscene.prototype.display = function () {
         }
 
     if(this.runOnce)
-        this.pickIDs.push(this.objects.length, "middle");
+        this.pickIDs.push("mid");
 
     this.runOnce = false;
 
