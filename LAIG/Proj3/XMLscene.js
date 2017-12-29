@@ -236,6 +236,7 @@ XMLscene.prototype.handleReply = function(data){
   } else if(responseArr[0] == "1"){
     console.log("nice move");
     this.allPlays.push(responseArr);
+    this.graph.movePiece(responseArr[responseArr.length - 3], responseArr[responseArr.length - 1]);
     this.pickCounter = 0;
     this.player = this.player == 0? 1 : 0;
   } else if(responseArr[0] == "2") {

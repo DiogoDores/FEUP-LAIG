@@ -26,7 +26,7 @@ AnimationsOfNode.prototype.constructor = AnimationsOfNode;
 
 AnimationsOfNode.prototype.updates = function(currTime){
   if(this.totalTime < this.animsTimes[this.animsTimes.length - 1]){
-    
+
     this.totalTime += currTime;
     this.currentTime += currTime;
     if(!this.isFinished){
@@ -65,5 +65,18 @@ AnimationsOfNode.prototype.nextAnim = function(){
       this.currentTime = this.totalTime - this.animsTimes[this.currAnim];
       this.currAnim++;
     }
+  }
+}
+
+AnimationsOfNode.prototype.addAnimationAfter = function(animation) {
+  if(this.isFinished) {
+    this.totalTime = this.animsTimes[this.animsTimes.length - 1];
+    this.currentTime = this.totalTime;
+    this.animsTimes.push(animation.getTotalTime());
+    this.anims.push(animation);
+    this.isFinished = false;
+  } else {
+    this.animsTimes.push(animation.getTotalTime());
+    this.anims.push(animation);
   }
 }
