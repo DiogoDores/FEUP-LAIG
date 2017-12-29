@@ -35,7 +35,6 @@ function XMLscene(interface) {
     this.secondsIndex = 10;
     this.minutesIndex = 5;
 
-    this.GameType = 3;
     this.gameType = 0;
 
 }
