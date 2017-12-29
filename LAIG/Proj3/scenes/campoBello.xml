@@ -125,7 +125,7 @@
         <file path="images/2.jpg" />
         <amplif_factor s="1" t="1" />
     </TEXTURE>
-    
+
     <TEXTURE id="number_3">
         <file path="images/3.jpg" />
         <amplif_factor s="1" t="1" />
@@ -476,7 +476,7 @@
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
-        <TRANSLATION x="-9.55" y="0" z="4.5" />
+        <TRANSLATION x="-9.05" y="0" z="4" />
 
         <DESCENDANTS>
            <NODEREF id="cube" />
@@ -489,7 +489,7 @@
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
-        <TRANSLATION x="-9.55" y="0" z="1.85" />
+        <TRANSLATION x="-9.05" y="0" z="1.35" />
 
         <DESCENDANTS>
            <NODEREF id="cube" />
@@ -501,7 +501,7 @@
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
-        <TRANSLATION x="-9.55" y="0" z="-0.8" />
+        <TRANSLATION x="-9.05" y="0" z="-1.2" />
 
         <DESCENDANTS>
            <NODEREF id="cube" />
@@ -513,7 +513,7 @@
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
-        <TRANSLATION x="-9.55" y="0" z="-3.45" />
+        <TRANSLATION x="-9.05" y="0" z="-3.95" />
 
         <DESCENDANTS>
            <NODEREF id="cube" />
@@ -525,7 +525,7 @@
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
-        <TRANSLATION x="-7.35" y="0" z="3.15" />
+        <TRANSLATION x="-6.85" y="0" z="2.65" />
 
         <DESCENDANTS>
            <NODEREF id="cube" />
@@ -537,7 +537,7 @@
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
-        <TRANSLATION x="-7.35" y="0" z="0.5" />
+        <TRANSLATION x="-6.85" y="0" z="0" />
 
         <DESCENDANTS>
            <NODEREF id="cube" />
@@ -549,7 +549,7 @@
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
-        <TRANSLATION x="-7.35" y="0" z="-2.15" />
+        <TRANSLATION x="-6.85" y="0" z="-2.65" />
 
         <DESCENDANTS>
            <NODEREF id="cube" />
@@ -561,7 +561,7 @@
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
-        <TRANSLATION x="-5.15" y="0" z="1.8" />
+        <TRANSLATION x="-4.65" y="0" z="1.3" />
 
         <DESCENDANTS>
            <NODEREF id="cube" />
@@ -573,7 +573,7 @@
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
-        <TRANSLATION x="-5.15" y="0" z="-0.85" />
+        <TRANSLATION x="-4.65" y="0" z="-1.35" />
 
         <DESCENDANTS>
            <NODEREF id="cube" />
@@ -585,7 +585,7 @@
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
-        <TRANSLATION x="8.55" y="0" z="-3.5" />
+        <TRANSLATION x="9.05" y="0" z="-4" />
 
         <DESCENDANTS>
             <NODEREF id="cube" />
@@ -598,7 +598,7 @@
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
-        <TRANSLATION x="8.55" y="0" z="-0.85" />
+        <TRANSLATION x="9.05" y="0" z="-1.55" />
 
         <DESCENDANTS>
            <NODEREF id="cube" />
@@ -610,7 +610,7 @@
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
-        <TRANSLATION x="8.55" y="0" z="1.8" />
+        <TRANSLATION x="9.05" y="0" z="1.3" />
 
         <DESCENDANTS>
            <NODEREF id="cube" />
@@ -622,7 +622,7 @@
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
-        <TRANSLATION x="8.55" y="0" z="4.45" />
+        <TRANSLATION x="9.05" y="0" z="3.95" />
 
         <DESCENDANTS>
            <NODEREF id="cube" />
@@ -634,7 +634,7 @@
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
-        <TRANSLATION x="6.35" y="0" z="-2.15" />
+        <TRANSLATION x="6.85" y="0" z="-2.5" />
 
         <DESCENDANTS>
            <NODEREF id="cube" />
@@ -646,7 +646,7 @@
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
-        <TRANSLATION x="6.35" y="0" z="0.5" />
+        <TRANSLATION x="6.85" y="0" z="0" />
 
         <DESCENDANTS>
            <NODEREF id="cube" />
@@ -658,7 +658,7 @@
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
-        <TRANSLATION x="6.35" y="0" z="3.15" />
+        <TRANSLATION x="6.85" y="0" z="2.65" />
 
         <DESCENDANTS>
            <NODEREF id="cube" />
@@ -670,7 +670,7 @@
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
-        <TRANSLATION x="4.15" y="0" z="-0.8" />
+        <TRANSLATION x="4.65" y="0" z="-1.3" />
 
         <DESCENDANTS>
            <NODEREF id="cube" />
@@ -682,7 +682,7 @@
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
-        <TRANSLATION x="4.15" y="0" z="1.85" />
+        <TRANSLATION x="4.65" y="0" z="1.35" />
 
         <DESCENDANTS>
            <NODEREF id="cube" />
@@ -694,6 +694,7 @@
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
+        <TRANSLATION x="-0.5" y="0" z="0.5" />
         <SCALE sx="1.0" sy="0.3" sz="1.0"/>
 
         <DESCENDANTS>
@@ -833,7 +834,7 @@
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
-        <TRANSLATION x="3.5" y="0" z="9.55" />
+        <TRANSLATION x="4" y="0" z="9.05" />
 
         <DESCENDANTS>
            <NODEREF id="circleObject" />
@@ -845,7 +846,7 @@
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
-        <TRANSLATION x="0.85" y="0" z="9.55" />
+        <TRANSLATION x="1.35" y="0" z="9.05" />
 
         <DESCENDANTS>
            <NODEREF id="circleObject" />
@@ -857,7 +858,7 @@
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
-        <TRANSLATION x="-1.8" y="0" z="9.55" />
+        <TRANSLATION x="-1.3" y="0" z="9.05" />
 
         <DESCENDANTS>
            <NODEREF id="circleObject" />
@@ -869,7 +870,7 @@
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
-        <TRANSLATION x="-4.45" y="0" z="9.55" />
+        <TRANSLATION x="-3.95" y="0" z="9.05" />
 
         <DESCENDANTS>
            <NODEREF id="circleObject" />
@@ -881,7 +882,7 @@
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
-        <TRANSLATION x="2.15" y="0" z="7.35" />
+        <TRANSLATION x="2.65" y="0" z="6.85" />
 
         <DESCENDANTS>
            <NODEREF id="circleObject" />
@@ -893,7 +894,7 @@
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
-        <TRANSLATION x="-0.5" y="0" z="7.35" />
+        <TRANSLATION x="0" y="0" z="6.85" />
 
         <DESCENDANTS>
            <NODEREF id="circleObject" />
@@ -905,7 +906,7 @@
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
-        <TRANSLATION x="-3.15" y="0" z="7.35" />
+        <TRANSLATION x="-2.65" y="0" z="6.85" />
 
         <DESCENDANTS>
            <NODEREF id="circleObject" />
@@ -917,7 +918,7 @@
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
-        <TRANSLATION x="0.8" y="0" z="5.15" />
+        <TRANSLATION x="1.3" y="0" z="4.65" />
 
         <DESCENDANTS>
            <NODEREF id="circleObject" />
@@ -929,7 +930,7 @@
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
-        <TRANSLATION x="-1.85" y="0" z="5.15" />
+        <TRANSLATION x="-1.35" y="0" z="4.65" />
 
         <DESCENDANTS>
            <NODEREF id="circleObject" />
@@ -941,7 +942,7 @@
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
-        <TRANSLATION x="-4.5" y="0" z="-8.55" />
+        <TRANSLATION x="-4" y="0" z="-9.05" />
 
         <DESCENDANTS>
            <NODEREF id="circleObject" />
@@ -953,7 +954,7 @@
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
-        <TRANSLATION x="-1.85" y="0" z="-8.55" />
+        <TRANSLATION x="-1.35" y="0" z="-9.05" />
 
         <DESCENDANTS>
            <NODEREF id="circleObject" />
@@ -965,7 +966,7 @@
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
-        <TRANSLATION x="0.8" y="0" z="-8.55" />
+        <TRANSLATION x="1.3" y="0" z="-9.05" />
 
         <DESCENDANTS>
            <NODEREF id="circleObject" />
@@ -977,7 +978,7 @@
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
-        <TRANSLATION x="3.45" y="0" z="-8.55" />
+        <TRANSLATION x="3.95" y="0" z="-9.05" />
 
         <DESCENDANTS>
            <NODEREF id="circleObject" />
@@ -989,7 +990,7 @@
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
-        <TRANSLATION x="-3.15" y="0" z="-6.35" />
+        <TRANSLATION x="-2.65" y="0" z="-6.85" />
 
         <DESCENDANTS>
            <NODEREF id="circleObject" />
@@ -1001,7 +1002,7 @@
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
-        <TRANSLATION x="-0.5" y="0" z="-6.35" />
+        <TRANSLATION x="0" y="0" z="-6.85" />
 
         <DESCENDANTS>
            <NODEREF id="circleObject" />
@@ -1013,7 +1014,7 @@
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
-        <TRANSLATION x="2.15" y="0" z="-6.35" />
+        <TRANSLATION x="2.65" y="0" z="-6.85" />
 
         <DESCENDANTS>
            <NODEREF id="circleObject" />
@@ -1025,7 +1026,7 @@
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
-        <TRANSLATION x="-1.8" y="0" z="-4.15" />
+        <TRANSLATION x="-1.3" y="0" z="-4.65" />
 
         <DESCENDANTS>
            <NODEREF id="circleObject" />
@@ -1037,7 +1038,7 @@
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
-        <TRANSLATION x="0.85" y="0" z="-4.15" />
+        <TRANSLATION x="1.35" y="0" z="-4.65" />
 
         <DESCENDANTS>
            <NODEREF id="circleObject" />
@@ -1049,7 +1050,6 @@
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
-        <TRANSLATION x="0.5" y="0" z="-0.5"/>
         <ROTATION axis="x" angle="90" />
 
         <DESCENDANTS>
@@ -1085,7 +1085,7 @@
     <NODE id="timer1">
         <MATERIAL id="null"/>
         <TEXTURE id="null" />
-        
+
         <TRANSLATION x="1.2" y="-2" z="6" />
         <ROTATION axis="y" angle="90" />
 
@@ -1111,7 +1111,7 @@
         </DESCENDANTS>
 
     </NODE>
-    
+
     <NODE id="dozens">
         <MATERIAL id="null"/>
         <TEXTURE id="number_6" />
@@ -1131,7 +1131,7 @@
     <NODE id="units">
         <MATERIAL id="null"/>
         <TEXTURE id="number_0" />
-        
+
         <SCALE sx="0.7" sy="0.7" sz="0.7" />
 
         <TRANSLATION x="0.65" y="-0.2" z="1.05" />

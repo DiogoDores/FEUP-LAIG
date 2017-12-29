@@ -19,6 +19,7 @@ function AnimationsOfNode(scene, animations) {
     time += this.anims[i].getTotalTime();
     this.animsTimes.push(time);
   }
+  this.notChanged = true;
 };
 
 AnimationsOfNode.prototype = Object.create(AnimationsOfNode.prototype);
@@ -75,6 +76,7 @@ AnimationsOfNode.prototype.addAnimationAfter = function(animation) {
     this.animsTimes.push(animation.getTotalTime());
     this.anims.push(animation);
     this.isFinished = false;
+    this.notChanged = true;
   } else {
     this.animsTimes.push(animation.getTotalTime());
     this.anims.push(animation);
