@@ -166,7 +166,7 @@ MySceneGraph.prototype.parseLSXFile = function (rootElement) {
     }
 
     this.createMapOfPieces();
-
+    this.createMapOfCoord();
 }
 
 /**
@@ -1748,7 +1748,8 @@ MySceneGraph.prototype.createMapOfCoord = function () {
   this.positionsMap.set("y3", vec3.fromValues(-3.15,0,7.35));
   this.positionsMap.set("y2", vec3.fromValues(0.8,0,5.15));
   this.positionsMap.set("y1", vec3.fromValues(-1.85,0,5.15));
-  this.positionsMap.set("y0", vec3.fromValues(0,0,0)); //TODO
+  this.positionsMap.set("y0", vec3.fromValues(-0.5,0,2.8));
+
 
   this.positionsMap.set("g9", vec3.fromValues(-4.5,0,-8.55));
   this.positionsMap.set("g8", vec3.fromValues(-1.85,0,-8.55));
@@ -1759,20 +1760,32 @@ MySceneGraph.prototype.createMapOfCoord = function () {
   this.positionsMap.set("g3", vec3.fromValues(2.15,0,-6.35));
   this.positionsMap.set("g2", vec3.fromValues(-1.8,0,-4.15));
   this.positionsMap.set("g1", vec3.fromValues(0.85,0,-4.15));
-  this.positionsMap.set("g0", vec3.fromValues(0,0,0)); //TODO
+  this.positionsMap.set("g0", vec3.fromValues(-0.5,0,-1.8));
 
-//TODO change values for blue and for red
-  this.positionsMap.set("b9", vec3.fromValues(-4.5,0,-8.55));
-  this.positionsMap.set("b8", vec3.fromValues(-1.85,0,-8.55));
-  this.positionsMap.set("b7", vec3.fromValues(0.8,0,-8.55));
-  this.positionsMap.set("b6", vec3.fromValues(3.45,0,-8.55));
-  this.positionsMap.set("b5", vec3.fromValues(-3.15,0,-6.35));
-  this.positionsMap.set("b4", vec3.fromValues(-0.5,0,-6.35));
-  this.positionsMap.set("b3", vec3.fromValues(2.15,0,-6.35));
-  this.positionsMap.set("b2", vec3.fromValues(-1.8,0,-4.15));
-  this.positionsMap.set("b1", vec3.fromValues(0.85,0,-4.15));
-  this.positionsMap.set("b0", vec3.fromValues(0,0,0)); //TODO
 
+  this.positionsMap.set("b9", vec3.fromValues(-9.55,0,4.5));
+  this.positionsMap.set("b8", vec3.fromValues(-9.55,0,1.85));
+  this.positionsMap.set("b7", vec3.fromValues(-9.55,0,-0.8));
+  this.positionsMap.set("b6", vec3.fromValues(-9.55,0,-3.45));
+  this.positionsMap.set("b5", vec3.fromValues(-7.35,0,3.15));
+  this.positionsMap.set("b4", vec3.fromValues(-7.35,0,0.5));
+  this.positionsMap.set("b3", vec3.fromValues(-7.35,0,-2.15));
+  this.positionsMap.set("b2", vec3.fromValues(-5.15,0,1.8));
+  this.positionsMap.set("b1", vec3.fromValues(-5.15,0,-0.85));
+  this.positionsMap.set("b0", vec3.fromValues(-2.8,0,0.5));
+
+  this.positionsMap.set("r9", vec3.fromValues(8.55,0,-3.5));
+  this.positionsMap.set("r8", vec3.fromValues(8.55,0,-0.85));
+  this.positionsMap.set("r7", vec3.fromValues(8.55,0,1.8));
+  this.positionsMap.set("r6", vec3.fromValues(8.55,0,4.45));
+  this.positionsMap.set("r5", vec3.fromValues(6.35,0,-2.15));
+  this.positionsMap.set("r4", vec3.fromValues(6.35,0,0.5));
+  this.positionsMap.set("r3", vec3.fromValues(6.35,0,3.15));
+  this.positionsMap.set("r2", vec3.fromValues(4.15,0,-0.8));
+  this.positionsMap.set("r1", vec3.fromValues(4.15,0,1.85));
+  this.positionsMap.set("r0", vec3.fromValues(1.8,0,0.5));
+
+  this.positionsMap.set("mid", vec3.fromValues(-0.5,0,0.5));
 }
 
 /**
