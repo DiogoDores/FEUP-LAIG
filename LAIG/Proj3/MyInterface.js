@@ -89,3 +89,11 @@ MyInterface.prototype.addShadersGroup = function (selectables) {
     });
 
 }
+
+MyInterface.prototype.addStartGameOptionsGroup = function () {
+    
+    var group = this.gui.addFolder("Start Game");
+    group.open();
+
+    group.add(this.scene, 'GameType', [ 'Multiplayer', 'Singleplayer', 'Computer vs Computer']);
+}

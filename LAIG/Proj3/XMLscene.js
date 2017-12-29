@@ -12,7 +12,6 @@ function XMLscene(interface) {
     this.lightValues = {};
     this.selectablesValues = {};
 
-    this.selectedShaderIndex = 0;
     this.scaleFactor = 1.0;
 
     this.Node = 0;
@@ -35,6 +34,10 @@ function XMLscene(interface) {
     this.runTimer = true;
     this.secondsIndex = 10;
     this.minutesIndex = 5;
+
+    this.GameType = 3;
+    this.gameType = 0;
+
 }
 
 XMLscene.prototype = Object.create(CGFscene.prototype);
@@ -184,10 +187,7 @@ XMLscene.prototype.onGraphLoaded = function () {
 
     this.updateScaleFactor();
 
-    // Adds lights group.
-    this.interface.addLightsGroup(this.graph.lights);
-
-    //this.interface.addShadersGroup(this.graph.selectables);
+    this.interface.addStartGameOptionsGroup();
 
 }
 
@@ -292,6 +292,14 @@ XMLscene.prototype.update = function (currTime) {
             this.globalCounter = 0;
         }
     }
+
+    if (this.GameTypeIndex == 'Multiplayer') {
+        this.gameType = 0;
+    } else if (this.GameTypeIndex == 'Singleplayer') {
+        this.gameType = 1;
+    } else if (this.GameTypeIndex == 'Computer vs Computer') {
+        this.gameType = 2;
+}
 
     this.globalCounter++;
 }
