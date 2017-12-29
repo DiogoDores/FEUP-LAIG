@@ -31,7 +31,7 @@
 
 	<LIGHT id="light1">
         <enable value ="1" />
-        <position x="30" y="10" z="0" w="1" />
+        <position x="47" y="34" z="-17" w="1" />
         <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
         <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
         <specular r="1.0" g="1.0" b="1.0" a="1.0" />
@@ -39,7 +39,7 @@
 
 	<LIGHT id="light2">
         <enable value ="1" />
-        <position x="0" y="10" z="20" w="1" />
+        <position x="10" y="10" z="-8" w="1" />
         <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
         <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
         <specular r="1.0" g="1.0" b="1.0" a="1.0" />
@@ -47,7 +47,7 @@
 
     <LIGHT id="light3">
         <enable value ="1" />
-        <position x="30" y="10" z="20" w="1" />
+        <position x="10" y="10" z="39" w="1" />
         <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
         <diffuse r="0.6" g="0.6" b="0.6" a="1.0" />
         <specular r="0.6" g="0.6" b="0.6" a="1.0" />
@@ -85,6 +85,21 @@
 
     <TEXTURE id="backVeniceTexture">
         <file path="images/backVenice.jpg" />
+        <amplif_factor s="1" t="1" />
+    </TEXTURE>
+
+    <TEXTURE id="pavementTexture">
+        <file path="images/pavement.jpg" />
+        <amplif_factor s="1" t="1" />
+    </TEXTURE>
+
+    <TEXTURE id="lampPostTexture">
+        <file path="images/lamp_post.jpg" />
+        <amplif_factor s="1" t="1" />
+    </TEXTURE>
+
+    <TEXTURE id="lampLightTexture">
+        <file path="images/light.png" />
         <amplif_factor s="1" t="1" />
     </TEXTURE>
 
@@ -1009,7 +1024,7 @@
         <MATERIAL id="null"/>
         <TEXTURE id="null" />
 
-        <SCALE sx="1.5" sy="4" sz="1.5" />
+        <SCALE sx="1.2" sy="4" sz="1.5" />
         <TRANSLATION x="0" y="10" z="10" />
         <ROTATION axis="y" angle="90" />
 
@@ -1046,7 +1061,7 @@
         <TEXTURE id="null" />
         
 
-        <SCALE sx="1.5" sy="4" sz="1.5" />
+        <SCALE sx="1.2" sy="4" sz="1.5" />
         <TRANSLATION x="0" y="10" z="10" />
         <ROTATION axis="y" angle="90" />
         <ROTATION axis="x" angle="180" />
@@ -1083,7 +1098,7 @@
         <MATERIAL id="null"/>
         <TEXTURE id="null" />
 
-        <SCALE sx="13.5" sy="1" sz="25" />
+        <SCALE sx="11" sy="1" sz="25" />
         <TRANSLATION x="0" y="5" z="0.65" />
         <ROTATION axis="x" angle="-90" />
 
@@ -1096,8 +1111,8 @@
         <MATERIAL id="yellowMaterial" />
         <TEXTURE id="accentTexture" />
 
-        <TRANSLATION x="-1.5" y="40" z="-18" />
-        <ROTATION axis="y" angle="-90" />
+        <TRANSLATION x="1.5" y="40" z="47.5" />
+        <ROTATION axis="y" angle="90" />
         <ROTATION axis="x" angle="180" />
         <ROTATION axis="z" angle="90" />
 
@@ -1247,7 +1262,7 @@
 
     <NODE id="pavement">
         <MATERIAL id="defaultMaterial"/>
-        <TEXTURE id="null" />
+        <TEXTURE id="pavementTexture" />
 
         <DESCENDANTS>
             <NODEREF id="pavementRight" />
@@ -1323,7 +1338,7 @@
 
     <NODE id="post">
         <MATERIAL id="defaultMaterial"/>
-        <TEXTURE id="null" />
+        <TEXTURE id="lampPostTexture" />
 
         <ROTATION axis="x" angle="-90" />
 
@@ -1335,14 +1350,14 @@
 
     <NODE id="middle">
         <MATERIAL id="defaultMaterial"/>
-        <TEXTURE id="null" />
+        <TEXTURE id="lampLightTexture" />
         
         <TRANSLATION x="0" y="19" z="0" />
         <ROTATION axis="y" angle="45" />
         <ROTATION axis="x" angle="-90" />
 
         <DESCENDANTS>
-            <LEAF  type="cylinder" args="4 2 3 4 20 0 1" />
+            <LEAF  type="cylinder" args="4 2 3 4 20 1 1" />
         </DESCENDANTS>
 
     </NODE>

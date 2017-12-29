@@ -180,7 +180,7 @@ XMLscene.prototype.onGraphLoaded = function () {
     // Adds lights group.
     this.interface.addLightsGroup(this.graph.lights);
 
-    this.interface.addShadersGroup(this.graph.selectables);
+    //this.interface.addShadersGroup(this.graph.selectables);
 
 }
 
@@ -320,6 +320,7 @@ XMLscene.prototype.display = function () {
         this.setActiveShader(this.transparent);
 
         this.pushMatrix();
+        this.translate(10, 7, 15);
         this.scale(0.7, 1, 0.7);
         this.translate(0,0.4,0);
         this.registerForPick(this.objects.length, this.objects[this.objects.length-1]);
@@ -343,6 +344,7 @@ XMLscene.prototype.display = function () {
             if(counter <= 10){
                 lastZ -= 2.65;
 
+                this.translate(10, 7, 15);
                 this.scale(0.7, 1, 0.7);
                 this.rotate(angle*Math.PI/180, 0,1,0);
                 this.translate(lastX, 0.4, lastZ);
