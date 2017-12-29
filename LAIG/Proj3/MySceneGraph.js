@@ -165,6 +165,8 @@ MySceneGraph.prototype.parseLSXFile = function (rootElement) {
             return error;
     }
 
+    this.createMapOfPieces();
+
 }
 
 /**
@@ -1563,6 +1565,7 @@ MySceneGraph.prototype.parseNodes = function (nodesNode) {
     }
 
     console.log("Parsed nodes");
+
     return null;
 }
 
@@ -1680,6 +1683,135 @@ MySceneGraph.generateRandomString = function (length) {
         numbers.push(Math.floor(Math.random() * 256)); // Random ASCII code.
 
     return String.fromCharCode.apply(null, numbers);
+}
+
+/**
+ * Generates a map of the piece node to the position
+ */
+MySceneGraph.prototype.createMapOfPieces = function () {
+  this.piecesMap = new Map();
+
+  this.piecesMap.set("circle1_yellow", "y9");
+  this.piecesMap.set("circle2_yellow", "y8");
+  this.piecesMap.set("circle3_yellow", "y7");
+  this.piecesMap.set("circle4_yellow", "y6");
+  this.piecesMap.set("circle5_yellow", "y5");
+  this.piecesMap.set("circle6_yellow", "y4");
+  this.piecesMap.set("circle7_yellow", "y3");
+  this.piecesMap.set("circle8_yellow", "y2");
+  this.piecesMap.set("circle9_yellow", "y1");
+
+  this.piecesMap.set("circle1_green", "g9");
+  this.piecesMap.set("circle2_green", "g8");
+  this.piecesMap.set("circle3_green", "g7");
+  this.piecesMap.set("circle4_green", "g6");
+  this.piecesMap.set("circle5_green", "g5");
+  this.piecesMap.set("circle6_green", "g4");
+  this.piecesMap.set("circle7_green", "g3");
+  this.piecesMap.set("circle8_green", "g2");
+  this.piecesMap.set("circle9_green", "g1");
+
+  this.piecesMap.set("square1_blue", "b9");
+  this.piecesMap.set("square2_blue", "b8");
+  this.piecesMap.set("square3_blue", "b7");
+  this.piecesMap.set("square4_blue", "b6");
+  this.piecesMap.set("square5_blue", "b5");
+  this.piecesMap.set("square6_blue", "b4");
+  this.piecesMap.set("square7_blue", "b3");
+  this.piecesMap.set("square8_blue", "b2");
+  this.piecesMap.set("square9_blue", "b1");
+
+  this.piecesMap.set("square1_red", "r9");
+  this.piecesMap.set("square2_red", "r8");
+  this.piecesMap.set("square3_red", "r7");
+  this.piecesMap.set("square4_red", "r6");
+  this.piecesMap.set("square5_red", "r5");
+  this.piecesMap.set("square6_red", "r4");
+  this.piecesMap.set("square7_red", "r3");
+  this.piecesMap.set("square8_red", "r2");
+  this.piecesMap.set("square9_red", "r1");
+
+}
+
+/**
+ * Generates a map of the position to the position coordinates
+ */
+MySceneGraph.prototype.createMapOfCoord = function () {
+  this.positionsMap = new Map();
+
+  this.positionsMap.set("y9", vec3.fromValues(3.5,0,9.55));
+  this.positionsMap.set("y8", vec3.fromValues(0.85,0,9.55));
+  this.positionsMap.set("y7", vec3.fromValues(-1.8,0,9.55));
+  this.positionsMap.set("y6", vec3.fromValues(-4.45,0,9.55));
+  this.positionsMap.set("y5", vec3.fromValues(2.15,0,7.35));
+  this.positionsMap.set("y4", vec3.fromValues(-0.5,0,7.35));
+  this.positionsMap.set("y3", vec3.fromValues(-3.15,0,7.35));
+  this.positionsMap.set("y2", vec3.fromValues(0.8,0,5.15));
+  this.positionsMap.set("y1", vec3.fromValues(-1.85,0,5.15));
+  this.positionsMap.set("y0", vec3.fromValues(0,0,0)); //TODO
+
+  this.positionsMap.set("g9", vec3.fromValues(-4.5,0,-8.55));
+  this.positionsMap.set("g8", vec3.fromValues(-1.85,0,-8.55));
+  this.positionsMap.set("g7", vec3.fromValues(0.8,0,-8.55));
+  this.positionsMap.set("g6", vec3.fromValues(3.45,0,-8.55));
+  this.positionsMap.set("g5", vec3.fromValues(-3.15,0,-6.35));
+  this.positionsMap.set("g4", vec3.fromValues(-0.5,0,-6.35));
+  this.positionsMap.set("g3", vec3.fromValues(2.15,0,-6.35));
+  this.positionsMap.set("g2", vec3.fromValues(-1.8,0,-4.15));
+  this.positionsMap.set("g1", vec3.fromValues(0.85,0,-4.15));
+  this.positionsMap.set("g0", vec3.fromValues(0,0,0)); //TODO
+
+//TODO change values for blue and for red
+  this.positionsMap.set("b9", vec3.fromValues(-4.5,0,-8.55));
+  this.positionsMap.set("b8", vec3.fromValues(-1.85,0,-8.55));
+  this.positionsMap.set("b7", vec3.fromValues(0.8,0,-8.55));
+  this.positionsMap.set("b6", vec3.fromValues(3.45,0,-8.55));
+  this.positionsMap.set("b5", vec3.fromValues(-3.15,0,-6.35));
+  this.positionsMap.set("b4", vec3.fromValues(-0.5,0,-6.35));
+  this.positionsMap.set("b3", vec3.fromValues(2.15,0,-6.35));
+  this.positionsMap.set("b2", vec3.fromValues(-1.8,0,-4.15));
+  this.positionsMap.set("b1", vec3.fromValues(0.85,0,-4.15));
+  this.positionsMap.set("b0", vec3.fromValues(0,0,0)); //TODO
+
+}
+
+/**
+ * Adds an animation to a piece to change position
+ */
+MySceneGraph.prototype.movePiece = function (pos1, pos2) {
+  let nodePos1;
+  for (var [key, value] of this.piecesMap) {
+    if(value == pos1){
+      nodePos1 = key;
+      break;
+    }
+  }
+  this.piecesMap.delete(nodePos1);
+  this.piecesMap.set(nodePos1, pos2);
+
+  let var1 = this.scene.getMatrix();
+  console.log(var1);
+  let var2 = mat4.multiply(var1, var1, this.nodes[nodePos1].transformMatrix)
+  console.log(this.nodes[nodePos1].transformMatrix);
+  console.log(var2);
+  //let var3 = mat4.multiply(var2, var2, )
+/*
+  if (this.nodes[nodePos1].anim != null) {
+    this.scene.multMatrix(this.nodes[nodePos1].anim.matrix);
+  } */
+
+  //TODO create animation from pos1 to pos2
+  console.log(nodePos1);
+  if(this.nodes[nodePos1].anim == null){
+
+    var animHolder = new AnimationsOfNode(this, animation);
+    this.animRefs.push(animHolder);
+    this.nodes[nodePos1].addAnimation(this.animRefs[this.animRefs.length - 1]);
+  } else {
+    this.nodes[nodePos1].anim.addAnimationAfter(animation);
+  }
+    console.log(this.nodes[nodePos1]);
+
 }
 
 /**
