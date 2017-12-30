@@ -150,7 +150,9 @@ XMLscene.prototype.updateScaleFactor = function (v) {
  * Initializes the scene cameras.
  */
 XMLscene.prototype.initCameras = function () {
-    this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(22, 6, 33), vec3.fromValues(0, 0, 0));
+    this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 10, 35), vec3.fromValues(0, 0, 0));
+    this.camera.rotate(vec3.fromValues(0, 1, 0), 3*Math.PI/180);
+    this.camera.rotate(vec3.fromValues(1, 0, 0), 8*Math.PI/180);
 }
 
 XMLscene.prototype.logPicking = function ()
@@ -324,7 +326,7 @@ XMLscene.prototype.update = function (currTime) {
 
     this.globalCounter++;
 
-    //console.log(this.camera.position);
+    //console.log(this.camera);
     
     //Moves camera to board
     if(this.alignCamera){
@@ -334,35 +336,38 @@ XMLscene.prototype.update = function (currTime) {
 
 XMLscene.prototype.moveCameraToBoard = function () {
 
-    this.camera.setPosition(vec3.fromValues(Math.round(this.camera.position[0]),
+    this.camera.setPosition(vec3.fromValues(15, 10, 35));
+    this.alignCamera = false;
+
+
+    /*this.camera.setPosition(vec3.fromValues(Math.round(this.camera.position[0]),
                                             Math.round(this.camera.position[1]),
                                             Math.round(this.camera.position[2])));
 
-    if(this.camera.position[0] == 6 && this.camera.position[1] == 14 && this.camera.position[2] == 16){
+    if(this.camera.position[0] == 4 && this.camera.position[1] == 17 && this.camera.position[2] == 7){
         this.alignCamera = false;
-        this.camera.orbit("y", 90);
     }
 
-    if(this.camera.position[0] != 6){
-        if(this.camera.position[0] > 6)
+    if(this.camera.position[0] != 4){
+        if(this.camera.position[0] > 4)
             this.camera.setPosition(vec3.fromValues(this.camera.position[0] - 1, this.camera.position[1], this.camera.position[2]));
         else
             this.camera.setPosition(vec3.fromValues(this.camera.position[0] + 1, this.camera.position[1], this.camera.position[2]));
     }
 
-    if(this.camera.position[1] != 14){
-        if(this.camera.position[1] > 14)
+    if(this.camera.position[1] != 17){
+        if(this.camera.position[1] > 17)
             this.camera.setPosition(vec3.fromValues(this.camera.position[0], this.camera.position[1] - 1, this.camera.position[2]));
         else
             this.camera.setPosition(vec3.fromValues(this.camera.position[0], this.camera.position[1] + 1, this.camera.position[2]));
     }
 
-    if(this.camera.position[2] != 16){
-        if(this.camera.position[2] > 16)
+    if(this.camera.position[2] != 7){
+        if(this.camera.position[2] > 7)
             this.camera.setPosition(vec3.fromValues(this.camera.position[0], this.camera.position[1], this.camera.position[2] - 1));
         else
             this.camera.setPosition(vec3.fromValues(this.camera.position[0], this.camera.position[1], this.camera.position[2] + 1));
-    }
+    }*/
 }
 
 /**
