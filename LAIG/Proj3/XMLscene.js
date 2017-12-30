@@ -444,7 +444,7 @@ XMLscene.prototype.makePickable = function(){
         var buttonCounter = 1.1;
         for(var i = 42; i < 45; i++){
             this.pushMatrix();
-                this.translate(9.5, 33.5, -24.8);
+                this.translate(-0.5, 26.5, -39.8);
                 this.scale(13, 7, 1);
                 this.translate(0, buttonCounter, 0);
                 this.rotate(90*Math.PI/180, 1, 0, 0);
@@ -456,7 +456,6 @@ XMLscene.prototype.makePickable = function(){
     }
 
     this.pushMatrix();
-        this.translate(10, 7, 15);
         this.scale(0.7, 1, 0.7);
         this.translate(0,0.4,0);
         this.registerForPick(41, this.objects[this.objects.length-4]);
@@ -480,7 +479,6 @@ XMLscene.prototype.makePickable = function(){
         if(counter <= 10){
             lastZ -= 2.65;
 
-            this.translate(10, 7, 15);
             this.scale(0.7, 1, 0.7);
             this.rotate(angle*Math.PI/180, 0,1,0);
             this.translate(lastX, 0.4, lastZ);
