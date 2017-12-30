@@ -155,8 +155,6 @@ XMLscene.prototype.updateScaleFactor = function (v) {
  */
 XMLscene.prototype.initCameras = function () {
     this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 10, 35), vec3.fromValues(0, 0, 0));
-    this.camera.rotate(vec3.fromValues(0, 1, 0), 3*Math.PI/180);
-    this.camera.rotate(vec3.fromValues(1, 0, 0), 8*Math.PI/180);
 }
 
 XMLscene.prototype.logPicking = function ()
@@ -414,7 +412,11 @@ XMLscene.prototype.update = function (currTime) {
 
 XMLscene.prototype.moveCameraToBoard = function () {
 
-    this.camera.setPosition(vec3.fromValues(15, 10, 35));
+
+    this.camera.setPosition(vec3.fromValues(0, 10, 10));
+    this.camera.rotate(vec3.fromValues(0, 1, 0), 1*Math.PI/180);
+    this.camera.rotate(vec3.fromValues(1, 0, 0), 5*Math.PI/180);
+
     this.alignCamera = false;
 
 
