@@ -31,13 +31,18 @@ function XMLscene(interface) {
     this.makeRequest(0);
 
     this.globalCounter = 0;
-    this.runTimer = true;
+    this.runTimer = false;
     this.secondsIndex = 10;
     this.minutesIndex = 5;
 
-    this.gameType = 0;
+    this.gameMode = 3;
+    this.isGameModeSelected = false;
+
 
     this.playing = true; //TODO change
+
+    this.alignCamera = [true];
+    this.cameraCoords = [50, 50, 50];
 }
 
 XMLscene.prototype = Object.create(CGFscene.prototype);
@@ -61,7 +66,7 @@ XMLscene.prototype.init = function (application) {
     this.gl.enable(this.gl.CULL_FACE);
     this.gl.depthFunc(this.gl.LEQUAL);
 
-    for (var i = 0; i < 41; i++) {
+    for (var i = 0; i < 44; i++) {
        this.objects.push(new CGFplane(this));
     }
 
@@ -102,7 +107,6 @@ XMLscene.prototype.initLights = function () {
             i++;
         }
     }
-
 }
 
 XMLscene.prototype.initShaders = function () {
@@ -146,7 +150,7 @@ XMLscene.prototype.updateScaleFactor = function (v) {
  * Initializes the scene cameras.
  */
 XMLscene.prototype.initCameras = function () {
-    this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(50, 50, 50), vec3.fromValues(0, 0, 0));
+    this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(this.cameraCoords[0], this.cameraCoords[1], this.cameraCoords[2]), vec3.fromValues(0, 0, 0));
 }
 
 XMLscene.prototype.logPicking = function ()
@@ -162,13 +166,32 @@ XMLscene.prototype.logPicking = function ()
                     this.pickCounter++;
                     if(this.pickCounter == 2)
                       this.makeRequest(1); // TODO ver melhor esta parte para usar o counter a 3 para dar pick na peca a remover
-                    console.log("Picked object: " + obj + ", with pick id " + customId);
+
+                    this.selectGameMode(customId);
+                    console.log("Picked id " + customId);
                 }
             }
             this.pickResults.splice(0,this.pickResults.length);
         }
     }
 }
+
+XMLscene.prototype.selectGameMode = function(id) {
+    if(id == 42){
+        this.gameMode = 0;
+        this.isGameModeSelected = true;
+        this.runTimer = true;
+    } else if(id == 43){
+        this.gameMode = 1;
+        this.isGameModeSelected = true;
+        this.runTimer = true;
+    } else if(id == 44){
+        this.gameMode = 2;
+        this.isGameModeSelected = true;
+        this.runTimer = true;
+    }
+}
+
 
 /* Handler called when the graph is finally loaded.
  * As loading is asynchronous, this may be called already after the application has started the run loop
@@ -186,8 +209,6 @@ XMLscene.prototype.onGraphLoaded = function () {
     this.initLights();
 
     this.updateScaleFactor();
-
-    this.interface.addStartGameOptionsGroup();
 
 }
 
@@ -248,13 +269,6 @@ XMLscene.prototype.handleReply = function(data){
   //TODO Fazer movimentos e cenas
 }
 
-function setGameType(value){
-    this.gameType = value;
-    var elem = document.getElementById('div');
-    elem.parentNode.removeChild(elem);
-    console.log(value);
-}
-
 /*
  *
  */
@@ -284,6 +298,8 @@ XMLscene.prototype.update = function (currTime) {
 
         if (this.graph.nodes != null && this.graph.clockTextures != null && this.runTimer) {
 
+            console.log("cenas");
+
             if(this.graph.nodes["units"].textureID != this.graph.clockTextures[0]){
                 this.graph.nodes["units"].textureID = this.graph.clockTextures[this.secondsIndex--];
             }
@@ -300,15 +316,23 @@ XMLscene.prototype.update = function (currTime) {
         }
     }
 
-    if (this.GameTypeIndex == 'Multiplayer') {
-        this.gameType = 0;
-    } else if (this.GameTypeIndex == 'Singleplayer') {
-        this.gameType = 1;
-    } else if (this.GameTypeIndex == 'Computer vs Computer') {
-        this.gameType = 2;
+    this.globalCounter++;
+    
+    //Moves camera to board
+    if(!this.alignCamera){
+        this.moveCameraToBoard();
+    }
 }
 
-    this.globalCounter++;
+XMLscene.prototype.moveCameraToBoard = function () {
+
+    if(this.cameraCoords[0] != 0){
+        this.cameraCoords[0] -= 1;
+        this.cameraCoords[1] -= 1;
+        this.cameraCoords[2] -= 1;
+    }
+
+    this.camera.setPosition(vec3.fromValues(this.cameraCoords[0] - 1, this.cameraCoords[1] - 1, this.cameraCoords[0] - 1));
 }
 
 /**
@@ -356,78 +380,7 @@ XMLscene.prototype.display = function () {
             }
         }
 
-        var counter = 1;
-        var inverseCounter = 9;
-        var lastX = -9.05;
-        var lastZ = 6.65;
-        var angle = 0;
-        var name = ["b", "g", "r", "y"];
-        var nameCounter = 0;
-
-        this.setActiveShader(this.transparent);
-
-        this.pushMatrix();
-            this.translate(10, 7, 15);
-            this.scale(0.7, 1, 0.7);
-            this.translate(0,0.4,0);
-            this.registerForPick(this.objects.length, this.objects[this.objects.length-1]);
-            this.objects[this.objects.length-1].display();
-        this.popMatrix();
-
-        for (var i = 0; i < this.objects.length - 1; i++) {
-
-            if(counter == 5){
-                lastZ = 5.3;
-                lastX += 2.2;
-            } else if (counter == 8) {
-                lastZ = 3.95;
-                lastX += 2.2;
-            } else if (counter == 10){
-                lastZ = 2.6;
-                lastX += 2.2;
-            }
-
-            this.pushMatrix()
-            if(counter <= 10){
-                lastZ -= 2.65;
-
-                this.translate(10, 7, 15);
-                this.scale(0.7, 1, 0.7);
-                this.rotate(angle*Math.PI/180, 0,1,0);
-                this.translate(lastX, 0.4, lastZ);
-            }
-
-            this.registerForPick(i+1, this.objects[i]);
-            if(this.runOnce){
-                var idName = name[nameCounter] + inverseCounter;
-                this.pickIDs.push(idName);
-            }
-
-            if(counter == 10){
-                counter = 0;
-                inverseCounter = 10;
-                angle -= 90;
-                lastX = -9.05;
-                lastZ = 6.65;
-                nameCounter++;
-            }
-
-            this.objects[i].display();
-            this.popMatrix();
-
-            counter++;
-            inverseCounter--;
-        }
-
-    if(this.runOnce)
-        this.pickIDs.push("mid");
-
-    this.runOnce = false;
-
-    this.setActiveShader(this.defaultShader);
-
-    this.clearPickRegistration();
-
+        this.makePickable();
 
         // Displays the scene.
         this.graph.displayScene();
@@ -443,4 +396,94 @@ XMLscene.prototype.display = function () {
 
     // ---- END Background, camera and axis setup
 
+}
+
+XMLscene.prototype.makePickable = function(){
+
+    var counter = 1;
+    var inverseCounter = 9;
+    var lastX = -9.05;
+    var lastZ = 6.65;
+    var angle = 0;
+    var name = ["b", "g", "r", "y"];
+    var nameCounter = 0;
+
+    this.setActiveShader(this.transparent);
+
+    if(!this.isGameModeSelected){
+        var buttonCounter = 1.1;
+        for(var i = 42; i < 45; i++){
+            this.pushMatrix();
+                this.translate(9.5, 33.5, -24.8);
+                this.scale(13, 7, 1);
+                this.translate(0, buttonCounter, 0);
+                this.rotate(90*Math.PI/180, 1, 0, 0);
+                this.registerForPick(i, this.objects[i-1]);
+                this.objects[i-1].display();
+            this.popMatrix();
+            buttonCounter -= 1.1;
+        } 
+    }
+
+    this.pushMatrix();
+        this.translate(10, 7, 15);
+        this.scale(0.7, 1, 0.7);
+        this.translate(0,0.4,0);
+        this.registerForPick(41, this.objects[this.objects.length-4]);
+        this.objects[this.objects.length-4].display();
+    this.popMatrix();
+
+    for (var i = 0; i < this.objects.length - 1; i++) {
+
+        if(counter == 5){
+            lastZ = 5.3;
+            lastX += 2.2;
+        } else if (counter == 8) {
+            lastZ = 3.95;
+            lastX += 2.2;
+        } else if (counter == 10){
+            lastZ = 2.6;
+            lastX += 2.2;
+        }
+
+        this.pushMatrix()
+        if(counter <= 10){
+            lastZ -= 2.65;
+
+            this.translate(10, 7, 15);
+            this.scale(0.7, 1, 0.7);
+            this.rotate(angle*Math.PI/180, 0,1,0);
+            this.translate(lastX, 0.4, lastZ);
+        }
+
+        this.registerForPick(i+1, this.objects[i]);
+        if(this.runOnce){
+            var idName = name[nameCounter] + inverseCounter;
+            this.pickIDs.push(idName);
+        }
+
+        if(counter == 10){
+            counter = 0;
+            inverseCounter = 10;
+            angle -= 90;
+            lastX = -9.05;
+            lastZ = 6.65;
+            nameCounter++;
+        }
+
+        this.objects[i].display();
+        this.popMatrix();
+
+        counter++;
+        inverseCounter--;
+    }
+
+    if(this.runOnce)
+        this.pickIDs.push("mid");
+
+    this.runOnce = false;
+
+    this.setActiveShader(this.defaultShader);
+
+    this.clearPickRegistration();
 }
