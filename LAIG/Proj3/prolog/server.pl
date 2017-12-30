@@ -105,14 +105,33 @@ print_header_line(_).
 
 parse_input(handshake, handshake).
 % Request: 0 - initial; 1 - to make a move ; 2 - with mover to remove
-% Reply: 0 - initial; 1 - moves ; 2 - bad move ; 3 - asks for mover to remove ; 4 - does move with removing mover
+% Reply: 0 - initial; 1 - moves ; 2 - bad move ; 3 - asks for mover to remove ; 4 - does move with removing mover ; 9 - game Over
 parse_input(0, 0-Y-B) :- initialBoard(Y,B).
 % Mode: 1 - H/H ; 2 - H/PC ; 3 - PC/PC
-parse_input(1-Yi-Bi-Player-Mode-PosI-PosF,1-Yo-Bo-PosI-PosJumped-PosF):-
-		isValid(Player, Yi,Bi,PosI,PosJumped,PosF),
-		game(Yi,Bi,Player,Mode,_,_,PosI,PosJumped,PosF, Yo, Bo).
 parse_input(1-Yi-Bi-Player-_-PosI-PosF,2):-
-		\+isValid(Player, Yi,Bi,PosI,_,PosF).
+	\+isValid(Player, Yi,Bi,PosI,_,PosF,_).
+parse_input(1-Yi-Bi-Player-_-PosI-PosF,3):-
+	isValid(Player, Yi,Bi,PosI,_,PosF,1).
+
+parse_input(2-Yi-Bi-Player-Mode-PosI-PosF-MoverToRemove,4-Yo-Bo-PosI-MoverToRemove-PosF):-
+		isValid(Player, Yi,Bi,PosI,PosJumped,PosF,1),
+		game(Yi,Bi,Player,Mode,_,_,PosI,PosJumped,PosF, Yo, Bo, MoverToRemove, GameOver),
+		GameOver == 0.
+
+parse_input(2-Yi-Bi-Player-Mode-PosI-PosF-MoverToRemove,9-Yo-Bo-PosI-MoverToRemove-PosF):-
+		isValid(Player, Yi,Bi,PosI,_,PosF,1),
+		game(Yi,Bi,Player,Mode,_,_,PosI,_,PosF, Yo, Bo,MoverToRemove, GameOver),
+		GameOver == 1.
+
+parse_input(1-Yi-Bi-Player-Mode-PosI-PosF,1-Yo-Bo-PosI-PosJumped-PosF):-
+		isValid(Player, Yi,Bi,PosI,PosJumped,PosF,0),
+		game(Yi,Bi,Player,Mode,_,_,PosI,PosJumped,PosF, Yo, Bo,_, GameOver),
+		GameOver == 0.
+
+parse_input(1-Yi-Bi-Player-Mode-PosI-PosF,9-Yo-Bo-PosI-PosJumped-PosF):-
+		isValid(Player, Yi,Bi,PosI,PosJumped,PosF,0),
+		game(Yi,Bi,Player,Mode,_,_,PosI,PosJumped,PosF, Yo, Bo, _,GameOver),
+		GameOver == 1.
 
 %parse_input(Initial-Final, 1-handshake-Final) :- write(Initial), nl, write(Final), nl.
 %parse_input(test(C,N), Res) :- test(C,Res,N).
