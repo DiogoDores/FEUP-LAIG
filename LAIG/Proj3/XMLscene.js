@@ -37,12 +37,9 @@ function XMLscene(interface) {
 
     this.gameMode = 3;
     this.isGameModeSelected = false;
-
+    this.alignCamera = false;
 
     this.playing = true; //TODO change
-
-    this.alignCamera = [true];
-    this.cameraCoords = [50, 50, 50];
 
     this.piecesOut = [0,0,0,0]; //[yellow, green, blue, red]
 
@@ -153,7 +150,7 @@ XMLscene.prototype.updateScaleFactor = function (v) {
  * Initializes the scene cameras.
  */
 XMLscene.prototype.initCameras = function () {
-    this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(this.cameraCoords[0], this.cameraCoords[1], this.cameraCoords[2]), vec3.fromValues(0, 0, 0));
+    this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(22, 6, 33), vec3.fromValues(0, 0, 0));
 }
 
 XMLscene.prototype.logPicking = function ()
@@ -184,14 +181,18 @@ XMLscene.prototype.selectGameMode = function(id) {
         this.gameMode = 0;
         this.isGameModeSelected = true;
         this.runTimer = true;
+        this.alignCamera = true;
+        console.log(this.camera.getViewMatrix());
     } else if(id == 43){
         this.gameMode = 1;
         this.isGameModeSelected = true;
         this.runTimer = true;
+        this.alignCamera = true;
     } else if(id == 44){
         this.gameMode = 2;
         this.isGameModeSelected = true;
         this.runTimer = true;
+        this.alignCamera = true;
     }
 }
 
@@ -300,43 +301,68 @@ XMLscene.prototype.update = function (currTime) {
 
     if(this.globalCounter == 33){
 
-        if (this.graph.nodes != null && this.graph.clockTextures != null && this.runTimer) {
+        if (this.graph.nodes != null && this.graph.clockTextures != null) {
 
-            console.log("cenas");
+            if(this.runTimer){
 
-            if(this.graph.nodes["units"].textureID != this.graph.clockTextures[0]){
-                this.graph.nodes["units"].textureID = this.graph.clockTextures[this.secondsIndex--];
+                if(this.graph.nodes["units"].textureID != this.graph.clockTextures[0]){
+                    this.graph.nodes["units"].textureID = this.graph.clockTextures[this.secondsIndex--];
+                } else {
+                    this.graph.nodes["dozens"].textureID = this.graph.clockTextures[this.minutesIndex--];
+                    this.secondsIndex = 9;
+                    this.graph.nodes["units"].textureID = this.graph.clockTextures[this.secondsIndex--];
+                }
+
+                if(this.graph.nodes["units"].textureID == this.graph.clockTextures[0] && this.graph.nodes["dozens"].textureID == this.graph.clockTextures[0])
+                    this.runTimer = false;
+
             }
-            else{
-                this.graph.nodes["dozens"].textureID = this.graph.clockTextures[this.minutesIndex--];
-                this.secondsIndex = 9;
-                this.graph.nodes["units"].textureID = this.graph.clockTextures[this.secondsIndex--];
-            }
-
-            if(this.graph.nodes["units"].textureID == this.graph.clockTextures[0] && this.graph.nodes["dozens"].textureID == this.graph.clockTextures[0])
-                this.runTimer = false;
 
             this.globalCounter = 0;
         }
     }
 
     this.globalCounter++;
+
+    //console.log(this.camera.position);
     
     //Moves camera to board
-    if(!this.alignCamera){
+    if(this.alignCamera){
         this.moveCameraToBoard();
     }
 }
 
 XMLscene.prototype.moveCameraToBoard = function () {
 
-    if(this.cameraCoords[0] != 0){
-        this.cameraCoords[0] -= 1;
-        this.cameraCoords[1] -= 1;
-        this.cameraCoords[2] -= 1;
+    this.camera.setPosition(vec3.fromValues(Math.round(this.camera.position[0]),
+                                            Math.round(this.camera.position[1]),
+                                            Math.round(this.camera.position[2])));
+
+    if(this.camera.position[0] == 6 && this.camera.position[1] == 14 && this.camera.position[2] == 16){
+        this.alignCamera = false;
+        this.camera.orbit("y", 90);
     }
 
-    this.camera.setPosition(vec3.fromValues(this.cameraCoords[0] - 1, this.cameraCoords[1] - 1, this.cameraCoords[0] - 1));
+    if(this.camera.position[0] != 6){
+        if(this.camera.position[0] > 6)
+            this.camera.setPosition(vec3.fromValues(this.camera.position[0] - 1, this.camera.position[1], this.camera.position[2]));
+        else
+            this.camera.setPosition(vec3.fromValues(this.camera.position[0] + 1, this.camera.position[1], this.camera.position[2]));
+    }
+
+    if(this.camera.position[1] != 14){
+        if(this.camera.position[1] > 14)
+            this.camera.setPosition(vec3.fromValues(this.camera.position[0], this.camera.position[1] - 1, this.camera.position[2]));
+        else
+            this.camera.setPosition(vec3.fromValues(this.camera.position[0], this.camera.position[1] + 1, this.camera.position[2]));
+    }
+
+    if(this.camera.position[2] != 16){
+        if(this.camera.position[2] > 16)
+            this.camera.setPosition(vec3.fromValues(this.camera.position[0], this.camera.position[1], this.camera.position[2] - 1));
+        else
+            this.camera.setPosition(vec3.fromValues(this.camera.position[0], this.camera.position[1], this.camera.position[2] + 1));
+    }
 }
 
 /**
