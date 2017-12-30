@@ -1875,7 +1875,7 @@ MySceneGraph.prototype.removePiece = function (pos) {
   let coordPos2 = vec3.create();
 //  coordPos2 = this.positionsMap.get(pos2);
   vec3.subtract(coordPos2, this.positionsMap.get(nodePos2), this.positionsMap.get(pos));
-  coordPos2[1] = this.scene.piecesOut[color];
+  coordPos2[1] = 0.3*this.scene.piecesOut[color];
   let animation = new BezierAnimation(this, ["bezier", "3", [[0,0,0],
       [0,5+coordPos2[1],0], [coordPos2[0],5+coordPos2[1],coordPos2[2]],coordPos2]]);
   console.log(coordPos2);
