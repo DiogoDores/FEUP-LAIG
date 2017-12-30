@@ -43,6 +43,9 @@ function XMLscene(interface) {
 
     this.alignCamera = [true];
     this.cameraCoords = [50, 50, 50];
+
+    this.piecesOut = [0,0,0,0]; //[yellow, green, blue, red]
+
 }
 
 XMLscene.prototype = Object.create(CGFscene.prototype);
@@ -258,6 +261,7 @@ XMLscene.prototype.handleReply = function(data){
     console.log("nice move");
     this.allPlays.push(responseArr);
     this.graph.movePiece(responseArr[responseArr.length - 3], responseArr[responseArr.length - 1]);
+    this.graph.removePiece(responseArr[responseArr.length - 2]);
     this.pickCounter = 0;
     this.player = this.player == 0? 1 : 0;
   } else if(responseArr[0] == "2") {

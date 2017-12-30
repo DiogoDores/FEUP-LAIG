@@ -160,7 +160,7 @@
         <file path="images/9.jpg" />
         <amplif_factor s="1" t="1" />
     </TEXTURE>
-
+    
     <TEXTURE id="multiplayer">
         <file path="images/multiplayer.jpg" />
         <amplif_factor s="1" t="1" />
@@ -175,7 +175,6 @@
         <file path="images/pc.jpg" />
         <amplif_factor s="1" t="1" />
     </TEXTURE>
-
 </TEXTURES>
 
 
