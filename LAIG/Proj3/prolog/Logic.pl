@@ -259,7 +259,7 @@ gameHuman(Player,Yi,Bi,InitialPos, JumpPos, FinalPos,MoverToRemove,Yo,Bo):-
 getPersonalMovers(y,Yi,_,Yi).
 getPersonalMovers(b,_,Bi,Bi).
 
-gameBot(Player,Yi,Bi,Start, Mid, Final,Yo,Bo,YDif,BDif):-
+gameBot(Player,Yi,Bi,Start, Mid, Final,MoverToRemove,Yo,Bo,YDif,BDif):-
         \+ isGameOver(Player,Yi,Bi),
         getBotDiff(Player,YDif,BDif,BotDiff),
         BotDiff == 1,
@@ -268,9 +268,10 @@ gameBot(Player,Yi,Bi,Start, Mid, Final,Yo,Bo,YDif,BDif):-
         getPersonalMovers(Player,Yi,Bi,MyMovers),
         getAllPossibleMoves(Player,MyMovers,Yi,Bi,[[Start,Final,Mid] | _]),
         write('Moving '), write(Start), write(' To '), write(Final),nl,
-        move(Yi,Bi,Start,Mid,Final,Yo,Bo,bot).
+        move(Yi,Bi,Start,Mid,Final,MoverToRemove,Yo,Bo,bot).
 
 %bot difficulty medium
+/*
 gameBot(Player,Yi,Bi,Start, Mid, Final,Yo,Bo,YDif,BDif):-
         \+ isGameOver(Player,Yi,Bi),
         getBotDiff(Player,YDif,BDif,BotDiff),
@@ -282,36 +283,38 @@ gameBot(Player,Yi,Bi,Start, Mid, Final,Yo,Bo,YDif,BDif):-
         write('Moving '), write(Start), write(' To '), write(Final),nl,
         move(Yi,Bi,Start,Mid,Final,Yo1,Bo1,bot),
         makeConsecutivePlay(Player,Yo1,Bo1,Start,Final,Yo,Bo,bot,1).
+        */
 
 /* PC-PC */
-game(Yi,Bi,Player,3,YDific,BDific,InitialPos, JumpPos, FinalPos, Yo, Bo,_,0):-
-        \+ isGameOver(Player,Yi,Bi),
-        gameBot(Player,Yi,Bi,InitialPos, JumpPos, FinalPos,Yo,Bo,YDific,BDific).%,
+game(Yi,Bi,Player,3,YDific,BDific,InitialPos, JumpPos, FinalPos, Yo, Bo,MoverToRemove):-
+        %\+ isGameOver(Player,Yi,Bi),
+        gameBot(Player,Yi,Bi,InitialPos, JumpPos, FinalPos,MoverToRemove,Yo,Bo,YDific,BDific).%,
         %switchPlayer(Player,NextPlayer),
         %game(Yo,Bo,NextPlayer,3,YDific,BDific).
 
 /* Human-Pc*/
-game(Yi,Bi,y,2,_,_,InitialPos, JumpPos, FinalPos, Yo, Bo,MoverToRemove, 0):-
-        \+ isGameOver(y,Yi,Bi),
+game(Yi,Bi,y,2,_,_,InitialPos, JumpPos, FinalPos, Yo, Bo,MoverToRemove):-
+        %\+ isGameOver(y,Yi,Bi),
         gameHuman(y,Yi,Bi,InitialPos, JumpPos, FinalPos,MoverToRemove,Yo,Bo).%,!,
         %game(Yo,Bo,b,2,_,BDific).
-game(Yi,Bi,b,2,_,BDific,InitialPos, JumpPos, FinalPos, Yo, Bo, _,0):-
-        \+ isGameOver(b,Yi,Bi),
-        gameBot(b,Yi,Bi,InitialPos, JumpPos, FinalPos,Yo,Bo,_,BDific). %,!,
+game(Yi,Bi,b,2,_,BDific,InitialPos, JumpPos, FinalPos, Yo, Bo, MoverToRemove):-
+        %\+ isGameOver(b,Yi,Bi),
+        gameBot(b,Yi,Bi,InitialPos, JumpPos, FinalPos,MoverToRemove,Yo,Bo,_,BDific). %,!,
         %game(Yo,Bo,y,2,_,BDific).
 
 /* Player Vs Player With Possible initial moves*/
-game(Yi,Bi,Player,1,_,_,InitialPos, JumpPos, FinalPos, Yo, Bo, MoverToRemove,0) :-
-        \+ isGameOver(Player,Yi,Bi),
+game(Yi,Bi,Player,1,_,_,InitialPos, JumpPos, FinalPos, Yo, Bo, MoverToRemove) :-
+        %\+ isGameOver(Player,Yi,Bi),
         gameHuman(Player,Yi,Bi,InitialPos, JumpPos, FinalPos,MoverToRemove,Yo,Bo). %,
         %switchPlayer(Player,NextPlayer),
         %game(Yo,Bo,NextPlayer,1,_,_).
 
-game(Yi,Bi,_,_,_,_,_,_,_,_,_,_,1):-
+/*
+game(Yi,Bi,_,_,_,_,_,_,_,_,_,_):-
         displayBoard(Yi,Bi),
         write('Game Over'),nl,nl,
         winner(Yi,Bi).
-
+*/
 
 
 validStartOption(MODE) :- integer(MODE), MODE > 0, MODE < 4.

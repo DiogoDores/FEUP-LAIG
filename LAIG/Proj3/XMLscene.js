@@ -37,14 +37,12 @@ function XMLscene(interface) {
 
     this.gameMode = 3;
     this.isGameModeSelected = false;
+    this.alignCamera = false;
 
 
     this.playing = false;
     this.player1Score = 0;
     this.player2Score = 0;
-
-    this.alignCamera = [true];
-    this.cameraCoords = [50, 50, 50];
 
     this.piecesOut = [0,0,0,0]; //[yellow, green, blue, red]
     this.makeRequest(0);
@@ -156,7 +154,7 @@ XMLscene.prototype.updateScaleFactor = function (v) {
  * Initializes the scene cameras.
  */
 XMLscene.prototype.initCameras = function () {
-    this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(this.cameraCoords[0], this.cameraCoords[1], this.cameraCoords[2]), vec3.fromValues(0, 0, 0));
+    this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(22, 6, 33), vec3.fromValues(0, 0, 0));
 }
 
 XMLscene.prototype.logPicking = function ()
@@ -204,18 +202,22 @@ XMLscene.prototype.selectGameMode = function(id) {
         this.runTimer = true;
         this.playing = true;
         console.log("Playing Multiplayer Mode");
+        this.alignCamera = true;
+        console.log(this.camera.getViewMatrix());
     } else if(id == 43){
         this.gameMode = 1;
         this.isGameModeSelected = true;
         this.runTimer = true;
         this.playing = true;
         console.log("Playing Singleplayer Mode");
+        this.alignCamera = true;
     } else if(id == 44){
         this.gameMode = 2;
         this.isGameModeSelected = true;
         this.runTimer = true;
         this.playing = true;
         console.log("Playing Computer vs Computer Mode");
+        this.alignCamera = true;
     }
 }
 
@@ -369,21 +371,22 @@ XMLscene.prototype.update = function (currTime) {
 
     if(this.globalCounter == 33){
 
-        if (this.graph.nodes != null && this.graph.clockTextures != null && this.runTimer) {
+        if (this.graph.nodes != null && this.graph.clockTextures != null) {
 
-            console.log("cenas");
+            if(this.runTimer){
 
-            if(this.graph.nodes["units"].textureID != this.graph.clockTextures[0]){
-                this.graph.nodes["units"].textureID = this.graph.clockTextures[this.secondsIndex--];
+                if(this.graph.nodes["units"].textureID != this.graph.clockTextures[0]){
+                    this.graph.nodes["units"].textureID = this.graph.clockTextures[this.secondsIndex--];
+                } else {
+                    this.graph.nodes["dozens"].textureID = this.graph.clockTextures[this.minutesIndex--];
+                    this.secondsIndex = 9;
+                    this.graph.nodes["units"].textureID = this.graph.clockTextures[this.secondsIndex--];
+                }
+
+                if(this.graph.nodes["units"].textureID == this.graph.clockTextures[0] && this.graph.nodes["dozens"].textureID == this.graph.clockTextures[0])
+                    this.runTimer = false;
+
             }
-            else{
-                this.graph.nodes["dozens"].textureID = this.graph.clockTextures[this.minutesIndex--];
-                this.secondsIndex = 9;
-                this.graph.nodes["units"].textureID = this.graph.clockTextures[this.secondsIndex--];
-            }
-
-            if(this.graph.nodes["units"].textureID == this.graph.clockTextures[0] && this.graph.nodes["dozens"].textureID == this.graph.clockTextures[0])
-                this.runTimer = false;
 
             this.globalCounter = 0;
         }
@@ -402,20 +405,42 @@ XMLscene.prototype.update = function (currTime) {
     }
     
     //Moves camera to board
-    if(!this.alignCamera){
+    if(this.alignCamera){
         this.moveCameraToBoard();
     }
 }
 
 XMLscene.prototype.moveCameraToBoard = function () {
 
-    if(this.cameraCoords[0] != 0){
-        this.cameraCoords[0] -= 1;
-        this.cameraCoords[1] -= 1;
-        this.cameraCoords[2] -= 1;
+    this.camera.setPosition(vec3.fromValues(Math.round(this.camera.position[0]),
+                                            Math.round(this.camera.position[1]),
+                                            Math.round(this.camera.position[2])));
+
+    if(this.camera.position[0] == 6 && this.camera.position[1] == 14 && this.camera.position[2] == 16){
+        this.alignCamera = false;
+        this.camera.orbit("y", 90);
     }
 
-    this.camera.setPosition(vec3.fromValues(this.cameraCoords[0] - 1, this.cameraCoords[1] - 1, this.cameraCoords[0] - 1));
+    if(this.camera.position[0] != 6){
+        if(this.camera.position[0] > 6)
+            this.camera.setPosition(vec3.fromValues(this.camera.position[0] - 1, this.camera.position[1], this.camera.position[2]));
+        else
+            this.camera.setPosition(vec3.fromValues(this.camera.position[0] + 1, this.camera.position[1], this.camera.position[2]));
+    }
+
+    if(this.camera.position[1] != 14){
+        if(this.camera.position[1] > 14)
+            this.camera.setPosition(vec3.fromValues(this.camera.position[0], this.camera.position[1] - 1, this.camera.position[2]));
+        else
+            this.camera.setPosition(vec3.fromValues(this.camera.position[0], this.camera.position[1] + 1, this.camera.position[2]));
+    }
+
+    if(this.camera.position[2] != 16){
+        if(this.camera.position[2] > 16)
+            this.camera.setPosition(vec3.fromValues(this.camera.position[0], this.camera.position[1], this.camera.position[2] - 1));
+        else
+            this.camera.setPosition(vec3.fromValues(this.camera.position[0], this.camera.position[1], this.camera.position[2] + 1));
+    }
 }
 
 /**
@@ -497,7 +522,7 @@ XMLscene.prototype.makePickable = function(){
         var buttonCounter = 1.1;
         for(var i = 42; i < 45; i++){
             this.pushMatrix();
-                this.translate(9.5, 33.5, -24.8);
+                this.translate(-0.5, 26.5, -39.8);
                 this.scale(13, 7, 1);
                 this.translate(0, buttonCounter, 0);
                 this.rotate(90*Math.PI/180, 1, 0, 0);
@@ -509,7 +534,6 @@ XMLscene.prototype.makePickable = function(){
     }
 
     this.pushMatrix();
-        this.translate(10, 7, 15);
         this.scale(0.7, 1, 0.7);
         this.translate(0,0.4,0);
         this.registerForPick(41, this.objects[this.objects.length-4]);
@@ -533,7 +557,6 @@ XMLscene.prototype.makePickable = function(){
         if(counter <= 10){
             lastZ -= 2.65;
 
-            this.translate(10, 7, 15);
             this.scale(0.7, 1, 0.7);
             this.rotate(angle*Math.PI/180, 0,1,0);
             this.translate(lastX, 0.4, lastZ);
