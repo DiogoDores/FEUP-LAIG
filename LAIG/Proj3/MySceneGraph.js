@@ -1850,7 +1850,7 @@ MySceneGraph.prototype.removePiece = function (pos) {
       break;
     }
   }
-  let colors=["y", "g", "r", "b"];
+  let colors=["y", "g", "b", "r"];
   let color;
   switch(nodePos.length){
     case 14: //yellow
@@ -1892,6 +1892,25 @@ MySceneGraph.prototype.removePiece = function (pos) {
 }
 
 
+MySceneGraph.prototype.checkIfBelongs = function(piece,player){
+
+  let node;
+  for (var [key, value] of this.piecesMap) {
+    if(value == piece){
+      node = key;
+      break;
+    }
+  }
+
+  if(node != null ){
+    if(player == "y" && node[0] == "c")
+      return true;
+    else if(player == "b" && node[0] == "s")
+      return true;
+  }
+  return false;
+
+}
 
 /**
  * Displays the scene, processing each node, starting in the root node.
@@ -1927,12 +1946,7 @@ MySceneGraph.prototype.displayNodes = function (id, matToApply, texToApply) {
 
     if (this.nodes[id].anim != null) {
       this.scene.multMatrix(this.nodes[id].anim.matrix);
-      if(this.scene.playing && this.nodes[id].anim.isFinished && this.nodes[id].anim.notChanged){
-        mat4.multiply(this.nodes[id].transformMatrix, this.nodes[id].transformMatrix, this.nodes[id].anim.matrix);
-        mat4.identity(this.nodes[id].anim.oldMatrix);
-        mat4.identity(this.nodes[id].anim.matrix);
-        this.nodes[id].anim.notChanged = false;
-      }
+
     }
 
     if(selected)
@@ -1957,5 +1971,14 @@ MySceneGraph.prototype.displayNodes = function (id, matToApply, texToApply) {
 
     if(selected)
       this.scene.setActiveShader(this.scene.defaultShader);
+
+    if (this.nodes[id].anim != null) {
+      if(this.scene.playing && this.nodes[id].anim.isFinished && this.nodes[id].anim.notChanged){
+        mat4.multiply(this.nodes[id].transformMatrix, this.nodes[id].transformMatrix, this.nodes[id].anim.matrix);
+        mat4.identity(this.nodes[id].anim.oldMatrix);
+        mat4.identity(this.nodes[id].anim.matrix);
+        this.nodes[id].anim.notChanged = false;
+      }
+    }
 
 }
