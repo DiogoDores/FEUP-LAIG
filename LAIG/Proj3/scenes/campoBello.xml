@@ -161,11 +161,6 @@
         <amplif_factor s="1" t="1" />
     </TEXTURE>
 
-    <TEXTURE id="colon">
-        <file path="images/colon.jpg" />
-        <amplif_factor s="1" t="1" />
-    </TEXTURE>
-
 </TEXTURES>
 
 
