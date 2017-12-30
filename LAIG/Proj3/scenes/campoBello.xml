@@ -160,7 +160,21 @@
         <file path="images/9.jpg" />
         <amplif_factor s="1" t="1" />
     </TEXTURE>
+    
+    <TEXTURE id="multiplayer">
+        <file path="images/multiplayer.jpg" />
+        <amplif_factor s="1" t="1" />
+    </TEXTURE>
 
+    <TEXTURE id="singleplayer">
+        <file path="images/singleplayer.jpg" />
+        <amplif_factor s="1" t="1" />
+    </TEXTURE>
+
+    <TEXTURE id="pc">
+        <file path="images/pc.jpg" />
+        <amplif_factor s="1" t="1" />
+    </TEXTURE>
 </TEXTURES>
 
 
@@ -275,6 +289,7 @@
 
           <NODEREF id="game" />
           <NODEREF id="counters" />
+          <NODEREF id="buttons" />
           <NODEREF id="scene1" />
 
         </DESCENDANTS>
@@ -1148,6 +1163,57 @@
 
         <DESCENDANTS>
             <LEAF type="cylinder" args="0.5 1 1 3 20 1 1"/>
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="buttons">
+        <MATERIAL id="defaultMaterial" />
+        <TEXTURE id="null" />
+        
+        <TRANSLATION x="3" y="30" z="-24.9" />
+        <SCALE sx="13" sy="7" sz="1" />
+
+        <DESCENDANTS>
+
+          <NODEREF id="multiPlayer" />
+          <NODEREF id="singlePlayer" />
+          <NODEREF id="pc" />
+
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="multiPlayer">
+        <MATERIAL id="defaultMaterial" />
+        <TEXTURE id="multiplayer" />
+
+        <TRANSLATION x="0" y="1.1" z="0" />
+
+        <DESCENDANTS>
+            <LEAF type="rectangle" args="0 0 1 1" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="singlePlayer">
+        <MATERIAL id="defaultMaterial" />
+        <TEXTURE id="singleplayer" />
+
+        <DESCENDANTS>
+            <LEAF type="rectangle" args="0 0 1 1" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="pc">
+        <MATERIAL id="defaultMaterial" />
+        <TEXTURE id="pc" />
+
+        <TRANSLATION x="0" y="-1.1" z="0" />
+
+        <DESCENDANTS>
+            <LEAF type="rectangle" args="0 0 1 1" />
         </DESCENDANTS>
 
     </NODE>
