@@ -1892,6 +1892,25 @@ MySceneGraph.prototype.removePiece = function (pos) {
 }
 
 
+MySceneGraph.prototype.checkIfBelongs = function(piece,player){
+
+  let node;
+  for (var [key, value] of this.piecesMap) {
+    if(value == piece){
+      node = key;
+      break;
+    }
+  }
+
+  if(node != null ){
+    if(player == "y" && node[0] == "c")
+      return true;
+    else if(player == "b" && node[0] == "s")
+      return true;
+  }
+  return false;
+
+}
 
 /**
  * Displays the scene, processing each node, starting in the root node.
