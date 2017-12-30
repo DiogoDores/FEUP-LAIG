@@ -1817,20 +1817,12 @@ MySceneGraph.prototype.movePiece = function (pos1, pos2) {
   this.piecesMap.delete(nodePos1);
   this.piecesMap.set(nodePos1, pos2);
 
-
-  //let var3 = mat4.multiply(var2, var2, )
-/*
-  if (this.nodes[nodePos1].anim != null) {
-    this.scene.multMatrix(this.nodes[nodePos1].anim.matrix);
-  } */
-
-  //TODO create animation from pos1 to pos2
   let coordPos1 = vec3.create();
   coordPos1 = this.positionsMap.get(pos1);
   let coordPos2 = vec3.create();
 //  coordPos2 = this.positionsMap.get(pos2);
   vec3.subtract(coordPos2, this.positionsMap.get(pos2), this.positionsMap.get(pos1));
-  let animation = new BezierAnimation(this, ["bezier", 1, [[0,0,0], [0,5,0], [coordPos2[0],5,coordPos2[2]],coordPos2]]);
+  let animation = new BezierAnimation(this, ["bezier", "2.5", [[0,0,0], [0,5,0], [coordPos2[0],5,coordPos2[2]],coordPos2]]);
 
   if(this.nodes[nodePos1].anim == null){
 

@@ -71,7 +71,7 @@ BezierAnimation.prototype.getMatrix = function (time) {
     mat4.identity(mat);
 
     if (time > 1)
-      time = 1;
+      time = 0.999999;
 
     var blend_1 = Math.pow(1 - time, 3);
     var blend_2 = 3 * time * (Math.pow(1 - time, 2));

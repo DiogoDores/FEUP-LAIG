@@ -50,6 +50,7 @@ AnimationsOfNode.prototype.finish = function(){
     this.oldMatrix = this.anims[this.currAnim].getMatrix(this.currentTime, false);
     this.currentTime = 0;
     this.isFinished = true;
+
   }
 
 }
@@ -72,10 +73,11 @@ AnimationsOfNode.prototype.nextAnim = function(){
 AnimationsOfNode.prototype.addAnimationAfter = function(animation) {
   if(this.isFinished) {
     this.totalTime = this.animsTimes[this.animsTimes.length - 1];
-    this.currentTime = this.totalTime;
-    this.animsTimes.push(animation.getTotalTime());
+    this.currentTime = 0;
+
+    this.animsTimes.push(this.animsTimes[this.animsTimes.length - 1] + animation.getTotalTime());
     this.anims.push(animation);
-    this.isFinished = false;
+
     this.notChanged = true;
   } else {
     this.animsTimes.push(animation.getTotalTime());
