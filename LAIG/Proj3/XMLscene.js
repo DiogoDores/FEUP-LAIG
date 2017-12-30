@@ -40,7 +40,9 @@ function XMLscene(interface) {
     this.alignCamera = false;
 
 
-    this.playing = true; //TODO change
+    this.playing = false;
+    this.player1Score = 0;
+    this.player2Score = 0;
 
     this.piecesOut = [0,0,0,0]; //[yellow, green, blue, red]
 
@@ -168,7 +170,7 @@ XMLscene.prototype.logPicking = function ()
                     this.picks[this.pickCounter] = this.pickIDs[customId - 1];
                     this.pickCounter++;
                     if(this.pickCounter == 2)
-                      this.makeRequest(1); // TODO ver melhor esta parte para usar o counter a 3 para dar pick na peca a remover
+                      this.makeRequest(1);
 
                     this.selectGameMode(customId);
                     console.log("Picked id " + customId);
@@ -332,7 +334,7 @@ XMLscene.prototype.update = function (currTime) {
     }
 
     this.globalCounter++;
-    
+
     //Moves camera to board
     if(this.alignCamera){
         this.moveCameraToBoard();
@@ -462,7 +464,7 @@ XMLscene.prototype.makePickable = function(){
                 this.objects[i-1].display();
             this.popMatrix();
             buttonCounter -= 1.1;
-        } 
+        }
     }
 
     this.pushMatrix();
