@@ -392,7 +392,7 @@ XMLscene.prototype.update = function (currTime) {
     this.globalCounter++;
     if(this.playing && this.gameMode != 0)
       this.timeToPlayBot++;
-    if(this.playing && this.gameMode == 1 && this.player == 1 && this.timeToPlayBot == 99){
+    if(this.playing && (this.gameMode == 2 || (this.gameMode == 1 && this.player == 1)) && this.timeToPlayBot == 99){
       this.timeToPlayBot = 0;
       this.picks = ["0","0"];
       this.makeRequest(1);
