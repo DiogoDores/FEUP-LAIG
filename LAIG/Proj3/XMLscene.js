@@ -537,7 +537,7 @@ XMLscene.prototype.makePickable = function(){
         this.objects[this.objects.length-4].display();
     this.popMatrix();
 
-    for (var i = 0; i < this.objects.length - 1; i++) {
+    for (var i = 0; i < this.objects.length - 4; i++) {
 
         if(counter == 5){
             lastZ = 5.3;
