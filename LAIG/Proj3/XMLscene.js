@@ -151,7 +151,7 @@ XMLscene.prototype.updateScaleFactor = function (v) {
  * Initializes the scene cameras.
  */
 XMLscene.prototype.initCameras = function () {
-    this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 10, 35), vec3.fromValues(0, 0, 0));
+    this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(25, 45, 50), vec3.fromValues(0,0,0));
 }
 
 XMLscene.prototype.logPicking = function ()
@@ -184,6 +184,7 @@ XMLscene.prototype.selectGameMode = function(id) {
         this.runTimer = true;
         this.playing = true;
         console.log("Playing Multiplayer Mode");
+        this.camera.setPosition(vec3.fromValues(15, 10, 30));
         this.alignCamera = true;
         console.log(this.camera.getViewMatrix());
     } else if(id == 43){
@@ -192,6 +193,7 @@ XMLscene.prototype.selectGameMode = function(id) {
         this.runTimer = true;
         this.playing = true;
         console.log("Playing Singleplayer Mode");
+        this.camera.setPosition(vec3.fromValues(15, 10, 30));
         this.alignCamera = true;
     } else if(id == 44){
         this.gameMode = 2;
@@ -199,6 +201,7 @@ XMLscene.prototype.selectGameMode = function(id) {
         this.runTimer = true;
         this.playing = true;
         console.log("Playing Computer vs Computer Mode");
+        this.camera.setPosition(vec3.fromValues(15, 10, 30));
         this.alignCamera = true;
     }
 }
@@ -339,42 +342,36 @@ XMLscene.prototype.update = function (currTime) {
 
 XMLscene.prototype.moveCameraToBoard = function () {
 
-
-    this.camera.setPosition(vec3.fromValues(0, 10, 10));
-    this.camera.rotate(vec3.fromValues(0, 1, 0), 1*Math.PI/180);
-    this.camera.rotate(vec3.fromValues(1, 0, 0), 5*Math.PI/180);
-
-    this.alignCamera = false;
-
-
-    /*this.camera.setPosition(vec3.fromValues(Math.round(this.camera.position[0]),
+    this.camera.setPosition(vec3.fromValues(Math.round(this.camera.position[0]),
                                             Math.round(this.camera.position[1]),
                                             Math.round(this.camera.position[2])));
 
-    if(this.camera.position[0] == 4 && this.camera.position[1] == 17 && this.camera.position[2] == 7){
+    if(this.camera.position[0] == 0 && this.camera.position[1] == 10 && this.camera.position[2] == 10){
+        this.camera.rotate(vec3.fromValues(0, 1, 0), Math.PI/180);
+        this.camera.rotate(vec3.fromValues(1, 0, 0), 5*Math.PI/180);
         this.alignCamera = false;
     }
 
-    if(this.camera.position[0] != 4){
-        if(this.camera.position[0] > 4)
+    if(this.camera.position[0] != 0){
+        if(this.camera.position[0] > 0)
             this.camera.setPosition(vec3.fromValues(this.camera.position[0] - 1, this.camera.position[1], this.camera.position[2]));
         else
             this.camera.setPosition(vec3.fromValues(this.camera.position[0] + 1, this.camera.position[1], this.camera.position[2]));
     }
 
-    if(this.camera.position[1] != 17){
-        if(this.camera.position[1] > 17)
+    if(this.camera.position[1] != 10){
+        if(this.camera.position[1] > 10)
             this.camera.setPosition(vec3.fromValues(this.camera.position[0], this.camera.position[1] - 1, this.camera.position[2]));
         else
             this.camera.setPosition(vec3.fromValues(this.camera.position[0], this.camera.position[1] + 1, this.camera.position[2]));
     }
 
-    if(this.camera.position[2] != 7){
-        if(this.camera.position[2] > 7)
+    if(this.camera.position[2] != 10){
+        if(this.camera.position[2] > 10)
             this.camera.setPosition(vec3.fromValues(this.camera.position[0], this.camera.position[1], this.camera.position[2] - 1));
         else
             this.camera.setPosition(vec3.fromValues(this.camera.position[0], this.camera.position[1], this.camera.position[2] + 1));
-    }*/
+    }
 }
 
 /**
