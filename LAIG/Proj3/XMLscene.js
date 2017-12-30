@@ -30,6 +30,7 @@ function XMLscene(interface) {
     this.player = 0;
     this.makeRequest(0);
 
+    this.timeToPlayBot = 0;
     this.globalCounter = 0;
     this.runTimer = false;
     this.secondsIndex = 10;
@@ -264,13 +265,13 @@ XMLscene.prototype.makeRequest = function(type)
     console.log(this.picks[0] + this.picks[1]);
     this.getPrologRequest("1-" + this.allPlays[this.allPlays.length - 1][1] + "-"
     + this.allPlays[this.allPlays.length - 1][2] + "-" + this.players[this.player]
-    + "-1-" + this.picks[0] + "-" + this.picks[1], this.handleReply.bind(this));
+    + "-" + (this.gameMode + 1) + "-" + this.picks[0] + "-" + this.picks[1], this.handleReply.bind(this));
     //TODO tirar o 1 e por o modo de jogo
   } else if(type == 2) {
     console.log(this.picks[0] + this.picks[1] + " mover to remove " + this.moverRemove);
     this.getPrologRequest("2-" + this.allPlays[this.allPlays.length - 1][1] + "-"
     + this.allPlays[this.allPlays.length - 1][2] + "-" + this.players[this.player]
-    + "-1-" + this.picks[0] + "-" + this.picks[1] + "-" + this.moverRemove, this.handleReply.bind(this));
+    + "-" + (this.gameMode + 1) + "-" + this.picks[0] + "-" + this.picks[1] + "-" + this.moverRemove, this.handleReply.bind(this));
   } else if (type == 9) {
     this.getPrologRequest("9-" + this.players[this.player] + "-"
      + this.allPlays[this.allPlays.length - 1][1] + "-"
@@ -300,6 +301,7 @@ XMLscene.prototype.handleReply = function(data){
     this.graph.removePiece(responseArr[responseArr.length - 2]);
     this.pickCounter = 0;
     this.player = this.player == 0? 1 : 0;
+    this.timeToPlayBot = 0;
     this.makeRequest(9);
 
   } else if(responseArr[0] == "2") {
@@ -315,6 +317,7 @@ XMLscene.prototype.handleReply = function(data){
     this.graph.removePiece(responseArr[responseArr.length - 2]);
     this.pickCounter = 0;
     this.player = this.player == 0? 1 : 0;
+    this.timeToPlayBot = 0;
     this.makeRequest(9);
 
   } else if (responseArr[0] == "8") {
@@ -387,6 +390,13 @@ XMLscene.prototype.update = function (currTime) {
     }
 
     this.globalCounter++;
+    if(this.playing && this.gameMode != 0)
+      this.timeToPlayBot++;
+    if(this.playing && this.gameMode == 1 && this.player == 1 && this.timeToPlayBot == 99){
+      this.timeToPlayBot = 0;
+      this.picks = ["0","0"];
+      this.makeRequest(1);
+   }
 
     //Moves camera to board
     if(this.alignCamera){
