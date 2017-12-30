@@ -160,7 +160,7 @@
         <file path="images/9.jpg" />
         <amplif_factor s="1" t="1" />
     </TEXTURE>
-
+    
     <TEXTURE id="multiplayer">
         <file path="images/multiplayer.jpg" />
         <amplif_factor s="1" t="1" />
@@ -285,13 +285,13 @@
         <MATERIAL id="defaultMaterial" />
         <TEXTURE id="null" />
 
-        <TRANSLATION x="-10" y="-7" z="-15" />
-
         <DESCENDANTS>
+
           <NODEREF id="game" />
           <NODEREF id="counters" />
           <NODEREF id="buttons" />
           <NODEREF id="scene1" />
+
         </DESCENDANTS>
 
     </NODE>
