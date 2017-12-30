@@ -38,16 +38,30 @@ whoWins(YP1,BP2) :- YP1 == BP2, write('Draw'),nl.
 
 
 
-isValid(b,Yi,Bi,InitialPos,JumpPos,FinalPos) :-
+isValid(b,Yi,Bi,InitialPos,JumpPos,FinalPos, 1) :-
         member(InitialPos,Bi),
         validJump2(InitialPos,FinalPos,JumpPos),
         isEmpty(FinalPos,Yi,Bi),
-        isNotEmpty(JumpPos, Yi,Bi).
-isValid(y,Yi,Bi,InitialPos,JumpPos,FinalPos) :-
+        isNotEmpty(JumpPos, Yi,Bi),
+        member(JumpPos, Yi).
+isValid(b,Yi,Bi,InitialPos,JumpPos,FinalPos, 0) :-
+        member(InitialPos,Bi),
+        validJump2(InitialPos,FinalPos,JumpPos),
+        isEmpty(FinalPos,Yi,Bi),
+        isNotEmpty(JumpPos, Yi,Bi),
+        member(JumpPos, Bi).
+isValid(y,Yi,Bi,InitialPos,JumpPos,FinalPos,1) :-
         member(InitialPos,Yi),
         validJump2(InitialPos,FinalPos,JumpPos),
         isEmpty(FinalPos,Yi,Bi),
-        isNotEmpty(JumpPos, Yi,Bi).
+        isNotEmpty(JumpPos, Yi,Bi),
+        member(JumpPos, Bi).
+isValid(y,Yi,Bi,InitialPos,JumpPos,FinalPos,0) :-
+        member(InitialPos,Yi),
+        validJump2(InitialPos,FinalPos,JumpPos),
+        isEmpty(FinalPos,Yi,Bi),
+        isNotEmpty(JumpPos, Yi,Bi),
+        member(JumpPos, Yi).
 
 
 isNotEmpty(X,Yi,Bi):- boardMembers(L),!, member(X,L), (member(X,Yi) ; member(X,Bi)).
@@ -67,7 +81,7 @@ readMoverToRemove(MoverToRemove, List):-
         member(MoverToRemove,List).
 
 % Yellow jumps yellow mover
-move(Yi,Bi,InitialPos,JumpPos,FinalPos,Yo,Bo,_) :-
+move(Yi,Bi,InitialPos,JumpPos,FinalPos,_,Yo,Bo,_) :-
         member(InitialPos,Yi),
         delete(Yi,InitialPos,Yo2),
         append([FinalPos],Yo2,Yo3),
@@ -76,7 +90,7 @@ move(Yi,Bi,InitialPos,JumpPos,FinalPos,Yo,Bo,_) :-
         append([],Bi,Bo).
 
 %(Bot) Yellow jumps blue mover
-move(Yi,Bi,InitialPos,JumpPos,FinalPos,Yo,Bo,bot) :-
+move(Yi,Bi,InitialPos,JumpPos,FinalPos,MoverToRemove,Yo,Bo,bot) :-
         member(InitialPos,Yi),
         delete(Yi,InitialPos,Yo2),
         append([FinalPos],Yo2,Yo3),
@@ -87,17 +101,17 @@ move(Yi,Bi,InitialPos,JumpPos,FinalPos,Yo,Bo,bot) :-
         append([],Bi,Bo).
 
 % Yellow jumps blue mover and selects valid mover to remove.
-move(Yi,Bi,InitialPos,JumpPos,FinalPos,Yo,Bo,human) :-
+move(Yi,Bi,InitialPos,JumpPos,FinalPos,MoverToRemove,Yo,Bo,human) :-
         member(InitialPos,Yi),
         delete(Yi,InitialPos,Yo2),
         append([FinalPos],Yo2,Yo3),
         member(JumpPos,Bi),
-        readMoverToRemove(MoverToRemove,Yo3),
+        %readMoverToRemove(MoverToRemove,Yo3),
         delete(Yo3,MoverToRemove,Yo),
         append([],Bi,Bo).
 
 % Blue jumps blue mover
-move(Yi,Bi,InitialPos,JumpPos,FinalPos,Yo,Bo,_) :-
+move(Yi,Bi,InitialPos,JumpPos,FinalPos,_,Yo,Bo,_) :-
         member(InitialPos,Bi),
         delete(Bi,InitialPos,Bo2),
         append([FinalPos],Bo2,Bo3),
@@ -106,7 +120,7 @@ move(Yi,Bi,InitialPos,JumpPos,FinalPos,Yo,Bo,_) :-
         append([],Yi,Yo).
 
 %(Bot) Blue jumps yellow mover
-move(Yi,Bi,InitialPos,JumpPos,FinalPos,Yo,Bo,bot) :-
+move(Yi,Bi,InitialPos,JumpPos,FinalPos,MoverToRemove,Yo,Bo,bot) :-
         member(InitialPos,Bi),
         delete(Bi,InitialPos,Bo2),
         append([FinalPos],Bo2,Bo3),
@@ -117,12 +131,12 @@ move(Yi,Bi,InitialPos,JumpPos,FinalPos,Yo,Bo,bot) :-
         append([],Yi,Yo).
 
 % Blue jumps yellow mover and selects valid mover to remove.
-move(Yi,Bi,InitialPos,JumpPos,FinalPos,Yo,Bo,human) :-
+move(Yi,Bi,InitialPos,JumpPos,FinalPos,MoverToRemove,Yo,Bo,human) :-
         member(InitialPos,Bi),
         delete(Bi,InitialPos,Bo2),
         append([FinalPos],Bo2,Bo3),
         member(JumpPos,Yi),
-        readMoverToRemove(MoverToRemove, Bo3),
+        %readMoverToRemove(MoverToRemove, Bo3),
         delete(Bo3,MoverToRemove,Bo),
         append([],Yi,Yo).
 
@@ -223,15 +237,24 @@ makeConsecutivePlay(_,Yi,Bi,_,_,Yi,Bi,_,_):-
 getBotDiff(y,YDif,_,YDif).
 getBotDiff(b,_,BDif,BDif).
 
-gameHuman(Player,Yi,Bi,InitialPos, JumpPos, FinalPos,Yo,Bo):-
+gameHuman(Player,Yi,Bi,InitialPos, JumpPos, FinalPos,_,Yo,Bo):-
         displayBoard(Yi,Bi),
         \+ isGameOver(Player,Yi,Bi),
         writeWhoIsPlaying(Player,human),
         %readValidPlay(Initial,Jump,Final,Yi,Bi,Player),
         %move(Yi,Bi,Initial,Jump,Final,Yo1,Bo1,human),!,
         %makeConsecutivePlay(Player,Yo1,Bo1,Initial,Final,Yo,Bo,human,1).
-        isValid(Player, Yi,Bi,InitialPos,JumpPos,FinalPos),
-        move(Yi,Bi,InitialPos,JumpPos,FinalPos,Yo,Bo,human).
+        isValid(Player, Yi,Bi,InitialPos,JumpPos,FinalPos,0),
+        move(Yi,Bi,InitialPos,JumpPos,FinalPos,_,Yo,Bo,human).
+gameHuman(Player,Yi,Bi,InitialPos, JumpPos, FinalPos,MoverToRemove,Yo,Bo):-
+        displayBoard(Yi,Bi),
+        \+ isGameOver(Player,Yi,Bi),
+        writeWhoIsPlaying(Player,human),
+        %readValidPlay(Initial,Jump,Final,Yi,Bi,Player),
+        %move(Yi,Bi,Initial,Jump,Final,Yo1,Bo1,human),!,
+        %makeConsecutivePlay(Player,Yo1,Bo1,Initial,Final,Yo,Bo,human,1).
+        isValid(Player, Yi,Bi,InitialPos,JumpPos,FinalPos,1),
+        move(Yi,Bi,InitialPos,JumpPos,FinalPos,MoverToRemove,Yo,Bo,human).
 
 getPersonalMovers(y,Yi,_,Yi).
 getPersonalMovers(b,_,Bi,Bi).
@@ -261,30 +284,30 @@ gameBot(Player,Yi,Bi,Start, Mid, Final,Yo,Bo,YDif,BDif):-
         makeConsecutivePlay(Player,Yo1,Bo1,Start,Final,Yo,Bo,bot,1).
 
 /* PC-PC */
-game(Yi,Bi,Player,3,YDific,BDific,InitialPos, JumpPos, FinalPos, Yo, Bo):-
+game(Yi,Bi,Player,3,YDific,BDific,InitialPos, JumpPos, FinalPos, Yo, Bo,_,0):-
         \+ isGameOver(Player,Yi,Bi),
         gameBot(Player,Yi,Bi,InitialPos, JumpPos, FinalPos,Yo,Bo,YDific,BDific).%,
         %switchPlayer(Player,NextPlayer),
         %game(Yo,Bo,NextPlayer,3,YDific,BDific).
 
 /* Human-Pc*/
-game(Yi,Bi,y,2,_,_,InitialPos, JumpPos, FinalPos, Yo, Bo):-
+game(Yi,Bi,y,2,_,_,InitialPos, JumpPos, FinalPos, Yo, Bo,MoverToRemove, 0):-
         \+ isGameOver(y,Yi,Bi),
-        gameHuman(y,Yi,Bi,InitialPos, JumpPos, FinalPos,Yo,Bo).%,!,
+        gameHuman(y,Yi,Bi,InitialPos, JumpPos, FinalPos,MoverToRemove,Yo,Bo).%,!,
         %game(Yo,Bo,b,2,_,BDific).
-game(Yi,Bi,b,2,_,BDific,InitialPos, JumpPos, FinalPos, Yo, Bo):-
+game(Yi,Bi,b,2,_,BDific,InitialPos, JumpPos, FinalPos, Yo, Bo, _,0):-
         \+ isGameOver(b,Yi,Bi),
         gameBot(b,Yi,Bi,InitialPos, JumpPos, FinalPos,Yo,Bo,_,BDific). %,!,
         %game(Yo,Bo,y,2,_,BDific).
 
 /* Player Vs Player With Possible initial moves*/
-game(Yi,Bi,Player,1,_,_,InitialPos, JumpPos, FinalPos, Yo, Bo) :-
+game(Yi,Bi,Player,1,_,_,InitialPos, JumpPos, FinalPos, Yo, Bo, MoverToRemove,0) :-
         \+ isGameOver(Player,Yi,Bi),
-        gameHuman(Player,Yi,Bi,InitialPos, JumpPos, FinalPos,Yo,Bo). %,
+        gameHuman(Player,Yi,Bi,InitialPos, JumpPos, FinalPos,MoverToRemove,Yo,Bo). %,
         %switchPlayer(Player,NextPlayer),
         %game(Yo,Bo,NextPlayer,1,_,_).
 
-game(Yi,Bi,_,_,_,_,_,_,_,_,_):-
+game(Yi,Bi,_,_,_,_,_,_,_,_,_,_,1):-
         displayBoard(Yi,Bi),
         write('Game Over'),nl,nl,
         winner(Yi,Bi).

@@ -102,7 +102,7 @@ BezierAnimation.prototype.getMatrix = function (time) {
     let ang = Math.atan(dx / dz) + (dz < 0 ? Math.PI : 0);
 
     mat4.translate(mat, mat, vec3.fromValues(new_x, new_y, new_z));
-    mat4.rotateY(mat, mat, ang);
+    //mat4.rotateY(mat, mat, ang);
 
     return mat;
 }

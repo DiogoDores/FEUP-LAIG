@@ -1850,7 +1850,7 @@ MySceneGraph.prototype.removePiece = function (pos) {
       break;
     }
   }
-  let colors=["y", "g", "r", "b"];
+  let colors=["y", "g", "b", "r"];
   let color;
   switch(nodePos.length){
     case 14: //yellow
@@ -1927,12 +1927,7 @@ MySceneGraph.prototype.displayNodes = function (id, matToApply, texToApply) {
 
     if (this.nodes[id].anim != null) {
       this.scene.multMatrix(this.nodes[id].anim.matrix);
-      if(this.scene.playing && this.nodes[id].anim.isFinished && this.nodes[id].anim.notChanged){
-        mat4.multiply(this.nodes[id].transformMatrix, this.nodes[id].transformMatrix, this.nodes[id].anim.matrix);
-        mat4.identity(this.nodes[id].anim.oldMatrix);
-        mat4.identity(this.nodes[id].anim.matrix);
-        this.nodes[id].anim.notChanged = false;
-      }
+
     }
 
     if(selected)
@@ -1957,5 +1952,14 @@ MySceneGraph.prototype.displayNodes = function (id, matToApply, texToApply) {
 
     if(selected)
       this.scene.setActiveShader(this.scene.defaultShader);
+
+    if (this.nodes[id].anim != null) {
+      if(this.scene.playing && this.nodes[id].anim.isFinished && this.nodes[id].anim.notChanged){
+        mat4.multiply(this.nodes[id].transformMatrix, this.nodes[id].transformMatrix, this.nodes[id].anim.matrix);
+        mat4.identity(this.nodes[id].anim.oldMatrix);
+        mat4.identity(this.nodes[id].anim.matrix);
+        this.nodes[id].anim.notChanged = false;
+      }
+    }
 
 }
