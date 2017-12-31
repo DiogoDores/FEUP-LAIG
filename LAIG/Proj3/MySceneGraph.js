@@ -1352,11 +1352,11 @@ MySceneGraph.prototype.parseNodes = function (nodesNode) {
         if ((nodeName = children[i].nodeName) == "ROOT") {
             // Retrieves root node.
             var root = this.reader.getString(children[i], 'id');
-            
+
             if (root == null)
                 return "failed to retrieve root node ID";
             this.idRoot = root;
-            
+
         } else if (nodeName == "NODE") {
             // Retrieves node ID.
             var nodeID = this.reader.getString(children[i], 'id');
@@ -1828,7 +1828,7 @@ MySceneGraph.prototype.movePiece = function (pos1, pos2) {
   console.log(coordPos2);
   if(this.nodes[nodePos1].anim == null){
 
-    var animHolder = new AnimationsOfNode(this, [animation]);
+    var animHolder = new AnimationsOfNode(this, [animation], this.nodes[nodePos1]);
     this.animRefs.push(animHolder);
     this.nodes[nodePos1].addAnimation(this.animRefs[this.animRefs.length - 1]);
   } else {
@@ -1879,7 +1879,7 @@ MySceneGraph.prototype.removePiece = function (pos) {
     console.log(coordPos2);
     if(this.nodes[nodePos].anim == null){
 
-      var animHolder = new AnimationsOfNode(this, [animation]);
+      var animHolder = new AnimationsOfNode(this, [animation], this.nodes[nodePos]);
       this.animRefs.push(animHolder);
       this.nodes[nodePos].addAnimation(this.animRefs[this.animRefs.length - 1]);
     } else {
@@ -1974,13 +1974,5 @@ MySceneGraph.prototype.displayNodes = function (id, matToApply, texToApply) {
     if(selected)
       this.scene.setActiveShader(this.scene.defaultShader);
 
-    if (this.nodes[id].anim != null) {
-      if(this.scene.playing && this.nodes[id].anim.isFinished && this.nodes[id].anim.notChanged){
-        mat4.multiply(this.nodes[id].transformMatrix, this.nodes[id].transformMatrix, this.nodes[id].anim.matrix);
-        mat4.identity(this.nodes[id].anim.oldMatrix);
-        mat4.identity(this.nodes[id].anim.matrix);
-        this.nodes[id].anim.notChanged = false;
-      }
-    }
 
 }

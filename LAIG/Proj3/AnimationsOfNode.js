@@ -2,10 +2,11 @@
  * AnimationsOfNode
  * @constructor
  */
-function AnimationsOfNode(scene, animations) {
+function AnimationsOfNode(scene, animations, node) {
   this.totalTime = 0;
   this.currentTime = 0;
-
+  this.scene = scene;
+  this.node = node;
   this.oldMatrix = mat4.create();
   this.matrix = mat4.create();
   mat4.identity(this.matrix);
@@ -44,13 +45,21 @@ AnimationsOfNode.prototype.updates = function(currTime){
   }
 }
 
+AnimationsOfNode.prototype.saveMatrix = function(){
+  if(this.currAnim != null && this.isFinished && this.node != null){
+    mat4.multiply(this.node.transformMatrix, this.node.transformMatrix, this.matrix);
+    mat4.identity(this.oldMatrix);
+    mat4.identity(this.matrix);
+  }
+}
+
 AnimationsOfNode.prototype.finish = function(){
 
   if(this.anims[this.currAnim].getTotalTime() <= this.currentTime && !this.isFinished){
     this.oldMatrix = this.anims[this.currAnim].getMatrix(this.currentTime, false);
     this.currentTime = 0;
     this.isFinished = true;
-
+    this.saveMatrix();
   }
 
 }
@@ -80,7 +89,7 @@ AnimationsOfNode.prototype.addAnimationAfter = function(animation) {
 
     this.notChanged = true;
   } else {
-    this.animsTimes.push(animation.getTotalTime());
+    this.animsTimes.push(this.animsTimes[this.animsTimes.length - 1] + animation.getTotalTime());
     this.anims.push(animation);
   }
 }
