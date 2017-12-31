@@ -52,6 +52,7 @@ function XMLscene(interface) {
 
     this.ChooseScene = "Venice";
     this.Undo = function Undo(){//Chamar funções aqui
+      this.undoAux();
     };
     this.Movie = function Movie(){};
 
@@ -198,6 +199,22 @@ XMLscene.prototype.logPicking = function ()
             this.pickResults.splice(0,this.pickResults.length);
         }
     }
+}
+
+XMLscene.prototype.undoAux = function() {
+  if(this.playing && this.gameMode != 3 && this.allPlays.length > 1 && this.graph.removedPieces.length > 0){
+    let responseArr = this.allPlays.pop();
+    console.log(responseArr);
+    this.graph.readdPiece(this.graph.removedPieces.pop(),responseArr[responseArr.length - 2]);
+    this.graph.movePiece(responseArr[responseArr.length - 1],responseArr[responseArr.length - 3]);
+    //this.graph.removePiece(responseArr[responseArr.length - 2]);
+    this.pickCounter = 0;
+    this.player = this.player == 0? 1 : 0;
+    this.orbitCamera = true; // TODO rodar ao contrario aqui
+    this.resetTimer();
+    this.timeToPlayBot = 0;
+    this.makeRequest(9);
+  }
 }
 
 XMLscene.prototype.selectGameMode = function(id) {
