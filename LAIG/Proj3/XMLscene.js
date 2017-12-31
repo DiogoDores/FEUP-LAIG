@@ -38,7 +38,8 @@ function XMLscene(interface) {
     this.gameMode = 3;
     this.isGameModeSelected = false;
     this.alignCamera = false;
-
+    this.orbitCamera = false;
+    this.orbitCounter = 0;
 
     this.playing = true; //TODO change
 
@@ -186,7 +187,6 @@ XMLscene.prototype.selectGameMode = function(id) {
         console.log("Playing Multiplayer Mode");
         this.camera.setPosition(vec3.fromValues(15, 10, 30));
         this.alignCamera = true;
-        console.log(this.camera.getViewMatrix());
     } else if(id == 43){
         this.gameMode = 1;
         this.isGameModeSelected = true;
@@ -275,6 +275,8 @@ XMLscene.prototype.handleReply = function(data){
     this.graph.removePiece(responseArr[responseArr.length - 2]);
     this.pickCounter = 0;
     this.player = this.player == 0? 1 : 0;
+    this.orbitCamera = true;
+    this.resetTimer();
   } else if(responseArr[0] == "2") {
     this.pickCounter = 0;
     console.log("bad move");
@@ -282,6 +284,13 @@ XMLscene.prototype.handleReply = function(data){
   console.log(this.allPlays);
   // TODO reset counter caso successo.
   //TODO Fazer movimentos e cenas
+}
+
+XMLscene.prototype.resetTimer = function () {
+    this.graph.nodes["units"].textureID = this.graph.clockTextures[0];
+    this.graph.nodes["dozens"].textureID = this.graph.clockTextures[6];
+    this.secondsIndex = 0;
+    this.minutesIndex = 5;
 }
 
 /*
@@ -323,8 +332,11 @@ XMLscene.prototype.update = function (currTime) {
                     this.graph.nodes["units"].textureID = this.graph.clockTextures[this.secondsIndex--];
                 }
 
-                if(this.graph.nodes["units"].textureID == this.graph.clockTextures[0] && this.graph.nodes["dozens"].textureID == this.graph.clockTextures[0])
-                    this.runTimer = false;
+                if(this.graph.nodes["units"].textureID == this.graph.clockTextures[0] && this.graph.nodes["dozens"].textureID == this.graph.clockTextures[0]){
+                    this.resetTimer();
+                    this.orbitCamera = true;
+                    this.player = this.player == 0? 1 : 0;
+                }
 
             }
 
@@ -338,17 +350,21 @@ XMLscene.prototype.update = function (currTime) {
     if(this.alignCamera){
         this.moveCameraToBoard();
     }
+
+    if(this.orbitCamera){
+        if(this.orbitCounter == 30){
+            this.orbitCounter = 0;
+            this.orbitCamera = false;
+        } else {
+            this.camera.orbit(vec3.fromValues(0, 1, 0), -3*Math.PI/180);
+            this.orbitCounter++;
+        }
+    }
 }
 
 XMLscene.prototype.moveCameraToBoard = function () {
 
-    this.camera.setPosition(vec3.fromValues(Math.round(this.camera.position[0]),
-                                            Math.round(this.camera.position[1]),
-                                            Math.round(this.camera.position[2])));
-
-    if(this.camera.position[0] == 0 && this.camera.position[1] == 10 && this.camera.position[2] == 10){
-        this.camera.rotate(vec3.fromValues(0, 1, 0), Math.PI/180);
-        this.camera.rotate(vec3.fromValues(1, 0, 0), 5*Math.PI/180);
+    if(this.camera.position[0] == 0 && this.camera.position[1] == 20 && this.camera.position[2] == 1){
         this.alignCamera = false;
     }
 
@@ -359,15 +375,15 @@ XMLscene.prototype.moveCameraToBoard = function () {
             this.camera.setPosition(vec3.fromValues(this.camera.position[0] + 1, this.camera.position[1], this.camera.position[2]));
     }
 
-    if(this.camera.position[1] != 10){
-        if(this.camera.position[1] > 10)
+    if(this.camera.position[1] != 20){
+        if(this.camera.position[1] > 20)
             this.camera.setPosition(vec3.fromValues(this.camera.position[0], this.camera.position[1] - 1, this.camera.position[2]));
         else
             this.camera.setPosition(vec3.fromValues(this.camera.position[0], this.camera.position[1] + 1, this.camera.position[2]));
     }
 
-    if(this.camera.position[2] != 10){
-        if(this.camera.position[2] > 10)
+    if(this.camera.position[2] != 1){
+        if(this.camera.position[2] > 1)
             this.camera.setPosition(vec3.fromValues(this.camera.position[0], this.camera.position[1], this.camera.position[2] - 1));
         else
             this.camera.setPosition(vec3.fromValues(this.camera.position[0], this.camera.position[1], this.camera.position[2] + 1));
@@ -402,7 +418,7 @@ XMLscene.prototype.display = function () {
         this.multMatrix(this.graph.initialTransforms);
 
         // Draw axis
-        this.axis.display();
+        // this.axis.display();
 
         var i = 0;
         for (var key in this.lightValues) {
