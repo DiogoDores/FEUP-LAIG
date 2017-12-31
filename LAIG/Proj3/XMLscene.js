@@ -30,6 +30,7 @@ function XMLscene(interface) {
     this.player = 0;
     this.makeRequest(0);
 
+    this.timeToPlayBot = 0;
     this.globalCounter = 0;
     this.runTimer = false;
     this.secondsIndex = 10;
@@ -41,7 +42,11 @@ function XMLscene(interface) {
     this.orbitCamera = false;
     this.orbitCounter = 0;
 
-    this.playing = true; //TODO change
+    this.playing = false;
+    this.player1Score = 0;
+    this.player2Score = 0;
+
+    this.needMoverToRemove = false;
 
     this.piecesOut = [0,0,0,0]; //[yellow, green, blue, red]
 
@@ -164,12 +169,26 @@ XMLscene.prototype.logPicking = function ()
                 if (obj)
                 {
                     var customId = this.pickResults[i][1];
-                    this.picks[this.pickCounter] = this.pickIDs[customId - 1];
-                    this.pickCounter++;
-                    if(this.pickCounter == 2)
-                      this.makeRequest(1); // TODO ver melhor esta parte para usar o counter a 3 para dar pick na peca a remover
+                    if(!this.isGameModeSelected)
+                      this.selectGameMode(customId);
+                    else if(this.playing && !this.needMoverToRemove){
+                      this.picks[this.pickCounter] = this.pickIDs[customId - 1];
+                      this.pickCounter++;
+                      if(this.pickCounter == 2)
+                        this.makeRequest(1);
 
-                    this.selectGameMode(customId);
+                    } else if(this.playing && this.needMoverToRemove){
+                      if(this.graph.checkIfBelongs(this.pickIDs[customId - 1],this.players[this.player])){
+                         console.log("there");
+                        this.moverRemove = this.pickIDs[customId - 1];
+                        this.makeRequest(2);
+                        this.needMoverToRemove = false;
+                       } else {
+                        console.log("here2");
+                         //TODO add message to say: "Mover To Remove Selected Invalid. Select Another"
+                       }
+                    }
+
                     console.log("Picked id " + customId);
                 }
             }
@@ -247,10 +266,17 @@ XMLscene.prototype.makeRequest = function(type)
     console.log(this.picks[0] + this.picks[1]);
     this.getPrologRequest("1-" + this.allPlays[this.allPlays.length - 1][1] + "-"
     + this.allPlays[this.allPlays.length - 1][2] + "-" + this.players[this.player]
-    + "-1-" + this.picks[0] + "-" + this.picks[1], this.handleReply.bind(this));
+    + "-" + (this.gameMode + 1) + "-" + this.picks[0] + "-" + this.picks[1], this.handleReply.bind(this));
     //TODO tirar o 1 e por o modo de jogo
   } else if(type == 2) {
-
+    console.log(this.picks[0] + this.picks[1] + " mover to remove " + this.moverRemove);
+    this.getPrologRequest("2-" + this.allPlays[this.allPlays.length - 1][1] + "-"
+    + this.allPlays[this.allPlays.length - 1][2] + "-" + this.players[this.player]
+    + "-" + (this.gameMode + 1) + "-" + this.picks[0] + "-" + this.picks[1] + "-" + this.moverRemove, this.handleReply.bind(this));
+  } else if (type == 9) {
+    this.getPrologRequest("9-" + this.players[this.player] + "-"
+     + this.allPlays[this.allPlays.length - 1][1] + "-"
+     + this.allPlays[this.allPlays.length - 1][2], this.handleReply.bind(this));
   }
   //TODO
 
@@ -267,6 +293,7 @@ XMLscene.prototype.handleReply = function(data){
   console.log(responseArr);
   if(responseArr[0] == "0"){
     this.allPlays = [responseArr];
+    this.makeRequest(9);
 
   } else if(responseArr[0] == "1"){
     console.log("nice move");
@@ -277,9 +304,40 @@ XMLscene.prototype.handleReply = function(data){
     this.player = this.player == 0? 1 : 0;
     this.orbitCamera = true;
     this.resetTimer();
+    this.timeToPlayBot = 0;
+    this.makeRequest(9);
+
   } else if(responseArr[0] == "2") {
     this.pickCounter = 0;
     console.log("bad move");
+
+  } else if(responseArr[0] == "3") {
+    this.needMoverToRemove = true;
+    this.graph.movePiece(this.picks[0], this.picks[1]);
+
+  } else if(responseArr[0] == "4") {
+    this.allPlays.push(responseArr);
+    this.graph.removePiece(responseArr[responseArr.length - 2]);
+    this.pickCounter = 0;
+    this.player = this.player == 0? 1 : 0;
+    this.timeToPlayBot = 0;
+    this.makeRequest(9);
+
+  } else if (responseArr[0] == "8") {
+    this.player1Score = responseArr[1];
+    this.player2Score = responseArr[2];
+
+  } else if (responseArr[0] == "9") {
+    this.player1Score = responseArr[1];
+    this.player2Score = responseArr[2];
+    this.playing = false;
+    this.isGameOver = true;
+    if(this.player1Score > this.player2Score)
+       console.log("Player 2 Wins");//TODO replace with text to: Player 2 Wins
+    else if (this.player1Score < this.player2Score)
+        console.log("Player 1 Wins");//TODO replace with text to: Player 1 Wins
+    else
+        console.log("Draw");//TODO replace with text to: Draw
   }
   console.log(this.allPlays);
   // TODO reset counter caso successo.
@@ -345,7 +403,14 @@ XMLscene.prototype.update = function (currTime) {
     }
 
     this.globalCounter++;
-    
+    if(this.playing && this.gameMode != 0)
+      this.timeToPlayBot++;
+    if(this.playing && (this.gameMode == 2 || (this.gameMode == 1 && this.player == 1)) && this.timeToPlayBot == 99){
+      this.timeToPlayBot = 0;
+      this.picks = ["0","0"];
+      this.makeRequest(1);
+   }
+
     //Moves camera to board
     if(this.alignCamera){
         this.moveCameraToBoard();
@@ -477,7 +542,7 @@ XMLscene.prototype.makePickable = function(){
                 this.objects[i-1].display();
             this.popMatrix();
             buttonCounter -= 1.1;
-        } 
+        }
     }
 
     this.pushMatrix();
@@ -487,7 +552,7 @@ XMLscene.prototype.makePickable = function(){
         this.objects[this.objects.length-4].display();
     this.popMatrix();
 
-    for (var i = 0; i < this.objects.length - 1; i++) {
+    for (var i = 0; i < this.objects.length - 4; i++) {
 
         if(counter == 5){
             lastZ = 5.3;

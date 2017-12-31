@@ -1843,54 +1843,71 @@ MySceneGraph.prototype.movePiece = function (pos1, pos2) {
  * Adds an animation to a piece to change position
  */
 MySceneGraph.prototype.removePiece = function (pos) {
-  let nodePos;
-  for (var [key, value] of this.piecesMap) {
-    if(value == pos){
-      nodePos = key;
-      break;
+    let nodePos;
+    for (var [key, value] of this.piecesMap) {
+      if(value == pos){
+        nodePos = key;
+        break;
+      }
     }
-  }
-  let colors=["y", "g", "b", "r"];
-  let color;
-  switch(nodePos.length){
-    case 14: //yellow
-      color = 0;
-      break;
-    case 13: //green
-      color = 1;
-      break;
-    case 12: //blue
-      color = 2;
-      break;
-    case 11: //red
-      color = 3;
-      break;
-  }
+    let colors=["y", "g", "b", "r"];
+    let color;
+    switch(nodePos.length){
+      case 14: //yellow
+        color = 0;
+        break;
+      case 13: //green
+        color = 1;
+        break;
+      case 12: //blue
+        color = 2;
+        break;
+      case 11: //red
+        color = 3;
+        break;
+    }
 
-  let nodePos2 = colors[color] + "_out";
-  this.piecesMap.delete(nodePos);
-  this.piecesMap.set(nodePos, nodePos2);
+    let nodePos2 = colors[color] + "_out";
+    this.piecesMap.delete(nodePos);
+    this.piecesMap.set(nodePos, nodePos2);
 
 
-  let coordPos2 = vec3.create();
-//  coordPos2 = this.positionsMap.get(pos2);
-  vec3.subtract(coordPos2, this.positionsMap.get(nodePos2), this.positionsMap.get(pos));
-  coordPos2[1] = 0.3*this.scene.piecesOut[color];
-  let animation = new BezierAnimation(this, ["bezier", "3", [[0,0,0],
-      [0,5+coordPos2[1],0], [coordPos2[0],5+coordPos2[1],coordPos2[2]],coordPos2]]);
-  console.log(coordPos2);
-  if(this.nodes[nodePos].anim == null){
+    let coordPos2 = vec3.create();
+  //  coordPos2 = this.positionsMap.get(pos2);
+    vec3.subtract(coordPos2, this.positionsMap.get(nodePos2), this.positionsMap.get(pos));
+    coordPos2[1] = 0.3*this.scene.piecesOut[color];
+    let animation = new BezierAnimation(this, ["bezier", "3", [[0,0,0],
+        [0,5+coordPos2[1],0], [coordPos2[0],5+coordPos2[1],coordPos2[2]],coordPos2]]);
+    console.log(coordPos2);
+    if(this.nodes[nodePos].anim == null){
 
-    var animHolder = new AnimationsOfNode(this, [animation]);
-    this.animRefs.push(animHolder);
-    this.nodes[nodePos].addAnimation(this.animRefs[this.animRefs.length - 1]);
-  } else {
-    this.nodes[nodePos].anim.addAnimationAfter(animation);
-  }
+      var animHolder = new AnimationsOfNode(this, [animation]);
+      this.animRefs.push(animHolder);
+      this.nodes[nodePos].addAnimation(this.animRefs[this.animRefs.length - 1]);
+    } else {
+      this.nodes[nodePos].anim.addAnimationAfter(animation);
+    }
 
-  this.scene.piecesOut[color]++;
+    this.scene.piecesOut[color]++;
 }
 
+MySceneGraph.prototype.checkIfBelongs = function(piece,player){
+    let node;
+    for (var [key, value] of this.piecesMap) {
+      if(value == piece){
+        node = key;
+        break;
+      }
+    }
+
+    if(node != null ){
+      if(player == "y" && node[0] == "c")
+         return true;
+      else if(player == "b" && node[0] == "s")
+         return true;
+    }
+    return false;
+}
 
 
 /**
