@@ -1,11 +1,17 @@
 # Ações necessárias
 
 De modo a correr o programa é necessário:
+
  * Abrir o **Sicstus**
+ 
  * Em *File*, selecionar **Consult**
+ 
  * Selecionar o ficheiro **Prolog/server.pl**
+ 
  * No *Sicstus*, correr "**server.**"
+ 
  * Abrir um server, p.e. "localhost:8080", e estará funcional
+ 
 
 # Resumo
 
