@@ -1887,7 +1887,7 @@ MySceneGraph.prototype.removePiece = function (pos) {
     // creates an animation
     let animation = new BezierAnimation(this, ["bezier", "3", [[0,0,0],
         [0,5+coordPos2[1],0], [coordPos2[0],5+coordPos2[1],coordPos2[2]],coordPos2]]);
-    console.log(coordPos2);
+
     if(this.nodes[nodePos].anim == null){
 
       var animHolder = new AnimationsOfNode(this, [animation], this.nodes[nodePos]);
