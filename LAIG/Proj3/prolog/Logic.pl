@@ -170,7 +170,7 @@ list_empty([_|_]):- fail.
 
 
 getAllPossibleMovesAux(Player, [Start|Tail],Yi, Bi, CalcMoves, Moves) :-
-        isValid(Player,Yi,Bi,Start, Mid, Final),!,
+        isValid(Player,Yi,Bi,Start, Mid, Final,_),!,
         getAllPossibleMovesAux(Player,Tail,Yi,Bi,[[Start,Final,Mid]|CalcMoves], Moves).
 
 /* Used when previous condition fails*/
@@ -190,7 +190,7 @@ readConsecutiveMove(Player,Yi,Bi,FirstInitial,PrevFinal,Jump,Final):-
         repeat,
         write('Choose final destination for '), write(PrevFinal),
         read(Final),
-        isValid(Player,Yi,Bi,PrevFinal,Jump,Final),
+        isValid(Player,Yi,Bi,PrevFinal,Jump,Final,_),
         FirstInitial \= Final,
         !.
 
@@ -327,7 +327,7 @@ readValidPlay(InitialPos,JumpPos,FinalPos,Yi,Bi,Player):-
                 nl,
                 write('Select valid final pos'),
                 read(FinalPos),nl,
-                isValid(Player, Yi,Bi,InitialPos,JumpPos,FinalPos),
+                isValid(Player, Yi,Bi,InitialPos,JumpPos,FinalPos,_),
                 !.
 
 chooseDificulty(b, Dificulty) :- nl, put_code(201),
