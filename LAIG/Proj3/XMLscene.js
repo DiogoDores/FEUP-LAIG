@@ -51,7 +51,7 @@ function XMLscene(interface) {
 
     this.piecesOut = [0,0,0,0]; //[yellow, green, blue, red]
 
-    this.ChooseScene = "Venice";
+    this.ChooseScene = "Restaurant";
     this.Undo = function Undo(){//Chamar funções aqui
       this.undoAux();
     };

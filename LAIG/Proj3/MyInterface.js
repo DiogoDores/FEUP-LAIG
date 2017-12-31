@@ -34,11 +34,13 @@ MyInterface.prototype.init = function (application) {
 
     this.gui = new dat.GUI();
 
-    this.gui.add(this.scene, 'ChooseScene', ['Venice', 'Restaurant']);
+    var group = this.gui.addFolder('Game Options');
 
-    this.gui.add(this.scene, 'Undo');
+    group.add(this.scene, 'ChooseScene', ['Venice', 'Restaurant']);
 
-    this.gui.add(this.scene, 'Movie');
+    group.add(this.scene, 'Undo');
+
+    group.add(this.scene, 'Movie');
 
     return true;
 };
