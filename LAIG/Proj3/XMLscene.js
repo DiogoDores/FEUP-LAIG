@@ -44,6 +44,7 @@ function XMLscene(interface) {
     this.orbitCounter = 0;
 
     this.playing = false;
+    this.isGameOver = false;
     this.player1Score = 0;
     this.player2Score = 0;
 
@@ -51,11 +52,13 @@ function XMLscene(interface) {
 
     this.piecesOut = [0,0,0,0]; //[yellow, green, blue, red]
 
-    this.ChooseScene = "Restaurant";
-    this.Undo = function Undo(){//Chamar funções aqui
+    this.ChooseScene = "Venice";
+    this.Undo = function Undo(){
       this.undoAux();
     };
-    this.Movie = function Movie(){};
+    this.Movie = function Movie(){
+      this.movieAux();
+    };
 
 }
 
@@ -199,6 +202,24 @@ XMLscene.prototype.logPicking = function ()
             this.pickResults.splice(0,this.pickResults.length);
         }
     }
+}
+
+XMLscene.prototype.movieAux = function(){
+  if(!this.playing && this.isGameOver){
+    this.graph.resetPos();
+    this.graph.animsRefs = [];
+    this.piecesOut = [0,0,0,0];
+
+    for (let i = 1; i < this.allPlays.length; i++) {
+      window.setTimeout(this.moviePlay.bind(this), 3000 * i, this.allPlays[i]);
+    }
+  }
+}
+
+
+XMLscene.prototype.moviePlay = function(play) {
+  this.graph.movePiece(play[play.length - 3], play[play.length - 1]);
+  this.graph.removePiece(play[play.length - 2]);
 }
 
 XMLscene.prototype.undoAux = function() {
@@ -352,10 +373,12 @@ XMLscene.prototype.handleReply = function(data){
   } else if (responseArr[0] == "8") {
     this.player1Score = responseArr[1];
     this.player2Score = responseArr[2];
+    this.setMessage(3,"Player 1:   " + this.player1Score + " - " + this.player2Score + "   :Player 2", "white");
 
   } else if (responseArr[0] == "9") {
     this.player1Score = responseArr[1];
     this.player2Score = responseArr[2];
+    this.setMessage(3,"Player 1:   " + this.player1Score + " - " + this.player2Score + "   :Player 2", "white");
     this.playing = false;
     this.isGameOver = true;
     if(this.player1Score > this.player2Score){

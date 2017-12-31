@@ -1973,6 +1973,42 @@ MySceneGraph.prototype.checkIfBelongs = function(piece,player){
     return false;
 }
 
+MySceneGraph.prototype.resetPos = function (){
+  this.piecesMap.clear();
+
+  let id = "blue_square";
+  for (var i = 0; i < this.nodes[id].children.length; i++) {
+      this.nodes[this.nodes[id].children[i]].anim = null;
+      mat4.identity(this.nodes[this.nodes[id].children[i]].transformMatrix);
+      mat4.translate(this.nodes[this.nodes[id].children[i]].transformMatrix, this.nodes[this.nodes[id].children[i]].transformMatrix, this.positionsMap.get("b" + (9 - i)));
+      this.piecesMap.set(this.nodes[id].children[i], "b" + (9 - i));
+  }
+
+  id = "red_square";
+  for (var i = 0; i < this.nodes[id].children.length; i++) {
+      this.nodes[this.nodes[id].children[i]].anim = null;
+      mat4.identity(this.nodes[this.nodes[id].children[i]].transformMatrix);
+      mat4.translate(this.nodes[this.nodes[id].children[i]].transformMatrix, this.nodes[this.nodes[id].children[i]].transformMatrix, this.positionsMap.get("r" + (9 - i)));
+      this.piecesMap.set(this.nodes[id].children[i], "r" + (9 - i));
+  }
+
+  id = "yellow_circle";
+  for (var i = 0; i < this.nodes[id].children.length; i++) {
+      this.nodes[this.nodes[id].children[i]].anim = null;
+      mat4.identity(this.nodes[this.nodes[id].children[i]].transformMatrix);
+      mat4.translate(this.nodes[this.nodes[id].children[i]].transformMatrix, this.nodes[this.nodes[id].children[i]].transformMatrix, this.positionsMap.get("y" + (9 - i)));
+      this.piecesMap.set(this.nodes[id].children[i], "y" + (9 - i));
+  }
+
+  id = "green_circle";
+  for (var i = 0; i < this.nodes[id].children.length; i++) {
+      this.nodes[this.nodes[id].children[i]].anim = null;
+      mat4.identity(this.nodes[this.nodes[id].children[i]].transformMatrix);
+      mat4.translate(this.nodes[this.nodes[id].children[i]].transformMatrix, this.nodes[this.nodes[id].children[i]].transformMatrix, this.positionsMap.get("g" + (9 - i)));
+      this.piecesMap.set(this.nodes[id].children[i], "g" + (9 - i));
+  }
+
+}
 
 /**
  * Displays the scene, processing each node, starting in the root node.
