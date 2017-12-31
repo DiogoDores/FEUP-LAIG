@@ -373,10 +373,12 @@ XMLscene.prototype.handleReply = function(data){
   } else if (responseArr[0] == "8") {
     this.player1Score = responseArr[1];
     this.player2Score = responseArr[2];
+    this.setMessage(3,"Player 1:   " + this.player1Score + " - " + this.player2Score + "   :Player 2", "white");
 
   } else if (responseArr[0] == "9") {
     this.player1Score = responseArr[1];
     this.player2Score = responseArr[2];
+    this.setMessage(3,"Player 1:   " + this.player1Score + " - " + this.player2Score + "   :Player 2", "white");
     this.playing = false;
     this.isGameOver = true;
     if(this.player1Score > this.player2Score){

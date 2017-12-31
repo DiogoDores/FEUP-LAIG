@@ -57,7 +57,7 @@ AnimationsOfNode.prototype.finish = function(){
 
   if(this.anims[this.currAnim].getTotalTime() <= this.currentTime && !this.isFinished){
     this.oldMatrix = this.anims[this.currAnim].getMatrix(this.currentTime, false);
-    this.currentTime = 0;
+    //this.currentTime = 0;
     this.isFinished = true;
     this.saveMatrix();
   }
