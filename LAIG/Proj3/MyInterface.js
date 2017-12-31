@@ -34,5 +34,11 @@ MyInterface.prototype.init = function (application) {
 
     this.gui = new dat.GUI();
 
+    this.gui.add(this.scene, 'ChooseScene', ['Venice', 'Restaurant']);
+
+    this.gui.add(this.scene, 'Undo');
+
+    this.gui.add(this.scene, 'Movie');
+
     return true;
 };

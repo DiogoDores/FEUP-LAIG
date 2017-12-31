@@ -1351,14 +1351,12 @@ MySceneGraph.prototype.parseNodes = function (nodesNode) {
         var nodeName;
         if ((nodeName = children[i].nodeName) == "ROOT") {
             // Retrieves root node.
-            if (this.idRoot != null)
-                return "there can only be one root node";
-            else {
-                var root = this.reader.getString(children[i], 'id');
-                if (root == null)
-                    return "failed to retrieve root node ID";
-                this.idRoot = root;
-            }
+            var root = this.reader.getString(children[i], 'id');
+            
+            if (root == null)
+                return "failed to retrieve root node ID";
+            this.idRoot = root;
+            
         } else if (nodeName == "NODE") {
             // Retrieves node ID.
             var nodeID = this.reader.getString(children[i], 'id');
@@ -1914,6 +1912,12 @@ MySceneGraph.prototype.checkIfBelongs = function(piece,player){
  * Displays the scene, processing each node, starting in the root node.
  */
 MySceneGraph.prototype.displayScene = function () {
+
+    if(this.scene.ChooseScene == "Venice"){
+        this.idRoot = "venice";
+    } else if (this.scene.ChooseScene == "Restaurant"){
+        this.idRoot = "restaurant";
+    }
 
     this.displayNodes(this.idRoot, null, null);
 

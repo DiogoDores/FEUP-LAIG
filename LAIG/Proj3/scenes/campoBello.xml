@@ -278,10 +278,11 @@
 <!-- The nodes -->
 <NODES>
 
-    <ROOT id="root" />
+    <ROOT id="venice" />
+    <ROOT id="restaurant" />
 
     <!-- The root node -->
-    <NODE id="root">
+    <NODE id="venice">
         <MATERIAL id="defaultMaterial" />
         <TEXTURE id="null" />
 
@@ -292,6 +293,21 @@
           <NODEREF id="counters" />
           <NODEREF id="buttons" />
           <NODEREF id="scene1" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="restaurant">
+        <MATERIAL id="defaultMaterial" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="-10" y="-7" z="-15" />
+
+        <DESCENDANTS>
+          <NODEREF id="game" />
+          <NODEREF id="counters" />
+          <NODEREF id="buttons" />
+          <NODEREF id="scene2" />
         </DESCENDANTS>
 
     </NODE>
@@ -1622,6 +1638,39 @@
 
         <DESCENDANTS>
             <LEAF type="rectangle" args="0 0 1 1" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="scene2">
+        <MATERIAL id="null"/>
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+           <!-- <NODEREF id="floor" />
+            <NODEREF id="walls" /> -->
+            <NODEREF id="table" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="table">
+        <MATERIAL id="null"/>
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+            <NODEREF id="lid" />
+            <!--<NODEREF id="foot" />-->
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="lid">
+        <MATERIAL id="null"/>
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+            <LEAF type="cylinder" args="2 20 20 20 20 1 1" />
         </DESCENDANTS>
 
     </NODE>

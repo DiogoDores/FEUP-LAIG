@@ -50,6 +50,11 @@ function XMLscene(interface) {
 
     this.piecesOut = [0,0,0,0]; //[yellow, green, blue, red]
 
+    this.ChooseScene = "Venice";
+    this.Undo = function Undo(){//Chamar funções aqui
+    };
+    this.Movie = function Movie(){};
+
 }
 
 XMLscene.prototype = Object.create(CGFscene.prototype);
@@ -63,8 +68,6 @@ XMLscene.prototype.init = function (application) {
 
     this.initCameras();
     this.initShaders();
-
-    this.clock = [];
 
     this.enableTextures(true);
 
