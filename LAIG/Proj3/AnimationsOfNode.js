@@ -20,7 +20,7 @@ function AnimationsOfNode(scene, animations, node) {
     time += this.anims[i].getTotalTime();
     this.animsTimes.push(time);
   }
-  this.notChanged = true;
+
 };
 
 AnimationsOfNode.prototype = Object.create(AnimationsOfNode.prototype);
@@ -57,7 +57,7 @@ AnimationsOfNode.prototype.finish = function(){
 
   if(this.anims[this.currAnim].getTotalTime() <= this.currentTime && !this.isFinished){
     this.oldMatrix = this.anims[this.currAnim].getMatrix(this.currentTime, false);
-    //this.currentTime = 0;
+    this.currentTime = 0;
     this.isFinished = true;
     this.saveMatrix();
   }
@@ -82,12 +82,11 @@ AnimationsOfNode.prototype.nextAnim = function(){
 AnimationsOfNode.prototype.addAnimationAfter = function(animation) {
   if(this.isFinished) {
     this.totalTime = this.animsTimes[this.animsTimes.length - 1];
-    this.currentTime = 0;
+    //this.currentTime = 0;
 
     this.animsTimes.push(this.animsTimes[this.animsTimes.length - 1] + animation.getTotalTime());
     this.anims.push(animation);
 
-    this.notChanged = true;
   } else {
     this.animsTimes.push(this.animsTimes[this.animsTimes.length - 1] + animation.getTotalTime());
     this.anims.push(animation);
