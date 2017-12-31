@@ -40,6 +40,7 @@ function XMLscene(interface) {
     this.isGameModeSelected = false;
     this.alignCamera = false;
     this.orbitCamera = false;
+    this.orbitBackwards = false;
     this.orbitCounter = 0;
 
     this.playing = false;
@@ -183,13 +184,12 @@ XMLscene.prototype.logPicking = function ()
 
                     } else if(this.playing && this.needMoverToRemove){
                       if(this.graph.checkIfBelongs(this.pickIDs[customId - 1],this.players[this.player])){
-                         console.log("there");
                         this.moverRemove = this.pickIDs[customId - 1];
                         this.makeRequest(2);
                         this.needMoverToRemove = false;
                        } else {
-                        console.log("here2");
-                         //TODO add message to say: "Mover To Remove Selected Invalid. Select Another"
+                         this.setMessage(2,"Invalid Piece to Remove. Select Another. Player " + (this.player + 1) + " turn", "red");
+
                        }
                     }
 
@@ -204,16 +204,18 @@ XMLscene.prototype.logPicking = function ()
 XMLscene.prototype.undoAux = function() {
   if(this.playing && this.gameMode != 3 && this.allPlays.length > 1 && this.graph.removedPieces.length > 0){
     let responseArr = this.allPlays.pop();
-    console.log(responseArr);
+
     this.graph.readdPiece(this.graph.removedPieces.pop(),responseArr[responseArr.length - 2]);
     this.graph.movePiece(responseArr[responseArr.length - 1],responseArr[responseArr.length - 3]);
-    //this.graph.removePiece(responseArr[responseArr.length - 2]);
+
     this.pickCounter = 0;
     this.player = this.player == 0? 1 : 0;
     this.orbitCamera = true; // TODO rodar ao contrario aqui
+    this.orbitBackwards = true;
     this.resetTimer();
     this.timeToPlayBot = 0;
     this.makeRequest(9);
+    this.setMessage(2,"Player " + (this.player + 1) + " turn", "white");
   }
 }
 
@@ -223,7 +225,8 @@ XMLscene.prototype.selectGameMode = function(id) {
         this.isGameModeSelected = true;
         this.runTimer = true;
         this.playing = true;
-        console.log("Playing Multiplayer Mode");
+        this.setMessage(1,"Playing Multiplayer Mode", "white");
+        this.setMessage(2,"Player " + (this.player + 1) + " turn", "white");
         this.camera.setPosition(vec3.fromValues(15, 10, 30));
         this.alignCamera = true;
     } else if(id == 43){
@@ -231,7 +234,8 @@ XMLscene.prototype.selectGameMode = function(id) {
         this.isGameModeSelected = true;
         this.runTimer = true;
         this.playing = true;
-        console.log("Playing Singleplayer Mode");
+        this.setMessage(1,"Playing singlePlayer Mode", "white");
+        this.setMessage(2,"Player " + (this.player + 1) + " turn", "white");
         this.camera.setPosition(vec3.fromValues(15, 10, 30));
         this.alignCamera = true;
     } else if(id == 44){
@@ -239,7 +243,8 @@ XMLscene.prototype.selectGameMode = function(id) {
         this.isGameModeSelected = true;
         this.runTimer = true;
         this.playing = true;
-        console.log("Playing Computer vs Computer Mode");
+        this.setMessage(1,"Playing Computer vs Computer Mode", "white");
+        this.setMessage(2,"Player " + (this.player + 1) + " turn", "white");
         this.camera.setPosition(vec3.fromValues(15, 10, 30));
         this.alignCamera = true;
     }
@@ -284,13 +289,13 @@ XMLscene.prototype.makeRequest = function(type)
     this.getPrologRequest(0, this.handleReply.bind(this));
 
   } else if(type == 1){
-    console.log(this.picks[0] + this.picks[1]);
+
     this.getPrologRequest("1-" + this.allPlays[this.allPlays.length - 1][1] + "-"
     + this.allPlays[this.allPlays.length - 1][2] + "-" + this.players[this.player]
     + "-" + (this.gameMode + 1) + "-" + this.picks[0] + "-" + this.picks[1], this.handleReply.bind(this));
 
   } else if(type == 2) {
-    console.log(this.picks[0] + this.picks[1] + " mover to remove " + this.moverRemove);
+
     this.getPrologRequest("2-" + this.allPlays[this.allPlays.length - 1][1] + "-"
     + this.allPlays[this.allPlays.length - 1][2] + "-" + this.players[this.player]
     + "-" + (this.gameMode + 1) + "-" + this.picks[0] + "-" + this.picks[1] + "-" + this.moverRemove, this.handleReply.bind(this));
@@ -300,30 +305,25 @@ XMLscene.prototype.makeRequest = function(type)
      + this.allPlays[this.allPlays.length - 1][1] + "-"
      + this.allPlays[this.allPlays.length - 1][2], this.handleReply.bind(this));
   }
-  //TODO
 
-  // Make Request
-  //getPrologRequest("handshake", handleReply);
 }
 
 //Handle the Reply
 XMLscene.prototype.handleReply = function(data){
   let response = data.target.response;
-  console.log("answer from prolog: " + response);
 
   let responseArr = response.split("-");
-  console.log(responseArr);
   if(responseArr[0] == "0"){
     this.allPlays = [responseArr];
     this.makeRequest(9);
 
   } else if(responseArr[0] == "1"){
-    console.log("nice move");
     this.allPlays.push(responseArr);
     this.graph.movePiece(responseArr[responseArr.length - 3], responseArr[responseArr.length - 1]);
     this.graph.removePiece(responseArr[responseArr.length - 2]);
     this.pickCounter = 0;
     this.player = this.player == 0? 1 : 0;
+    this.setMessage(2,"Player " + (this.player + 1) + " turn", "white");
     this.orbitCamera = true;
     this.resetTimer();
     this.timeToPlayBot = 0;
@@ -331,17 +331,19 @@ XMLscene.prototype.handleReply = function(data){
 
   } else if(responseArr[0] == "2") {
     this.pickCounter = 0;
-    console.log("bad move");
+    this.setMessage(2,"Invalid Move. Player " + (this.player + 1) + " turn", "red");
 
   } else if(responseArr[0] == "3") {
     this.needMoverToRemove = true;
     this.graph.movePiece(this.picks[0], this.picks[1]);
+    this.setMessage(2,"Select one of your pieces to remove. Player " + (this.player + 1) + " turn", "yellow");
 
   } else if(responseArr[0] == "4") {
     this.allPlays.push(responseArr);
     this.graph.removePiece(responseArr[responseArr.length - 2]);
     this.pickCounter = 0;
     this.player = this.player == 0? 1 : 0;
+    this.setMessage(2,"Player " + (this.player + 1) + " turn", "white");
     this.orbitCamera = true;
     this.resetTimer();
     this.timeToPlayBot = 0;
@@ -356,16 +358,26 @@ XMLscene.prototype.handleReply = function(data){
     this.player2Score = responseArr[2];
     this.playing = false;
     this.isGameOver = true;
-    if(this.player1Score > this.player2Score)
-       console.log("Player 2 Wins");//TODO replace with text to: Player 2 Wins
-    else if (this.player1Score < this.player2Score)
-        console.log("Player 1 Wins");//TODO replace with text to: Player 1 Wins
-    else
-        console.log("Draw");//TODO replace with text to: Draw
+    if(this.player1Score > this.player2Score){
+      this.setMessage(1,"Game Over!", "white");
+      this.setMessage(2,"Player 2 WINS", "green");
+
+    } else if (this.player1Score < this.player2Score) {
+      this.setMessage(1,"Game Over!", "white");
+      this.setMessage(2,"Player 1 WINS", "green");
+    } else {
+      this.setMessage(1,"Game Over!", "white");
+      this.setMessage(2,"DRAW", "green");
+    }
+
   }
-  console.log(this.allPlays);
-  // TODO reset counter caso successo.
-  //TODO Fazer movimentos e cenas
+
+}
+
+XMLscene.prototype.setMessage = function(type,text, color){
+  let element = document.getElementById("messages" + type);
+  element.innerHTML = text;
+  element.style.color = color;
 }
 
 XMLscene.prototype.resetTimer = function () {
@@ -425,8 +437,8 @@ XMLscene.prototype.update = function (currTime) {
             this.globalCounter = 0;
         }
     }
-
-    this.globalCounter++;
+    if(this.playing)
+      this.globalCounter++;
     if(this.playing && this.gameMode != 0)
       this.timeToPlayBot++;
     if(this.playing && (this.gameMode == 2 || (this.gameMode == 1 && this.player == 1)) && this.timeToPlayBot == 99){
@@ -444,8 +456,12 @@ XMLscene.prototype.update = function (currTime) {
         if(this.orbitCounter == 30){
             this.orbitCounter = 0;
             this.orbitCamera = false;
+            this.orbitBackwards = false;
         } else {
-            this.camera.orbit(vec3.fromValues(0, 1, 0), -3*Math.PI/180);
+            if(this.orbitBackwards)
+              this.camera.orbit(vec3.fromValues(0, 1, 0), 3*Math.PI/180);
+            else
+              this.camera.orbit(vec3.fromValues(0, 1, 0), -3*Math.PI/180);
             this.orbitCounter++;
         }
     }
